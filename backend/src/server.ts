@@ -18,6 +18,12 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+//import here
+import contact_router from "./router/contact_router";
+
+//app use here
+
+app.use("/api", contact_router);
 
 async function connect_db() {
   try {
