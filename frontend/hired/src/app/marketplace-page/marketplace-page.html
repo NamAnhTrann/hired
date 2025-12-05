@@ -1,0 +1,963 @@
+<section
+  class="py-10 px-4 mt-12 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950 transition-colors duration-300"
+>
+  <div class="mx-auto max-w-[110rem] w-full">
+    <!-- Dummy Seller Block -->
+    <div class="mb-12 border-b border-gray-200 dark:border-neutral-800 pb-8">
+      <!-- Seller Header -->
+      <div class="flex items-center justify-between mb-6"></div>
+      <!-- Modern Filter Bar -->
+      <div
+        class="mb-8 flex flex-wrap items-center gap-3 p-4 rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/60 backdrop-blur-xl shadow-sm"
+      >
+        <!-- Search -->
+        <div class="relative flex-1 min-w-[250px]">
+          <input
+            type="text"
+            placeholder="Search products"
+            class="w-full pl-10 pr-4 py-2 rounded-xl bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-neutral-200 placeholder-gray-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-indigo-400 dark:focus:ring-amber-300 outline-none"
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+            />
+          </svg>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <button
+            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
+          >
+            All
+          </button>
+
+          <button
+            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
+          >
+            Clothing
+          </button>
+
+          <button
+            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
+          >
+            Digital
+          </button>
+
+          <button
+            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
+          >
+            Handmade
+          </button>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div>
+          <select
+            class="px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 focus:ring-2 focus:ring-indigo-400 dark:focus:ring-amber-300 outline-none"
+          >
+            <option>Sort</option>
+            <option>Newest</option>
+            <option>Price Low to High</option>
+            <option>Price High to Low</option>
+            <option>Most Liked</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Static Swiper (manual slides) -->
+      <swiper-container
+        slides-per-view="3"
+        pagination="true"
+        mousewheel='{"forceToAxis": true, "sensitivity": 0.8}'
+        class="mySwiper"
+        style="--swiper-pagination-color: #4f46e5"
+        breakpoints='{
+          "0": { "slidesPerView": 1 },
+          "640": { "slidesPerView": 2 },
+          "1024": { "slidesPerView": 3 }
+        }'
+      >
+        <!-- Dummy Product Slide -->
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <div class="flex items-center justify-between">
+                  <!-- Left: static comments label -->
+                  <p class="text-sm text-gray-500 dark:text-neutral-400">
+                    3 comments
+                  </p>
+
+                  <!-- Right: Message button -->
+                  <button
+                    class="text-sm font-semibold text-indigo-600 dark:text-amber-300 hover:underline transition"
+                  >
+                    Message
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+
+            <swiper-container
+        slides-per-view="3"
+        pagination="true"
+        mousewheel='{"forceToAxis": true, "sensitivity": 0.8}'
+        class="mySwiper"
+        style="--swiper-pagination-color: #4f46e5"
+        breakpoints='{
+          "0": { "slidesPerView": 1 },
+          "640": { "slidesPerView": 2 },
+          "1024": { "slidesPerView": 3 }
+        }'
+      >
+        <!-- Dummy Product Slide -->
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <div class="flex items-center justify-between">
+                  <!-- Left: static comments label -->
+                  <p class="text-sm text-gray-500 dark:text-neutral-400">
+                    3 comments
+                  </p>
+
+                  <!-- Right: Message button -->
+                  <button
+                    class="text-sm font-semibold text-indigo-600 dark:text-amber-300 hover:underline transition"
+                  >
+                    Message
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div
+            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+          >
+            <div class="relative overflow-hidden rounded-t-xl">
+              <img
+                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
+                alt="Sample Product"
+                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+
+              <!-- Static Buttons -->
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              >
+                <button
+                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                >
+                  Buy Now
+                </button>
+
+                <a
+                  href="#"
+                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
+                >
+                  View Detail
+                </a>
+              </div>
+            </div>
+
+            <!-- Static Product Info -->
+            <div class="p-5">
+              <h3
+                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+              >
+                Sample Product Title
+              </h3>
+
+              <p
+                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
+              >
+                This is a sample product description used for UI testing.
+              </p>
+
+              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
+                $99.99
+              </p>
+
+              <!-- Static Interaction Bar -->
+              <div class="mt-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.8"
+                      stroke="currentColor"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
+                      />
+                    </svg>
+                  </button>
+
+                  <button class="transition transform hover:scale-110">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="w-6 h-6 text-gray-600"
+                    >
+                      <path
+                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <p
+                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
+                >
+                  12 likes
+                </p>
+              </div>
+
+              <!-- Static Comment Section -->
+              <div
+                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
+              >
+                <p class="text-sm text-gray-500 dark:text-neutral-400">
+                  3 comments
+                </p>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+
+      
+    </div>
+  </div>
+</section>

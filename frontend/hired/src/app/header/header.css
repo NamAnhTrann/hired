@@ -1,0 +1,52 @@
+/* header.css */
+
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+  display: inline-block; /* fix underline alignment */
+}
+
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: 2px;
+background: rgb(112, 80, 226);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.active-link {
+  color: #000;
+}
+
+.active-link::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Disable underline + hover for mobile dropdown */
+@media (max-width: 1023px) {
+  .mobile-nav .nav-link::after {
+    display: none !important;
+  }
+
+  .mobile-nav .nav-link:hover {
+    color: inherit !important;
+    opacity: 1 !important;
+  }
+
+  .mobile-nav .nav-link {
+    transition: none !important;
+  }
+}
+
+
+

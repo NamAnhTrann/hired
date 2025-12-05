@@ -1,0 +1,167 @@
+<div
+  class="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-neutral-950 transition-colors duration-300"
+>
+  <div class="py-6 px-4 w-full">
+    <div
+      class="grid lg:grid-cols-2 items-center gap-6 max-w-6xl mx-auto w-full"
+    >
+      <!-- 🟦 LOGIN FORM -->
+      <div
+        class="border border-slate-300 dark:border-neutral-700 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] dark:shadow-[0_2px_22px_-4px_rgba(255,225,53,0.15)] max-lg:mx-auto bg-white dark:bg-neutral-900 transition-colors duration-300"
+      >
+        <form  class="space-y-6">
+          <div class="text-center lg:text-left">
+            <h1 class="text-3xl font-semibold text-slate-900 dark:text-white">
+              Welcome Back!
+            </h1>
+            <p
+              class="text-slate-600 dark:text-neutral-400 text-[15px] mt-6 leading-relaxed"
+            >
+              Log in to your account to continue exploring and managing your
+              experience.
+            </p>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label
+              class="text-sm font-medium mb-2 block text-slate-900 dark:text-neutral-100"
+              >Email</label
+            >
+            <div class="relative flex items-center">
+              <input
+                type="email"
+                id="email"
+                name="user_email"
+                required
+                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label
+              class="text-sm font-medium mb-2 block text-slate-900 dark:text-neutral-100"
+              >Password</label
+            >
+            <div class="relative flex items-center">
+              <input
+                type="password"
+                id="password"
+                name="user_password"
+                required
+                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+
+          <!-- Remember / Forgot -->
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                type="checkbox"
+                class="h-4 w-4 text-[#4F46E5] dark:text-[#FFE135] focus:ring-[#4F46E5] dark:focus:ring-[#FFE135] border-slate-300 dark:border-neutral-600 rounded"
+              />
+              <label
+                for="remember-me"
+                class="ml-3 block text-sm text-slate-900 dark:text-neutral-200"
+              >
+                Remember me
+              </label>
+            </div>
+            <a
+              routerLink="/forgotPassword-page"
+              class="font-medium text-[#4F46E5] hover:underline dark:text-[#FFE135]"
+            >
+              Forgot password?
+            </a>
+          </div>
+
+          <!-- Submit -->
+          <div class="!mt-12">
+            <button
+              type="submit"
+              class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-[#4F46E5] hover:bg-[#3b36c9] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#ffea67] focus:outline-none transition-all"
+            >
+              Login
+            </button>
+            <p
+              class="text-sm !mt-6 text-center text-slate-600 dark:text-neutral-400"
+            >
+              Don't have an account?
+              <a
+                routerLink="/signup-page"
+                class="font-medium ml-1 whitespace-nowrap text-[#4F46E5] hover:underline dark:text-[#FFE135]"
+              >
+                Register here
+              </a>
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- 🟡 STATS + MOTIVATION PANEL -->
+      <div
+        class="flex flex-col justify-center items-center text-center lg:pl-8 max-lg:mt-8"
+      >
+        <div class="w-full max-w-sm space-y-8">
+          <!-- Heading -->
+          <div>
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">
+              Empowering Creators Everywhere
+            </h2>
+            <p class="text-slate-600 dark:text-neutral-400 text-[15px]">
+              Join thousands of creators using Scrappy to grow their audience,
+              boost sales, and collaborate with purpose.
+            </p>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="grid grid-cols-3 gap-6 mt-10">
+            <div>
+              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                12K+
+              </p>
+              <p class="text-sm text-slate-600 dark:text-neutral-400">
+                Active Creators
+              </p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                98%
+              </p>
+              <p class="text-sm text-slate-600 dark:text-neutral-400">
+                Satisfaction
+              </p>
+            </div>
+            <div>
+              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+                2x
+              </p>
+              <p class="text-sm text-slate-600 dark:text-neutral-400">
+                Faster Growth
+              </p>
+            </div>
+          </div>
+
+          <!-- Quote -->
+          <div
+            class="mt-10 p-6 rounded-lg bg-slate-50 dark:bg-neutral-800 shadow-md"
+          >
+            <p class="italic text-slate-700 dark:text-neutral-300">
+              “Scrappy gives me the power to build and sell freely — no limits,
+              just opportunities.”
+            </p>
+            <p class="mt-3 font-semibold text-slate-900 dark:text-white">
+              — A Scrappy Creator
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
