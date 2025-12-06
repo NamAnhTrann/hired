@@ -16,7 +16,7 @@ export function require_auth(req: Request, res: Response, next: NextFunction) {
 
       //this is req.user
       (req as any).user = user;
-
+        //Continue to controller
       return next();
     }
   )(req, res, next);
