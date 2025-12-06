@@ -29,6 +29,11 @@ let user_schema = new mongoose.Schema({
     user_first_name:{
         type:String,
         required:false,
+    },
+
+    user_profile: {
+        type:String,
+        required:false
     }
 })
 

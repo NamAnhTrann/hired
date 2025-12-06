@@ -8,6 +8,14 @@ export const add_product = async function (
   next: NextFunction
 ) {
   try {
+    //use req.user from auth
+    //this is the same as req.user in JavaScript but with type safety
+    const user = (req as any).user;
+
+    if (!user) {
+      return next(bad_request("User not authenticate to do this operation"));
+    }
+
     //TODO: Later add in req.user for only authenticated user
     const newProduct = new Product({
       product_title: req.body.product_title,
@@ -16,7 +24,7 @@ export const add_product = async function (
       product_quantity: req.body.product_quantity,
       product_image: req.body.product_image,
       product_cateogry: req.body.product_cateogry,
-      product_user: req.body.product_user, //For now use this, later req.user
+      product_user: user._id,
     });
     await newProduct.save();
     return res
@@ -77,6 +85,4 @@ export const list_single_product = async function (
 
     return next(internal(err.message));
   }
-
-
 };

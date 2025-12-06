@@ -128,10 +128,4 @@ export const logout = async function(req:Request, res:Response) {
     });
 }
 
-//get the current user
-export function current_user(req: Request, res: Response) {
-  return res.status(200).json({
-    success: true,
-    user: req.user,
-  });
-}
+

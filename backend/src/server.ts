@@ -26,13 +26,12 @@ app.use(
 //import here
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
-
+import auth_router from "./router/auth_router";
 
 //app use here
-
 app.use("/api", contact_router);
 app.use("/api", product_router);
-
+app.use("/api", auth_router);
 
 async function connect_db() {
   try {
