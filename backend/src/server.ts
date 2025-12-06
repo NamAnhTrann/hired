@@ -3,11 +3,16 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import { errorHandler } from "./middleware/error_handler";
+import cookieParser from "cookie-parser";
+import passport from "passport";
+import "./auth/passport";
 
 const app = express();
 //later put Stripe here
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
 app.use(errorHandler);
 
 app.use(
@@ -21,6 +26,7 @@ app.use(
 //import here
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
+
 
 //app use here
 
