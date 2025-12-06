@@ -26,8 +26,10 @@ export const like_product = async function (
       return next(not_found("Product not found"));
     }
 
-    const user_id = (req as any).user._id
-
+    const user_id = (req as any).user._id;
+    if (!user_id) {
+      return next(unauthorized("Not authorised"));
+    }
     const existing = await Like.findOne({ user: user_id, product: product_id });
     if (existing) {
       return next(bad_request("You already liked this product"));
@@ -65,6 +67,9 @@ export const like_comment = async function like_comment(
     if (!comment) return next(not_found("Comment not found"));
 
     const user_id = (req as any).user._id;
+    if (!user_id) {
+      return next(unauthorized("Not authorised"));
+    }
 
     // prevent duplicate like
     const existing = await Like.findOne({ user: user_id, comment: comment_id });
@@ -106,6 +111,9 @@ export const unlike = async function (
     }
 
     const user_id = (req as any).user._id;
+    if (!user_id) {
+      return next(unauthorized("Not authorised"));
+    }
     const filter: any = { user: user_id };
 
     if (type === "product") {

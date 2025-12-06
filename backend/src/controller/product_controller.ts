@@ -1,6 +1,9 @@
 import Product from "../model/product_model";
+import Like from "../model/like_model";
+import Comment from "../model/comment_model"
+
 import { Request, Response, NextFunction } from "express";
-import { bad_request, internal, not_found } from "../middleware/error_handler";
+import { bad_request, internal, not_found, unauthorized } from "../middleware/error_handler";
 
 export const add_product = async function (
   req: Request,
@@ -46,21 +49,82 @@ export const list_all_product = async function (
   next: NextFunction
 ) {
   try {
-    let products = await Product.find({}).populate(
-      "product_user",
-      "user_username user_email"
-    );
-    return res
-      .status(200)
-      .json({ success: true, data: products, message: "List All Products" });
+    const user_id = (req as any).user ? String((req as any).user._id) : "";
+
+    const products = await Product.find({})
+      .populate("product_user", "user_username user_email")
+      .lean();
+
+    const productIds = products.map(p => p._id);
+
+    // If no products exist
+    if (productIds.length === 0) {
+      return res.status(200).json({
+        success: true,
+        data: [],
+        message: "List All Products"
+      });
+    }
+
+    // LIKE COUNTS
+    const likeCounts = await Like.aggregate([
+      { $match: { product: { $in: productIds } } },
+      { $group: { _id: "$product", total: { $sum: 1 } } }
+    ]);
+
+    const likeMap: Record<string, number> = {};
+    likeCounts.forEach((item: any) => {
+      likeMap[String(item._id)] = item.total || 0;
+    });
+
+    // COMMENT COUNTS
+    const commentCounts = await Comment.aggregate([
+      { $match: { product: { $in: productIds } } },
+      { $group: { _id: "$product", total: { $sum: 1 } } }
+    ]);
+
+    const commentMap: Record<string, number> = {};
+    commentCounts.forEach((item: any) => {
+      commentMap[String(item._id)] = item.total || 0;
+    });
+
+    // USER LIKE STATUS
+    let userLikedSet = new Set<string>();
+
+    if (user_id) {
+      const userLikes = await Like.find({
+        user: user_id,
+        product: { $in: productIds }
+      }).lean();
+
+      userLikes.forEach((like: any) => {
+        userLikedSet.add(String(like.product));
+      });
+    }
+
+    // FINAL RESPONSE
+    const finalProducts = products.map(p => ({
+      ...p,
+      like_count: likeMap[String(p._id)] || 0,
+      comment_count: commentMap[String(p._id)] || 0,
+      liked_by_user: userLikedSet.has(String(p._id))
+    }));
+
+    return res.status(200).json({
+      success: true,
+      data: finalProducts,
+      message: "List All Products"
+    });
+
   } catch (err: any) {
     if (err.name === "ValidationError") {
       return next(bad_request(err.message));
     }
-
     return next(internal(err.message));
   }
 };
+
+
 
 export const list_single_product = async function (
   req: Request,
