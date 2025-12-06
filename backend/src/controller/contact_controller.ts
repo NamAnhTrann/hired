@@ -1,6 +1,5 @@
-import express, { NextFunction } from "express";
 import Contact from "../model/contact_model";
-import { Request, Response } from "express";
+import { Request, Response,NextFunction } from "express";
 import { bad_request, internal } from "../middleware/error_handler";
 
 //TODO: Add validations (use ZOD)
