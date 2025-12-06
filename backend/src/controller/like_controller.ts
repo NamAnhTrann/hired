@@ -26,8 +26,15 @@ export const like_product = async function (
       return next(not_found("Product not found"));
     }
 
+    const user_id = (req as any).user._id
+
+    const existing = await Like.findOne({ user: user_id, product: product_id });
+    if (existing) {
+      return next(bad_request("You already liked this product"));
+    }
+
     const like = await Like.create({
-      user: (req as any).user._id,
+      user: user_id,
       product: product_id,
     });
 
@@ -57,8 +64,16 @@ export const like_comment = async function like_comment(
     const comment = await Comment.findById(comment_id);
     if (!comment) return next(not_found("Comment not found"));
 
+    const user_id = (req as any).user._id;
+
+    // prevent duplicate like
+    const existing = await Like.findOne({ user: user_id, comment: comment_id });
+    if (existing) {
+      return next(bad_request("You already liked this comment"));
+    }
+
     const like = await Like.create({
-      user: (req as any).user._id,
+      user: user_id,
       comment: comment_id,
     });
 
@@ -90,7 +105,9 @@ export const unlike = async function (
       return next(bad_request("Missing target id or type"));
     }
 
-    let filter: any = { user: (req as any).user._id };
+    const user_id = (req as any).user._id;
+    const filter: any = { user: user_id };
+
     if (type === "product") {
       filter.product = target_id;
     } else if (type === "comment") {
@@ -99,7 +116,11 @@ export const unlike = async function (
       return next(bad_request("Invalid Type"));
     }
 
-    await Like.deleteOne(filter);
+    const deleted = await Like.deleteOne(filter);
+
+    if (deleted.deletedCount === 0) {
+      return next(not_found("Like does not exist"));
+    }
 
     return res.status(200).json({
       success: true,

@@ -1,7 +1,7 @@
 import Comment from "../model/comment_model";
 import Product from "../model/product_model";
 
-import {comment_tree} from "../utils/comment_tree";
+import { comment_tree, delete_comment_tree } from "../utils/comment_tree";
 
 import { Request, Response, NextFunction } from "express";
 import {
@@ -56,9 +56,12 @@ export const add_comment = async function (
   }
 };
 
-
 //reply to comments
-export async function reply_comment(req: Request, res: Response, next: NextFunction) {
+export async function reply_comment(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const { product_id, parent_comment, comment_text } = req.body;
 
@@ -68,23 +71,21 @@ export async function reply_comment(req: Request, res: Response, next: NextFunct
     }
 
     const newReply = await Comment.create({
-      product: product_id,                     
-      parent_comment: parent_comment,          
-      text: comment_text,                      
-      user: (req as any).user._id              
+      product: product_id,
+      parent_comment: parent_comment,
+      text: comment_text,
+      user: (req as any).user._id,
     });
 
     return res.status(200).json({
       success: true,
       data: newReply,
-      message: "Reply added"
+      message: "Reply added",
     });
-
   } catch (err: any) {
     return next(internal(err.message));
   }
 }
-
 
 //list all the comments
 export const list_comment = async function (
@@ -99,29 +100,34 @@ export const list_comment = async function (
       return next(bad_request("Missing product id"));
     }
 
+    // Check if product exists
     const product = await Product.findById(product_id);
     if (!product) {
       return next(not_found("Product not found"));
     }
 
+    // Fetch all comments for this product
     const comments = await Comment.find({ product: product_id })
       .populate("user", "user_username user_email")
       .sort({ createdAt: -1 })
       .lean();
 
-      //call tree for nested comments
-    const nested_comments = comment_tree(comments);
+    // Current logged-in user (for liked_by_user calculation)
+    const current_user_id = (req as any).user
+      ? String((req as any).user._id)
+      : "";
+    const nested_comments = await comment_tree(comments, current_user_id);
 
-    return res
-      .status(200)
-      .json({ success: true, data: nested_comments, messaeg: "List of comments" });
+    return res.status(200).json({
+      success: true,
+      data: nested_comments,
+      message: "List of comments",
+    });
   } catch (err: any) {
-    //this will handle errors from Schemas
     if (err.name === "ValidationError") {
       return next(bad_request(err.message));
     }
-    //call the error handler
-    return next(internal("Failed to add contact"));
+    return next(internal(err.message));
   }
 };
 
@@ -151,8 +157,12 @@ export const delete_comment = async function (
       return next(unauthorized("Cannot delete someone else comment"));
     }
 
-    await Comment.findByIdAndDelete(comment_id);
-    return res.status(200).json({ success: true, message: "comment deleted" });
+    await delete_comment_tree(comment_id);
+
+    return res.status(200).json({
+      success: true,
+      message: "Comment and its replies deleted",
+    });
   } catch (err: any) {
     //this will handle errors from Schemas
     if (err.name === "ValidationError") {

@@ -1,39 +1,73 @@
+import Like from "../model/like_model";
+import Comment from "../model/comment_model";
 
-
-//construct a Hierarchy Alggorithm for nested comments (what the fuck is this)
-export function comment_tree(comment_list: any[]){
-    //1 - Create a map so that we can find each comment by its _id
-    //eg: lookup ["1"] -> comment 1 object
+export async function comment_tree(comments: any[], current_user_id: string) {
     const lookup: Record<string, any> = {};
-    
-    //2 - array hold top level comments
-    const tree_roots: any[] = [];
+    const roots: any[] = [];
 
-    //3 - Add each comment to the lookup map, prepare empty replies array for each comments.
-    for (const comment of comment_list){
-        lookup[comment._id] = {
+    // Map each comment
+    for (const comment of comments) {
+        const id = String(comment._id);
+
+        lookup[id] = {
             ...comment,
-            replies:[] // each comment can have replies
+            replies: [],
+            like_count: 0,
+            liked_by_user: false
         };
     }
-    
-    //Connect each comment to its parent (if it has 1)
-    for (const comment of comment_list){
-        // null or some id
-        const parent_id = comment.parent_comment;
-        if(parent_id){
-            //this comment is a reply --> attach to parent's "replies" array
-            const parent = lookup[parent_id];
-            if(parent) {
-                parent.replies.push(lookup[comment._id]);
+
+    // Aggregate like counts
+    const likeCounts = await Like.aggregate([
+        { $match: { comment: { $in: comments.map(c => c._id) } } },
+        { $group: { _id: "$comment", total: { $sum: 1 } } }
+    ]);
+
+    likeCounts.forEach(item => {
+        const id = String(item._id);
+        if (lookup[id]) {
+            lookup[id].like_count = item.total;
+        }
+    });
+
+    // User-liked detection
+    if (current_user_id) {
+        const userLikes = await Like.find({
+            user: current_user_id,
+            comment: { $in: comments.map(c => c._id) }
+        }).lean();
+
+        userLikes.forEach(like => {
+            const id = String(like.comment);
+            if (lookup[id]) {
+                lookup[id].liked_by_user = true;
             }
+        });
+    }
+
+    // Build tree
+    for (const comment of comments) {
+        const id = String(comment._id);
+        const parentId = comment.parent_comment
+            ? String(comment.parent_comment)
+            : null;
+
+        if (parentId && lookup[parentId]) {
+            lookup[parentId].replies.push(lookup[id]);
         } else {
-            //no parent --> this is a ROOT comment
-            tree_roots.push(lookup[comment._id])
+            roots.push(lookup[id]);
         }
     }
-    //return the tree
-    return tree_roots
 
+    return roots;
 }
 
+export async function delete_comment_tree(comment_id:string){
+    const replies = await Comment.find({parent_comment: comment_id}).lean();
+
+    for (const reply of replies){
+        await delete_comment_tree(String(reply._id));
+    }
+
+    await Comment.findByIdAndDelete(comment_id);
+}
