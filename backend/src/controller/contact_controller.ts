@@ -28,7 +28,7 @@ export const add_contact = async function (
         return next(bad_request(err.message));
     }
     //call the error handler
-    return next(internal("Failed to add contact"));
+    return next(internal(err.message));
   }
 };
 

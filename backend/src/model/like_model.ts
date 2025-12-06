@@ -1,25 +1,31 @@
+// model/like_model.ts
 import mongoose from "mongoose";
 
-const likeSchema = new mongoose.Schema(
+const like_schema = new mongoose.Schema(
   {
-    product: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
-      required: true
-    },
-
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: null
+    },
+
+    comment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment",
+      default: null
     }
   },
-  {
-    timestamps: true
-  }
+  { timestamps: true }
 );
 
-// Prevent duplicate likes: a user can like a product only once.
-// likeSchema.index({ product: 1, user: 1 }, { unique: true });
+// Prevent duplicate like from same user
+// like_schema.index({ user: 1, product: 1 }, { unique: true });
+// like_schema.index({ user: 1, comment: 1 }, { unique: true });
 
-export default mongoose.model("Like", likeSchema);
+export default mongoose.model("Like", like_schema);
