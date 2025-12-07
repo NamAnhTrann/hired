@@ -195,7 +195,7 @@ export const create_checkout = async function (
   }
 };
 
-export const cancel_order = async function (
+export const cancel_order_customer = async function (
   req: Request,
   res: Response,
   next: NextFunction
