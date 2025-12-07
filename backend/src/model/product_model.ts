@@ -27,7 +27,7 @@ let product_schema = new mongoose.Schema({
         required:false
     },
 
-    product_cateogry: {
+    product_category: {
         type:String,
         enum: ["clothing", "digital", "electronic", "food", "other"]
     },

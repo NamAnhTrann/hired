@@ -29,13 +29,15 @@ import product_router from "./router/product_router";
 import auth_router from "./router/auth_router";
 import comment_router from "./router/comment_router";
 import like_router from "./router/like_router";
-
+import cart_router from "./router/cart_router";
 //app use here
 app.use("/api", contact_router);
 app.use("/api", product_router);
 app.use("/api", auth_router);
 app.use("/api", comment_router);
 app.use("/api", like_router);
+app.use("/api", cart_router);
+
 
 async function connect_db() {
   try {
