@@ -8,6 +8,8 @@ import passport from "passport";
 import "./auth/passport";
 
 const app = express();
+import webhook_router from "./router/webhook";
+app.use("/api/stripe", webhook_router);
 //later put Stripe here
 
 app.use(express.json());
@@ -30,6 +32,7 @@ import auth_router from "./router/auth_router";
 import comment_router from "./router/comment_router";
 import like_router from "./router/like_router";
 import cart_router from "./router/cart_router";
+import order_router from "./router/order_router";
 //app use here
 app.use("/api", contact_router);
 app.use("/api", product_router);
@@ -37,6 +40,7 @@ app.use("/api", auth_router);
 app.use("/api", comment_router);
 app.use("/api", like_router);
 app.use("/api", cart_router);
+app.use("/api", order_router);
 
 
 async function connect_db() {

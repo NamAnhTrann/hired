@@ -68,64 +68,75 @@ export const register = async function (
   }
 };
 
-
-export const login = async function(req: Request, res: Response, next: NextFunction) {
+export const login = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   // Use passport local strategy for authentication
-  passport.authenticate("local", { session: false }, async function (err:any, user:any, info:any) {
-    // If some unknown error happened
-    if (err) {
-      return next(internal("Authentication error"));
-    }
+  passport.authenticate(
+    "local",
+    { session: false },
+    async function (err: any, user: any, info: any) {
+      // If some unknown error happened
+      if (err) {
+        return next(internal("Authentication error"));
+      }
 
-    // If user is not found or password is wrong
-    if (!user) {
-      return next(bad_request("Invalid email or password"));
-    }
+      // If user is not found or password is wrong
+      if (!user) {
+        return next(bad_request("Invalid email or password"));
+      }
 
-    try {
-      // Create JWT payload
-      const payload = { id: user._id };
-
-      // Sign the JWT using secret key
-      const token = jwt.sign(payload, process.env.JWT_SECRET_KEY!, {
-        expiresIn: "7d",
-      });
-
-      // Store JWT in an httpOnly cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-      });
-
-      return res.status(200).json({
-        success: true,
-        message: "Logged in successfully",
-        user: {
+      try {
+        // Create JWT payload
+        const payload = {
           id: user._id,
           user_email: user.user_email,
+          user_username: user.user_username,
           user_first_name: user.user_first_name,
           user_last_name: user.user_last_name,
-          user_username: user.user_username,
-          user_phone_number: user.user_phone_number
-        },
-      });
-    } catch (err: any) {
-      return next(internal("Failed to generate login token"));
-    }
-  })(req, res, next);
-}
+          user_phone_number: user.user_phone_number,
+        };
 
+        // Sign the JWT using secret key
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY!, {
+          expiresIn: "7d",
+        });
+
+        // Store JWT in an httpOnly cookie
+        res.cookie("token", token, {
+          httpOnly: true,
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        return res.status(200).json({
+          success: true,
+          message: "Logged in successfully",
+          user: {
+            id: user._id,
+            user_email: user.user_email,
+            user_first_name: user.user_first_name,
+            user_last_name: user.user_last_name,
+            user_username: user.user_username,
+            user_phone_number: user.user_phone_number,
+          },
+        });
+      } catch (err: any) {
+        return next(internal("Failed to generate login token"));
+      }
+    }
+  )(req, res, next);
+};
 
 //logout so clear cookies
-export const logout = async function(req:Request, res:Response) {
-     res.clearCookie('token');
+export const logout = async function (req: Request, res: Response) {
+  res.clearCookie("token");
 
-    return res.status(200).json({
-        success:true,
-        message: "Logged out successfully"
-    });
-}
-
-
+  return res.status(200).json({
+    success: true,
+    message: "Logged out successfully",
+  });
+};

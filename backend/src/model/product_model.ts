@@ -18,8 +18,8 @@ let product_schema = new mongoose.Schema({
     },
 
     product_quantity: {
-        type:String,
-        required:false
+        type:Number,
+        required:true
     },
 
       product_image: {
