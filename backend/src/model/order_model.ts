@@ -54,7 +54,7 @@ const order_schema = new mongoose.Schema(
     },
     order_status: {
       type: String,
-      enum: ["pending", "paid", "cancelled", "failed_out_of_stock"],
+      enum: ["pending", "paid", "cancelled", "failed_out_of_stock", "shipped"],
       default: "pending",
       validate: {
         validator: (v: any) => ["pending", "paid", "cancelled"].includes(v),
