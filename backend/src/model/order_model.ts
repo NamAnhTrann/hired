@@ -40,10 +40,10 @@ const order_schema = new mongoose.Schema(
         },
 
         reserved_quantity: {
-            type:Number, 
-            required:true,
-            default:0
-        }
+          type: Number,
+          required: true,
+          default: 0,
+        },
       },
     ],
 
@@ -56,16 +56,23 @@ const order_schema = new mongoose.Schema(
       type: String,
       enum: ["pending", "paid", "cancelled", "failed_out_of_stock", "shipped"],
       default: "pending",
-      validate: {
-        validator: (v: any) => ["pending", "paid", "cancelled"].includes(v),
-        message: "Invalid order status",
-      },
     },
 
     createdAt: {
-        type:Date,
-        default: Date.now
-    }
+      type: Date,
+      default: Date.now,
+    },
+    //Neat trick: since we dont have seller/buyer roles, we can use system level as enum
+    cancelled_by: {
+      type: String,
+      enum: ["customer", "system", null],
+      default: null,
+    },
+
+    cancelled_at: {
+      type: Date,
+      default: null,
+    },
 
     // payment_id: {
     //   type: mongoose.Schema.Types.ObjectId,

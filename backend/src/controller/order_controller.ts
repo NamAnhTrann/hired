@@ -161,9 +161,9 @@ export const create_checkout = async function (
         price_data: {
           currency: "aud",
           product_data: { name: product.product_title },
-          unit_amount: product.product_price * 100
+          unit_amount: product.product_price * 100,
         },
-        quantity: i.order_quantity
+        quantity: i.order_quantity,
       };
     });
 
@@ -179,14 +179,120 @@ export const create_checkout = async function (
       },
       payment_intent_data: {
         metadata: {
-          order_id: order._id.toString()
-        }
+          order_id: order._id.toString(),
+        },
       },
       success_url: `${base_url}/order-summary-page`,
-      cancel_url: `${base_url}/marketplace-page`
+      cancel_url: `${base_url}/marketplace-page`,
     });
 
     return res.json({ url: session.url });
+  } catch (err: any) {
+    if (err.name === "ValidationError") {
+      return next(bad_request(err.message));
+    }
+    return next(internal(err.message));
+  }
+};
+
+export const cancel_order = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const user = (req as any).user._id;
+    const { order_id } = req.body;
+
+    const order = await Order.findById(order_id).populate(
+      "order_item.product_id"
+    );
+    if (!order) {
+      return next(not_found("Order not found"));
+    }
+
+    const NON_CANCELLABLE = [
+      "paid",
+      "shipped",
+      "cancelled",
+      "failed_out_of_stock",
+    ];
+
+    if (NON_CANCELLABLE.includes(order.order_status)) {
+      return next(unauthorized("You cannot cancel this order"));
+    }
+
+    if (order.order_status !== "pending") {
+      return next(bad_request("You cannot cancel a paid or shipped order"));
+    }
+
+    //restocking items back to inventory
+    for (const item of order.order_item) {
+      const product: any = item.product_id;
+      product.product_quantity += item.order_quantity;
+      await product.save();
+    }
+
+    order.order_status = "cancelled";
+    order.cancelled_by = "customer";
+    order.cancelled_at = new Date();
+    await order.save();
+    return res.status(200).json({
+      success: true,
+      message: "Order cancelled sucessfully",
+      data: order,
+    });
+  } catch (err: any) {
+    if (err.name === "ValidationError") {
+      return next(bad_request(err.message));
+    }
+    return next(internal(err.message));
+  }
+};
+
+//exact same thing but for ssytem so i use chatgpt
+export const cancel_order_system = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { order_id } = req.params;
+
+    const order = await Order.findById(order_id).populate(
+      "order_item.product_id"
+    );
+
+    if (!order) return next(not_found("Order not found"));
+
+    const NON_CANCELLABLE = [
+      "paid",
+      "shipped",
+      "cancelled",
+      "failed_out_of_stock",
+    ];
+
+    if (NON_CANCELLABLE.includes(order.order_status)) {
+      return next(bad_request("Cannot cancel a paid order"));
+    }
+
+    // Restock all items
+    for (const item of order.order_item) {
+      const prod: any = item.product_id;
+      prod.product_quantity += item.order_quantity;
+      await prod.save();
+    }
+
+    order.order_status = "cancelled";
+    order.cancelled_by = "system";
+    order.cancelled_at = new Date();
+    await order.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Order cancelled by system",
+      data: order,
+    });
   } catch (err: any) {
     if (err.name === "ValidationError") {
       return next(bad_request(err.message));
