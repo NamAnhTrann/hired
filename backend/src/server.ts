@@ -8,6 +8,18 @@ import passport from "passport";
 import "./auth/passport";
 
 const app = express();
+app.use(
+  cors({
+    origin: true,
+    methods: "GET, POST, PUT, DELETE",
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 import webhook_router from "./router/webhook";
 app.use("/api/stripe", webhook_router);
 //later put Stripe here
@@ -15,16 +27,8 @@ app.use("/api/stripe", webhook_router);
 app.use(express.json());
 app.use(cookieParser());
 app.use(passport.initialize());
-app.use(errorHandler);
 
-app.use(
-  cors({
-    origin: ["http://localhost:4200", ""],
-    methods: "GET, POST, PUT, DELETE",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+
 //import here
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
@@ -42,6 +46,7 @@ app.use("/api", like_router);
 app.use("/api", cart_router);
 app.use("/api", order_router);
 
+app.use(errorHandler);
 
 async function connect_db() {
   try {
@@ -56,7 +61,7 @@ async function connect_db() {
   }
 }
 
-app.listen(function (err) {
+app.listen(process.env.PORT_NO, function (err) {
   if (err) {
     console.error("cannot connect to port");
   } else {

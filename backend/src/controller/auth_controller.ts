@@ -32,7 +32,7 @@ export const register = async function (
 
     //check existing user, if email already exist, cannot have doublicate
     const existing_user = await User.findOne({ user_email });
-    if (!existing_user) {
+    if (existing_user) {
       return next(conflict("Email already exist"));
     }
 
