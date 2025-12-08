@@ -37,6 +37,8 @@ import comment_router from "./router/comment_router";
 import like_router from "./router/like_router";
 import cart_router from "./router/cart_router";
 import order_router from "./router/order_router";
+import trending_router from "./router/trending_router";
+
 //app use here
 app.use("/api", contact_router);
 app.use("/api", product_router);
@@ -45,9 +47,10 @@ app.use("/api", comment_router);
 app.use("/api", like_router);
 app.use("/api", cart_router);
 app.use("/api", order_router);
+app.use("/api", trending_router)
 
 app.use(errorHandler);
-
+ 
 async function connect_db() {
   try {
     const db_url = process.env.db_url;

@@ -38,12 +38,6 @@ const order_schema = new mongoose.Schema(
           required: true,
           min: [0, "Price cannot be negative"],
         },
-
-        reserved_quantity: {
-          type: Number,
-          required: true,
-          default: 0,
-        },
       },
     ],
 

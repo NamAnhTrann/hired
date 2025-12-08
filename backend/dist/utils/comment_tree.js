@@ -7,6 +7,8 @@ exports.comment_tree = comment_tree;
 exports.delete_comment_tree = delete_comment_tree;
 const like_model_1 = __importDefault(require("../model/like_model"));
 const comment_model_1 = __importDefault(require("../model/comment_model"));
+
+
 async function comment_tree(comments, current_user_id) {
     const lookup = {};
     const roots = [];
