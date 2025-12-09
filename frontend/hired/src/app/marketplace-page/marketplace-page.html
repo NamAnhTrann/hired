@@ -1,5 +1,5 @@
-<section class="py-10 px-4 mt-24 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
-  <div class="mx-auto max-w-7xl">
+<section class="py-10 px-4 mt-28 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
+  <div class="mx-auto max-w-[1800px] px-4">
     <!-- HEADER -->
     <header>
       <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">Marketplace</h2>
@@ -171,7 +171,7 @@
     </div>
 
     <!-- PRODUCT GRID -->
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       @for (item of products; track item._id) {
 
       <!-- COLUMN WRAPPER: VERY IMPORTANT -->
@@ -180,11 +180,11 @@
         <div
           class="rounded-xl bg-white dark:bg-neutral-900 shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden"
         >
-          <div class="relative overflow-hidden">
+          <div class="relative group overflow-hidden">
             <img
               [src]="item.product_image[0]"
               [alt]="item.product_title"
-              class="h-[350px] sm:h-[420px] w-full object-cover"
+              class="h-[450px] sm:h-[480px] w-full object-cover transition duration-300 group-hover:brightness-75"
             />
           </div>
 
@@ -200,6 +200,28 @@
             <p class="mt-2 text-lg text-indigo-600">
               ${{ item.product_price }}
             </p>
+            <!-- ACTION BUTTONS: BUY NOW + VIEW DETAIL -->
+            <div
+              class="mt-4 grid gap-3"
+              [class.grid-cols-2]="item.user?._id !== current_user?._id"
+              [class.grid-cols-1]="item.user?._id === current_user?._id"
+            >
+              @if (item.user?._id !== current_user?._id) {
+              <button
+                (click)="buyNow(item._id)"
+                class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md shadow-md hover:bg-indigo-700"
+              >
+                Buy Now
+              </button>
+              }
+
+              <button
+                class="w-full py-2 rounded-md bg-indigo-800 text-white text-sm font-semibold hover:bg-indigo-700 transition"
+                (click)="viewDetail(item._id)"
+              >
+                View Detail
+              </button>
+            </div>
 
             <div class="mt-4 flex items-center justify-between">
               <div class="flex items-center gap-3">
@@ -223,6 +245,12 @@
                   class="transition hover:scale-110"
                 >
                   <i class="fa-regular fa-comment text-gray-600 text-xl"></i>
+                </button>
+
+                <button class="transition hover:scale-110">
+                  <i
+                    class="text-xl fa-regular fa-paper-plane text-gray-700"
+                  ></i>
                 </button>
               </div>
 
@@ -299,12 +327,12 @@
                   <!-- DELETE OWN COMMENT -->
                   @if (c.user?._id === current_user?._id) {
                   <button
-                    (click)="deleteComment(c._id, item._id)"
-                    [disabled]="isDeleting[c._id]"
                     class="text-red-500 text-sm"
+                    (click)="deleteComment(c, item, true)"
                   >
                     Delete
                   </button>
+
                   }
                 </div>
               </div>
@@ -368,7 +396,7 @@
                       <!-- DELETE OWN REPLY -->
                       @if (r.user?._id === current_user?._id) {
                       <button
-                        (click)="deleteComment(r._id, item._id)"
+                        (click)="deleteComment(r, item, true)"
                         class="text-red-500 text-xs"
                       >
                         Delete

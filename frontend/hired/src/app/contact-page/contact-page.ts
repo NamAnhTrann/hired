@@ -39,45 +39,39 @@ export class ContactPage {
     this.form.patchValue({ contact_support_file: file });
   }
 
-  add_contact() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this.error_message = 'Please enter the correct details';
-      this.success_message = '';
-      return;
-    }
-
-    this.error_message = '';
-    this.loading = true;
-
-    const form_data = new FormData();
-    form_data.append('contact_last_name', this.form.value.contact_last_name!);
-    form_data.append('contact_first_name', this.form.value.contact_first_name!);
-    form_data.append('contact_email', this.form.value.contact_email!);
-    form_data.append(
-      'contact_phone_number',
-      this.form.value.contact_phone_number!
-    );
-    form_data.append('contact_type', this.form.value.contact_type!);
-    form_data.append('contact_message', this.form.value.contact_message!);
-    if (this.form.value.contact_support_file) {
-      form_data.append(
-        'contact_support_file',
-        this.form.value.contact_support_file
-      );
-    }
-
-    this.contact.send_contact(form_data).subscribe({
-      next: () => {
-        this.loading = false;
-        this.success_message = 'Thank you, your message has been sent';
-        this.form.reset();
-      },
-      error: (err: any) => {
-        this.loading = false;
-        alert('Fill in the forms');
-        this.error_message = err.error?.message;
-      },
-    });
+ add_contact() {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    this.error_message = 'Please enter the correct details';
+    this.success_message = '';
+    return;
   }
+
+  this.error_message = '';
+  this.loading = true;
+
+  const payload = {
+    contact_last_name: this.form.value.contact_last_name,
+    contact_first_name: this.form.value.contact_first_name,
+    contact_email: this.form.value.contact_email,
+    contact_phone_number: this.form.value.contact_phone_number,
+    contact_type: this.form.value.contact_type,
+    contact_message: this.form.value.contact_message,
+    contact_support_file: null   // or remove this entirely
+  };
+
+  this.contact.send_contact(payload).subscribe({
+    next: () => {
+      this.loading = false;
+      this.success_message = 'Thank you, your message has been sent';
+      alert("Thank you, your message has been sent")
+      this.form.reset();
+    },
+    error: (err: any) => {
+      this.loading = false;
+      this.error_message = err.error?.message || 'Something went wrong';
+    }
+  });
+}
+
 }

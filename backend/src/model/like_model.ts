@@ -23,9 +23,7 @@ const like_schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-// Prevent duplicate like from same user
-// like_schema.index({ user: 1, product: 1 }, { unique: true });
-// like_schema.index({ user: 1, comment: 1 }, { unique: true });
+ like_schema.index({ user: 1, product: 1 }, { unique: true });
+ like_schema.index({ user: 1, comment: 1 }, { unique: true });
 
 export default mongoose.model("Like", like_schema);

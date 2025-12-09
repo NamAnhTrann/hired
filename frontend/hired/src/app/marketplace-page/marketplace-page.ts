@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Product_Service } from '../services/product';
 import { Comment } from '../services/comment';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth';
@@ -31,7 +31,8 @@ export class MarketplacePage {
     private auth: AuthService,
     private product_service: Product_Service,
     private commentService: Comment,
-    private likeService: Like_Service
+    private likeService: Like_Service,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
@@ -73,28 +74,18 @@ export class MarketplacePage {
     const text = this.newComment[product_id];
     if (!text?.trim()) return;
 
-    const product = this.products.find((p) => p._id === product_id);
     this.newComment[product_id] = '';
 
     this.commentService.add_comment({ product_id, text }).subscribe({
-      next: (res: any) => {
-        const saved = res.data;
+      next: () => {
+        const product = this.products.find((p) => p._id === product_id);
+        if (product) product.comment_count++;
 
-        // Immediately append only the new comment
-        if (!this.comments[product_id]) this.comments[product_id] = [];
-        this.comments[product_id].unshift(saved);
-        this.comments[product_id] = [...this.comments[product_id]];
-
-        // Update count
-        if (product) {
-          product.comment_count++;
-          this.products = [...this.products];
-        }
+        this.loadComments(product_id);
       },
 
-      error: (err) => {
-        console.error(err);
-        this.newComment[product_id] = text; // restore
+      error: () => {
+        alert('Failed to post comment');
       },
     });
   }
@@ -114,49 +105,43 @@ export class MarketplacePage {
     const text = this.replyText[parent_id];
     if (!text?.trim()) return;
 
-    const before = [...this.comments[product_id]];
+    this.replyText[parent_id] = '';
 
-    Optimistic.apply(
-      () => {
-        const parent = this.comments[product_id].find(
-          (c: any) => c._id === parent_id
-        );
-        parent.replies.push({
-          _id: 'temp_' + crypto.randomUUID(),
-          text,
-          user: {
-            _id: this.current_user?._id,
-            user_username: this.current_user?.user_username,
-          },
-          like_count: 0,
-        });
+    this.commentService
+      .add_reply({
+        product_id,
+        parent_comment: parent_id,
+        text,
+      })
+      .subscribe({
+        next: () => {
+          const product = this.products.find((p) => p._id === product_id);
+          if (product) product.comment_count++;
 
-        this.replyText[parent_id] = '';
-      },
-
-      () =>
-        this.commentService.add_reply({
-          product_id,
-          parent_comment: parent_id,
-          text,
-        }),
-
-      () => {
-        this.comments[product_id] = before;
-      }
-    );
+          this.loadComments(product_id);
+        },
+      });
   }
 
-  deleteComment(id: string, product_id: string) {
-    this.isDeleting[id] = true;
-
-    this.commentService.delete_comment(id).subscribe({
+  deleteComment(comment: any, product: any, isTopLevel: boolean) {
+    this.commentService.delete_comment(comment._id).subscribe({
       next: () => {
-        this.isDeleting[id] = false;
-        this.loadComments(product_id);
-      },
-      error: () => {
-        this.isDeleting[id] = false;
+        if (isTopLevel) {
+          // number to deduct = 1 parent + number of replies
+          const replyCount = Array.isArray(comment.replies)
+            ? comment.replies.length
+            : 0;
+
+          const totalToRemove = 1 + replyCount;
+
+          product.comment_count -= totalToRemove;
+
+          if (product.comment_count < 0) {
+            product.comment_count = 0;
+          }
+        }
+
+        this.loadComments(product._id);
       },
     });
   }
@@ -168,19 +153,16 @@ export class MarketplacePage {
     const beforeCount = product.like_count;
 
     Optimistic.apply(
-      // UI update instantly
       () => {
         product.liked_by_user = !before;
         product.like_count += before ? -1 : 1;
       },
 
-      // backend call
       () =>
         before
           ? this.likeService.unlike(product._id, 'product')
           : this.likeService.like_product({ product_id: product._id }),
 
-      // rollback safely
       () => {
         product.liked_by_user = before;
         product.like_count = beforeCount;
@@ -189,26 +171,39 @@ export class MarketplacePage {
   }
 
   toggleLikeComment(comment: any) {
-    if (!this.current_user) return alert('Please login first');
+    if (!this.current_user) {
+      alert('Please login first');
+      return;
+    }
 
-    const before = comment.liked_by_user;
-    const beforeCount = comment.like_count;
+    // Already liked → UNLIKE
+    if (comment.liked_by_user) {
+      this.likeService.unlike(comment._id, 'comment').subscribe({
+        next: (res: any) => {
+          comment.liked_by_user = false;
+          comment.like_count = res.data.comment.like_count;
+        },
+        error: (err) => console.error(err),
+      });
+    }
 
-    Optimistic.apply(
-      () => {
-        comment.liked_by_user = !before;
-        comment.like_count += before ? -1 : 1;
-      },
+    // Not liked → LIKE
+    else {
+      this.likeService.like_comment({ comment_id: comment._id }).subscribe({
+        next: (res: any) => {
+          comment.liked_by_user = true;
+          comment.like_count = res.data.comment.like_count;
+        },
+        error: (err) => console.error(err),
+      });
+    }
+  }
 
-      () =>
-        before
-          ? this.likeService.unlike(comment._id, 'comment')
-          : this.likeService.like_comment({ comment_id: comment._id }),
+  viewDetail(product_id: string) {
+    this.router.navigate(['/product', product_id]);
+  }
 
-      () => {
-        comment.liked_by_user = before;
-        comment.like_count = beforeCount;
-      }
-    );
+  buyNow(product_id: string) {
+    this.router.navigate(['/checkout', product_id]);
   }
 }

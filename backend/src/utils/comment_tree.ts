@@ -64,26 +64,18 @@ export async function comment_tree(comments: any[], current_user_id: string) {
 }
 
 export async function delete_comment_tree(comment_id: string) {
-  // If already deleted, stop quietly
   const comment = await Comment.findById(comment_id).lean();
   if (!comment) return;
 
-  // Get all replies
   const replies = await Comment.find({ parent_comment: comment_id }).lean();
 
-  // Recursively delete children
   for (const reply of replies) {
-    try {
-      await delete_comment_tree(String(reply._id));
-    } catch (e) {
-      // ignore safe failures
-    }
+    await delete_comment_tree(String(reply._id));
   }
 
-  // Delete parent, ignore if already deleted
-  try {
-    await Comment.findByIdAndDelete(comment_id);
-  } catch (e) {
-    // ignore deletion errors
-  }
+  // delete likes for this comment
+  await Like.deleteMany({ comment: comment_id });
+
+  // delete comment
+  await Comment.findByIdAndDelete(comment_id);
 }

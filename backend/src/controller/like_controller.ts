@@ -63,39 +63,48 @@ export const like_comment = async function like_comment(
     const { comment_id } = req.body;
 
     if (!comment_id) return next(bad_request("Missing comment_id"));
-    const comment = await Comment.findById(comment_id);
+
+    const comment = await Comment.findById(comment_id).populate(
+      "user",
+      "user_username user_email"
+    );
     if (!comment) return next(not_found("Comment not found"));
 
     const user_id = (req as any).user._id;
-    if (!user_id) {
-      return next(unauthorized("Not authorised"));
-    }
+    if (!user_id) return next(unauthorized("Not authorised"));
 
     // prevent duplicate like
     const existing = await Like.findOne({ user: user_id, comment: comment_id });
-    if (existing) {
-      return next(bad_request("You already liked this comment"));
-    }
+    if (existing) return next(bad_request("You already liked this comment"));
 
-    const like = await Like.create({
+    // create like
+    await Like.create({
       user: user_id,
       comment: comment_id,
     });
 
+    // updated like count
+    const likeCount = await Like.countDocuments({ comment: comment_id });
+
     return res.status(200).json({
       success: true,
       message: "Comment liked",
-      data: like,
+      data: {
+        comment: {
+          ...comment.toObject(),
+          like_count: likeCount,
+          liked_by_user: true,
+        },
+      },
     });
   } catch (err: any) {
-    //this will handle errors from Schemas
     if (err.name === "ValidationError") {
       return next(bad_request(err.message));
     }
-    //call the error handler
     return next(internal(err.message));
   }
 };
+
 
 //unlike comments
 export const unlike = async function (
@@ -111,9 +120,8 @@ export const unlike = async function (
     }
 
     const user_id = (req as any).user._id;
-    if (!user_id) {
-      return next(unauthorized("Not authorised"));
-    }
+    if (!user_id) return next(unauthorized("Not authorised"));
+
     const filter: any = { user: user_id };
 
     if (type === "product") {
@@ -125,21 +133,41 @@ export const unlike = async function (
     }
 
     const deleted = await Like.deleteOne(filter);
-
     if (deleted.deletedCount === 0) {
       return next(not_found("Like does not exist"));
     }
 
+    // if unlike is for a COMMENT, return updated state
+    if (type === "comment") {
+      const updatedComment = await Comment.findById(target_id)
+        .populate("user", "user_username user_email")
+        .lean();
+
+      const likeCount = await Like.countDocuments({ comment: target_id });
+
+      return res.status(200).json({
+        success: true,
+        message: "unliked",
+        data: {
+          comment: {
+            ...updatedComment,
+            like_count: likeCount,
+            liked_by_user: false,
+          },
+        },
+      });
+    }
+
+    // for product only
     return res.status(200).json({
       success: true,
       message: "unliked",
     });
   } catch (err: any) {
-    //this will handle errors from Schemas
     if (err.name === "ValidationError") {
       return next(bad_request(err.message));
     }
-    //call the error handler
     return next(internal(err.message));
   }
 };
+
