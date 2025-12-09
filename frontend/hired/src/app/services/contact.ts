@@ -1,16 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const httpOptions = {
-  withCredentials: true,
-};
+
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class Contact_Service {
-  private local_url = "http://localhost:4040/api";
+  private local_url = "http://localhost:2020/api";
 
   constructor(private http: HttpClient) {}
 

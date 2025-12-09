@@ -2,7 +2,7 @@ import { Product } from "./product_interface";
 
 export interface Trending {
   _id: string;
-  product: string | Product;
+  product: Product;
 
   added_at: string;
   createdAt: string;

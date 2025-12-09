@@ -63,17 +63,17 @@ export async function reply_comment(
   next: NextFunction
 ) {
   try {
-    const { product_id, parent_comment, comment_text } = req.body;
+    const { product_id, parent_comment, text } = req.body;
 
     // Validate input
-    if (!product_id || !parent_comment || !comment_text) {
+    if (!product_id || !parent_comment || !text) {
       return next(bad_request("Missing fields for reply"));
     }
 
     const newReply = await Comment.create({
       product: product_id,
       parent_comment: parent_comment,
-      text: comment_text,
+      text: text,
       user: (req as any).user._id,
     });
 
@@ -169,6 +169,6 @@ export const delete_comment = async function (
       return next(bad_request(err.message));
     }
     //call the error handler
-    return next(internal("Failed to add contact"));
+    return next(internal("Failed to add comment"));
   }
 };

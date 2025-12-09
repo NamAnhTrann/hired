@@ -22,20 +22,6 @@
         </h2>
 
         <form [formGroup]="form" (ngSubmit)="add_contact()">
-          <!-- Error -->
-          @if (error_message) {
-          <p class="text-red-600 dark:text-red-400 text-sm mb-4">
-            {{ error_message }}
-          </p>
-          }
-
-          <!-- Success -->
-          @if (success_message) {
-          <p class="text-green-600 dark:text-green-400 text-sm mb-4">
-            {{ success_message }}
-          </p>
-          }
-
           <div class="grid gap-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <!-- First Name -->

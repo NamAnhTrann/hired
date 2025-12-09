@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.post("/like/product", require_auth, like_product);
 router.post("/like/comment", require_auth, like_comment);
-router.post("/like/remove", require_auth, unlike);
+router.delete("/like/remove", require_auth, unlike);
 
 export default router;

@@ -20,7 +20,7 @@ export class Header {
   
   }
 
-  logout(){
+  public logout(){
     this.auth.logout().subscribe({
       next:()=>{
         this.router.navigate(["/login-page"])

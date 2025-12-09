@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Header } from "./header/header";
 import { Footer } from "./footer/footer";
 import { filter } from 'rxjs/operators';
 import 'preline/dist/preline';
+import { AuthService } from './services/auth';
 
 @Component({
   selector: 'app-root',
@@ -11,22 +12,33 @@ import 'preline/dist/preline';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   protected readonly title = signal('ecom');
 
   hideHeaderFooterSignal = signal(false);
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private auth: AuthService         
+  ) {
     // Watch route changes
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const hiddenRoutes = ['/chat-page','/dashboard-page']; // both header & footer hidden here
+        const hiddenRoutes = ['/chat-page', '/dashboard-page'];
         const shouldHide = hiddenRoutes.some(route =>
           event.urlAfterRedirects.startsWith(route)
         );
         this.hideHeaderFooterSignal.set(shouldHide);
       });
+  }
+
+  ngOnInit(): void {
+    // THIS FIXES THE LOGIN REFRESH PROBLEM
+    this.auth.load_user().subscribe({
+      next: () => {},
+      error: () => {}
+    });
   }
 
   hideHeaderFooter(): boolean {

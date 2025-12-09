@@ -1,963 +1,431 @@
-<section
-  class="py-10 px-4 mt-12 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950 transition-colors duration-300"
->
-  <div class="mx-auto max-w-[110rem] w-full">
-    <!-- Dummy Seller Block -->
-    <div class="mb-12 border-b border-gray-200 dark:border-neutral-800 pb-8">
-      <!-- Seller Header -->
-      <div class="flex items-center justify-between mb-6"></div>
-      <!-- Modern Filter Bar -->
-      <div
-        class="mb-8 flex flex-wrap items-center gap-3 p-4 rounded-2xl border border-gray-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/60 backdrop-blur-xl shadow-sm"
-      >
-        <!-- Search -->
-        <div class="relative flex-1 min-w-[250px]">
-          <input
-            type="text"
-            placeholder="Search products"
-            class="w-full pl-10 pr-4 py-2 rounded-xl bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-900 dark:text-neutral-200 placeholder-gray-400 dark:placeholder-neutral-500 focus:ring-2 focus:ring-indigo-400 dark:focus:ring-amber-300 outline-none"
-          />
+<section class="py-10 px-4 mt-24 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
+  <div class="mx-auto max-w-7xl">
+    <!-- HEADER -->
+    <header>
+      <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">Marketplace</h2>
+      <p class="mt-4 max-w-md text-gray-500">
+        Explore our latest products from creators, sellers, and designers.
+      </p>
+    </header>
+
+    <!-- FILTER BAR -->
+    <div class="mt-8 sm:flex sm:items-center sm:justify-between">
+      <!-- Mobile filter button -->
+      <div class="block sm:hidden">
+        <button
+          class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
+        >
+          <span class="text-sm font-medium"> Filters & Sorting </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-neutral-500"
+            class="size-4 rtl:rotate-180"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="1.8"
+            stroke-width="1.5"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+              d="M8.25 4.5l7.5 7.5-7.5 7.5"
             />
           </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Filter Items -->
+      <div class="hidden sm:flex sm:gap-4">
+        <!-- Availability -->
+        <div class="relative">
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary
+              class="flex items-center gap-2 cursor-pointer border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
+            >
+              <span class="text-sm font-medium"> Availability </span>
+              <span class="transition group-open:-rotate-180">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </span>
+            </summary>
+
+            <div
+              class="absolute mt-2 w-96 rounded-sm border border-gray-200 bg-white shadow-lg z-50"
+            >
+              <header class="flex items-center justify-between p-4">
+                <span class="text-sm text-gray-700">0 Selected</span>
+                <button
+                  class="text-sm text-gray-900 underline underline-offset-4"
+                >
+                  Reset
+                </button>
+              </header>
+
+              <ul class="space-y-1 border-t border-gray-200 p-4">
+                <li>
+                  <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" class="size-5" />
+                    <span class="text-sm text-gray-700">In Stock</span>
+                  </label>
+                </li>
+
+                <li>
+                  <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" class="size-5" />
+                    <span class="text-sm text-gray-700">Pre Order</span>
+                  </label>
+                </li>
+
+                <li>
+                  <label class="inline-flex items-center gap-2">
+                    <input type="checkbox" class="size-5" />
+                    <span class="text-sm text-gray-700">Out of Stock</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </details>
         </div>
 
-        <!-- Filter Chips -->
-        <div class="flex items-center gap-2 flex-wrap">
-          <button
-            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
-          >
-            All
-          </button>
+        <!-- Price -->
+        <div class="relative">
+          <details class="group [&_summary::-webkit-details-marker]:hidden">
+            <summary
+              class="flex items-center gap-2 cursor-pointer border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
+            >
+              <span class="text-sm font-medium"> Price </span>
+              <span class="transition group-open:-rotate-180">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </span>
+            </summary>
 
-          <button
-            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
-          >
-            Clothing
-          </button>
+            <div
+              class="absolute mt-2 w-96 rounded-sm border border-gray-200 bg-white shadow-lg z-50"
+            >
+              <header class="flex items-center justify-between p-4">
+                <span class="text-sm text-gray-700">Adjust price range</span>
+                <button
+                  class="text-sm text-gray-900 underline underline-offset-4"
+                >
+                  Reset
+                </button>
+              </header>
 
-          <button
-            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
-          >
-            Digital
-          </button>
+              <div class="border-t border-gray-200 p-4">
+                <div class="flex justify-between gap-4">
+                  <label class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">$</span>
+                    <input
+                      type="number"
+                      placeholder="From"
+                      class="w-full rounded-md border-gray-200 shadow-xs text-sm"
+                    />
+                  </label>
 
-          <button
-            class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-neutral-300 hover:bg-gray-200 dark:hover:bg-neutral-700 transition"
-          >
-            Handmade
-          </button>
-        </div>
-
-        <!-- Sort Dropdown -->
-        <div>
-          <select
-            class="px-4 py-2 rounded-xl text-sm font-medium bg-gray-50 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 text-gray-700 dark:text-neutral-300 focus:ring-2 focus:ring-indigo-400 dark:focus:ring-amber-300 outline-none"
-          >
-            <option>Sort</option>
-            <option>Newest</option>
-            <option>Price Low to High</option>
-            <option>Price High to Low</option>
-            <option>Most Liked</option>
-          </select>
+                  <label class="flex items-center gap-2">
+                    <span class="text-sm text-gray-600">$</span>
+                    <input
+                      type="number"
+                      placeholder="To"
+                      class="w-full rounded-md border-gray-200 shadow-xs text-sm"
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+          </details>
         </div>
       </div>
 
-      <!-- Static Swiper (manual slides) -->
-      <swiper-container
-        slides-per-view="3"
-        pagination="true"
-        mousewheel='{"forceToAxis": true, "sensitivity": 0.8}'
-        class="mySwiper"
-        style="--swiper-pagination-color: #4f46e5"
-        breakpoints='{
-          "0": { "slidesPerView": 1 },
-          "640": { "slidesPerView": 2 },
-          "1024": { "slidesPerView": 3 }
-        }'
-      >
-        <!-- Dummy Product Slide -->
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
+      <!-- SORT -->
+      <div class="hidden sm:block">
+        <select class="h-10 rounded-sm border-gray-300 text-sm">
+          <option>Sort By</option>
+          <option value="title_desc">Title DESC</option>
+          <option value="title_asc">Title ASC</option>
+          <option value="price_desc">Price DESC</option>
+          <option value="price_asc">Price ASC</option>
+        </select>
+      </div>
+    </div>
 
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
+    <!-- PRODUCT GRID -->
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (item of products; track item._id) {
+
+      <!-- COLUMN WRAPPER: VERY IMPORTANT -->
+      <div class="flex flex-col">
+        <!-- PRODUCT CARD -->
+        <div
+          class="rounded-xl bg-white dark:bg-neutral-900 shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden"
+        >
+          <div class="relative overflow-hidden">
+            <img
+              [src]="item.product_image[0]"
+              [alt]="item.product_title"
+              class="h-[350px] sm:h-[420px] w-full object-cover"
+            />
+          </div>
+
+          <div class="p-5">
+            <h3 class="text-base font-semibold truncate">
+              {{ item.product_title }}
+            </h3>
+
+            <p class="mt-1 text-gray-700 text-sm line-clamp-2">
+              {{ item.product_description }}
+            </p>
+
+            <p class="mt-2 text-lg text-indigo-600">
+              ${{ item.product_price }}
+            </p>
+
+            <div class="mt-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
                 <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                  class="transition hover:scale-110"
+                  (click)="toggleLikeProduct(item)"
                 >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <div class="flex items-center justify-between">
-                  <!-- Left: static comments label -->
-                  <p class="text-sm text-gray-500 dark:text-neutral-400">
-                    3 comments
-                  </p>
-
-                  <!-- Right: Message button -->
-                  <button
-                    class="text-sm font-semibold text-indigo-600 dark:text-amber-300 hover:underline transition"
+                  <i
+                    class="text-xl"
+                    [ngClass]="
+                      item.liked_by_user
+                        ? 'fa-solid fa-heart text-red-500'
+                        : 'fa-regular fa-heart text-gray-600'
+                    "
                   >
-                    Message
-                  </button>
-                </div>
+                  </i>
+                </button>
+
+                <!-- COMMENTS ICON -->
+                <button
+                  (click)="toggleComments(item._id)"
+                  class="transition hover:scale-110"
+                >
+                  <i class="fa-regular fa-comment text-gray-600 text-xl"></i>
+                </button>
+              </div>
+
+              <p class="text-sm font-semibold text-gray-700">
+                {{ item.like_count }} likes
+              </p>
+            </div>
+
+            <div class="mt-3 border-t pt-3">
+              <div class="flex items-center justify-between">
+                <p
+                  class="text-sm text-gray-500 cursor-pointer hover:underline"
+                  (click)="toggleComments(item._id)"
+                >
+                  @if (item.comment_count === 0) { No comments yet } @else if
+                  (item.comment_count > 50) { 50+ comments } @else {
+                  {{ item.comment_count }} comments }
+                </p>
+
+                <button
+                  class="text-sm font-semibold text-indigo-600 hover:underline"
+                >
+                  Message
+                </button>
               </div>
             </div>
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
+        </div>
 
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
+        <!-- COMMENTS PANEL BELOW CARD -->
+        @if (activeProduct === item._id) {
+        <div class="mt-4 border rounded-xl p-4 bg-gray-50 dark:bg-neutral-900">
+          <div class="flex gap-2 mb-4">
+            <input
+              type="text"
+              [(ngModel)]="newComment[item._id]"
+              placeholder="Write a comment..."
+              (keydown.enter)="postComment(item._id)"
+              class="flex-1 rounded-md border px-3 py-2 bg-white dark:bg-neutral-800 text-sm"
+            />
+            <button
+              (click)="postComment(item._id)"
+              class="px-4 py-2 bg-indigo-600 text-white rounded-md"
+            >
+              Post
+            </button>
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
 
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
+          @if (comments[item._id]?.length > 0) {
+          <div class="space-y-3">
+            @for (c of comments[item._id]; track c._id) {
+            <div class="p-3 border rounded-md bg-white dark:bg-neutral-800">
+              <div class="flex justify-between items-center">
+                <p class="text-sm font-semibold">{{ c.user?.user_username }}</p>
 
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper-container>
-
-            <swiper-container
-        slides-per-view="3"
-        pagination="true"
-        mousewheel='{"forceToAxis": true, "sensitivity": 0.8}'
-        class="mySwiper"
-        style="--swiper-pagination-color: #4f46e5"
-        breakpoints='{
-          "0": { "slidesPerView": 1 },
-          "640": { "slidesPerView": 2 },
-          "1024": { "slidesPerView": 3 }
-        }'
-      >
-        <!-- Dummy Product Slide -->
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <div class="flex items-center justify-between">
-                  <!-- Left: static comments label -->
-                  <p class="text-sm text-gray-500 dark:text-neutral-400">
-                    3 comments
-                  </p>
-
-                  <!-- Right: Message button -->
+                  <!-- LIKE COMMENT -->
                   <button
-                    class="text-sm font-semibold text-indigo-600 dark:text-amber-300 hover:underline transition"
+                    (click)="toggleLikeComment(c)"
+                    class="transition hover:scale-110"
                   >
-                    Message
+                    <i
+                      class="text-base"
+                      [ngClass]="
+                        c.liked_by_user
+                          ? 'fa-solid fa-heart text-red-500'
+                          : 'fa-regular fa-heart text-gray-600'
+                      "
+                    ></i>
                   </button>
+
+                  <p class="text-xs text-gray-600">{{ c.like_count || 0 }}</p>
+
+                  <!-- DELETE OWN COMMENT -->
+                  @if (c.user?._id === current_user?._id) {
+                  <button
+                    (click)="deleteComment(c._id, item._id)"
+                    class="text-red-500 text-sm"
+                  >
+                    Delete
+                  </button>
+                  }
                 </div>
               </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
 
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
+              <p class="text-sm mt-1">{{ c.text }}</p>
+
+              <button
+                (click)="toggleReply(item._id, c._id)"
+                class="text-xs text-indigo-600 mt-2"
               >
+                Reply
+              </button>
+
+              @if (replyBox[item._id]?.[c._id]) {
+              <div class="mt-2 flex gap-2">
+                <input
+                  type="text"
+                  [(ngModel)]="replyText[c._id]"
+                  placeholder="Reply..."
+                  class="flex-1 rounded-md border px-3 py-2 text-sm"
+                />
                 <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
+                  (click)="postReply(item._id, c._id)"
+                  class="px-3 py-2 bg-indigo-600 text-white rounded-md text-xs"
                 >
-                  Buy Now
+                  Send
                 </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
               </div>
-            </div>
+              }
+              <!-- NESTED REPLIES -->
+@if (c.replies?.length > 0) {
+  <div class="ml-4 mt-3 space-y-2 border-l pl-3">
 
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
+    @for (r of c.replies; track r._id) {
+      <div class="p-2 bg-gray-100 dark:bg-neutral-700 rounded-md">
+
+        <!-- Reply header -->
+        <div class="flex justify-between items-center">
+          <p class="text-xs font-semibold">
+            {{ r.user?.user_username }}
+          </p>
+
+          <div class="flex items-center gap-2">
+            <!-- LIKE REPLY -->
+            <button (click)="toggleLikeComment(r)" class="transition hover:scale-110">
+              <i
+                class="text-sm"
+                [ngClass]="
+                  r.liked_by_user
+                    ? 'fa-solid fa-heart text-red-500'
+                    : 'fa-regular fa-heart text-gray-600'
+                "
+              ></i>
+            </button>
+
+            <p class="text-xs text-gray-600">{{ r.like_count || 0 }}</p>
+
+            <!-- DELETE OWN REPLY -->
+            @if (r.user?._id === current_user?._id) {
+              <button
+                (click)="deleteComment(r._id, item._id)"
+                class="text-red-500 text-xs"
               >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
+                Delete
+              </button>
+            }
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
+        </div>
+
+        <!-- Reply text -->
+        <p class="text-xs mt-1">{{ r.text }}</p>
+
+        <!-- Reply to reply -->
+        <button
+          (click)="toggleReply(item._id, r._id)"
+          class="text-xs text-indigo-600 mt-1"
+        >
+          Reply
+        </button>
+
+        @if (replyBox[item._id]?.[r._id]) {
+          <div class="mt-2 flex gap-2">
+            <input
+              type="text"
+              [(ngModel)]="replyText[r._id]"
+              placeholder="Reply..."
+              class="flex-1 rounded-md border px-2 py-1 text-xs"
+            />
+            <button
+              (click)="postReply(item._id, r._id)"
+              class="px-2 py-1 bg-indigo-600 text-white rounded-md text-xs"
+            >
+              Send
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+}
+
+            </div>
+            }
+          </div>
+          } @else {
+          <p class="text-gray-500 text-sm">No comments yet.</p>
+          }
+
+          <button
+            (click)="toggleComments(item._id)"
+            class="mt-4 text-sm underline"
           >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
+            Close
+          </button>
+        </div>
+        }
+      </div>
+      <!-- END COLUMN WRAPPER -->
 
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div
-            class="mb-8 mx-3 group rounded-xl bg-white dark:bg-neutral-900 shadow-sm hover:shadow-lg border border-gray-100 dark:border-neutral-800 transition-all duration-300 overflow-hidden"
-          >
-            <div class="relative overflow-hidden rounded-t-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=800&q=80"
-                alt="Sample Product"
-                class="h-[350px] sm:h-[420px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-
-              <!-- Static Buttons -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300"
-              >
-                <button
-                  class="w-2/3 py-2 bg-[#4F46E5] text-white font-semibold rounded-md shadow-md hover:bg-[#4338CA] transition-all duration-300"
-                >
-                  Buy Now
-                </button>
-
-                <a
-                  href="#"
-                  class="w-2/3 text-center py-2 bg-white/90 border border-gray-200 text-gray-900 font-semibold rounded-md shadow-md hover:bg-gray-100 transition-all duration-300"
-                >
-                  View Detail
-                </a>
-              </div>
-            </div>
-
-            <!-- Static Product Info -->
-            <div class="p-5">
-              <h3
-                class="text-base font-semibold text-gray-900 dark:text-neutral-100"
-              >
-                Sample Product Title
-              </h3>
-
-              <p
-                class="mt-1 text-gray-700 dark:text-neutral-300 text-sm line-clamp-2"
-              >
-                This is a sample product description used for UI testing.
-              </p>
-
-              <p class="mt-2 text-lg text-indigo-600 dark:text-amber-300">
-                $99.99
-              </p>
-
-              <!-- Static Interaction Bar -->
-              <div class="mt-4 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.8"
-                      stroke="currentColor"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.223 1.003-3.97 2.477C11.723 4.753 10.24 3.75 8.5 3.75 6.015 3.75 4 5.765 4 8.25c0 7.236 8 11.25 8 11.25s8-4.014 8-11.25z"
-                      />
-                    </svg>
-                  </button>
-
-                  <button class="transition transform hover:scale-110">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="w-6 h-6 text-gray-600"
-                    >
-                      <path
-                        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8.5Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                <p
-                  class="text-sm font-semibold text-gray-700 dark:text-neutral-300"
-                >
-                  12 likes
-                </p>
-              </div>
-
-              <!-- Static Comment Section -->
-              <div
-                class="mt-3 border-t border-gray-200 dark:border-neutral-800 pt-3"
-              >
-                <p class="text-sm text-gray-500 dark:text-neutral-400">
-                  3 comments
-                </p>
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper-container>
-
-      
+      }
     </div>
   </div>
 </section>
