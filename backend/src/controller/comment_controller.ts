@@ -42,6 +42,7 @@ export const add_comment = async function (
 
     //save and return
     await new_comment.save();
+    await new_comment.populate("user", "user_username");
 
     return res
       .status(200)
@@ -150,8 +151,12 @@ export const delete_comment = async function (
 
     const comment = await Comment.findById(comment_id);
     if (!comment) {
-      return next(not_found("Comment not found"));
-    }
+  return res.status(200).json({
+    success: true,
+    message: "Already deleted"
+  });
+}
+
 
     if (comment.user.toString() !== user._id.toString()) {
       return next(unauthorized("Cannot delete someone else comment"));

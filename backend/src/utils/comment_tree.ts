@@ -2,73 +2,88 @@ import Like from "../model/like_model";
 import Comment from "../model/comment_model";
 
 export async function comment_tree(comments: any[], current_user_id: string) {
-    const lookup: Record<string, any> = {};
-    const roots: any[] = [];
+  const lookup: Record<string, any> = {};
+  const roots: any[] = [];
 
-    // Map each comment
-    for (const comment of comments) {
-        const id = String(comment._id);
+  // Map each comment
+  for (const comment of comments) {
+    const id = String(comment._id);
 
-        lookup[id] = {
-            ...comment,
-            replies: [],
-            like_count: 0,
-            liked_by_user: false
-        };
+    lookup[id] = {
+      ...comment,
+      replies: [],
+      like_count: 0,
+      liked_by_user: false,
+    };
+  }
+
+  // Aggregate like counts
+  const likeCounts = await Like.aggregate([
+    { $match: { comment: { $in: comments.map((c) => c._id) } } },
+    { $group: { _id: "$comment", total: { $sum: 1 } } },
+  ]);
+
+  likeCounts.forEach((item) => {
+    const id = String(item._id);
+
+    if (lookup[id]) {
+      lookup[id].like_count = item.total;
     }
+  });
 
-    // Aggregate like counts
-    const likeCounts = await Like.aggregate([
-        { $match: { comment: { $in: comments.map(c => c._id) } } },
-        { $group: { _id: "$comment", total: { $sum: 1 } } }
-    ]);
+  // User-liked detection
+  if (current_user_id) {
+    const userLikes = await Like.find({
+      user: current_user_id,
+      comment: { $in: comments.map((c) => c._id) },
+    }).lean();
 
-    likeCounts.forEach(item => {
-        const id = String(item._id);
-        
-        if (lookup[id]) {
-            lookup[id].like_count = item.total;
-        }
+    userLikes.forEach((like) => {
+      const id = String(like.comment);
+      if (lookup[id]) {
+        lookup[id].liked_by_user = true;
+      }
     });
+  }
 
-    // User-liked detection
-    if (current_user_id) {
-        const userLikes = await Like.find({
-            user: current_user_id,
-            comment: { $in: comments.map(c => c._id) }
-        }).lean();
+  // Build tree
+  for (const comment of comments) {
+    const id = String(comment._id);
+    const parentId = comment.parent_comment
+      ? String(comment.parent_comment)
+      : null;
 
-        userLikes.forEach(like => {
-            const id = String(like.comment);
-            if (lookup[id]) {
-                lookup[id].liked_by_user = true;
-            }
-        });
+    if (parentId && lookup[parentId]) {
+      lookup[parentId].replies.push(lookup[id]);
+    } else {
+      roots.push(lookup[id]);
     }
+  }
 
-    // Build tree
-    for (const comment of comments) {
-        const id = String(comment._id);
-        const parentId = comment.parent_comment
-            ? String(comment.parent_comment)
-            : null;
-
-        if (parentId && lookup[parentId]) {
-            lookup[parentId].replies.push(lookup[id]);
-        } else {
-            roots.push(lookup[id]);
-        }
-    }
-
-    return roots;
+  return roots;
 }
 
-export async function delete_comment_tree(comment_id:string){
-    const replies = await Comment.find({parent_comment: comment_id}).lean();
+export async function delete_comment_tree(comment_id: string) {
+  // If already deleted, stop quietly
+  const comment = await Comment.findById(comment_id).lean();
+  if (!comment) return;
 
-    for (const reply of replies){
-        await delete_comment_tree(String(reply._id));
+  // Get all replies
+  const replies = await Comment.find({ parent_comment: comment_id }).lean();
+
+  // Recursively delete children
+  for (const reply of replies) {
+    try {
+      await delete_comment_tree(String(reply._id));
+    } catch (e) {
+      // ignore safe failures
     }
+  }
 
+  // Delete parent, ignore if already deleted
+  try {
     await Comment.findByIdAndDelete(comment_id);
+  } catch (e) {
+    // ignore deletion errors
+  }
 }

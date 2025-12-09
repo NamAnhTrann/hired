@@ -209,13 +209,12 @@
                 >
                   <i
                     class="text-xl"
-                    [ngClass]="
+                    [ngClass]="[
                       item.liked_by_user
-                        ? 'fa-solid fa-heart text-red-500'
+                        ? 'fa-solid fa-heart text-red-500 heart-pop'
                         : 'fa-regular fa-heart text-gray-600'
-                    "
-                  >
-                  </i>
+                    ]"
+                  ></i>
                 </button>
 
                 <!-- COMMENTS ICON -->
@@ -301,6 +300,7 @@
                   @if (c.user?._id === current_user?._id) {
                   <button
                     (click)="deleteComment(c._id, item._id)"
+                    [disabled]="isDeleting[c._id]"
                     class="text-red-500 text-sm"
                   >
                     Delete
@@ -335,78 +335,79 @@
               </div>
               }
               <!-- NESTED REPLIES -->
-@if (c.replies?.length > 0) {
-  <div class="ml-4 mt-3 space-y-2 border-l pl-3">
+              @if (c.replies?.length > 0) {
+              <div class="ml-4 mt-3 space-y-2 border-l pl-3">
+                @for (r of c.replies; track r._id) {
+                <div class="p-2 bg-gray-100 dark:bg-neutral-700 rounded-md">
+                  <!-- Reply header -->
+                  <div class="flex justify-between items-center">
+                    <p class="text-xs font-semibold">
+                      {{ r.user?.user_username }}
+                    </p>
 
-    @for (r of c.replies; track r._id) {
-      <div class="p-2 bg-gray-100 dark:bg-neutral-700 rounded-md">
+                    <div class="flex items-center gap-2">
+                      <!-- LIKE REPLY -->
+                      <button
+                        (click)="toggleLikeComment(r)"
+                        class="transition hover:scale-110"
+                      >
+                        <i
+                          class="text-sm"
+                          [ngClass]="
+                            r.liked_by_user
+                              ? 'fa-solid fa-heart text-red-500'
+                              : 'fa-regular fa-heart text-gray-600'
+                          "
+                        ></i>
+                      </button>
 
-        <!-- Reply header -->
-        <div class="flex justify-between items-center">
-          <p class="text-xs font-semibold">
-            {{ r.user?.user_username }}
-          </p>
+                      <p class="text-xs text-gray-600">
+                        {{ r.like_count || 0 }}
+                      </p>
 
-          <div class="flex items-center gap-2">
-            <!-- LIKE REPLY -->
-            <button (click)="toggleLikeComment(r)" class="transition hover:scale-110">
-              <i
-                class="text-sm"
-                [ngClass]="
-                  r.liked_by_user
-                    ? 'fa-solid fa-heart text-red-500'
-                    : 'fa-regular fa-heart text-gray-600'
-                "
-              ></i>
-            </button>
+                      <!-- DELETE OWN REPLY -->
+                      @if (r.user?._id === current_user?._id) {
+                      <button
+                        (click)="deleteComment(r._id, item._id)"
+                        class="text-red-500 text-xs"
+                      >
+                        Delete
+                      </button>
+                      }
+                    </div>
+                  </div>
 
-            <p class="text-xs text-gray-600">{{ r.like_count || 0 }}</p>
+                  <!-- Reply text -->
+                  <p class="text-xs mt-1">{{ r.text }}</p>
 
-            <!-- DELETE OWN REPLY -->
-            @if (r.user?._id === current_user?._id) {
-              <button
-                (click)="deleteComment(r._id, item._id)"
-                class="text-red-500 text-xs"
-              >
-                Delete
-              </button>
-            }
-          </div>
-        </div>
+                  <!-- Reply to reply -->
+                  <button
+                    (click)="toggleReply(item._id, r._id)"
+                    class="text-xs text-indigo-600 mt-1"
+                  >
+                    Reply
+                  </button>
 
-        <!-- Reply text -->
-        <p class="text-xs mt-1">{{ r.text }}</p>
-
-        <!-- Reply to reply -->
-        <button
-          (click)="toggleReply(item._id, r._id)"
-          class="text-xs text-indigo-600 mt-1"
-        >
-          Reply
-        </button>
-
-        @if (replyBox[item._id]?.[r._id]) {
-          <div class="mt-2 flex gap-2">
-            <input
-              type="text"
-              [(ngModel)]="replyText[r._id]"
-              placeholder="Reply..."
-              class="flex-1 rounded-md border px-2 py-1 text-xs"
-            />
-            <button
-              (click)="postReply(item._id, r._id)"
-              class="px-2 py-1 bg-indigo-600 text-white rounded-md text-xs"
-            >
-              Send
-            </button>
-          </div>
-        }
-      </div>
-    }
-
-  </div>
-}
-
+                  @if (replyBox[item._id]?.[r._id]) {
+                  <div class="mt-2 flex gap-2">
+                    <input
+                      type="text"
+                      [(ngModel)]="replyText[r._id]"
+                      placeholder="Reply..."
+                      class="flex-1 rounded-md border px-2 py-1 text-xs"
+                    />
+                    <button
+                      (click)="postReply(item._id, r._id)"
+                      class="px-2 py-1 bg-indigo-600 text-white rounded-md text-xs"
+                    >
+                      Send
+                    </button>
+                  </div>
+                  }
+                </div>
+                }
+              </div>
+              }
             </div>
             }
           </div>
