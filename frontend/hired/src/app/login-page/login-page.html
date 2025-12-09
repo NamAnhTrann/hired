@@ -5,11 +5,11 @@
     <div
       class="grid lg:grid-cols-2 items-center gap-6 max-w-6xl mx-auto w-full"
     >
-      <!-- 🟦 LOGIN FORM -->
+      <!-- LOGIN FORM -->
       <div
         class="border border-slate-300 dark:border-neutral-700 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] dark:shadow-[0_2px_22px_-4px_rgba(255,225,53,0.15)] max-lg:mx-auto bg-white dark:bg-neutral-900 transition-colors duration-300"
       >
-        <form  class="space-y-6">
+        <form [formGroup]="form" (ngSubmit)="login()" class="space-y-6">
           <div class="text-center lg:text-left">
             <h1 class="text-3xl font-semibold text-slate-900 dark:text-white">
               Welcome Back!
@@ -31,9 +31,9 @@
             <div class="relative flex items-center">
               <input
                 type="email"
-                id="email"
-                name="user_email"
                 required
+                formControlName="user_email"
+                name="user_email"
                 class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
                 placeholder="Enter your email"
               />
@@ -49,14 +49,21 @@
             <div class="relative flex items-center">
               <input
                 type="password"
-                id="password"
-                name="user_password"
                 required
+               formControlName="user_password"
+                name="user_password"
                 class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
                 placeholder="Enter your password"
               />
             </div>
           </div>
+
+          <!-- Error display -->
+          @if (error_message) {
+            <p class="text-red-600 dark:text-red-400 text-sm font-medium">
+              {{ error_message }}
+            </p>
+          }
 
           <!-- Remember / Forgot -->
           <div class="flex flex-wrap items-center justify-between gap-4">
@@ -104,12 +111,11 @@
         </form>
       </div>
 
-      <!-- 🟡 STATS + MOTIVATION PANEL -->
+      <!-- RIGHT PANEL -->
       <div
         class="flex flex-col justify-center items-center text-center lg:pl-8 max-lg:mt-8"
       >
         <div class="w-full max-w-sm space-y-8">
-          <!-- Heading -->
           <div>
             <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">
               Empowering Creators Everywhere
@@ -120,7 +126,6 @@
             </p>
           </div>
 
-          <!-- Stats Grid -->
           <div class="grid grid-cols-3 gap-6 mt-10">
             <div>
               <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
@@ -148,7 +153,6 @@
             </div>
           </div>
 
-          <!-- Quote -->
           <div
             class="mt-10 p-6 rounded-lg bg-slate-50 dark:bg-neutral-800 shadow-md"
           >

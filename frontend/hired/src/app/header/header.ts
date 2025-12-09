@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +14,21 @@ export class Header {
   private lastScrollTop = 0;
   cartCount = 0;
 
-  constructor() {}
+  constructor(public auth:AuthService, private router:Router) {}
   
   ngOnInit() {
   
+  }
+
+  logout(){
+    this.auth.logout().subscribe({
+      next:()=>{
+        this.router.navigate(["/login-page"])
+      },
+      error: () => {
+        alert('Logout failed');
+      }
+    })
   }
 
   @HostListener('window:scroll', [])

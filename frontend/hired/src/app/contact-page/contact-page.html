@@ -21,69 +21,111 @@
           Fill in the form
         </h2>
 
-        <form >
+        <form [formGroup]="form" (ngSubmit)="add_contact()">
+          <!-- Error -->
+          @if (error_message) {
+          <p class="text-red-600 dark:text-red-400 text-sm mb-4">
+            {{ error_message }}
+          </p>
+          }
+
+          <!-- Success -->
+          @if (success_message) {
+          <p class="text-green-600 dark:text-green-400 text-sm mb-4">
+            {{ success_message }}
+          </p>
+          }
+
           <div class="grid gap-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- First Name -->
               <div>
-                <label for="hs-firstname-contacts-1" class="sr-only"
-                  >First Name</label
-                >
                 <input
                   type="text"
-                  id="hs-firstname-contacts-1"
-                  name="firstName"
-                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-300 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
+                  formControlName="contact_first_name"
+                  [class.border-red-500]="
+                    form.controls['contact_first_name'].invalid &&
+                    form.controls['contact_first_name'].touched
+                  "
+                  class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-[#FFE135]"
                   placeholder="First Name"
                 />
+
+                @if(form.controls['contact_first_name'].invalid &&
+                form.controls['contact_first_name'].touched) {
+                <p class="text-xs text-red-500 mt-1">First name is required</p>
+                }
               </div>
 
+              <!-- Last Name -->
               <div>
-                <label for="hs-lastname-contacts-1" class="sr-only"
-                  >Last Name</label
-                >
                 <input
                   type="text"
-                  id="hs-lastname-contacts-1"
-                  name="lastName"
-                  class="py-2.5 sm:py-3 px-4 block w-full border border-gray-300 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
+                  formControlName="contact_last_name"
+                  [class.border-red-500]="
+                    form.controls['contact_last_name'].invalid &&
+                    form.controls['contact_last_name'].touched
+                  "
+                  class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                   placeholder="Last Name"
                 />
+
+                @if(form.controls['contact_last_name'].invalid &&
+                form.controls['contact_last_name'].touched) {
+                <p class="text-xs text-red-500 mt-1">Last name is required</p>
+                }
               </div>
             </div>
 
+            <!-- Email -->
             <div>
-              <label for="hs-email-contacts-1" class="sr-only">Email</label>
               <input
                 type="email"
-                id="hs-email-contacts-1"
-                name="email"
-                autocomplete="email"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-300 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
+                formControlName="contact_email"
+                [class.border-red-500]="
+                  form.controls['contact_email'].invalid &&
+                  form.controls['contact_email'].touched
+                "
+                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Email"
               />
+
+              @if(form.controls['contact_email'].invalid &&
+              form.controls['contact_email'].touched) {
+              <p class="text-xs text-red-500 mt-1">
+                Please enter a valid email
+              </p>
+              }
             </div>
 
+            <!-- Phone -->
             <div>
-              <label for="hs-phone-number-1" class="sr-only"
-                >Phone Number</label
-              >
               <input
                 type="text"
-                id="hs-phone-number-1"
-                name="phone"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-300 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
+                formControlName="contact_phone_number"
+                [class.border-red-500]="
+                  form.controls['contact_phone_number'].invalid &&
+                  form.controls['contact_phone_number'].touched
+                "
+                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Phone Number"
               />
+
+              @if(form.controls['contact_phone_number'].invalid &&
+              form.controls['contact_phone_number'].touched) {
+              <p class="text-xs text-red-500 mt-1">Phone number is required</p>
+              }
             </div>
 
+            <!-- Enquiry Type -->
             <div class="relative">
-              <label for="hs-enquiry-type" class="sr-only">Enquiry Type</label>
-
-              <!-- Dropdown -->
               <select
-                id="hs-enquiry-type"
-                name="enquiry"
-                class="appearance-none py-2.5 sm:py-3 px-4 pr-10 block w-full border border-gray-300 rounded-lg sm:text-sm text-gray-700 dark:text-neutral-300 bg-white dark:bg-neutral-900 focus:border-[#4F46E5] dark:focus:border-[#FFE135] focus:ring-1 focus:ring-[#4F46E5] dark:focus:ring-[#FFE135] transition-all duration-200"
+                formControlName="contact_type"
+                [class.border-red-500]="
+                  form.controls['contact_type'].invalid &&
+                  form.controls['contact_type'].touched
+                "
+                class="appearance-none py-2.5 sm:py-3 px-4 pr-10 block w-full border rounded-lg sm:text-sm text-gray-700 dark:text-neutral-300 bg-white dark:bg-neutral-900 border-gray-300 focus:border-[#4F46E5] dark:focus:border-[#FFE135]"
               >
                 <option value="" disabled selected>Select Enquiry Type</option>
                 <option value="General_enquiry">General Enquiry</option>
@@ -93,39 +135,61 @@
                 <option value="Other">Other</option>
               </select>
 
-              <!-- Custom arrow -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#4F46E5] dark:text-[#FFE135]"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
+              @if(form.controls['contact_type'].invalid &&
+              form.controls['contact_type'].touched) {
+              <p class="text-xs text-red-500 mt-1">
+                Please select an enquiry type
+              </p>
+              }
             </div>
 
+            <!-- Message -->
             <div>
-              <label for="hs-about-contacts-1" class="sr-only">Details</label>
               <textarea
-                id="hs-about-contacts-1"
-                name="message"
                 rows="4"
-                class="py-2.5 sm:py-3 px-4 block w-full border border-gray-300 rounded-lg sm:text-sm focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-[#FFE135]"
+                formControlName="contact_message"
+                [class.border-red-500]="
+                  form.controls['contact_message'].invalid &&
+                  form.controls['contact_message'].touched
+                "
+                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Details"
               ></textarea>
+
+              @if(form.controls['contact_message'].invalid &&
+              form.controls['contact_message'].touched) {
+              <p class="text-xs text-red-500 mt-1">Message is required</p>
+              }
+            </div>
+
+            <!-- File Upload -->
+            <div>
+              <label
+                class="text-sm font-medium text-gray-700 dark:text-neutral-200"
+              >
+                Attach File (optional)
+              </label>
+
+              <input
+                type="file"
+                (change)="onFileSelected($event)"
+                class="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#4F46E5] file:text-white hover:file:bg-[#4338CA] dark:file:bg-[#FFE135] dark:file:text-black"
+              />
             </div>
           </div>
 
+          <!-- Submit -->
           <div class="mt-4 grid">
             <button
               type="submit"
-              class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#4F46E5] text-white hover:scale-[1.05] transition-all duration-300 hover:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700]"
+              [disabled]="loading"
+              class="w-full py-3 px-4 inline-flex justify-center items-center text-sm font-medium rounded-lg bg-[#4F46E5] text-white hover:scale-[1.05] transition-all duration-300 hover:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700]"
             >
-              Send inquiry
+              @if (loading) {
+              <span>Sending...</span>
+              } @else {
+              <span>Send inquiry</span>
+              }
             </button>
           </div>
         </form>

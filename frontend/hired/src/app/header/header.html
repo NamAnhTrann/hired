@@ -22,7 +22,18 @@
     <!-- Sign-in + Mobile Toggle -->
     <div
       class="flex items-center gap-x-3 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3"
-        >
+    >
+      @if (auth.user$ | async; as user) {
+      <!-- USER IS LOGGED IN → Show Logout -->
+      <button
+        (click)="logout()"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition"
+      >
+        Logout
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+      } @else {
+      <!-- USER NOT LOGGED IN → Show Login -->
       <a
         routerLink="/login-page"
         class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 transition"
@@ -30,6 +41,7 @@
         Login
         <i class="fa-solid fa-right-to-bracket"></i>
       </a>
+      }
 
       <!-- Mobile menu button -->
       <div class="lg:hidden">
@@ -40,9 +52,7 @@
           aria-controls="hs-pro-hcail"
           class="hs-collapse-toggle w-11 h-11 flex justify-center items-center text-xl rounded-xl border border-gray-200 text-black dark:text-white dark:border-neutral-700"
         >
-          <!-- Hamburger -->
-
-          <!-- Close -->
+          <i class="fa-solid fa-bars hs-collapse-open:hidden"></i>
           <i class="fa-solid fa-xmark hidden hs-collapse-open:block"></i>
         </button>
       </div>
@@ -56,7 +66,6 @@
       <div
         class="mobile-nav flex flex-col gap-y-4 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-x-7 lg:mt-0"
       >
-
         <!-- Listings -->
         <a
           routerLink="/marketplace-page"

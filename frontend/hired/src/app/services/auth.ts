@@ -26,6 +26,13 @@ export class AuthService  {
       );
   }
 
+  signup(data: any) {
+  return this.http.post(`${this.local_url}/register/user`, data, {
+    withCredentials: true
+  });
+}
+
+
   //load the user from cookies
   load_user() {
     return this.http
