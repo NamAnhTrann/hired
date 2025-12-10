@@ -7,16 +7,20 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth';
 import { Like_Service } from '../services/like';
 import { Optimistic } from '../helper/optimistic';
+import { Cart_Service } from '../services/cart';
+import { Cart } from '../models/cart_interface';
 
 @Component({
   selector: 'app-marketplace-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './marketplace-page.html',
   styleUrl: './marketplace-page.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MarketplacePage {
   products: any[] = [];
+  quantity = 1;
+  cart: Cart | null = null;
 
   // Comment states (for future UI usage)
   comments: any = {};
@@ -32,6 +36,7 @@ export class MarketplacePage {
     private product_service: Product_Service,
     private commentService: Comment,
     private likeService: Like_Service,
+    private cartService: Cart_Service,
     private router: Router
   ) {}
 
@@ -53,7 +58,7 @@ export class MarketplacePage {
   private loadProducts() {
     this.product_service.list_products().subscribe({
       next: (res: any) => {
-        this.products = [...res.data];
+        this.products = res.data;
       },
       error: (err) => {
         console.error('Failed to load products', err);
@@ -170,40 +175,12 @@ export class MarketplacePage {
     );
   }
 
-  toggleLikeComment(comment: any) {
-    if (!this.current_user) {
-      alert('Please login first');
-      return;
-    }
-
-    // Already liked → UNLIKE
-    if (comment.liked_by_user) {
-      this.likeService.unlike(comment._id, 'comment').subscribe({
-        next: (res: any) => {
-          comment.liked_by_user = false;
-          comment.like_count = res.data.comment.like_count;
-        },
-        error: (err) => console.error(err),
-      });
-    }
-
-    // Not liked → LIKE
-    else {
-      this.likeService.like_comment({ comment_id: comment._id }).subscribe({
-        next: (res: any) => {
-          comment.liked_by_user = true;
-          comment.like_count = res.data.comment.like_count;
-        },
-        error: (err) => console.error(err),
-      });
-    }
-  }
-
-  viewDetail(product_id: string) {
-    this.router.navigate(['/product', product_id]);
-  }
-
   buyNow(product_id: string) {
-    this.router.navigate(['/checkout', product_id]);
+    this.cartService.add_cart(product_id, this.quantity).subscribe({
+      next: (res: any) => {
+        alert("Added to Cart")
+        console.log(res);
+      },
+    });
   }
 }

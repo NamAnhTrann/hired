@@ -113,11 +113,8 @@ export const list_comment = async function (
       .sort({ createdAt: -1 })
       .lean();
 
-    // Current logged-in user (for liked_by_user calculation)
-    const current_user_id = (req as any).user
-      ? String((req as any).user._id)
-      : "";
-    const nested_comments = await comment_tree(comments, current_user_id);
+    // Build nested comment structure (NO likes)
+    const nested_comments = await comment_tree(comments);
 
     return res.status(200).json({
       success: true,
@@ -131,6 +128,7 @@ export const list_comment = async function (
     return next(internal(err.message));
   }
 };
+
 
 export const delete_comment = async function (
   req: Request,
@@ -158,7 +156,7 @@ export const delete_comment = async function (
 }
 
 
-    if (comment.user.toString() !== user._id.toString()) {
+if (comment.user.toString() !== (user._id || user.id).toString()) {
       return next(unauthorized("Cannot delete someone else comment"));
     }
 

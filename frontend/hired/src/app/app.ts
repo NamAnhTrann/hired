@@ -33,13 +33,17 @@ export class App implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    // THIS FIXES THE LOGIN REFRESH PROBLEM
-    this.auth.load_user().subscribe({
-      next: () => {},
-      error: () => {}
-    });
-  }
+ngOnInit(): void {
+  this.auth.load_user().subscribe({
+    next: (res: any) => {
+      console.log("User is logged in:", res.user);
+    },
+    error: () => {
+      console.log("No user logged in");
+    }
+  });
+}
+
 
   hideHeaderFooter(): boolean {
     return this.hideHeaderFooterSignal();

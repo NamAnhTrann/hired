@@ -21,3 +21,18 @@ export function require_auth(req: Request, res: Response, next: NextFunction) {
     }
   )(req, res, next);
 }
+
+//for product listing without auths
+export function optional_auth(req: Request, res: Response, next: NextFunction) {
+  passport.authenticate(
+    "jwt",
+    { session: false },
+    function (err:any, user:any) {
+      // ignore all errors
+      // do NOT throw 401
+      req.user = user || null;
+      next();
+    }
+  )(req, res, next);
+}
+

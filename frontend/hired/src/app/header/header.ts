@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../services/auth';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+export class Header implements OnInit {
   isShrunk = false;
   private lastScrollTop = 0;
   cartCount = 0;
@@ -21,6 +21,8 @@ export class Header {
   }
 
   public logout(){
+      if (!confirm('Are you sure you want to logout?')) return;
+
     this.auth.logout().subscribe({
       next:()=>{
         this.router.navigate(["/login-page"])

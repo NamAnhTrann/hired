@@ -209,18 +209,18 @@
               @if (item.user?._id !== current_user?._id) {
               <button
                 (click)="buyNow(item._id)"
-                class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md shadow-md hover:bg-indigo-700"
+                class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md hover:bg-indigo-700"
               >
                 Buy Now
               </button>
               }
 
-              <button
-                class="w-full py-2 rounded-md bg-indigo-800 text-white text-sm font-semibold hover:bg-indigo-700 transition"
-                (click)="viewDetail(item._id)"
+              <a
+                [routerLink]="['/view-detail-page', item._id]"
+                class="w-full py-2 rounded-md text-center bg-indigo-800 text-white text-sm font-semibold hover:bg-indigo-700 transition"
               >
                 View Detail
-              </button>
+              </a>
             </div>
 
             <div class="mt-4 flex items-center justify-between">
@@ -306,35 +306,14 @@
               <div class="flex justify-between items-center">
                 <p class="text-sm font-semibold">{{ c.user?.user_username }}</p>
 
-                <div class="flex items-center gap-3">
-                  <!-- LIKE COMMENT -->
-                  <button
-                    (click)="toggleLikeComment(c)"
-                    class="transition hover:scale-110"
-                  >
-                    <i
-                      class="text-base"
-                      [ngClass]="
-                        c.liked_by_user
-                          ? 'fa-solid fa-heart text-red-500'
-                          : 'fa-regular fa-heart text-gray-600'
-                      "
-                    ></i>
-                  </button>
-
-                  <p class="text-xs text-gray-600">{{ c.like_count || 0 }}</p>
-
-                  <!-- DELETE OWN COMMENT -->
-                  @if (c.user?._id === current_user?._id) {
-                  <button
-                    class="text-red-500 text-sm"
-                    (click)="deleteComment(c, item, true)"
-                  >
-                    Delete
-                  </button>
-
-                  }
-                </div>
+                @if (c.user?._id === current_user?.id) {
+                <button
+                  class="text-red-500 text-xs font-semibold hover:underline"
+                  (click)="deleteComment(c, item, true)"
+                >
+                  Delete
+                </button>
+                }
               </div>
 
               <p class="text-sm mt-1">{{ c.text }}</p>
@@ -373,36 +352,14 @@
                       {{ r.user?.user_username }}
                     </p>
 
-                    <div class="flex items-center gap-2">
-                      <!-- LIKE REPLY -->
-                      <button
-                        (click)="toggleLikeComment(r)"
-                        class="transition hover:scale-110"
-                      >
-                        <i
-                          class="text-sm"
-                          [ngClass]="
-                            r.liked_by_user
-                              ? 'fa-solid fa-heart text-red-500'
-                              : 'fa-regular fa-heart text-gray-600'
-                          "
-                        ></i>
-                      </button>
-
-                      <p class="text-xs text-gray-600">
-                        {{ r.like_count || 0 }}
-                      </p>
-
-                      <!-- DELETE OWN REPLY -->
-                      @if (r.user?._id === current_user?._id) {
-                      <button
-                        (click)="deleteComment(r, item, true)"
-                        class="text-red-500 text-xs"
-                      >
-                        Delete
-                      </button>
-                      }
-                    </div>
+                    @if (r.user?._id === current_user?.id) {
+                    <button
+                      class="text-red-500 text-xs font-semibold hover:underline"
+                      (click)="deleteComment(r, item, true)"
+                    >
+                      Delete
+                    </button>
+                    }
                   </div>
 
                   <!-- Reply text -->

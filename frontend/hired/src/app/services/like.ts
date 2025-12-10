@@ -18,14 +18,6 @@ export class Like_Service {
     );
   }
 
-  like_comment(like_comment: any) {
-    return this.http.post(
-      `${this.local_url}/like/comment`,
-      like_comment,
-      httpOptions
-    );
-  }
-
   unlike(target_id: string, type: 'product' | 'comment') {
     return this.http.delete(`${this.local_url}/like/remove`, {
       ...httpOptions, 

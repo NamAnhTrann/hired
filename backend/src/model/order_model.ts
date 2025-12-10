@@ -52,6 +52,14 @@ const order_schema = new mongoose.Schema(
       default: "pending",
     },
 
+    shipping_address: {
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      postcode: { type: String, required: true },
+      country: { type: String, required: true },
+    },
+
     createdAt: {
       type: Date,
       default: Date.now,

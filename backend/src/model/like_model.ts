@@ -23,7 +23,8 @@ const like_schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
- like_schema.index({ user: 1, product: 1 }, { unique: true });
- like_schema.index({ user: 1, comment: 1 }, { unique: true });
+like_schema.index({ user: 1, product: 1 }, { unique: true, sparse: true });
+like_schema.index({ user: 1, comment: 1 }, { unique: true, sparse: true });
+
 
 export default mongoose.model("Like", like_schema);

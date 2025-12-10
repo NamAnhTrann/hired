@@ -56,7 +56,7 @@ export const add_cart = async function (
       });
     }
 
-    // Recalculate subtotal
+    // Recalculate subtotal (can optimise later)
     let total = 0;
 
     for (const item of cart.item) {
