@@ -29,7 +29,7 @@ let product_schema = new mongoose.Schema({
 
     product_category: {
         type:String,
-        enum: ["clothing", "digital", "electronic", "food", "other"]
+        enum: ["clothing", "digital", "electronic", "other"]
     },
 
     //each user if choose to sell, will hold their own products

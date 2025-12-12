@@ -10,6 +10,7 @@ import { ContactPage } from './contact-page/contact-page';
 import { ForgotPasswordPage } from './forgot-password-page/forgot-password-page';
 import { ViewDetailPage } from './view-detail-page/view-detail-page';
 import { CartPage } from './cart-page/cart-page';
+import { PreCheckoutPage } from './pre-checkout-page/pre-checkout-page';
 
 export const routes: Routes = [
     {path:"", component:Homepage},
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {path:"contact-page", component:ContactPage},
     {path:"view-detail-page/:id", component:ViewDetailPage},
     {path:"forgotPassword-page", component:ForgotPasswordPage},
+    {path:"pre-checkout-page", component:PreCheckoutPage},
     {path:"cart-page", component:CartPage},
 
 
