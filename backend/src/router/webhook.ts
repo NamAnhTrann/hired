@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+
 import { Request, Response } from "express";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -15,7 +16,8 @@ router.post(
   async (req: Request, res: Response) => {
     const signature = req.headers["stripe-signature"] as string;
 
-    let event;
+    let event: Stripe.Event;
+
     try {
       event = stripe.webhooks.constructEvent(
         req.body,
@@ -27,13 +29,17 @@ router.post(
     }
 
     if (event.type === "checkout.session.completed") {
-      const session = event.data.object as any;
+      const session = event.data.object as Stripe.Checkout.Session;
 
       if (session.payment_status !== "paid") {
         return res.status(200).send("IGNORED");
       }
 
-      const order_id = session.metadata.order_id;
+      const order_id = session.metadata?.order_id;
+      if (!order_id) {
+        return res.status(400).send("ORDER_ID_MISSING");
+      }
+
       const order = await Order.findById(order_id).populate(
         "order_item.product_id"
       );
@@ -42,20 +48,38 @@ router.post(
         return res.status(404).send("Order not found");
       }
 
-      // If already processed, ignore
-      if (order.order_status === "paid") {
+      // Idempotency: ignore repeated webhook calls
+      if (order.order_status !== "pending") {
         return res.status(200).send("OK");
       }
 
-      // Try deduct stock 
-      for (const item of order.order_item) {
-        const prod = await Product.findById(item.product_id);
-        if (!prod) continue;
+      // Verify payment amount (Stripe sends cents)
+      if (session.amount_total !== order.order_total_amount) {
+        return res.status(400).send("AMOUNT_MISMATCH");
+      }
 
-        if (prod.product_quantity < item.order_quantity) {
-          // Not enough stock: refund instantly
+      // Atomic stock check + deduction
+      for (const item of order.order_item) {
+        const productId =
+          typeof item.product_id === "object"
+            ? (item.product_id as any)._id
+            : item.product_id;
+
+        const updatedProduct = await Product.findOneAndUpdate(
+          {
+            _id: productId,
+            product_quantity: { $gte: item.order_quantity },
+          },
+          {
+            $inc: { product_quantity: -item.order_quantity },
+          },
+          { new: true }
+        );
+
+        if (!updatedProduct) {
+          // Refund if stock insufficient
           await stripe.refunds.create({
-            payment_intent: session.payment_intent,
+            payment_intent: session.payment_intent as string,
           });
 
           order.order_status = "failed_out_of_stock";
@@ -63,15 +87,6 @@ router.post(
 
           return res.status(200).send("REFUNDED_OUT_OF_STOCK");
         }
-      }
-
-      // Deduct stock 
-      for (const item of order.order_item) {
-        const prod = await Product.findById(item.product_id);
-        if (!prod) continue;
-
-        prod.product_quantity -= item.order_quantity;
-        await prod.save();
       }
 
       // Mark order as paid
@@ -88,14 +103,22 @@ router.post(
     }
 
     if (event.type === "payment_intent.payment_failed") {
-      const intent = event.data.object as any;
-      const order_id = intent.metadata.order_id;
+      const intent = event.data.object as Stripe.PaymentIntent;
+      const order_id = intent.metadata?.order_id;
+
+      if (!order_id) {
+        return res.status(200).send("OK");
+      }
 
       const order = await Order.findById(order_id);
-      if (!order) return res.status(200).send("OK");
+      if (!order) {
+        return res.status(200).send("OK");
+      }
 
-      order.order_status = "cancelled";
-      await order.save();
+      if (order.order_status === "pending") {
+        order.order_status = "cancelled";
+        await order.save();
+      }
 
       return res.status(200).send("OK");
     }
@@ -103,6 +126,5 @@ router.post(
     return res.status(200).send("IGNORED");
   }
 );
-
 
 export default router;

@@ -42,7 +42,7 @@ const order_schema = new mongoose.Schema(
     ],
 
     order_total_amount: {
-      type: String,
+      type: Number,
       required: true,
       min: [0, "Price can't be negative"],
     },
@@ -52,18 +52,20 @@ const order_schema = new mongoose.Schema(
       default: "pending",
     },
 
-    shipping_address: {
-      street: { type: String, required: true },
-      city: { type: String, required: true },
-      state: { type: String, required: true },
-      postcode: { type: String, required: true },
-      country: { type: String, required: true },
+    vat_amount: {
+      type: Number,
+      required: true,
+      min: 0,
     },
 
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    shipping_address: {
+      street: String,
+      city: String,
+      state: String,
+      postcode: String,
+      country: String,
     },
+
     //Neat trick: since we dont have seller/buyer roles, we can use system level as enum
     cancelled_by: {
       type: String,
@@ -89,6 +91,10 @@ const order_schema = new mongoose.Schema(
   {
     timestamps: true,
   }
+);
+order_schema.index(
+  { user_id: 1 },
+  { unique: true, partialFilterExpression: { order_status: "pending" } }
 );
 
 export default mongoose.model("Order", order_schema);
