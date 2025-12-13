@@ -1,6 +1,9 @@
 import Product from "../model/product_model";
 import Like from "../model/like_model";
 import Comment from "../model/comment_model";
+
+import Seller from "../model/seller_model";
+
 import {
   get_product_like_count,
   user_liked_product
@@ -28,7 +31,16 @@ export const add_product = async function (
       return next(bad_request("User not authenticate to do this operation"));
     }
 
-    //TODO: Later add in req.user for only authenticated user
+    const seller = await Seller.findOne({user_id: user._id});
+
+    if(!seller) {
+      return next(unauthorized("Only seller can add products"))
+    }
+
+    if (seller.seller_status !== "active") {
+      return next(unauthorized("Seller account is not active"));
+    }
+
     const newProduct = new Product({
       product_title: req.body.product_title,
       product_description: req.body.product_description,
@@ -36,6 +48,7 @@ export const add_product = async function (
       product_quantity: req.body.product_quantity,
       product_image: req.body.product_image,
       product_category: req.body.product_category,
+      
       product_user: user._id,
     });
     await newProduct.save();

@@ -29,7 +29,7 @@ export function optional_auth(req: Request, res: Response, next: NextFunction) {
     { session: false },
     function (err:any, user:any) {
       // ignore all errors
-      // do NOT throw 401
+      // do NOT throw 401 
       req.user = user || null;
       next();
     }

@@ -10,9 +10,6 @@ import "./auth/passport";
 
 const app = express();
 
-// ------------------------------
-// CORS FIRST
-// ------------------------------
 app.use(
   cors({
     origin: "http://localhost:4200",
@@ -22,32 +19,15 @@ app.use(
   })
 );
 
-// ------------------------------
-// COOKIE PARSER SECOND
-// ------------------------------
 app.use(cookieParser());
 
-// ------------------------------
-// JSON PARSER THIRD
-// ------------------------------
 app.use(express.json());
 
-// ------------------------------
-// PASSPORT INITIALIZATION
-// ------------------------------
 app.use(passport.initialize());
 
-// ------------------------------
-// STRIPE WEBHOOK
-// If you need raw body, PUT it above express.json
-// Otherwise leave it here
-// ------------------------------
 import webhook_router from "./router/webhook";
 app.use("/api/stripe", webhook_router);
 
-// ------------------------------
-// ROUTERS
-// ------------------------------
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
 import auth_router from "./router/auth_router";
@@ -56,6 +36,7 @@ import like_router from "./router/like_router";
 import cart_router from "./router/cart_router";
 import order_router from "./router/order_router";
 import trending_router from "./router/trending_router";
+import seller_router from "./router/seller_route";
 
 app.use("/api", contact_router);
 app.use("/api", product_router);
@@ -65,15 +46,11 @@ app.use("/api", like_router);
 app.use("/api", cart_router);
 app.use("/api", order_router);
 app.use("/api", trending_router);
+app.use("/api", seller_router);
 
-// ------------------------------
-// GLOBAL ERROR HANDLER
-// ------------------------------
+
 app.use(errorHandler);
 
-// ------------------------------
-// DB CONNECTION
-// ------------------------------
 async function connect_db() {
   try {
     const db_url = process.env.db_url;
@@ -86,9 +63,6 @@ async function connect_db() {
   }
 }
 
-// ------------------------------
-// START SERVER
-// ------------------------------
 app.listen(process.env.PORT_NO, function (err) {
   if (err) {
     console.error("cannot connect to port");
