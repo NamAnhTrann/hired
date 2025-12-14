@@ -4,15 +4,12 @@ const router = express.Router();
 import { Request, Response } from "express";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-
-import bodyParser from "body-parser";
 import Order from "../model/order_model";
 import Cart from "../model/cart_model";
 import Product from "../model/product_model";
 
 router.post(
   "/webhook",
-  bodyParser.raw({ type: "application/json" }),
   async (req: Request, res: Response) => {
     const signature = req.headers["stripe-signature"] as string;
 

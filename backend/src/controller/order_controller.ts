@@ -219,7 +219,7 @@ export const create_checkout = async function (
           order_id: order._id.toString(),
         },
       },
-      success_url: `${base_url}/order-summary-page`,
+      success_url: `${base_url}/marketplace-page`,
       cancel_url: `${base_url}/marketplace-page`,
     });
 

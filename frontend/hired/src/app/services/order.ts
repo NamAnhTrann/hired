@@ -26,7 +26,7 @@ export class Order_Service {
   }
 
   create_checkout(order_id: string) { 
-    return this.http.post<any>(`${this.local_url}order/checkout`, {order_id:order_id}, httpOptions)
+    return this.http.post<any>(`${this.local_url}/order/checkout`, {order_id:order_id}, httpOptions)
   }
   
 

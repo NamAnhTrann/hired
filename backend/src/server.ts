@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -20,13 +20,16 @@ app.use(
 );
 
 app.use(cookieParser());
-
-app.use(express.json());
+import webhook_router from "./router/webhook";
+app.use(
+  "/api/stripe",
+  bodyParser.raw({ type: "application/json" }),
+  webhook_router
+);app.use(express.json());
 
 app.use(passport.initialize());
 
-import webhook_router from "./router/webhook";
-app.use("/api/stripe", webhook_router);
+
 
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
