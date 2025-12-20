@@ -4,7 +4,7 @@ export async function comment_tree(comments: any[]) {
   const lookup: Record<string, any> = {};
   const roots: any[] = [];
 
-  // Map each comment
+  //Map each comment
   for (const comment of comments) {
     const id = String(comment._id);
 
@@ -14,7 +14,7 @@ export async function comment_tree(comments: any[]) {
     };
   }
 
-  // Build tree
+  //Build tree
   for (const comment of comments) {
     const id = String(comment._id);
     const parentId = comment.parent_comment
@@ -35,14 +35,14 @@ export async function delete_comment_tree(comment_id: string) {
   const comment = await Comment.findById(comment_id).lean();
   if (!comment) return;
 
-  // find replies
+  // ind replies
   const replies = await Comment.find({ parent_comment: comment_id }).lean();
 
-  // delete children first
+  //delete children first
   for (const reply of replies) {
     await delete_comment_tree(String(reply._id));
   }
 
-  // delete main comment
+  //delete main comment
   await Comment.findByIdAndDelete(comment_id);
 }

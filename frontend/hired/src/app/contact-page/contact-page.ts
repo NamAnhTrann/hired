@@ -22,7 +22,7 @@ export class ContactPage {
   error_message = '';
   success_message = '';
 
-  constructor(private contact: Contact_Service, private router: Router) {}
+  constructor(private contact: Contact_Service) {}
 
   form = new FormGroup({
     contact_last_name: new FormControl('', [Validators.required]),

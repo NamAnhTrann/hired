@@ -15,7 +15,12 @@ export const add_trending_item = async function (
   next: NextFunction
 ) {
   try {
+    const user_id = (req as any).user._id;
     const { product_id } = req.body;
+
+    if(!user_id) { 
+      return next(unauthorized("Unauthorised"))
+    }
 
     // Validate input
     if (!product_id) {

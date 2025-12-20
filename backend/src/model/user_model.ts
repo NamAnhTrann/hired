@@ -9,6 +9,7 @@ let user_schema = new mongoose.Schema({
   user_email: {
     type: String,
     required: true,
+    unique:true
   },
 
   user_phone_number: {

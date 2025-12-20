@@ -196,10 +196,20 @@
             <p class="mt-1 text-gray-700 text-sm line-clamp-2">
               {{ item.product_description }}
             </p>
+            <div class="mt-2 flex items-center justify-between">
+              <p class="text-lg text-indigo-600">${{ item.product_price }}</p>
 
-            <p class="mt-2 text-lg text-indigo-600">
-              ${{ item.product_price }}
-            </p>
+              <div class="flex items-center gap-1 text-sm text-gray-500">
+                <i class="fa-regular fa-eye"></i>
+
+                @if (item.product_view_count === 0) {
+                <span>No views</span>
+                } @else {
+                <span>{{ item.product_view_count }}</span>
+                }
+              </div>
+            </div>
+
             <!-- ACTION BUTTONS: BUY NOW + VIEW DETAIL -->
             <div
               class="mt-4 grid gap-3"
@@ -214,13 +224,12 @@
                 Buy Now
               </button>
               }
-
-              <a
-                [routerLink]="['/view-detail-page', item._id]"
+              <button
+                (click)="viewDetail(item)"
                 class="w-full py-2 rounded-md text-center bg-indigo-800 text-white text-sm font-semibold hover:bg-indigo-700 transition"
               >
                 View Detail
-              </a>
+              </button>
             </div>
 
             <div class="mt-4 flex items-center justify-between">

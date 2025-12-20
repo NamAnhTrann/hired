@@ -12,7 +12,7 @@ import { Cart } from '../models/cart_interface';
 
 @Component({
   selector: 'app-marketplace-page',
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule],
   templateUrl: './marketplace-page.html',
   styleUrl: './marketplace-page.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -183,4 +183,12 @@ export class MarketplacePage {
       },
     });
   }
+
+viewDetail(item: any) {
+  this.router.navigate(['/view-detail-page', item._id]);
+}
+
+
+
+
 }

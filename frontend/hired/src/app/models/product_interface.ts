@@ -9,7 +9,7 @@ export interface Product {
   product_image: [string, string?];
   product_category: 'clothing' | 'digital' | 'electronic' | 'food' | 'other';
   product_user: User;
-
+  product_view_count: number;
   like_count: number;
   comment_count: number;
   liked_by_user: boolean;

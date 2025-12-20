@@ -11,6 +11,7 @@ import { ForgotPasswordPage } from './forgot-password-page/forgot-password-page'
 import { ViewDetailPage } from './view-detail-page/view-detail-page';
 import { CartPage } from './cart-page/cart-page';
 import { PreCheckoutPage } from './pre-checkout-page/pre-checkout-page';
+import { AddProduct } from './add-product/add-product';
 
 export const routes: Routes = [
     {path:"", component:Homepage},
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path:"view-detail-page/:id", component:ViewDetailPage},
     {path:"forgotPassword-page", component:ForgotPasswordPage},
     {path:"pre-checkout-page", component:PreCheckoutPage},
+    {path:"add-product-page", component:AddProduct},
     {path:"cart-page", component:CartPage},
 
 

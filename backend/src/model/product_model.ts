@@ -37,6 +37,11 @@ let product_schema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true
+    },
+
+    product_view_count: {
+        type:Number, 
+        default:0,
     }
 })
 

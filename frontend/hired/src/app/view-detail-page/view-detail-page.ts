@@ -44,16 +44,17 @@ export class ViewDetailPage {
 
   // LOAD PRODUCT
   list_product() {
-    const product_id = this.route.snapshot.paramMap.get('id');
-    if (!product_id) return;
+  const product_id = this.route.snapshot.paramMap.get('id');
+  if (!product_id) return;
 
-    this.productService.list_single_product(product_id).subscribe({
-      next: (res: any) => {
-        this.product = res.data;
-      },
-      error: (err: any) => console.error(err),
-    });
-  }
+  this.productService.list_single_product(product_id).subscribe({
+    next: (res: any) => {
+      this.product = res.data;
+    },
+    error: (err: any) => console.error(err),
+  });
+}
+
 
   // ADD TO CART
   add_cart(product_id: string, quantity: number) {
@@ -70,7 +71,6 @@ export class ViewDetailPage {
     this.quantity = Math.floor(v);
   }
 
-  // SOCIAL FEATURES ---------------------------------------------------
 
   toggleComments(product_id: string) {
     if (this.activeProduct === product_id) {
