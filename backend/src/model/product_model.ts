@@ -22,6 +22,8 @@ let product_schema = new mongoose.Schema({
         required:true
     },
 
+    
+
       product_image: {
         type:[String], //arrays of iamges
         required:false
@@ -29,7 +31,7 @@ let product_schema = new mongoose.Schema({
 
     product_category: {
         type:String,
-        enum: ["clothing", "digital", "electronic", "other"]
+        enum: ["clothing", "digital", "electronic", "other", 'food']
     },
 
     //each user if choose to sell, will hold their own products

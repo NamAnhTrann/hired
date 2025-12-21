@@ -22,5 +22,12 @@ export class Product_Service {
   list_single_product(product_id:string){
     return this.http.get(`${this.local_url}/list/single/product/${product_id}`)
   }
-  
+
+  delete_product(product_id:string){
+    return this.http.delete(`${this.local_url}/delete/product/${product_id}`, httpOptions)
+  }
+
+  edit_product(product_id:string, product_data:any){
+    return this.http.put(`${this.local_url}/edit/product/${product_id}`, product_data, httpOptions)
+  }
 }

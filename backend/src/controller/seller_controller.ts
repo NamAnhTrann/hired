@@ -1,4 +1,7 @@
 import Seller from "../model/seller_model";
+import Product from "../model/product_model";
+import Comment from "../model/comment_model";
+import Like from "../model/like_model";
 import { Request, Response, NextFunction } from "express";
 import {
   bad_request,
@@ -102,8 +105,8 @@ export const get_status = async function (
 ) {
   try {
     const user_id = (req as any).user._id;
-    if(!user_id){ 
-        return next(unauthorized("Unauthorised"));
+    if (!user_id) {
+      return next(unauthorized("Unauthorised"));
     }
 
     const seller = await Seller.findOne({ user_id }).select(
@@ -124,3 +127,61 @@ export const get_status = async function (
   }
 };
 
+export const get_stats = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const user_id = (req as any).user._id;
+
+    const product_stats = await Product.aggregate([
+      { $match: { product_user: user_id } },
+      {
+        $group: {
+          _id: null,
+          published_posts: { $sum: 1 },
+          avg_view: { $avg: "$product_view_count" },
+          product_ids: { $push: "$_id" },
+        },
+      },
+    ]);
+
+    if (product_stats.length === 0) {
+      return res.status(200).json({
+        published_posts: 0,
+        total_likes: 0,
+        total_comments: 0,
+        avg_view: 0,
+      });
+    }
+
+    const { published_posts, avg_view, product_ids } = product_stats[0];
+
+    //comments
+    const comments_agg = await Comment.aggregate([
+      { $match: { product: { $in: product_ids } } },
+      { $group: { _id: null, total: { $sum: 1 } } },
+    ]);
+
+    //likes
+    const likes_agg = await Like.aggregate([
+      { $match: { product: { $in: product_ids } } },
+      { $group: { _id: null, total: { $sum: 1 } } },
+    ]);
+
+    return res.status(200).json({
+      published_posts,
+      total_likes: likes_agg[0]?.total || 0,
+      total_comments: comments_agg[0]?.total || 0,
+      avg_view: Math.round(avg_view || 0),
+    });
+  } catch (err: any) {
+    //return error from Schema
+    if (err.name === "ValidationError") {
+      return next(bad_request(err.message));
+    }
+    //return intertal 500
+    return next(internal(err.message));
+  }
+};

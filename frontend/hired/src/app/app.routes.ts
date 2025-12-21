@@ -12,6 +12,7 @@ import { ViewDetailPage } from './view-detail-page/view-detail-page';
 import { CartPage } from './cart-page/cart-page';
 import { PreCheckoutPage } from './pre-checkout-page/pre-checkout-page';
 import { AddProduct } from './add-product/add-product';
+import { EditPost } from './edit-post/edit-post';
 
 export const routes: Routes = [
     {path:"", component:Homepage},
@@ -26,6 +27,8 @@ export const routes: Routes = [
     {path:"forgotPassword-page", component:ForgotPasswordPage},
     {path:"pre-checkout-page", component:PreCheckoutPage},
     {path:"add-product-page", component:AddProduct},
+    {path:"add-product-page", component:AddProduct},
+    {path:"product-edit-page/:id", component:EditPost},
     {path:"cart-page", component:CartPage},
 
 
