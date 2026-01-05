@@ -184,11 +184,11 @@
   <!-- SECTION HEADER -->
   <div class="max-w-[1500px] mx-auto mb-12">
     <h1 class="text-3xl font-semibold leading-tight">
-      Explore Digital Creations
+      Hidden Gems Worth Discovering
     </h1>
 
     <p class="text-gray-600 mt-2 text-sm">
-      High-quality digital downloads created by talented designers and artists.
+      Explore products, services, and digital creations that don’t follow trends — they set them.
     </p>
   </div>
   <div class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10" data-aos="fade-left">
@@ -227,6 +227,63 @@
 
       }
     </div>
+  </div>
+</section>
+
+<section class="mt-64 px-4">
+  <!-- SECTION HEADER -->
+  <div class="max-w-[1500px] mx-auto mb-12 lg:text-right">
+    <h1 class="text-3xl font-semibold leading-tight">
+      Support the Next Big Thing
+    </h1>
+
+    <p class="text-gray-600 mt-2 text-sm">
+      Support emerging sellers and first-timers who are still building their audience, but not their ambition.
+    </p>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div
+    class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10"
+    data-aos="fade-left"
+  >
+
+    <!-- LEFT DIGITAL GRID -->
+    <div class="lg:col-span-2 lg:col-start-1 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+      @for (item of trending_model.slice(0,6); track item._id) {
+
+        <div class="cursor-pointer">
+          <!-- IMAGE CARD -->
+          <div class="relative rounded-2xl overflow-hidden shadow-md group">
+            <img
+              [src]="item.product.product_image[0]"
+              class="w-full h-[300px] object-cover transition duration-300 group-hover:scale-105"
+              alt="Product image"
+            />
+          </div>
+
+          <!-- TEXT -->
+          <div class="mt-3 px-1">
+            <h3 class="font-semibold text-gray-900 text-sm truncate">
+              {{ item.product.product_title }}
+            </h3>
+          </div>
+        </div>
+
+      }
+    </div>
+
+    <!-- RIGHT FEATURED DIGITAL PRODUCT -->
+    <div class="lg:col-span-1 lg:col-start-3 cursor-pointer flex flex-col h-full">
+      <div class="relative rounded-3xl overflow-hidden shadow-lg group flex-1">
+        <img
+          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+          class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          alt="Featured workspace"
+        />
+      </div>
+    </div>
+
   </div>
 </section>
 
