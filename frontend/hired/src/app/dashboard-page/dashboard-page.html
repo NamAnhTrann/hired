@@ -1,3 +1,4 @@
+
 <body
   class="hs-overlay-body-open overflow-hidden bg-gray-100 dark:bg-neutral-900"
 >
@@ -364,6 +365,7 @@
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
+   @if(current_user){
   <main
     class="lg:hs-overlay-layout-open:ps-60 transition-all duration-300 lg:fixed lg:inset-0 pt-13 px-3 pb-3"
   >
@@ -1099,4 +1101,10 @@
     </div>
     <!-- End Content -->
   </main>
+   } @else {
+    <div class="h-screen flex items-center justify-center">
+    <p class="text-gray-500">Please Login To View</p>
+  </div>
+   }
+
 </body>
