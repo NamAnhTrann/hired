@@ -1,4 +1,4 @@
-
+   @if(current_user){
 <body
   class="hs-overlay-body-open overflow-hidden bg-gray-100 dark:bg-neutral-900"
 >
@@ -365,7 +365,7 @@
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
-   @if(current_user){
+
   <main
     class="lg:hs-overlay-layout-open:ps-60 transition-all duration-300 lg:fixed lg:inset-0 pt-13 px-3 pb-3"
   >
@@ -1101,10 +1101,29 @@
     </div>
     <!-- End Content -->
   </main>
-   } @else {
-    <div class="h-screen flex items-center justify-center">
-    <p class="text-gray-500">Please Login To View</p>
-  </div>
-   }
+
 
 </body>
+   } @else {
+<div class="h-screen flex flex-col items-center justify-center gap-4">
+  <p class="text-gray-500 text-sm">
+    Please Login To View
+  </p>
+
+  <a
+    routerLink="/login-page"
+    class="
+      inline-flex items-center justify-center
+      px-4 py-2
+      text-sm font-medium
+      rounded-full
+      bg-gray-900 text-white
+      hover:bg-gray-800
+      transition
+    "
+  >
+    Login
+  </a>
+</div>
+
+   }

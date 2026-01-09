@@ -3,7 +3,6 @@ export interface User {
 
   user_username?: string;
   user_email: string;
-
   user_phone_number?: string;
 
   user_first_name?: string;
@@ -18,4 +17,7 @@ export interface User {
     postcode: string;
     country: string;
   };
+
+  createdAt?: string;
+  updatedAt?: string;
 }

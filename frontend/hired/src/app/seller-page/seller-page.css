@@ -1,0 +1,9 @@
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  opacity: 0.6;
+}
+
+swiper-container::part(button-prev):hover,
+swiper-container::part(button-next):hover {
+  opacity: 1;
+}
