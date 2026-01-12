@@ -13,6 +13,7 @@ import { PreCheckoutPage } from './pre-checkout-page/pre-checkout-page';
 import { AddProduct } from './add-product/add-product';
 import { EditPost } from './edit-post/edit-post';
 import { AboutUs } from './about-us/about-us';
+import { TermOfConditionPage } from './term-of-condition-page/term-of-condition-page';
 
 export const routes: Routes = [
     {path:"", component:Homepage},
@@ -30,7 +31,7 @@ export const routes: Routes = [
     {path:"product-edit-page/:id", component:EditPost},
     {path:"cart-page", component:CartPage},
     {path:"about-us-page", component:AboutUs},
-
+    {path:"term-of-condition-page", component:TermOfConditionPage},
 
 
 
