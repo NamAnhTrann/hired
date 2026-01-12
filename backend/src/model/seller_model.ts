@@ -20,21 +20,31 @@ const seller_schema = new mongoose.Schema(
       required: true,
     },
 
-    //entry point for shipping
     store_address: {
-      street: { type: String, required: true, default: "" },
-      city: { type: String, required: true, default: "" },
-      state: { type: String, required: true, default: "" },
-      postcode: { type: String, required: true, default: "" },
-      country: { type: String, required: true, default: "" },
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      state: { type: String, required: true },
+      postcode: { type: String, required: true },
+      country: { type: String, required: true },
     },
 
     stripe_account_id: {
       type: String,
-      default: "",
+      default: null,
+      index: true,
     },
 
     stripe_onboarded: {
+      type: Boolean,
+      default: false,
+    },
+
+    stripe_charges_enabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    stripe_payouts_enabled: {
       type: Boolean,
       default: false,
     },
@@ -47,14 +57,6 @@ const seller_schema = new mongoose.Schema(
 
     seller_badges: {
       type: [String],
-      enum: [
-        "trusted_seller",
-        "top_rated",
-        "veteran",
-        "high_volume",
-        "responsive_seller",
-        "quality_products",
-      ],
       default: [],
     },
   },

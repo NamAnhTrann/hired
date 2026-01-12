@@ -25,11 +25,10 @@ app.use(
   "/api/stripe",
   bodyParser.raw({ type: "application/json" }),
   webhook_router
-);app.use(express.json());
+);
+app.use(express.json());
 
 app.use(passport.initialize());
-
-
 
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
@@ -40,7 +39,7 @@ import cart_router from "./router/cart_router";
 import order_router from "./router/order_router";
 import trending_router from "./router/trending_router";
 import seller_router from "./router/seller_route";
-
+import stripe_router from "./router/stripe_router";
 app.use("/api", contact_router);
 app.use("/api", product_router);
 app.use("/api", auth_router);
@@ -50,7 +49,7 @@ app.use("/api", cart_router);
 app.use("/api", order_router);
 app.use("/api", trending_router);
 app.use("/api", seller_router);
-
+app.use("/api", stripe_router);
 
 app.use(errorHandler);
 

@@ -25,6 +25,7 @@ export class Header implements OnInit {
 
     this.auth.logout().subscribe({
       next:()=>{
+        
         this.router.navigate(["/login-page"])
       },
       error: () => {

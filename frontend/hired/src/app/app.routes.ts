@@ -13,29 +13,26 @@ import { PreCheckoutPage } from './pre-checkout-page/pre-checkout-page';
 import { AddProduct } from './add-product/add-product';
 import { EditPost } from './edit-post/edit-post';
 import { AboutUs } from './about-us/about-us';
-import { TermOfConditionPage } from './term-of-condition-page/term-of-condition-page';
+import { SellerPage } from './seller-page/seller-page';
+import { SellerCreatePage } from './seller-create-page/seller-create-page';
 
 export const routes: Routes = [
-    {path:"", component:Homepage},
-    {path:"dashboard-page", component:DashboardPage},
-    {path:"signup-page", component:SignupPage},
-    {path:"login-page", component:LoginPage},
-    {path:"marketplace-page", component:MarketplacePage},
-    {path:"chat-page", component:ChatPage},
-    {path:"contact-page", component:ContactPage},
-    {path:"view-detail-page/:id", component:ViewDetailPage},
-    {path:"forgotPassword-page", component:ForgotPasswordPage},
-    {path:"pre-checkout-page", component:PreCheckoutPage},
-    {path:"add-product-page", component:AddProduct},
-    {path:"add-product-page", component:AddProduct},
-    {path:"product-edit-page/:id", component:EditPost},
-    {path:"cart-page", component:CartPage},
-    {path:"about-us-page", component:AboutUs},
-    {path:"term-of-condition-page", component:TermOfConditionPage},
+  { path: '', component: Homepage },
+  { path: 'dashboard-page', component: DashboardPage },
+  { path: 'signup-page', component: SignupPage },
+  { path: 'login-page', component: LoginPage },
+  { path: 'marketplace-page', component: MarketplacePage },
+  { path: 'chat-page', component: ChatPage },
+  { path: 'contact-page', component: ContactPage },
+  { path: 'view-detail-page/:id', component: ViewDetailPage },
+  { path: 'forgotPassword-page', component: ForgotPasswordPage },
+  { path: 'pre-checkout-page', component: PreCheckoutPage },
+  { path: 'add-product-page', component: AddProduct },
+  { path: 'add-product-page', component: AddProduct },
+  { path: 'product-edit-page/:id', component: EditPost },
+  { path: 'cart-page', component: CartPage },
+  { path: 'about-us-page', component: AboutUs },
+  { path: 'seller-page', component: SellerPage },
+    { path: 'seller-create-page', component: SellerCreatePage },
 
-
-
-
-
-    
 ];

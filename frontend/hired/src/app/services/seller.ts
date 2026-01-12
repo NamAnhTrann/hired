@@ -1,8 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+const httpOptions = {
+  withCredentials: true,
+};
 @Injectable({
   providedIn: 'root',
 })
 export class Seller {
-  
+  private local_url = 'http://localhost:2020/api';
+
+  constructor(private http: HttpClient) {}
+
+  create_stripe_account() {
+    return this.http.post(`${this.local_url}/create-account`, {}, httpOptions);
+  }
+
+  create_onboard_link() {
+    return this.http.post<{ url: string }>(
+      `${this.local_url}/onboarding-link`,
+      {},
+      httpOptions
+    );
+  }
+
+  checkStripeStatus() {
+    return this.http.get<{
+      onboarded: boolean;
+      charges_enabled: boolean;
+      payouts_enabled: boolean;
+    }>(`${this.local_url}/status`, { withCredentials: true });
+  }
 }
