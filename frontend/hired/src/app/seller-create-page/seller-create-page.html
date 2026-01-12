@@ -1,1 +1,302 @@
-<p>seller-create-page works!</p>
+<section id="1" class="bg-neutral-900 w-full h-screen overflow-hidden">
+
+  <a
+    routerLink="/"
+    class="group absolute top-6 left-1/2 -translate-x-1/2 z-[50] px-5 py-1.5 rounded-full text-[11px] tracking-[0.35em] uppercase text-white/70 hover:text-white border border-white/20 hover:border-white/40 backdrop-blur-md transition-all duration-500"
+  >
+    <span class="relative z-10">EXIT</span>
+
+    <!-- glow -->
+    <span
+      class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl"
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.35),
+          transparent 70%
+        );
+      "
+    ></span>
+  </a>
+  <!-- Swiper -->
+  <swiper-container
+    #swiper
+    slides-per-view="1"
+    speed="500"
+    allow-touch-move="false"
+    class="relative z-20 w-full h-full flex items-center justify-center [--swiper-navigation-size:22px] [--swiper-navigation-sides-offset:12px] md:[--swiper-navigation-sides-offset:40px] [--swiper-theme-color:white]"
+  >
+    <!-- Slide 1 -->
+    <swiper-slide class="flex items-center justify-center">
+      <div class="text-center space-y-8 max-w-xl px-6">
+        <p class="text-xs uppercase tracking-widest text-white/70">
+          Seller setup · Step 1 of 5
+        </p>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight">
+          Let’s set up your store
+        </h1>
+
+        <p class="text-white/80 text-base md:text-lg leading-relaxed">
+          This will only take a few minutes. You’ll create your seller profile
+          first, then securely connect payouts through Stripe.
+        </p>
+
+        <p class="text-white/60 text-sm">
+          No bank details needed yet · You can finish Stripe onboarding later
+        </p>
+
+        <div class="pt-4">
+          <button
+            class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+            (click)="goNext()"
+          >
+            Start setup
+            <svg
+              class="size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </swiper-slide>
+
+    <!-- Slide 2 -->
+    <swiper-slide class="flex items-center justify-center">
+      <div class="w-full max-w-xl px-6 space-y-8">
+        <!-- Step indicator -->
+        <p class="text-xs uppercase tracking-widest text-white/70 text-center">
+          Seller setup · Step 2 of 5
+        </p>
+
+        <!-- Heading -->
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center">
+          Name your store
+        </h2>
+
+        <p class="text-white/70 text-center text-sm md:text-base">
+          This is how buyers will see your store on Outsold.
+        </p>
+
+        <!-- Form -->
+        <div class="space-y-6">
+          <!-- Store name -->
+          <div>
+            <label class="block text-white/70 text-sm mb-2"> Store name </label>
+            <input
+              type="text"
+              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-white/70"
+              placeholder="e.g. Nam’s Studio"
+            />
+          </div>
+
+          <!-- Store description -->
+          <div>
+            <label class="block text-white/70 text-sm mb-2">
+              Store description
+            </label>
+            <textarea
+              rows="3"
+              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black focus:outline-none focus:ring-2 focus:ring-white/70 resize-none"
+              placeholder="What do you sell?"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- CTA -->
+<div class="pt-6 flex justify-between items-center">
+  <!-- Back -->
+  <button
+    class="text-sm text-white/60 hover:text-white transition"
+    (click)="goPrev()"
+  >
+    ← Back
+  </button>
+
+  <!-- Continue -->
+  <button
+    class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full
+           bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+    (click)="goNext()"
+  >
+    Continue
+  </button>
+</div>
+
+      </div>
+    </swiper-slide>
+
+    <!-- Slide 3 -->
+    <swiper-slide class="flex items-center justify-center">
+      <div class="w-full max-w-xl px-6 space-y-8">
+        <p class="text-xs uppercase tracking-widest text-white/70 text-center">
+          Seller setup · Step 3 of 5
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center">
+          Store address
+        </h2>
+
+        <p class="text-white/70 text-center text-sm md:text-base">
+          Used for verification and payouts. This won’t be shown publicly.
+        </p>
+
+        <div class="space-y-4">
+          <input
+            class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+            placeholder="Street address"
+          />
+          <input
+            class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+            placeholder="City"
+          />
+          <div class="grid grid-cols-2 gap-4">
+            <input
+              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+              placeholder="State"
+            />
+            <input
+              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+              placeholder="Postcode"
+            />
+          </div>
+          <input
+            class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+            placeholder="Country"
+          />
+        </div>
+<div class="pt-6 flex justify-between items-center">
+  <!-- Back -->
+  <button
+    class="text-sm text-white/60 hover:text-white transition"
+    (click)="goPrev()"
+  >
+    ← Back
+  </button>
+
+  <!-- Continue -->
+  <button
+    class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full
+           bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+    (click)="goNext()"
+  >
+    Continue
+  </button>
+</div>
+
+      </div>
+    </swiper-slide>
+    <!-- Slide 4 -->
+    <swiper-slide class="flex items-center justify-center">
+      <div class="w-full max-w-xl px-6 space-y-8">
+        <p class="text-xs uppercase tracking-widest text-white/70 text-center">
+          Seller setup · Step 4 of 5
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-white text-center">
+          Review your store
+        </h2>
+
+        <p class="text-white/70 text-center text-sm md:text-base">
+          Make sure everything looks right before creating your storefront.
+        </p>
+
+        <div class="bg-white/10 rounded-2xl p-6 space-y-4 text-white">
+          <div>
+            <p class="text-xs text-white/60">Store name</p>
+            <p class="font-medium">Nam’s Studio</p>
+          </div>
+
+          <div>
+            <p class="text-xs text-white/60">Description</p>
+            <p class="font-medium">Handmade products and digital designs.</p>
+          </div>
+
+          <div>
+            <p class="text-xs text-white/60">Address</p>
+            <p class="font-medium">Melbourne, VIC 3000, Australia</p>
+          </div>
+        </div>
+
+<div class="pt-6 flex justify-between items-center">
+  <!-- Back -->
+  <button
+    class="text-sm text-white/60 hover:text-white transition"
+    (click)="goPrev()"
+  >
+    ← Back
+  </button>
+
+  <!-- Continue -->
+  <button
+    class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full
+           bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+    (click)="goNext()"
+  >
+    Continue
+  </button>
+</div>
+
+      </div>
+    </swiper-slide>
+    <!-- Slide 5 -->
+    <swiper-slide class="flex items-center justify-center">
+      <div class="w-full max-w-xl px-6 space-y-8 text-center">
+        <p class="text-xs uppercase tracking-widest text-white/70">
+          Seller setup · Step 5 of 5
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-white">
+          Connect payouts with Stripe
+        </h2>
+
+        <p class="text-white/80 text-sm md:text-base leading-relaxed">
+          To receive payments, you’ll securely connect your bank account through
+          Stripe. Outsold never sees or stores your banking details.
+        </p>
+
+        <div
+          class="bg-white/10 rounded-2xl p-6 text-left space-y-3 text-white/80"
+        >
+          <p>• Secure identity verification</p>
+          <p>• Automatic payouts to your bank</p>
+          <p>• Resume anytime if you’re not ready</p>
+        </div>
+
+        <p class="text-white/60 text-xs">
+          This step is required before you can receive payments.
+        </p>
+
+<div class="pt-6 flex justify-between items-center">
+  <!-- Back -->
+  <button
+    class="text-sm text-white/60 hover:text-white transition"
+    (click)="goPrev()"
+  >
+    ← Back
+  </button>
+
+  <!-- Continue -->
+  <button
+    class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full
+           bg-white text-black text-sm font-medium hover:bg-white/90 transition"
+    (click)="goNext()"
+  >
+    Continue
+  </button>
+</div>
+
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</section>

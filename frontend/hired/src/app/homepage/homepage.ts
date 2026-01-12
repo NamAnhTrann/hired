@@ -49,13 +49,10 @@ load_trending() {
 }
 
 start_onboard() {
-  // Step 1: create Stripe account (safe to call multiple times)
   this.seller.create_stripe_account().subscribe({
     next: () => {
-      // Step 2: create onboarding link
       this.seller.create_onboard_link().subscribe({
         next: (res) => {
-          // Step 3: redirect to Stripe
           window.location.href = res.url;
         },
         error: (err) => {
