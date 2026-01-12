@@ -15,6 +15,7 @@ import { EditPost } from './edit-post/edit-post';
 import { AboutUs } from './about-us/about-us';
 import { SellerPage } from './seller-page/seller-page';
 import { SellerCreatePage } from './seller-create-page/seller-create-page';
+import { TermAndConditionPage } from './term-and-condition-page/term-and-condition-page';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'cart-page', component: CartPage },
   { path: 'about-us-page', component: AboutUs },
   { path: 'seller-page', component: SellerPage },
-    { path: 'seller-create-page', component: SellerCreatePage },
-
+  { path: 'seller-create-page', component: SellerCreatePage },
+  { path: 'term-and-condition-page', component: TermAndConditionPage },
+  
 ];
