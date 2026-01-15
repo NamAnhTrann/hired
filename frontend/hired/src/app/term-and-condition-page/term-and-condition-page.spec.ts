@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TermOfConditionPage } from './term-of-condition-page';
+import { TermAndConditionPage } from './term-and-condition-page';
 
-describe('TermOfConditionPage', () => {
-  let component: TermOfConditionPage;
-  let fixture: ComponentFixture<TermOfConditionPage>;
+describe('TermAndConditionPage', () => {
+  let component: TermAndConditionPage;
+  let fixture: ComponentFixture<TermAndConditionPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TermOfConditionPage]
+      imports: [TermAndConditionPage]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TermOfConditionPage);
+    fixture = TestBed.createComponent(TermAndConditionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
