@@ -17,6 +17,7 @@
       "
     ></span>
   </a>
+
   <form [formGroup]="form" (ngSubmit)="create_profile()">
     <!-- Swiper -->
     <swiper-container
@@ -27,9 +28,7 @@
       class="relative z-20 w-full h-full flex items-center justify-center [--swiper-navigation-size:22px] [--swiper-navigation-sides-offset:12px] md:[--swiper-navigation-sides-offset:40px] [--swiper-theme-color:white]"
     >
       <!-- Slide 1 -->
-      <swiper-slide
-  class="flex min-h-screen items-center justify-center"
->
+      <swiper-slide class="flex min-h-screen items-center justify-center">
         <div class="text-center space-y-8 max-w-xl px-6">
           <p class="text-xs uppercase tracking-widest text-white/70">
             Seller setup · Step 1 of 5
@@ -50,6 +49,7 @@
 
           <div class="pt-4">
             <button
+              type="button"
               class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
               (click)="goNext()"
             >
@@ -74,18 +74,14 @@
       </swiper-slide>
 
       <!-- Slide 2 -->
-      <swiper-slide
-  class="flex min-h-screen items-center justify-center"
->
+      <swiper-slide class="flex min-h-screen items-center justify-center">
         <div class="w-full max-w-xl px-6 space-y-8">
-          <!-- Step indicator -->
           <p
             class="text-xs uppercase tracking-widest text-white/70 text-center"
           >
             Seller setup · Step 2 of 5
           </p>
 
-          <!-- Heading -->
           <h2 class="text-3xl md:text-4xl font-bold text-white text-center">
             Name your store
           </h2>
@@ -94,7 +90,6 @@
             This is how buyers will see your store on Outsold.
           </p>
 
-          <!-- Form -->
           <div class="space-y-6">
             <!-- Store name -->
             <div>
@@ -109,8 +104,8 @@
                 placeholder="e.g. Nam’s Studio"
               />
 
-              @if (form.get('store_name')?.touched &&
-              form.get('store_name')?.invalid) {
+              @if ( form.get('store_name')?.dirty &&
+              form.get('store_name')?.invalid ) {
               <p class="mt-1 text-xs text-red-400">
                 Store name must be at least 3 characters.
               </p>
@@ -130,7 +125,7 @@
                 placeholder="What do you sell?"
               ></textarea>
 
-              @if ( form.get('store_description')?.touched &&
+              @if ( form.get('store_description')?.dirty &&
               form.get('store_description')?.invalid ) {
               <p class="mt-1 text-xs text-red-400">
                 Description must be at least 10 characters.
@@ -139,18 +134,17 @@
             </div>
           </div>
 
-          <!-- CTA -->
           <div class="pt-6 flex justify-between items-center">
-            <!-- Back -->
             <button
+              type="button"
               class="text-sm text-white/60 hover:text-white transition"
               (click)="goPrev()"
             >
               ← Back
             </button>
 
-            <!-- Continue -->
             <button
+              type="button"
               class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
               (click)="goNext()"
             >
@@ -161,9 +155,7 @@
       </swiper-slide>
 
       <!-- Slide 3 -->
-      <swiper-slide
-  class="flex min-h-screen items-center justify-center"
->
+      <swiper-slide class="flex min-h-screen items-center justify-center">
         <div class="w-full max-w-xl px-6 space-y-8">
           <p
             class="text-xs uppercase tracking-widest text-white/70 text-center"
@@ -175,53 +167,88 @@
             Store address
           </h2>
 
-          <p class="text-white/70 text-center text-sm md:text-base">
-            Used for verification and payouts. This won’t be shown publicly.
-          </p>
-
           <div class="space-y-4">
-            <input
-              formControlName="street"
-              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
-              placeholder="Street address"
-            />
-
-            <input
-              formControlName="city"
-              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
-              placeholder="City"
-            />
-
-            <div class="grid grid-cols-2 gap-4">
+            <!-- Street -->
+            <div>
               <input
-                formControlName="state"
+                formControlName="street"
                 class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
-                placeholder="State"
+                placeholder="Street address"
               />
-              <input
-                formControlName="postcode"
-                class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
-                placeholder="Postcode"
-              />
+
+              @if ( form.get('street')?.dirty && form.get('street')?.invalid ) {
+              <p class="mt-1 text-xs text-red-400">
+                Street address is required.
+              </p>
+              }
             </div>
 
-            <input
-              formControlName="country"
-              class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
-              placeholder="Country"
-            />
+            <!-- City -->
+            <div>
+              <input
+                formControlName="city"
+                class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+                placeholder="City"
+              />
+
+              @if ( form.get('city')?.dirty && form.get('city')?.invalid ) {
+              <p class="mt-1 text-xs text-red-400">City is required.</p>
+              }
+            </div>
+
+            <!-- State + Postcode -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <input
+                  formControlName="state"
+                  class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+                  placeholder="State"
+                />
+
+                @if ( form.get('state')?.dirty && form.get('state')?.invalid ) {
+                <p class="mt-1 text-xs text-red-400">State is required.</p>
+                }
+              </div>
+
+              <div>
+                <input
+                  formControlName="postcode"
+                  class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+                  placeholder="Postcode"
+                />
+
+                @if ( form.get('postcode')?.dirty &&
+                form.get('postcode')?.invalid ) {
+                <p class="mt-1 text-xs text-red-400">Postcode is required.</p>
+                }
+              </div>
+            </div>
+
+            <!-- Country -->
+            <div>
+              <input
+                formControlName="country"
+                class="w-full rounded-xl px-4 py-3 bg-white/90 text-black"
+                placeholder="Country"
+              />
+
+              @if ( form.get('country')?.dirty && form.get('country')?.invalid )
+              {
+              <p class="mt-1 text-xs text-red-400">Country is required.</p>
+              }
+            </div>
           </div>
+
           <div class="pt-6 flex justify-between items-center">
-            <!-- Back -->
             <button
+              type="button"
               class="text-sm text-white/60 hover:text-white transition"
               (click)="goPrev()"
             >
               ← Back
             </button>
-
-            <!-- Continue -->
             <button
+              type="button"
               class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
               (click)="goNext()"
             >
@@ -230,62 +257,34 @@
           </div>
         </div>
       </swiper-slide>
-      <!-- Slide 4 -->
-      <swiper-slide
-  class="flex min-h-screen items-center justify-center"
->
-        <div class="w-full max-w-xl px-6 space-y-8">
-          <p
-            class="text-xs uppercase tracking-widest text-white/70 text-center"
-          >
-            Seller setup · Step 4 of 5
-          </p>
 
+      <!-- Slide 4 -->
+      <swiper-slide class="flex min-h-screen items-center justify-center">
+        <div class="w-full max-w-xl px-6 space-y-8">
           <h2 class="text-3xl md:text-4xl font-bold text-white text-center">
             Review your store
           </h2>
 
-          <p class="text-white/70 text-center text-sm md:text-base">
-            Make sure everything looks right before creating your storefront.
-          </p>
-
           <div class="bg-white/10 rounded-2xl p-6 space-y-4 text-white">
-            <div>
-              <p class="text-xs text-white/60">Store name</p>
-              <p class="font-medium">
-                {{ form.value.store_name }}
-              </p>
-            </div>
-
-            <div>
-              <p class="text-xs text-white/60">Description</p>
-              <p class="font-medium">
-                {{ form.value.store_description }}
-              </p>
-            </div>
-
-            <div>
-              <p class="text-xs text-white/60">Address</p>
-              <p class="font-medium">
-                {{ form.value.street }}, {{ form.value.city }},
-                {{ form.value.state }}
-                {{ form.value.postcode }},
-                {{ form.value.country }}
-              </p>
-            </div>
+            <p>{{ form.value.store_name }}</p>
+            <p>{{ form.value.store_description }}</p>
+            <p>
+              {{ form.value.street }}, {{ form.value.city }},
+              {{ form.value.state }} {{ form.value.postcode }},
+              {{ form.value.country }}
+            </p>
           </div>
 
           <div class="pt-6 flex justify-between items-center">
-            <!-- Back -->
             <button
+              type="button"
               class="text-sm text-white/60 hover:text-white transition"
               (click)="goPrev()"
             >
               ← Back
             </button>
-
-            <!-- Continue -->
             <button
+              type="button"
               class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
               (click)="goNext()"
             >
@@ -294,50 +293,47 @@
           </div>
         </div>
       </swiper-slide>
-      <!-- Slide 5 -->
-      <swiper-slide
-  class="flex min-h-screen items-center justify-center"
->
-        <div class="w-full max-w-xl px-6 space-y-8 text-center">
-          <p class="text-xs uppercase tracking-widest text-white/70">
-            Seller setup · Step 5 of 5
-          </p>
 
+      <!-- Slide 5 -->
+      <swiper-slide class="flex min-h-screen items-center justify-center">
+        <div class="w-full max-w-xl px-6 space-y-8 text-center">
           <h2 class="text-3xl md:text-4xl font-bold text-white">
             Connect payouts with Stripe
           </h2>
+          <div class="pt-6 mt-4 flex justify-between items-center relative">
+            <!-- Popup (top of screen, mobile friendly) -->
+            @if (submitAttempted && form.invalid) {
+            <div
+              class="fixed top-20 sm:top-24 left-1/2 -translate-x-1/2 z-[9999] w-[92vw] max-w-md px-4 py-2 rounded-xl text-xs sm:text-sm font-medium shadow-2xl backdrop-blur-md bg-black/80 text-white"
+              role="alert"
+              aria-live="polite"
+            >
+              @if (!form.dirty) {
+              <span class="text-red-400">
+                Please complete all required fields to continue.
+              </span>
+              } @else {
+              <span class="text-red-400">
+                Some details are incorrect. Please review the highlighted
+                fields.
+              </span>
+              }
+            </div>
+            }
 
-          <p class="text-white/80 text-sm md:text-base leading-relaxed">
-            To receive payments, you’ll securely connect your bank account
-            through Stripe. Outsold never sees or stores your banking details.
-          </p>
-
-          <div
-            class="bg-white/10 rounded-2xl p-6 text-left space-y-3 text-white/80"
-          >
-            <p>• Secure identity verification</p>
-            <p>• Automatic payouts to your bank</p>
-            <p>• Resume anytime if you’re not ready</p>
-          </div>
-
-          <p class="text-white/60 text-xs">
-            This step is required before you can receive payments.
-          </p>
-
-          <div class="pt-6 flex justify-between items-center">
             <!-- Back -->
             <button
+              type="button"
               class="text-sm text-white/60 hover:text-white transition"
               (click)="goPrev()"
             >
               ← Back
             </button>
 
-            <!-- Continue -->
+            <!-- Submit -->
             <button
-              type="button"
+              type="submit"
               [disabled]="loading"
-              (click)="create_profile()"
               class="inline-flex items-center gap-x-2 px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition"
             >
               {{ loading ? "Creating…" : "Create store & connect Stripe" }}

@@ -24,7 +24,10 @@ export const create_stripe_account = async (
     }
 
     if (seller.stripe_account_id) {
-      console.log("[Stripe] Existing seller account:", seller.stripe_account_id);
+      console.log(
+        "[Stripe] Existing seller account:",
+        seller.stripe_account_id
+      );
       return res.json({ stripe_account_id: seller.stripe_account_id });
     }
 
@@ -46,7 +49,6 @@ export const create_stripe_account = async (
     return next(internal(err.message));
   }
 };
-
 
 //onboard link
 export const create_stripe_onboard_link = async (
@@ -78,7 +80,6 @@ export const create_stripe_onboard_link = async (
   }
 };
 
-
 //status check
 export const check_stripe_status = async (
   req: Request,
@@ -100,9 +101,7 @@ export const check_stripe_status = async (
     seller.stripe_charges_enabled = account.charges_enabled;
     seller.stripe_payouts_enabled = account.payouts_enabled;
 
-    seller.seller_status = seller.stripe_onboarded
-      ? "active"
-      : "pending";
+    seller.seller_status = seller.stripe_onboarded ? "active" : "pending";
 
     await seller.save();
 
@@ -118,5 +117,3 @@ export const check_stripe_status = async (
     return next(internal(err.message));
   }
 };
-
-

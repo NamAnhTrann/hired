@@ -29,7 +29,7 @@ export class SellerCreatePage implements AfterViewInit {
   loading = false;
   error_message = '';
   success_message = '';
-
+  submitAttempted = false;
   constructor(private sellerService: Seller_Service) {}
 
   form = new FormGroup({
@@ -67,11 +67,10 @@ export class SellerCreatePage implements AfterViewInit {
   }
 
   public create_profile() {
-
+    this.submitAttempted = true;
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.error_message = 'Please enter the correct details';
       return;
     }
 
