@@ -100,7 +100,7 @@
   </swiper-container>
 </section>
 
-<section class="mt-64 px-4 py-24">
+<section class="mt-24 px-4 py-24">
   <div class="max-w-[1450px] mx-auto">
     <h2 class="text-2xl md:text-3xl font-semibold mb-2">
       Most Popular Products
@@ -181,120 +181,227 @@
   </div>
 </section>
 
-<section class="mt-64 px-4 bg-white py-24">
-  <!-- SECTION HEADER -->
-  <div class="max-w-[1500px] mx-auto mb-12">
-    <h1 class="text-3xl font-semibold leading-tight">
-      Hidden Gems Worth Discovering
-    </h1>
-
-    <p class="text-gray-600 mt-2 text-sm">
-      Explore products, services, and digital creations that don’t follow trends
-      — they set them.
-    </p>
-  </div>
+<section class="w-full min-h-screen bg-white">
   <div
-    class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10"
-    data-aos="fade-left"
+    class="max-w-[1450px] mx-auto"
+    data-aos="fade-right"
   >
-    <!-- LEFT FEATURED DIGITAL PRODUCT -->
-    <div class="lg:col-span-1 cursor-pointer flex flex-col h-full">
-      <!-- FULL IMAGE CARD (matches entire column height) -->
-      <div class="relative rounded-3xl overflow-hidden shadow-lg group flex-1">
-        <img
-          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
-          class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-        />
+
+    <!-- SCROLL CONTEXT (required for sticky to work) -->
+    <div class="flex flex-col lg:flex-row gap-8 min-h-[220vh] py-24">
+
+      <!-- LEFT: Sticky Hidden Gems Panel -->
+      <div class="lg:w-1/2">
+        <div class="sticky top-24 bg-indigo-600 text-white rounded-3xl p-12 shadow-xl h-[calc(100vh-7rem)] flex flex-col justify-between">
+
+          <div>
+            <h2 class="text-4xl font-bold leading-tight">
+              Hidden Gems<br />Worth Discovering
+            </h2>
+
+            <p class="mt-6 text-indigo-100 text-lg leading-relaxed">
+              Unexpected products, ideas, and services discovered across the
+              marketplace — not ranked, not categorized, just found.
+            </p>
+
+            <p class="mt-6 text-indigo-200 text-base">
+              Scroll to explore what others might miss.
+            </p>
+          </div>
+
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 bg-white text-indigo-600 font-semibold px-6 py-3 rounded-xl hover:bg-indigo-100 transition"
+          >
+            Keep Exploring →
+          </a>
+        </div>
       </div>
-    </div>
 
-    <!-- RIGHT DIGITAL GRID -->
-    <div class="lg:col-span-2 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
-      @for (item of trending_model.slice(0,6); track item._id) {
+      <!-- RIGHT: Page-scrolling content -->
+      <div class="lg:w-1/2 space-y-6 pr-2">
 
-      <div class="cursor-pointer">
-        <!-- FULL IMAGE CARD -->
-        <div class="relative rounded-2xl overflow-hidden shadow-md group">
-          <img
-            [src]="item.product.product_image[0]"
-            class="w-full h-[300px] object-cover transition duration-300 group-hover:scale-105"
-          />
+        <!-- ITEM 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=1" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Unnamed Creation</h3>
+            <p class="text-sm text-gray-500">Found unexpectedly</p>
+          </div>
         </div>
 
-        <!-- TEXT BELOW THE CARD -->
-        <div class="mt-3 px-1">
-          <h3 class="font-semibold text-gray-900 text-sm truncate">
-            {{ item.product.product_title }}
-          </h3>
+        <!-- ITEM 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=2" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Unknown Product</h3>
+            <p class="text-sm text-gray-500">No category assigned</p>
+          </div>
         </div>
+
+        <!-- ITEM 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=3" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Experimental Object</h3>
+            <p class="text-sm text-gray-500">Early concept</p>
+          </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=4" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Discovered Item</h3>
+            <p class="text-sm text-gray-500">Unranked & unexplained</p>
+          </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=5" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Strange but Useful</h3>
+            <p class="text-sm text-gray-500">No trend attached</p>
+          </div>
+        </div>
+
+        <!-- ITEM 6 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=6" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Overlooked Idea</h3>
+            <p class="text-sm text-gray-500">Recently surfaced</p>
+          </div>
+        </div>
+
+        <!-- ITEM 7 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=7" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Unlabeled Entry</h3>
+            <p class="text-sm text-gray-500">Hard to describe</p>
+          </div>
+        </div>
+
+        <!-- ITEM 8 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=8" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Quiet Favorite</h3>
+            <p class="text-sm text-gray-500">Low visibility</p>
+          </div>
+        </div>
+
       </div>
 
-      }
     </div>
   </div>
 </section>
 
-<section class="mt-64 px-4 py-28">
-  <!-- SECTION HEADER -->
-  <div class="max-w-[1500px] mx-auto mb-12 lg:text-right">
-    <h1 class="text-3xl font-semibold leading-tight">
-      Support the Next Big Thing
-    </h1>
-
-    <p class="text-gray-600 mt-2 text-sm">
-      Support emerging sellers and first-timers who are still building their
-      audience, but not their ambition.
-    </p>
-  </div>
-
-  <!-- MAIN GRID -->
+<section class="w-full min-h-screen bg-white">
   <div
-    class="max-w-[1500px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10"
+    class="max-w-[1450px] mx-auto"
     data-aos="fade-left"
   >
-    <!-- LEFT DIGITAL GRID -->
-    <div
-      class="lg:col-span-2 lg:col-start-1 grid sm:grid-cols-2 md:grid-cols-3 gap-6"
-    >
-      @for (item of trending_model.slice(0,6); track item._id) {
 
-      <div class="cursor-pointer">
-        <!-- IMAGE CARD -->
-        <div class="relative rounded-2xl overflow-hidden shadow-md group">
-          <img
-            [src]="item.product.product_image[0]"
-            class="w-full h-[300px] object-cover transition duration-300 group-hover:scale-105"
-            alt="Product image"
-          />
+    <!-- SCROLL CONTEXT -->
+    <div class="flex flex-col lg:flex-row gap-8 min-h-[220vh] py-24">
+
+      <!-- LEFT: Page-scrolling content -->
+      <div class="lg:w-1/2 space-y-6 pr-2">
+
+        <!-- ITEM 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=21" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">First Public Release</h3>
+            <p class="text-sm text-gray-500">Still finding its audience</p>
+          </div>
         </div>
 
-        <!-- TEXT -->
-        <div class="mt-3 px-1">
-          <h3 class="font-semibold text-gray-900 text-sm truncate">
-            {{ item.product.product_title }}
-          </h3>
+        <!-- ITEM 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=22" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Early Builder Project</h3>
+            <p class="text-sm text-gray-500">Just getting started</p>
+          </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=23" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">New Creator Drop</h3>
+            <p class="text-sm text-gray-500">Low visibility, high intent</p>
+          </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=24" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Independent Launch</h3>
+            <p class="text-sm text-gray-500">First steps forward</p>
+          </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=25" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">Quiet Start</h3>
+            <p class="text-sm text-gray-500">Built with care</p>
+          </div>
+        </div>
+
+        <!-- ITEM 6 -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <img src="https://picsum.photos/600/400?random=26" class="h-56 w-full object-cover" />
+          <div class="p-4">
+            <h3 class="font-medium">New Voice</h3>
+            <p class="text-sm text-gray-500">Still unheard</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Sticky Support Panel -->
+      <div class="lg:w-1/2">
+        <div class="sticky top-24 bg-indigo-600 text-white rounded-3xl p-12 shadow-xl h-[calc(100vh-7rem)] flex flex-col justify-between">
+
+          <div>
+            <h2 class="text-4xl font-bold leading-tight">
+              Support the<br />Next Big Thing
+            </h2>
+
+            <p class="mt-6 text-indigo-100 text-lg leading-relaxed">
+              Support emerging sellers and first-timers who are still building
+              their audience — but not their ambition.
+            </p>
+
+            <p class="mt-6 text-indigo-200 text-base">
+              Your support helps ideas grow.
+            </p>
+          </div>
+
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 bg-white text-indigo-600 font-semibold px-6 py-3 rounded-xl hover:bg-indigo-100 transition"
+          >
+            Discover New Creators →
+          </a>
+
         </div>
       </div>
 
-      }
-    </div>
-
-    <!-- RIGHT FEATURED DIGITAL PRODUCT -->
-    <div
-      class="lg:col-span-1 lg:col-start-3 cursor-pointer flex flex-col h-full"
-    >
-      <div class="relative rounded-3xl overflow-hidden shadow-lg group flex-1">
-        <img
-          src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
-          class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
-          alt="Featured workspace"
-        />
-      </div>
     </div>
   </div>
 </section>
 
-<section class="features mt-64">
+
+<section>
   <div class="bg-slate-50 py-28 sm:py-36">
     <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8" data-aos="fade-up">
       <h2 class="text-center text-base/7 font-semibold text-indigo-600">
