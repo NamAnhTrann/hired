@@ -6,16 +6,25 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class Seller {
+export class Seller_Service {
   private local_url = 'http://localhost:2020/api';
 
   constructor(private http: HttpClient) {}
 
-  create_stripe_account() {
+  //create seller profile 
+  public create_profile (data:any){
+    return this.http.post(`${this.local_url}/create/seller/profile`, data, httpOptions)
+  }
+
+  public get_seller (){
+    return this.http.get(`${this.local_url}/get/seller/profile`, httpOptions)
+  }
+
+  public create_stripe_account() {
     return this.http.post(`${this.local_url}/create-account`, {}, httpOptions);
   }
 
-  create_onboard_link() {
+   public create_onboard_link() {
     return this.http.post<{ url: string }>(
       `${this.local_url}/onboarding-link`,
       {},
@@ -23,7 +32,7 @@ export class Seller {
     );
   }
 
-  checkStripeStatus() {
+  public checkStripeStatus() {
     return this.http.get<{
       onboarded: boolean;
       charges_enabled: boolean;
