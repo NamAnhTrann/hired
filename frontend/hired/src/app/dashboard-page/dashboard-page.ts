@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth';
 import { Dashboard_Service } from '../services/dashboard';
 import { SellerStats } from '../models/seller_stats';
+import { User } from '../models/user_interface';
+import { Seller } from '../models/seller_interface';
+import { Seller_Service } from '../services/seller';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -17,7 +20,9 @@ export class DashboardPage implements OnInit {
   products: any[] = [];
   top_products: any[] = [];
   isRefreshing = false;
-  current_user: any;
+  current_user: User | null = null;
+  seller: Seller | null = null;
+
   seller_stats: SellerStats | null = null;
 
   constructor(
@@ -25,14 +30,25 @@ export class DashboardPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private dashboardService: Dashboard_Service,
+    private sellerService: Seller_Service
   ) {}
-  public ngOnInit() {
+  ngOnInit() {
     this.auth.load_user().subscribe({
       next: (res: any) => {
         this.current_user = res.user;
       },
       error: () => {
         this.current_user = null;
+      },
+    });
+
+    this.sellerService.get_seller().subscribe({
+      next: (res) => {
+        this.seller = res.data as Seller;
+      },
+      error: (err) => {
+        console.error( err);
+        this.seller = null;
       },
     });
 
@@ -44,8 +60,6 @@ export class DashboardPage implements OnInit {
         this.seller_stats = null;
       },
     });
-
-    this.refresh();
   }
 
   public refresh() {
@@ -69,26 +83,24 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  public delete_product(item:any){
-    if(!confirm('Are you sure you want to delete this product?')){
+  public delete_product(item: any) {
+    if (!confirm('Are you sure you want to delete this product?')) {
       return;
     }
     this.productService.delete_product(item._id).subscribe({
-      next:(res:any)=>{
-        alert("product remove");
+      next: (res: any) => {
+        alert('product remove');
         this.refresh();
       },
-      error:(err:any)=>{
-        alert("failed to delete product");
-      }
-    })
+      error: (err: any) => {
+        alert('failed to delete product');
+      },
+    });
   }
 
   public viewDetail(item: any) {
     this.router.navigate(['/view-detail-page', item._id]);
   }
-
-
 
   public logout() {
     if (!confirm('Are you sure you want to logout?')) return;
