@@ -9,30 +9,40 @@ const httpOptions = {
 export class Product_Service {
   private local_url = 'http://localhost:2020/api';
 
-  constructor(private http:HttpClient){}
+  constructor(private http: HttpClient) {}
 
-  add_product(product_data:any){
-    return this.http.post(`${this.local_url}/add/product`, product_data, httpOptions)
+  add_product(product_data: any) {
+    return this.http.post(
+      `${this.local_url}/add/product`,
+      product_data,
+      httpOptions,
+    );
   }
 
-  list_products(){
-    return this.http.get(`${this.local_url}/list/all/product`)
+  list_products() {
+    return this.http.get(`${this.local_url}/list/all/product`);
   }
 
   list_my_products() {
-  return this.http.get(`${this.local_url}/products/my-products`);
-}
-
-
-  list_single_product(product_id:string){
-    return this.http.get(`${this.local_url}/list/single/product/${product_id}`)
+    return this.http.get(`${this.local_url}/products/my-products`);
   }
 
-  delete_product(product_id:string){
-    return this.http.delete(`${this.local_url}/delete/product/${product_id}`, httpOptions)
+  list_single_product(product_id: string) {
+    return this.http.get(`${this.local_url}/list/single/product/${product_id}`);
   }
 
-  edit_product(product_id:string, product_data:any){
-    return this.http.put(`${this.local_url}/edit/product/${product_id}`, product_data, httpOptions)
+  delete_product(product_id: string) {
+    return this.http.delete(
+      `${this.local_url}/delete/product/${product_id}`,
+      httpOptions,
+    );
+  }
+
+  edit_product(product_id: string, product_data: any) {
+    return this.http.put(
+      `${this.local_url}/edit/product/${product_id}`,
+      product_data,
+      httpOptions,
+    );
   }
 }

@@ -1,4 +1,4 @@
-<section class="py-10 px-4 mt-28 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
+<section class="py-10 px-4 mt-24 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
   <div class="mx-auto max-w-[1800px] px-4">
     <!-- HEADER -->
     <header>
@@ -7,648 +7,437 @@
         Explore our latest products from creators, sellers, and designers.
       </p>
     </header>
+    <!-- SEARCH BAR -->
+    <div class="mb-6">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Seek and you shall find..."
+        class="mt-3 block w-[60%] rounded-lg border border-gray-400 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+      />
+    </div>
 
-    <!-- FILTER BAR -->
-    <div class="mt-8 sm:flex sm:items-center sm:justify-between">
-      <!-- Mobile filter button -->
-      <div class="block sm:hidden">
-        <button
-          class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
-        >
-          <span class="text-sm font-medium"> Filters & Sorting </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-4 rtl:rotate-180"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            />
-          </svg>
+    <!-- TAG FILTERS -->
+    <div class="mb-5">
+      <p class="text-xs text-gray-500 mb-2">Tags:</p>
+      <div class="flex flex-wrap gap-2">
+        <button class="rounded-full bg-red-600 px-3 py-1 text-white">
+          Bathroom accessories
+        </button>
+
+        <button class="rounded-full bg-blue-600 px-3 py-1 text-white">
+          Bedding & linens
+        </button>
+
+        <button class="rounded-full bg-purple-600 px-3 py-1 text-white">
+          Travel accessories
+        </button>
+
+        <button class="rounded-full bg-indigo-600 px-3 py-1 text-white">
+          Fashion accessories
+        </button>
+
+        <button class="rounded-full bg-green-600 px-3 py-1 text-white">
+          Pet food & supplies
+        </button>
+
+        <button class="rounded-full bg-emerald-600 px-3 py-1 text-white">
+          Small home appliances
+        </button>
+
+        <span class="text-xs text-gray-400 px-2 self-center">+10</span>
+      </div>
+    </div>
+
+    <!-- BRAND VALUES -->
+    <div class="mb-6">
+      <p class="text-xs text-gray-500 mb-2">Brand Values:</p>
+      <div class="flex gap-2">
+        <button class="rounded-full bg-red-600 px-3 py-1 text-white">
+          Cock
+        </button>
+
+        <button class="rounded-full bg-blue-600 px-3 py-1 text-white">
+          Balls
         </button>
       </div>
-
-      <!-- Desktop Filter Items -->
-      <div class="hidden sm:flex sm:gap-4">
-        <!-- Availability -->
-        <div class="relative">
-          <details class="group [&_summary::-webkit-details-marker]:hidden">
-            <summary
-              class="flex items-center gap-2 cursor-pointer border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
-            >
-              <span class="text-sm font-medium"> Availability </span>
-              <span class="transition group-open:-rotate-180">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="size-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                  />
-                </svg>
-              </span>
-            </summary>
-
-            <div
-              class="absolute mt-2 w-96 rounded-sm border border-gray-200 bg-white shadow-lg z-50"
-            >
-              <header class="flex items-center justify-between p-4">
-                <span class="text-sm text-gray-700">0 Selected</span>
-                <button
-                  class="text-sm text-gray-900 underline underline-offset-4"
-                >
-                  Reset
-                </button>
-              </header>
-
-              <ul class="space-y-1 border-t border-gray-200 p-4">
-                <li>
-                  <label class="inline-flex items-center gap-2">
-                    <input type="checkbox" class="size-5" />
-                    <span class="text-sm text-gray-700">In Stock</span>
-                  </label>
-                </li>
-
-                <li>
-                  <label class="inline-flex items-center gap-2">
-                    <input type="checkbox" class="size-5" />
-                    <span class="text-sm text-gray-700">Pre Order</span>
-                  </label>
-                </li>
-
-                <li>
-                  <label class="inline-flex items-center gap-2">
-                    <input type="checkbox" class="size-5" />
-                    <span class="text-sm text-gray-700">Out of Stock</span>
-                  </label>
-                </li>
-              </ul>
-            </div>
-          </details>
-        </div>
-
-        <!-- Price -->
-        <div class="relative">
-          <details class="group [&_summary::-webkit-details-marker]:hidden">
-            <summary
-              class="flex items-center gap-2 cursor-pointer border-b border-gray-400 pb-1 text-gray-900 hover:border-gray-600 transition"
-            >
-              <span class="text-sm font-medium"> Price </span>
-              <span class="transition group-open:-rotate-180">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="size-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                  />
-                </svg>
-              </span>
-            </summary>
-
-            <div
-              class="absolute mt-2 w-96 rounded-sm border border-gray-200 bg-white shadow-lg z-50"
-            >
-              <header class="flex items-center justify-between p-4">
-                <span class="text-sm text-gray-700">Adjust price range</span>
-                <button
-                  class="text-sm text-gray-900 underline underline-offset-4"
-                >
-                  Reset
-                </button>
-              </header>
-
-              <div class="border-t border-gray-200 p-4">
-                <div class="flex justify-between gap-4">
-                  <label class="flex items-center gap-2">
-                    <span class="text-sm text-gray-600">$</span>
-                    <input
-                      type="number"
-                      placeholder="From"
-                      class="w-full rounded-md border-gray-200 shadow-xs text-sm"
-                    />
-                  </label>
-
-                  <label class="flex items-center gap-2">
-                    <span class="text-sm text-gray-600">$</span>
-                    <input
-                      type="number"
-                      placeholder="To"
-                      class="w-full rounded-md border-gray-200 shadow-xs text-sm"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-          </details>
-        </div>
-      </div>
-
-      <!-- SORT -->
-      <div class="hidden sm:block">
-        <select class="h-10 rounded-sm border-gray-300 text-sm">
-          <option>Sort By</option>
-          <option value="title_desc">Title DESC</option>
-          <option value="title_asc">Title ASC</option>
-          <option value="price_desc">Price DESC</option>
-          <option value="price_asc">Price ASC</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- PRODUCT GRID -->
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      @for (item of products; track item._id) {
-
-      <!-- COLUMN WRAPPER: VERY IMPORTANT -->
-      <div class="flex flex-col">
-        <!-- PRODUCT CARD -->
-        <div
-          class="rounded-xl bg-white dark:bg-neutral-900 shadow-sm border border-gray-100 dark:border-neutral-800 overflow-hidden"
-        >
-          <div class="relative group overflow-hidden">
-            <img
-              [src]="item.product_image[0]"
-              [alt]="item.product_title"
-              class="h-[450px] sm:h-[480px] w-full object-cover transition duration-300 group-hover:brightness-75"
-            />
-          </div>
-
-          <div class="p-5">
-            <h3 class="text-base font-semibold truncate">
-              {{ item.product_title }}
-            </h3>
-
-            <p class="mt-1 text-gray-700 text-sm line-clamp-2">
-              {{ item.product_description }}
-            </p>
-            <div class="mt-2 flex items-center justify-between">
-              <p class="text-lg text-indigo-600">${{ item.product_price }}</p>
-
-              <div class="flex items-center gap-1 text-sm text-gray-500">
-                <i class="fa-regular fa-eye"></i>
-
-                @if (item.product_view_count === 0) {
-                <span>No views</span>
-                } @else {
-                <span>{{ item.product_view_count }}</span>
-                }
-              </div>
-            </div>
-
-            <!-- ACTION BUTTONS: BUY NOW + VIEW DETAIL -->
-            <div
-              class="mt-4 grid gap-3"
-              [class.grid-cols-2]="item.user?._id !== current_user?._id"
-              [class.grid-cols-1]="item.user?._id === current_user?._id"
-            >
-              @if (item.user?._id !== current_user?._id) {
-              <button
-                (click)="buyNow(item._id)"
-                class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md hover:bg-indigo-700"
-              >
-                Buy Now
-              </button>
-              }
-              <button
-                (click)="viewDetail(item)"
-                class="w-full py-2 rounded-md text-center bg-indigo-800 text-white text-sm font-semibold hover:bg-indigo-700 transition"
-              >
-                View Detail
-              </button>
-            </div>
-
-            <div class="mt-4 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <button
-                  class="transition hover:scale-110"
-                  (click)="toggleLikeProduct(item)"
-                >
-                  <i
-                    class="text-xl"
-                    [ngClass]="[
-                      item.liked_by_user
-                        ? 'fa-solid fa-heart text-red-500 heart-pop'
-                        : 'fa-regular fa-heart text-gray-600'
-                    ]"
-                  ></i>
-                </button>
-
-                <!-- COMMENTS ICON -->
-                <button
-                  (click)="toggleComments(item._id)"
-                  class="transition hover:scale-110"
-                >
-                  <i class="fa-regular fa-comment text-gray-600 text-xl"></i>
-                </button>
-
-                <button class="transition hover:scale-110">
-                  <i
-                    class="text-xl fa-regular fa-paper-plane text-gray-700"
-                  ></i>
-                </button>
-              </div>
-
-              <p class="text-sm font-semibold text-gray-700">
-                {{ item.like_count }} likes
-              </p>
-            </div>
-
-            <div class="mt-3 border-t pt-3">
-              <div class="flex items-center justify-between">
-                <p
-                  class="text-sm text-gray-500 cursor-pointer hover:underline"
-                  (click)="toggleComments(item._id)"
-                >
-                  @if (item.comment_count === 0) { No comments yet } @else if
-                  (item.comment_count > 50) { 50+ comments } @else {
-                  {{ item.comment_count }} comments }
-                </p>
-
-                <button
-                  class="text-sm font-semibold text-indigo-600 hover:underline"
-                >
-                  Message
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- COMMENTS PANEL BELOW CARD -->
-        @if (activeProduct === item._id) {
-        <div class="mt-4 border rounded-xl p-4 bg-gray-50 dark:bg-neutral-900">
-          <div class="flex gap-2 mb-4">
-            <input
-              type="text"
-              [(ngModel)]="newComment[item._id]"
-              placeholder="Write a comment..."
-              (keydown.enter)="postComment(item._id)"
-              class="flex-1 rounded-md border px-3 py-2 bg-white dark:bg-neutral-800 text-sm"
-            />
-            <button
-              (click)="postComment(item._id)"
-              class="px-4 py-2 bg-indigo-600 text-white rounded-md"
-            >
-              Post
-            </button>
-          </div>
-
-          @if (comments[item._id]?.length > 0) {
-          <div class="space-y-3">
-            @for (c of comments[item._id]; track c._id) {
-            <div class="p-3 border rounded-md bg-white dark:bg-neutral-800">
-              <div class="flex justify-between items-center">
-                <p class="text-sm font-semibold">{{ c.user?.user_username }}</p>
-
-                @if (c.user?._id === current_user?.id) {
-                <button
-                  class="text-red-500 text-xs font-semibold hover:underline"
-                  (click)="deleteComment(c, item, true)"
-                >
-                  Delete
-                </button>
-                }
-              </div>
-
-              <p class="text-sm mt-1">{{ c.text }}</p>
-
-              <button
-                (click)="toggleReply(item._id, c._id)"
-                class="text-xs text-indigo-600 mt-2"
-              >
-                Reply
-              </button>
-
-              @if (replyBox[item._id]?.[c._id]) {
-              <div class="mt-2 flex gap-2">
-                <input
-                  type="text"
-                  [(ngModel)]="replyText[c._id]"
-                  placeholder="Reply..."
-                  class="flex-1 rounded-md border px-3 py-2 text-sm"
-                />
-                <button
-                  (click)="postReply(item._id, c._id)"
-                  class="px-3 py-2 bg-indigo-600 text-white rounded-md text-xs"
-                >
-                  Send
-                </button>
-              </div>
-              }
-              <!-- NESTED REPLIES -->
-              @if (c.replies?.length > 0) {
-              <div class="ml-4 mt-3 space-y-2 border-l pl-3">
-                @for (r of c.replies; track r._id) {
-                <div class="p-2 bg-gray-100 dark:bg-neutral-700 rounded-md">
-                  <!-- Reply header -->
-                  <div class="flex justify-between items-center">
-                    <p class="text-xs font-semibold">
-                      {{ r.user?.user_username }}
-                    </p>
-
-                    @if (r.user?._id === current_user?.id) {
-                    <button
-                      class="text-red-500 text-xs font-semibold hover:underline"
-                      (click)="deleteComment(r, item, true)"
-                    >
-                      Delete
-                    </button>
-                    }
-                  </div>
-
-                  <!-- Reply text -->
-                  <p class="text-xs mt-1">{{ r.text }}</p>
-
-                  <!-- Reply to reply -->
-                  <button
-                    (click)="toggleReply(item._id, r._id)"
-                    class="text-xs text-indigo-600 mt-1"
-                  >
-                    Reply
-                  </button>
-
-                  @if (replyBox[item._id]?.[r._id]) {
-                  <div class="mt-2 flex gap-2">
-                    <input
-                      type="text"
-                      [(ngModel)]="replyText[r._id]"
-                      placeholder="Reply..."
-                      class="flex-1 rounded-md border px-2 py-1 text-xs"
-                    />
-                    <button
-                      (click)="postReply(item._id, r._id)"
-                      class="px-2 py-1 bg-indigo-600 text-white rounded-md text-xs"
-                    >
-                      Send
-                    </button>
-                  </div>
-                  }
-                </div>
-                }
-              </div>
-              }
-            </div>
-            }
-          </div>
-          } @else {
-          <p class="text-gray-500 text-sm">No comments yet.</p>
-          }
-
-          <button
-            (click)="toggleComments(item._id)"
-            class="mt-4 text-sm underline"
-          >
-            Close
-          </button>
-        </div>
-        }
-      </div>
-      <!-- END COLUMN WRAPPER -->
-
-      }
     </div>
   </div>
-</section>
 
-<section class="py-10 px-4 mt-28 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
   <div class="mx-auto max-w-[1800px] px-4">
-    <!-- HEADER -->
-    <header>
-      <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">Marketplace</h2>
-      <p class="mt-4 max-w-md text-gray-500">
-        Explore our latest products from creators, sellers, and designers.
-      </p>
-    </header>
-  <!-- SEARCH BAR -->
-  <div class="mb-6">
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Seek and you shall find"
-      class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-    />
-  </div>
-
-  <!-- TAG FILTERS -->
-  <div class="mb-5">
-    <p class="text-xs text-gray-500 mb-2">Tags:</p>
-    <div class="flex flex-wrap gap-2">
-      <button class="tag bg-pink-100 text-pink-700" onclick="toggleTag('Bathroom')">Bathroom accessories</button>
-      <button class="tag bg-blue-100 text-blue-700" onclick="toggleTag('Bedding')">Bedding & linens</button>
-      <button class="tag bg-purple-100 text-purple-700" onclick="toggleTag('Travel')">Travel accessories</button>
-      <button class="tag bg-indigo-100 text-indigo-700" onclick="toggleTag('Fashion')">Fashion accessories</button>
-      <button class="tag bg-green-100 text-green-700" onclick="toggleTag('Pet')">Pet food & supplies</button>
-      <button class="tag bg-emerald-100 text-emerald-700" onclick="toggleTag('Home')">Small home appliances</button>
-      <span class="text-xs text-gray-400 px-2 self-center">+10</span>
-    </div>
-  </div>
-
-  <!-- BRAND VALUES -->
-  <div class="mb-6">
-    <p class="text-xs text-gray-500 mb-2">Brand Values:</p>
-    <div class="flex gap-2">
-      <button class="tag bg-orange-100 text-orange-700" onclick="toggleValue('Emerging')">Emerging brand</button>
-      <button class="tag bg-yellow-100 text-yellow-700" onclick="toggleValue('Value')">Value for money</button>
-    </div>
-  </div>
-
-</div>
-</section>
-
-<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
-  <div class="mx-auto max-w-[1800px] px-4">
-    <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Products</h2>
-
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
+      Our Products
+    </h2>
     <div class="mt-6 sm:mt-8 flex flex-col lg:flex-row gap-6 xl:gap-8">
       <div class="w-full lg:w-[68%]">
         <div class="space-y-6">
-          <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800">
-  <div class="flex gap-4">
+          @for (item of products; track item._id) {
+            <div
+              class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800"
+            >
+              <div class="flex gap-4">
+                <!-- PRODUCT IMAGE -->
+                <img
+                  [src]="item.product_image[0]"
+                  [alt]="item.product_title"
+                  class="h-24 w-24 rounded-md object-cover"
+                />
 
-    <!-- PRODUCT IMAGE -->
-    <img
-      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/iphone-light.svg"
-      class="h-24 w-24 rounded-md object-cover"
-      alt="product"
-    />
+                <!-- PRODUCT INFO (UNCHANGED DESIGN) -->
+                <div class="flex-1">
+                  <p class="text-xs text-gray-500">
+                    {{ item.user?.store_name || "Unknown seller" }}
+                  </p>
 
-    <!-- PRODUCT INFO -->
-    <div class="flex-1">
-      <p class="text-xs text-gray-500">Medibank Lab ltd</p>
+                  <h3
+                    class="text-base font-semibold text-gray-900 dark:text-white"
+                  >
+                    {{ item.product_title }}
+                    <span class="ml-1 text-sm text-indigo-600">
+                      | ★ {{ item.rating || "4.9" }}
+                    </span>
+                    <span class="ml-1 text-sm text-yellow-500">
+                      | 💡 {{ item.score || "10/10" }}
+                    </span>
+                  </h3>
 
-      <h3 class="text-base font-semibold text-gray-900 dark:text-white">
-        Cancer-free Pill
-        <span class="ml-1 text-sm text-indigo-600">★ 4.9</span>
-        <span class="ml-1 text-sm text-yellow-500">💡 10/10</span>
-      </h3>
+                  <p class="mt-1 text-sm text-gray-500">
+                    {{ item.product_description }}
+                  </p>
 
-      <p class="mt-1 text-sm text-gray-500">
-        This breakthrough pill cure all kind of cancer. Lorem ipsum test content.
-      </p>
+                  <div class="mt-2 flex items-center gap-4 text-sm">
+                    <span class="font-medium text-gray-900 dark:text-white">
+                      Product Price: ${{ item.product_price }}
+                    </span>
 
-      <div class="mt-2 flex items-center gap-4 text-sm">
-        <span class="font-medium text-gray-900 dark:text-white">$9.99</span>
-        <span class="text-gray-500">In-stock: 150</span>
-      </div>
-    </div>
+                    <span class="text-gray-500">
+                      In-stock: {{ item.product_quantity || 0 }}
+                    </span>
+                  </div>
+                </div>
 
-    <!-- STATS / ACTIONS -->
-    <div class="flex flex-col items-end justify-between text-sm text-gray-500">
-      <div class="flex items-center gap-1">
-        ↑ <span>10291</span>
-      </div>
-      <div class="flex items-center gap-1">
-        <span>💬 214</span>
-      </div>
-      <div class="flex items-center gap-4">
-        <span>🛒 210</span>
-      </div>
-    </div>
+                <!-- STATS / ACTIONS (SAME DESIGN, REAL LOGIC) -->
+                <div
+                  class="flex flex-col items-end justify-between text-sm text-gray-500"
+                >
+                  <!-- VIEWS -->
+                  <div class="flex flex-col items-end leading-tight">
+                    <div class="flex items-center gap-1">
+                      <span>{{ item.product_view_count || 0 }}</span>
+                      <i class="fa-regular fa-eye"></i>
+                    </div>
+                    <span class="text-[10px] text-gray-400">views</span>
+                  </div>
 
-  </div>
-</div>
+                  <!-- COMMENTS -->
+                  <button
+                    class="flex flex-col items-end leading-tight hover:text-indigo-600 transition"
+                    (click)="toggleComments(item._id)"
+                  >
+                    <div class="flex items-center gap-1">
+                      <span>{{ item.comment_count || 0 }}</span>
+                      <i class="fa-regular fa-comment"></i>
+                    </div>
+                    <span class="text-[10px] text-gray-400">comments</span>
+                  </button>
+
+                  <!-- LIKES -->
+                  <button
+                    class="flex flex-col items-end leading-tight transition"
+                    (click)="toggleLikeProduct(item)"
+                  >
+                    <div class="flex items-center gap-1">
+                      <span>{{ item.like_count }}</span>
+                      <i
+                        [ngClass]="
+                          item.liked_by_user
+                            ? 'fa-solid fa-heart text-red-500'
+                            : 'fa-regular fa-heart text-gray-500'
+                        "
+                      ></i>
+                    </div>
+                    <span class="text-[10px] text-gray-400">Upvotes</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- ACTION ROW (ADDED WITHOUT BREAKING DESIGN) -->
+              <div class="mt-4 flex items-center justify-between border-t pt-4">
+                <div class="flex gap-2">
+                  @if (item.user?._id !== current_user?._id) {
+                    <button
+                      (click)="buyNow(item._id)"
+                      class="px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md hover:bg-indigo-700 transition"
+                    >
+                      Add To Cart
+                    </button>
+                  }
+
+                  <button
+                    (click)="viewDetail(item)"
+                    class="px-4 py-2 border border-indigo-600 text-indigo-600 text-sm font-semibold rounded-md hover:bg-indigo-50 dark:hover:bg-neutral-700 transition"
+                  >
+                    View Detail
+                  </button>
+                </div>
+
+                @if (item.user?._id !== current_user?._id) {
+                  <button
+                    class="text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-indigo-600 hover:underline"
+                  >
+                    Message Seller
+                  </button>
+                }
+              </div>
+
+              <!-- COMMENT PANEL -->
+              @if (activeProduct === item._id) {
+                <div
+                  class="mt-4 border rounded-lg p-4 bg-gray-50 dark:bg-neutral-900"
+                >
+                  <div class="flex gap-2 mb-3">
+                    <input
+                      type="text"
+                      [(ngModel)]="newComment[item._id]"
+                      placeholder="Write a comment..."
+                      (keydown.enter)="postComment(item._id)"
+                      class="flex-1 rounded-md border px-3 py-2 text-sm bg-white dark:bg-neutral-800"
+                    />
+                    <button
+                      (click)="postComment(item._id)"
+                      class="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm"
+                    >
+                      Post
+                    </button>
+                  </div>
+
+                  @if (comments[item._id]?.length > 0) {
+                    <div class="space-y-3">
+                      @for (c of comments[item._id]; track c._id) {
+                        <div
+                          class="p-3 border rounded-md bg-white dark:bg-neutral-800"
+                        >
+                          <div class="flex justify-between items-center">
+                            <p class="text-sm font-semibold">
+                              {{ c.user?.user_username }}
+                            </p>
+
+                            @if (c.user?._id === current_user?.id) {
+                              <button
+                                class="text-xs text-red-500 hover:underline"
+                                (click)="deleteComment(c, item, true)"
+                              >
+                                Delete
+                              </button>
+                            }
+                          </div>
+
+                          <p class="text-sm mt-1">{{ c.text }}</p>
+                        </div>
+                      }
+                    </div>
+                  } @else {
+                    <p class="text-sm text-gray-500">No comments yet.</p>
+                  }
+
+                  <button
+                    (click)="toggleComments(item._id)"
+                    class="mt-3 text-sm text-indigo-600 hover:underline"
+                  >
+                    Close
+                  </button>
+                </div>
+              }
+            </div>
+          }
         </div>
       </div>
       <div class="w-full lg:w-[32%] space-y-6 lg:mt-0">
-        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800 space-y-6">
+        <div
+          class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800 space-y-6"
+        >
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white">
+            Price Range
+          </h3>
 
-  <h3 class="text-base font-semibold text-gray-900 dark:text-white">
-    Price Range
-  </h3>
+          <!-- SLIDER -->
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="40"
+            class="w-full accent-indigo-600"
+          />
 
-  <!-- SLIDER -->
-  <input
-    type="range"
-    min="0"
-    max="100"
-    value="40"
-    class="w-full accent-indigo-600"
-  />
+          <div class="flex justify-between text-sm text-gray-500">
+            <span>Low</span>
+            <span>High</span>
+          </div>
 
-  <div class="flex justify-between text-sm text-gray-500">
-    <span>Low</span>
-    <span>High</span>
-  </div>
+          <!-- CHECKBOXES -->
+          <div class="space-y-3 text-sm">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" class="rounded border-gray-300" />
+              Only Discounts
+            </label>
 
-  <!-- CHECKBOXES -->
-  <div class="space-y-3 text-sm">
-    <label class="flex items-center gap-2">
-      <input type="checkbox" class="rounded border-gray-300" />
-      Only Discounts
-    </label>
+            <label class="flex items-center gap-2">
+              <input type="checkbox" checked class="rounded border-gray-300" />
+              Only Events
+            </label>
+          </div>
 
-    <label class="flex items-center gap-2">
-      <input type="checkbox" checked class="rounded border-gray-300" />
-      Only Events
-    </label>
-  </div>
+          <!-- CUSTOM PRICE -->
+          <div>
+            <p class="text-sm text-gray-500 mb-2">Custom Price</p>
+            <div class="flex gap-2">
+              <input
+                type="number"
+                placeholder="Low"
+                class="w-full rounded border px-2 py-1 text-sm"
+              />
+              <input
+                type="number"
+                placeholder="High"
+                class="w-full rounded border px-2 py-1 text-sm"
+              />
+            </div>
+          </div>
 
-  <!-- CUSTOM PRICE -->
-  <div>
-    <p class="text-sm text-gray-500 mb-2">Custom Price</p>
-    <div class="flex gap-2">
-      <input
-        type="number"
-        placeholder="Low"
-        class="w-full rounded border px-2 py-1 text-sm"
-      />
-      <input
-        type="number"
-        placeholder="High"
-        class="w-full rounded border px-2 py-1 text-sm"
-      />
-    </div>
-  </div>
-
-  <!-- ACTION -->
-  <button class="w-full rounded-md bg-indigo-600 py-2 text-sm font-medium text-white hover:bg-indigo-700">
-    Apply Filters
-  </button>
-
-</div>
+          <!-- ACTION -->
+          <button
+            class="w-full rounded-md bg-indigo-600 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+          >
+            Apply Filters
+          </button>
+        </div>
 
         <div class="space-y-6">
+          <!-- TAGS CATEGORIES -->
+          <div
+            class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800"
+          >
+            <div
+              class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white"
+            >
+              Tags Categories
+            </div>
 
-  <!-- TAGS CATEGORIES -->
-  <div class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800">
-    <div class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white">
-      Tags Categories
-    </div>
+            <div class="p-4">
+              <div class="flex flex-wrap gap-2 text-xs font-medium">
+                <span class="rounded-full bg-red-600 px-3 py-1 text-white"
+                  >Phone accessories</span
+                >
+                <span class="rounded-full bg-yellow-300 px-3 py-1 text-black"
+                  >Cookware</span
+                >
+                <span class="rounded-full bg-pink-300 px-3 py-1 text-white"
+                  >Cleaning tools</span
+                >
+                <span class="rounded-full bg-lime-400 px-3 py-1 text-black"
+                  >Clothing</span
+                >
+                <span class="rounded-full bg-amber-900 px-3 py-1 text-white"
+                  >Power tools</span
+                >
+                <span class="rounded-full bg-purple-600 px-3 py-1 text-white"
+                  >Office supplies</span
+                >
+                <span class="rounded-full bg-green-400 px-3 py-1 text-black"
+                  >Car accessories</span
+                >
+                <span class="rounded-full bg-rose-400 px-3 py-1 text-white"
+                  >Home décor</span
+                >
+                <span class="rounded-full bg-blue-600 px-3 py-1 text-white"
+                  >Drinkware</span
+                >
+                <span class="rounded-full bg-red-500 px-3 py-1 text-white"
+                  >Bags & backpacks</span
+                >
+                <span class="rounded-full bg-sky-400 px-3 py-1 text-black"
+                  >Baby care products</span
+                >
+                <span class="rounded-full bg-teal-400 px-3 py-1 text-black"
+                  >Gift sets</span
+                >
+              </div>
 
-    <div class="p-4">
-      <div class="flex flex-wrap gap-2 text-xs font-medium">
-        <span class="rounded-full bg-red-600 px-3 py-1 text-white">Phone accessories</span>
-        <span class="rounded-full bg-yellow-300 px-3 py-1 text-black">Cookware</span>
-        <span class="rounded-full bg-pink-300 px-3 py-1 text-white">Cleaning tools</span>
-        <span class="rounded-full bg-lime-400 px-3 py-1 text-black">Clothing</span>
-        <span class="rounded-full bg-amber-900 px-3 py-1 text-white">Power tools</span>
-        <span class="rounded-full bg-purple-600 px-3 py-1 text-white">Office supplies</span>
-        <span class="rounded-full bg-green-400 px-3 py-1 text-black">Car accessories</span>
-        <span class="rounded-full bg-rose-400 px-3 py-1 text-white">Home décor</span>
-        <span class="rounded-full bg-blue-600 px-3 py-1 text-white">Drinkware</span>
-        <span class="rounded-full bg-red-500 px-3 py-1 text-white">Bags & backpacks</span>
-        <span class="rounded-full bg-sky-400 px-3 py-1 text-black">Baby care products</span>
-        <span class="rounded-full bg-teal-400 px-3 py-1 text-black">Gift sets</span>
-      </div>
+              <input
+                type="text"
+                placeholder="enter for custom tags"
+                class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+              />
+            </div>
+          </div>
 
-      <input
-        type="text"
-        placeholder="enter for custom tags"
-        class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-      />
-    </div>
-  </div>
+          <!-- BRAND VALUES CATEGORIES -->
+          <div
+            class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800"
+          >
+            <div
+              class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white"
+            >
+              Brand Values Categories
+            </div>
 
-  <!-- BRAND VALUES CATEGORIES -->
-  <div class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800">
-    <div class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white">
-      Brand Values Categories
-    </div>
+            <div class="p-4">
+              <div class="flex flex-wrap gap-2 text-xs font-medium">
+                <span class="rounded-full bg-orange-400 px-3 py-1 text-white"
+                  >Best seller</span
+                >
+                <span class="rounded-full bg-green-200 px-3 py-1 text-black"
+                  >Budget friendly</span
+                >
+                <span class="rounded-full bg-red-900 px-3 py-1 text-white"
+                  >Reliable</span
+                >
+                <span class="rounded-full bg-purple-300 px-3 py-1 text-black"
+                  >New</span
+                >
+                <span class="rounded-full bg-indigo-700 px-3 py-1 text-white"
+                  >Niche</span
+                >
+                <span class="rounded-full bg-violet-500 px-3 py-1 text-white"
+                  >Ethical</span
+                >
+                <span class="rounded-full bg-pink-400 px-3 py-1 text-white"
+                  >Small business</span
+                >
+                <span class="rounded-full bg-emerald-300 px-3 py-1 text-black"
+                  >Sustainable</span
+                >
+                <span class="rounded-full bg-lime-400 px-3 py-1 text-black"
+                  >Beginner friendly</span
+                >
+                <span class="rounded-full bg-gray-300 px-3 py-1 text-black"
+                  >Exclusive</span
+                >
+                <span class="rounded-full bg-green-600 px-3 py-1 text-white"
+                  >Eco-friendly</span
+                >
+                <span class="rounded-full bg-red-500 px-3 py-1 text-white"
+                  >Limited edition</span
+                >
+                <span class="rounded-full bg-blue-700 px-3 py-1 text-white"
+                  >Trusted</span
+                >
+                <span class="rounded-full bg-fuchsia-500 px-3 py-1 text-white"
+                  >Premium</span
+                >
+                <span class="rounded-full bg-slate-400 px-3 py-1 text-white"
+                  >Affordable</span
+                >
+              </div>
 
-    <div class="p-4">
-      <div class="flex flex-wrap gap-2 text-xs font-medium">
-        <span class="rounded-full bg-orange-400 px-3 py-1 text-white">Best seller</span>
-        <span class="rounded-full bg-green-200 px-3 py-1 text-black">Budget friendly</span>
-        <span class="rounded-full bg-red-900 px-3 py-1 text-white">Reliable</span>
-        <span class="rounded-full bg-purple-300 px-3 py-1 text-black">New</span>
-        <span class="rounded-full bg-indigo-700 px-3 py-1 text-white">Niche</span>
-        <span class="rounded-full bg-violet-500 px-3 py-1 text-white">Ethical</span>
-        <span class="rounded-full bg-pink-400 px-3 py-1 text-white">Small business</span>
-        <span class="rounded-full bg-emerald-300 px-3 py-1 text-black">Sustainable</span>
-        <span class="rounded-full bg-lime-400 px-3 py-1 text-black">Beginner friendly</span>
-        <span class="rounded-full bg-gray-300 px-3 py-1 text-black">Exclusive</span>
-        <span class="rounded-full bg-green-600 px-3 py-1 text-white">Eco-friendly</span>
-        <span class="rounded-full bg-red-500 px-3 py-1 text-white">Limited edition</span>
-        <span class="rounded-full bg-blue-700 px-3 py-1 text-white">Trusted</span>
-        <span class="rounded-full bg-fuchsia-500 px-3 py-1 text-white">Premium</span>
-        <span class="rounded-full bg-slate-400 px-3 py-1 text-white">Affordable</span>
-      </div>
-
-      <input
-        type="text"
-        placeholder="enter for custom brand values"
-        class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-      />
-    </div>
-  </div>
-
-</div>
-
+              <input
+                type="text"
+                placeholder="enter for custom brand values"
+                class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

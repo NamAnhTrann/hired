@@ -72,8 +72,7 @@ export const list_all_product = async function (
   try {
     const user_id = (req as any).user ? String((req as any).user._id) : "";
 
-    const products = await Product.find({})
-      .lean();
+    const products = await Product.find({}).lean();
 
     const productIds = products.map((p) => p._id);
 
@@ -216,7 +215,6 @@ export const list_my_products = async function (
     return next(internal(err.message));
   }
 };
-
 
 export const delete_product = async function (
   req: Request,

@@ -70,6 +70,7 @@ export class AddProduct {
         this.loading = false;
         alert('Post Uploaded');
         this.form.reset;
+        
       },
       error: (err: any) => {
         this.loading = false;
