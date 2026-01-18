@@ -25,8 +25,11 @@ export class App implements OnInit {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        const hiddenRoutes = ['/chat-page', '/dashboard-page'];
-        const shouldHide = hiddenRoutes.some(route =>
+const hiddenRoutes = [
+  '/chat-page',
+  '/dashboard-page',
+  '/seller-create-page',
+];        const shouldHide = hiddenRoutes.some(route =>
           event.urlAfterRedirects.startsWith(route)
         );
         this.hideHeaderFooterSignal.set(shouldHide);

@@ -22,6 +22,15 @@ export const create_seller_profile = async function (
       return next(unauthorized("unauthorised"));
     }
 
+    const existing_seller_profile = await Seller.findOne({ user_id });
+    if (existing_seller_profile) {
+      return res.status(200).json({
+        success: true,
+        message: "Seller profile already exists",
+        data: existing_seller_profile,
+      });
+    }
+
     const { store_name, store_description, store_address } = req.body;
 
     if (!store_name) {
@@ -37,11 +46,6 @@ export const create_seller_profile = async function (
       if (!store_address?.[field]) {
         return next(bad_request(`Store address.${field} is required`));
       }
-    }
-
-    const existing_seller_profile = await Seller.findOne({ user_id });
-    if (existing_seller_profile) {
-      return next(conflict("This profile already exist"));
     }
 
     //create if dont exist

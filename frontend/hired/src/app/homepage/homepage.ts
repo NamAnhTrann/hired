@@ -9,7 +9,7 @@ import AOS from 'aos';
 import { Trending_Service } from '../services/trending';
 import { CommonModule } from '@angular/common';
 import { Trending } from '../models/trending_interface';
-import { Seller } from '../services/seller';
+import { Seller_Service } from '../services/seller';
 
 @Component({
   selector: 'app-homepage',
@@ -19,7 +19,7 @@ import { Seller } from '../services/seller';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class Homepage implements AfterViewInit {
-  constructor(private trending: Trending_Service, private seller: Seller) {}
+  constructor(private trending: Trending_Service, private seller: Seller_Service) {}
 
   trending_model: Trending[] = [];
   ngOnInit(): void {
@@ -49,21 +49,18 @@ load_trending() {
 }
 
 start_onboard() {
-  // Step 1: create Stripe account (safe to call multiple times)
   this.seller.create_stripe_account().subscribe({
     next: () => {
-      // Step 2: create onboarding link
       this.seller.create_onboard_link().subscribe({
-        next: (res) => {
-          // Step 3: redirect to Stripe
+        next: (res:any) => {
           window.location.href = res.url;
         },
-        error: (err) => {
+        error: (err:any) => {
           console.error('Failed to create onboarding link', err);
         },
       });
     },
-    error: (err) => {
+    error: (err:any) => {
       console.error('Failed to create Stripe account', err);
     },
   });

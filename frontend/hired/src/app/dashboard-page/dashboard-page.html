@@ -1,4 +1,18 @@
-   @if(current_user){
+@if (!current_user) {
+<div class="h-screen flex flex-col items-center justify-center gap-4">
+  <p class="text-gray-500 text-sm text-center">
+    Please log in to access your dashboard.
+  </p>
+
+  <a
+    routerLink="/login-page"
+    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
+  >
+    Login
+  </a>
+</div>
+} @else if (seller?.seller_status === 'active') {
+
 <body
   class="hs-overlay-body-open overflow-hidden bg-gray-100 dark:bg-neutral-900"
 >
@@ -105,7 +119,6 @@
             </div>
             <!-- End Project Dropdown -->
           </li>
-          
 
           <li
             class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
@@ -172,10 +185,10 @@
                   <img
                     class="shrink-0 size-7 rounded-full"
                     [src]="
-                      current_user?.user_profile ||
+                      current_user.user_profile ||
                       'https://www.gravatar.com/avatar/?d=mp&s=256'
                     "
-                    [alt]="current_user?.user_username || 'User avatar'"
+                    [alt]="current_user.user_username || 'User avatar'"
                   />
                 </button>
 
@@ -190,11 +203,11 @@
                     <span
                       class="font-medium text-gray-800 dark:text-neutral-300"
                     >
-                      {{ current_user?.user_first_name || "You" }}
-                      {{ current_user?.user_last_name || "" }}
+                      {{ current_user.user_first_name || "You" }}
+                      {{ current_user.user_last_name || "" }}
                     </span>
                     <p class="text-sm text-gray-500 dark:text-neutral-500">
-                      {{ current_user?.user_email || "You" }}
+                      {{ current_user.user_email || "You" }}
                     </p>
                     <div class="mt-1.5">
                       <a
@@ -930,7 +943,8 @@
                               </button>
 
                               <!-- DELETE -->
-                              <button (click)="delete_product(item)"
+                              <button
+                                (click)="delete_product(item)"
                                 type="button"
                                 class="inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition"
                               >
@@ -969,7 +983,7 @@
                     </h2>
 
                     <!-- Avatar Media -->
-                    {{ current_user?.user_username || "You" }}
+                    {{ current_user.user_username || "You" }}
                     <!-- End Avatar Media -->
                   </div>
                 </div>
@@ -986,17 +1000,17 @@
                       <img
                         class="absolute inset-0 size-full object-cover rounded-full"
                         [src]="
-                          current_user?.user_profile ||
+                          current_user.user_profile ||
                           'https://www.gravatar.com/avatar/?d=mp&s=256'
                         "
-                        [alt]="current_user?.user_username || 'User avatar'"
+                        [alt]="current_user.user_username || 'User avatar'"
                       />
                     </span>
                     <div class="grow">
                       <h3
                         class="font-medium text-lg text-gray-800 dark:text-neutral-200"
                       >
-                        {{ current_user?.user_username || "You" }}
+                        {{ current_user.user_username || "You" }}
                       </h3>
                     </div>
                   </div>
@@ -1101,29 +1115,22 @@
     </div>
     <!-- End Content -->
   </main>
-
-
 </body>
-   } @else {
+} @else {
 <div class="h-screen flex flex-col items-center justify-center gap-4">
-  <p class="text-gray-500 text-sm">
-    Please Login To View
+  <p class="text-gray-500 text-sm text-center">
+    Your seller account is not active yet.
+  </p>
+
+  <p class="text-gray-400 text-xs text-center max-w-sm">
+    Complete seller onboarding and verification to access your dashboard.
   </p>
 
   <a
-    routerLink="/login-page"
-    class="
-      inline-flex items-center justify-center
-      px-4 py-2
-      text-sm font-medium
-      rounded-full
-      bg-gray-900 text-white
-      hover:bg-gray-800
-      transition
-    "
+    routerLink="/seller-create-page"
+    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
   >
-    Login
+    Continue onboarding
   </a>
 </div>
-
-   }
+}

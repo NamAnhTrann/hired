@@ -19,6 +19,11 @@ export class Product_Service {
     return this.http.get(`${this.local_url}/list/all/product`)
   }
 
+  list_my_products() {
+  return this.http.get(`${this.local_url}/products/my-products`);
+}
+
+
   list_single_product(product_id:string){
     return this.http.get(`${this.local_url}/list/single/product/${product_id}`)
   }

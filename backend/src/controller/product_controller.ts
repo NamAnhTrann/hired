@@ -2,7 +2,6 @@ import Product from "../model/product_model";
 import Like from "../model/like_model";
 import Comment from "../model/comment_model";
 
-
 import {
   get_product_like_count,
   user_liked_product,
@@ -19,7 +18,7 @@ import {
 export const add_product = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     //use req.user from auth
@@ -68,13 +67,12 @@ export const add_product = async function (
 export const list_all_product = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user ? String((req as any).user._id) : "";
 
     const products = await Product.find({})
-      .populate("product_user", "user_username user_email")
       .lean();
 
     const productIds = products.map((p) => p._id);
@@ -147,7 +145,7 @@ export const list_all_product = async function (
 export const list_single_product = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user ? String((req as any).user._id) : "";
@@ -159,7 +157,7 @@ export const list_single_product = async function (
     const product = await Product.findByIdAndUpdate(
       product_id,
       { $inc: { product_view_count: 1 } },
-      { new: true }
+      { new: true },
     )
       .populate("product_user", "user_username user_email")
       .lean();
@@ -193,65 +191,103 @@ export const list_single_product = async function (
   }
 };
 
-export const delete_product = async function(req:Request, res:Response, next:NextFunction) {
+export const list_my_products = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const user_id = (req as any).user?._id;
+
+    if (!user_id) {
+      return next(unauthorized("Not authenticated"));
+    }
+
+    const products = await Product.find({
+      product_user: user_id,
+    }).lean();
+
+    return res.status(200).json({
+      success: true,
+      data: products,
+      message: "List My Products",
+    });
+  } catch (err: any) {
+    return next(internal(err.message));
+  }
+};
+
+
+export const delete_product = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const user_id = (req as any).user._id;
     const product_id = req.params.id;
-    if(!product_id) {
+    if (!product_id) {
       return next(not_found("product not found"));
     }
     //delete product, and its commments and likes
     const product = await Product.findOneAndDelete({
-      _id: product_id, 
+      _id: product_id,
       product_user: user_id,
-
     });
-    if(!product){
-      return next(not_found("Product not found"))
+    if (!product) {
+      return next(not_found("Product not found"));
     }
     await Comment.deleteMany({
-      product:product_id
+      product: product_id,
     });
     await Like.deleteMany({
-      product:product_id
+      product: product_id,
     });
 
     return res.status(200).json({
-      success:true,
-      message:"Product deleted",
-      data:product
-    })
+      success: true,
+      message: "Product deleted",
+      data: product,
+    });
   } catch (err: any) {
     if (err.name === "ValidationError") return next(bad_request(err.message));
     return next(internal(err.message));
   }
-}
+};
 
-export const edit_product_details = async function(req:Request, res:Response, next:NextFunction) {
+export const edit_product_details = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
     const user_id = (req as any).user._id;
     const product_id = req.params.id;
 
-    if(!product_id) {
+    if (!product_id) {
       return next(not_found("product not found"));
     }
 
-    const update_product = await Product.findOneAndUpdate({
-      _id: product_id, 
-      product_user: user_id, 
-    }, req.body, {new:true});
+    const update_product = await Product.findOneAndUpdate(
+      {
+        _id: product_id,
+        product_user: user_id,
+      },
+      req.body,
+      { new: true },
+    );
 
-    if(!update_product) {
+    if (!update_product) {
       return next(not_found("Product not found"));
     }
 
     return res.status(200).json({
-      success:true,
-      message:"Product updated",
-      data:update_product
-    })
+      success: true,
+      message: "Product updated",
+      data: update_product,
+    });
   } catch (err: any) {
     if (err.name === "ValidationError") return next(bad_request(err.message));
     return next(internal(err.message));
   }
-}
+};
