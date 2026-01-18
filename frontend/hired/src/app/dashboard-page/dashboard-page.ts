@@ -30,58 +30,63 @@ export class DashboardPage implements OnInit {
     private router: Router,
     private auth: AuthService,
     private dashboardService: Dashboard_Service,
-    private sellerService: Seller_Service
+    private sellerService: Seller_Service,
   ) {}
-  ngOnInit() {
-    this.auth.load_user().subscribe({
-      next: (res: any) => {
-        this.current_user = res.user;
-      },
-      error: () => {
-        this.current_user = null;
-      },
-    });
+ngOnInit() {
+  this.auth.load_user().subscribe({
+    next: (res: any) => {
+      this.current_user = res.user;
+      this.refresh(); 
+    },
+    error: () => {
+      this.current_user = null;
+    },
+  });
 
-    this.sellerService.get_seller().subscribe({
-      next: (res) => {
-        this.seller = res.data as Seller;
-      },
-      error: (err) => {
-        console.error( err);
-        this.seller = null;
-      },
-    });
+  this.sellerService.get_seller().subscribe({
+    next: (res) => {
+      this.seller = res.data as Seller;
+    },
+    error: (err) => {
+      console.error(err);
+      this.seller = null;
+    },
+  });
 
-    this.dashboardService.get_seller_stats().subscribe({
-      next: (stats) => {
-        this.seller_stats = stats;
-      },
-      error: () => {
-        this.seller_stats = null;
-      },
-    });
+  this.dashboardService.get_seller_stats().subscribe({
+    next: (stats) => {
+      this.seller_stats = stats;
+    },
+    error: () => {
+      this.seller_stats = null;
+    },
+  });
+}
+
+public refresh() {
+  if (!this.current_user) {
+    return;
   }
 
-  public refresh() {
-    this.isRefreshing = true;
+  this.isRefreshing = true;
 
-    this.productService.list_products().subscribe({
-      next: (res: any) => {
-        this.products = res.data;
+  this.productService.list_my_products().subscribe({
+    next: (res: any) => {
+      this.products = res.data;
 
-        //descending sort
-        this.top_products = [...this.products]
-          .sort((a, b) => b.product_view_count - a.product_view_count)
-          .slice(0, 5);
+      this.top_products = [...this.products]
+        .sort((a, b) => b.product_view_count - a.product_view_count)
+        .slice(0, 5);
 
-        this.isRefreshing = false;
-      },
-      error: (err) => {
-        console.error(err);
-        this.isRefreshing = false;
-      },
-    });
-  }
+      this.isRefreshing = false;
+    },
+    error: () => {
+      this.isRefreshing = false;
+    },
+  });
+}
+
+
 
   public delete_product(item: any) {
     if (!confirm('Are you sure you want to delete this product?')) {
@@ -103,7 +108,9 @@ export class DashboardPage implements OnInit {
   }
 
   public logout() {
-    if (!confirm('Are you sure you want to logout?')) return;
+    if (!confirm('Are you sure you want to logout?')) {
+      return;
+    }
 
     this.auth.logout().subscribe({
       next: () => {
