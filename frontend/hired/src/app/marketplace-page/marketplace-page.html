@@ -424,3 +424,232 @@
     </div>
   </div>
 </section>
+
+<section class="py-10 px-4 mt-28 sm:px-6 lg:px-8 bg-white dark:bg-neutral-950">
+  <div class="mx-auto max-w-[1800px] px-4">
+    <!-- HEADER -->
+    <header>
+      <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">Marketplace</h2>
+      <p class="mt-4 max-w-md text-gray-500">
+        Explore our latest products from creators, sellers, and designers.
+      </p>
+    </header>
+  <!-- SEARCH BAR -->
+  <div class="mb-6">
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Seek and you shall find"
+      class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+    />
+  </div>
+
+  <!-- TAG FILTERS -->
+  <div class="mb-5">
+    <p class="text-xs text-gray-500 mb-2">Tags:</p>
+    <div class="flex flex-wrap gap-2">
+      <button class="tag bg-pink-100 text-pink-700" onclick="toggleTag('Bathroom')">Bathroom accessories</button>
+      <button class="tag bg-blue-100 text-blue-700" onclick="toggleTag('Bedding')">Bedding & linens</button>
+      <button class="tag bg-purple-100 text-purple-700" onclick="toggleTag('Travel')">Travel accessories</button>
+      <button class="tag bg-indigo-100 text-indigo-700" onclick="toggleTag('Fashion')">Fashion accessories</button>
+      <button class="tag bg-green-100 text-green-700" onclick="toggleTag('Pet')">Pet food & supplies</button>
+      <button class="tag bg-emerald-100 text-emerald-700" onclick="toggleTag('Home')">Small home appliances</button>
+      <span class="text-xs text-gray-400 px-2 self-center">+10</span>
+    </div>
+  </div>
+
+  <!-- BRAND VALUES -->
+  <div class="mb-6">
+    <p class="text-xs text-gray-500 mb-2">Brand Values:</p>
+    <div class="flex gap-2">
+      <button class="tag bg-orange-100 text-orange-700" onclick="toggleValue('Emerging')">Emerging brand</button>
+      <button class="tag bg-yellow-100 text-yellow-700" onclick="toggleValue('Value')">Value for money</button>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+  <div class="mx-auto max-w-[1800px] px-4">
+    <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Products</h2>
+
+    <div class="mt-6 sm:mt-8 flex flex-col lg:flex-row gap-6 xl:gap-8">
+      <div class="w-full lg:w-[68%]">
+        <div class="space-y-6">
+          <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800">
+  <div class="flex gap-4">
+
+    <!-- PRODUCT IMAGE -->
+    <img
+      src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/iphone-light.svg"
+      class="h-24 w-24 rounded-md object-cover"
+      alt="product"
+    />
+
+    <!-- PRODUCT INFO -->
+    <div class="flex-1">
+      <p class="text-xs text-gray-500">Medibank Lab ltd</p>
+
+      <h3 class="text-base font-semibold text-gray-900 dark:text-white">
+        Cancer-free Pill
+        <span class="ml-1 text-sm text-indigo-600">★ 4.9</span>
+        <span class="ml-1 text-sm text-yellow-500">💡 10/10</span>
+      </h3>
+
+      <p class="mt-1 text-sm text-gray-500">
+        This breakthrough pill cure all kind of cancer. Lorem ipsum test content.
+      </p>
+
+      <div class="mt-2 flex items-center gap-4 text-sm">
+        <span class="font-medium text-gray-900 dark:text-white">$9.99</span>
+        <span class="text-gray-500">In-stock: 150</span>
+      </div>
+    </div>
+
+    <!-- STATS / ACTIONS -->
+    <div class="flex flex-col items-end justify-between text-sm text-gray-500">
+      <div class="flex items-center gap-1">
+        ↑ <span>10291</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <span>💬 214</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>🛒 210</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="w-full lg:w-[32%] space-y-6 lg:mt-0">
+        <div class="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:bg-gray-800 space-y-6">
+
+  <h3 class="text-base font-semibold text-gray-900 dark:text-white">
+    Price Range
+  </h3>
+
+  <!-- SLIDER -->
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value="40"
+    class="w-full accent-indigo-600"
+  />
+
+  <div class="flex justify-between text-sm text-gray-500">
+    <span>Low</span>
+    <span>High</span>
+  </div>
+
+  <!-- CHECKBOXES -->
+  <div class="space-y-3 text-sm">
+    <label class="flex items-center gap-2">
+      <input type="checkbox" class="rounded border-gray-300" />
+      Only Discounts
+    </label>
+
+    <label class="flex items-center gap-2">
+      <input type="checkbox" checked class="rounded border-gray-300" />
+      Only Events
+    </label>
+  </div>
+
+  <!-- CUSTOM PRICE -->
+  <div>
+    <p class="text-sm text-gray-500 mb-2">Custom Price</p>
+    <div class="flex gap-2">
+      <input
+        type="number"
+        placeholder="Low"
+        class="w-full rounded border px-2 py-1 text-sm"
+      />
+      <input
+        type="number"
+        placeholder="High"
+        class="w-full rounded border px-2 py-1 text-sm"
+      />
+    </div>
+  </div>
+
+  <!-- ACTION -->
+  <button class="w-full rounded-md bg-indigo-600 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+    Apply Filters
+  </button>
+
+</div>
+
+        <div class="space-y-6">
+
+  <!-- TAGS CATEGORIES -->
+  <div class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800">
+    <div class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white">
+      Tags Categories
+    </div>
+
+    <div class="p-4">
+      <div class="flex flex-wrap gap-2 text-xs font-medium">
+        <span class="rounded-full bg-red-600 px-3 py-1 text-white">Phone accessories</span>
+        <span class="rounded-full bg-yellow-300 px-3 py-1 text-black">Cookware</span>
+        <span class="rounded-full bg-pink-300 px-3 py-1 text-white">Cleaning tools</span>
+        <span class="rounded-full bg-lime-400 px-3 py-1 text-black">Clothing</span>
+        <span class="rounded-full bg-amber-900 px-3 py-1 text-white">Power tools</span>
+        <span class="rounded-full bg-purple-600 px-3 py-1 text-white">Office supplies</span>
+        <span class="rounded-full bg-green-400 px-3 py-1 text-black">Car accessories</span>
+        <span class="rounded-full bg-rose-400 px-3 py-1 text-white">Home décor</span>
+        <span class="rounded-full bg-blue-600 px-3 py-1 text-white">Drinkware</span>
+        <span class="rounded-full bg-red-500 px-3 py-1 text-white">Bags & backpacks</span>
+        <span class="rounded-full bg-sky-400 px-3 py-1 text-black">Baby care products</span>
+        <span class="rounded-full bg-teal-400 px-3 py-1 text-black">Gift sets</span>
+      </div>
+
+      <input
+        type="text"
+        placeholder="enter for custom tags"
+        class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+      />
+    </div>
+  </div>
+
+  <!-- BRAND VALUES CATEGORIES -->
+  <div class="rounded-lg border border-gray-300 bg-white shadow-sm dark:bg-gray-800">
+    <div class="border-b bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 dark:bg-gray-700 dark:text-white">
+      Brand Values Categories
+    </div>
+
+    <div class="p-4">
+      <div class="flex flex-wrap gap-2 text-xs font-medium">
+        <span class="rounded-full bg-orange-400 px-3 py-1 text-white">Best seller</span>
+        <span class="rounded-full bg-green-200 px-3 py-1 text-black">Budget friendly</span>
+        <span class="rounded-full bg-red-900 px-3 py-1 text-white">Reliable</span>
+        <span class="rounded-full bg-purple-300 px-3 py-1 text-black">New</span>
+        <span class="rounded-full bg-indigo-700 px-3 py-1 text-white">Niche</span>
+        <span class="rounded-full bg-violet-500 px-3 py-1 text-white">Ethical</span>
+        <span class="rounded-full bg-pink-400 px-3 py-1 text-white">Small business</span>
+        <span class="rounded-full bg-emerald-300 px-3 py-1 text-black">Sustainable</span>
+        <span class="rounded-full bg-lime-400 px-3 py-1 text-black">Beginner friendly</span>
+        <span class="rounded-full bg-gray-300 px-3 py-1 text-black">Exclusive</span>
+        <span class="rounded-full bg-green-600 px-3 py-1 text-white">Eco-friendly</span>
+        <span class="rounded-full bg-red-500 px-3 py-1 text-white">Limited edition</span>
+        <span class="rounded-full bg-blue-700 px-3 py-1 text-white">Trusted</span>
+        <span class="rounded-full bg-fuchsia-500 px-3 py-1 text-white">Premium</span>
+        <span class="rounded-full bg-slate-400 px-3 py-1 text-white">Affordable</span>
+      </div>
+
+      <input
+        type="text"
+        placeholder="enter for custom brand values"
+        class="mt-3 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
+      />
+    </div>
+  </div>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+</section>
