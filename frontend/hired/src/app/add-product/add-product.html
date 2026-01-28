@@ -163,14 +163,13 @@
           >
             Image URL   
           </label>
-          <input
-            type="text"
-            placeholder="https://..."
-            class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
-            (change)="
-              form.controls.product_image.setValue([$event.target.value])
-            "
-          />
+     <input
+  type="file"
+  multiple
+  accept="image/*"
+  (change)="onFileChange($event)"
+/>
+
         </section>
 
         <!-- ACTIONS -->
