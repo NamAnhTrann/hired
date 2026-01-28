@@ -1,6 +1,7 @@
 import Product from "../model/product_model";
 import Like from "../model/like_model";
 import Comment from "../model/comment_model";
+import Seller from "../model/seller_model";
 
 import {
   get_product_like_count,
@@ -29,22 +30,20 @@ export const add_product = async function (
       return next(bad_request("User not authenticate to do this operation"));
     }
 
-    // const seller = await Seller.findOne({user_id: user._id});
+    const files = req.files as Express.Multer.File[] | undefined;
 
-    // if(!seller) {
-    //   return next(unauthorized("Only seller can add products"))
-    // }
-
-    // if (seller.seller_status !== "active") {
-    //   return next(unauthorized("Seller account is not active"));
-    // }
+    const imagePaths: string[] = files
+      ? files.map(
+          (file) => `http://localhost:2020/uploads/products/${file.filename}`,
+        )
+      : [];
 
     const newProduct = new Product({
       product_title: req.body.product_title,
       product_description: req.body.product_description,
       product_price: req.body.product_price,
       product_quantity: req.body.product_quantity,
-      product_image: req.body.product_image,
+      product_image: imagePaths,
       product_category: req.body.product_category,
       product_view_count: 0,
 
@@ -72,12 +71,12 @@ export const list_all_product = async function (
   try {
     const user_id = (req as any).user ? String((req as any).user._id) : "";
 
+    // 1. Fetch products + user
     const products = await Product.find({})
+      .populate("product_user", "_id user_username")
       .lean();
 
-    const productIds = products.map((p) => p._id);
-
-    if (productIds.length === 0) {
+    if (products.length === 0) {
       return res.status(200).json({
         success: true,
         data: [],
@@ -85,7 +84,10 @@ export const list_all_product = async function (
       });
     }
 
-    // LIKE COUNTS
+    const productIds = products.map((p) => p._id);
+    const userIds = products.map((p) => p.product_user?._id).filter(Boolean);
+
+    // 2. LIKE COUNTS
     const likeCounts = await Like.aggregate([
       { $match: { product: { $in: productIds } } },
       { $group: { _id: "$product", total: { $sum: 1 } } },
@@ -93,10 +95,10 @@ export const list_all_product = async function (
 
     const likeMap: Record<string, number> = {};
     likeCounts.forEach((item) => {
-      likeMap[String(item._id)] = item.total || 0;
+      likeMap[String(item._id)] = item.total;
     });
 
-    // COMMENT COUNTS
+    // 3. COMMENT COUNTS
     const commentCounts = await Comment.aggregate([
       { $match: { product: { $in: productIds } } },
       { $group: { _id: "$product", total: { $sum: 1 } } },
@@ -104,10 +106,10 @@ export const list_all_product = async function (
 
     const commentMap: Record<string, number> = {};
     commentCounts.forEach((item) => {
-      commentMap[String(item._id)] = item.total || 0;
+      commentMap[String(item._id)] = item.total;
     });
 
-    // USER LIKE STATUS
+    // 4. USER LIKE STATUS
     const userLikedSet = new Set<string>();
 
     if (user_id) {
@@ -121,15 +123,23 @@ export const list_all_product = async function (
       });
     }
 
-    // FINAL RESPONSE
+    // 5. FETCH SELLERS (IMPORTANT PART)
+    const sellers = await Seller.find({
+      user_id: { $in: userIds },
+      seller_status: "active",
+    }).lean();
+
+    const sellerMap = new Map(sellers.map((s) => [String(s.user_id), s]));
+
+    // 6. FINAL RESPONSE
     const finalProducts = products.map((p) => ({
       ...p,
+      seller: sellerMap.get(String(p.product_user?._id)) || null,
       like_count: likeMap[String(p._id)] || 0,
       comment_count: commentMap[String(p._id)] || 0,
       liked_by_user: userLikedSet.has(String(p._id)),
       product_view_count: p.product_view_count ?? 0,
     }));
-    console.log(finalProducts);
 
     return res.status(200).json({
       success: true,
@@ -137,7 +147,9 @@ export const list_all_product = async function (
       message: "List All Products",
     });
   } catch (err: any) {
-    if (err.name === "ValidationError") return next(bad_request(err.message));
+    if (err.name === "ValidationError") {
+      return next(bad_request(err.message));
+    }
     return next(internal(err.message));
   }
 };
@@ -216,7 +228,6 @@ export const list_my_products = async function (
     return next(internal(err.message));
   }
 };
-
 
 export const delete_product = async function (
   req: Request,

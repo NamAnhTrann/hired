@@ -57,7 +57,7 @@ export class ContactPage {
       contact_phone_number: this.form.value.contact_phone_number,
       contact_type: this.form.value.contact_type,
       contact_message: this.form.value.contact_message,
-      contact_support_file: null, // or remove this entirely
+      contact_support_file: null, 
     };
 
     this.contact.send_contact(payload).subscribe({

@@ -2,7 +2,7 @@
 <header
   [ngClass]="{
     'min-h-20': !isShrunk,
-    'min-h-16': isShrunk
+    'min-h-16': isShrunk,
   }"
   class="fixed top-0 left-0 w-full z-50 backdrop-blur-lg bg-white/80 dark:bg-neutral-900/80 border-b border-gray-200/50 dark:border-neutral-700/50 transition-all duration-300 flex items-center"
 >
@@ -24,23 +24,23 @@
       class="flex items-center gap-x-3 lg:gap-x-2 ms-auto py-1 lg:ps-6 lg:order-3 lg:col-span-3"
     >
       @if (auth.user$ | async; as user) {
-      <!-- USER IS LOGGED IN → Show Logout -->
-      <button
-        (click)="logout()"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition"
-      >
-        Logout
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
+        <!-- USER IS LOGGED IN → Show Logout -->
+        <button
+          (click)="logout()"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-500 transition"
+        >
+          Logout
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
       } @else {
-      <!-- USER NOT LOGGED IN → Show Login -->
-      <a
-        routerLink="/login-page"
-        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 transition"
-      >
-        Login
-        <i class="fa-solid fa-right-to-bracket"></i>
-      </a>
+        <!-- USER NOT LOGGED IN → Show Login -->
+        <a
+          routerLink="/login-page"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 transition"
+        >
+          Login
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </a>
       }
       <a
         routerLink="/cart-page"
@@ -84,21 +84,22 @@
 
         <!-- Product -->
 
-
-        <a
-          routerLink="/dashboard-page"
-          routerLinkActive="active-link"
-          class="nav-link text-black dark:text-white"
-        >
-          Dashboard
-        </a>
+        @if (auth.isLoggedIn()) {
+          <a
+            routerLink="/dashboard-page"
+            routerLinkActive="active-link"
+            class="nav-link text-black dark:text-white"
+          >
+            Dashboard
+          </a>
+        }
 
         <a
           routerLink="/pre-checkout-page"
           routerLinkActive="active-link"
           class="nav-link text-black dark:text-white"
         >
-         Checkout Test
+          Checkout Test
         </a>
 
         <a
@@ -106,7 +107,7 @@
           routerLinkActive="active-link"
           class="nav-link text-black dark:text-white"
         >
-         Seller Test
+          Seller Test
         </a>
       </div>
     </div>
