@@ -9,18 +9,25 @@
             <div class="flex flex-col gap-4">
               <div class="bg-white shadow-sm p-2">
                 <img
-                  [src]="product.product_image[0]"
+                  [src]="selectedImage"
                   [alt]="product.product_title"
-                  class="w-full aspect-[11/8] object-cover object-top"
+                  class="w-full aspect-[11/8] object-cover object-top transition-opacity duration-200"
                 />
               </div>
-              <div class="bg-white rounded-xl shadow-sm px-6 py-5 w-full">
+
+              <div class="bg-white rounded-xl px-6 py-5 w-full">
                 <div class="grid grid-cols-5 gap-4">
                   @for (img of product.product_image; track img) {
-                    <button type="button" class="group w-full">
+                    <button
+                      type="button"
+                      class="group w-full"
+                      (click)="selectedImage = img"
+                    >
                       <img
                         [src]="img"
-                        class="w-full aspect-square object-cover rounded-lg border-2 border-transparent shadow-sm transition-all duration-200 group-hover:border-indigo-500 group-hover:scale-[1.03]"
+                        class="w-full aspect-square object-cover rounded-lg transition-all duration-200 hover:scale-[1.03]"
+                        [class.border-indigo-500]="img === selectedImage"
+                        [class.border-transparent]="img !== selectedImage"
                       />
                     </button>
                   }
@@ -92,10 +99,13 @@
                   </svg>
                 </div>
                 <span class="text-slate-500">|</span>
-                <p class="text-sm"><i class="fa-solid fa-lightbulb"></i> 10/10</p>
+                <p class="text-sm">
+                  <i class="fa-solid fa-lightbulb"></i> 10/10
+                </p>
                 <span class="text-slate-500">|</span>
                 <p class="text-sm text-slate-500">
-                  <i class="fa-solid fa-comment"></i> {{ product.comment_count }}
+                  <i class="fa-solid fa-comment"></i>
+                  {{ product.comment_count }}
                 </p>
                 <span class="text-slate-500">|</span>
                 <button
@@ -251,9 +261,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                <span class="font-normal text-base text-gray-900"
-                  >Nigger</span
-                >
+                <span class="font-normal text-base text-gray-900">Nigger</span>
               </li>
               <li class="flex items-center gap-3">
                 <svg
@@ -271,9 +279,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                <span class="font-normal text-base text-gray-900"
-                  >Nigger</span
-                >
+                <span class="font-normal text-base text-gray-900">Nigger</span>
               </li>
               <li class="flex items-center gap-3">
                 <svg
@@ -291,9 +297,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                <span class="font-normal text-base text-gray-900"
-                  >Nigger</span
-                >
+                <span class="font-normal text-base text-gray-900">Nigger</span>
               </li>
               <li class="flex items-center gap-3">
                 <svg
@@ -311,9 +315,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                <span class="font-normal text-base text-gray-900"
-                  >Nigger</span
-                >
+                <span class="font-normal text-base text-gray-900">Nigger</span>
               </li>
             </ul>
             <div class="hover:bg-slate-100 transition-all">

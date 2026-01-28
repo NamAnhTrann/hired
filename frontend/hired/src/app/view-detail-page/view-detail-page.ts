@@ -30,6 +30,8 @@ product!: Product;
   current_user: any = null;
   showCommentsModal = false;
 activeCommentsProductId: string | null = null;
+selectedImage?: string 
+
 
   constructor(
     private productService: Product_Service,
@@ -53,6 +55,7 @@ activeCommentsProductId: string | null = null;
   this.productService.list_single_product(product_id).subscribe({
     next: (res: any) => {
       this.product = res.data;
+       this.selectedImage = this.product.product_image?.[0] ?? null;
        this.loadComments(this.product._id);
     },
     error: (err: any) => console.error(err),
