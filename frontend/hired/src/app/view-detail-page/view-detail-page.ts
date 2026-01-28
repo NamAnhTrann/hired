@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product_interface';
 import { Product_Service } from '../services/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Cart_Service } from '../services/cart';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,12 +12,13 @@ import { Optimistic } from '../helper/optimistic';
 
 @Component({
   selector: 'app-view-detail-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './view-detail-page.html',
   styleUrl: './view-detail-page.css',
 })
 export class ViewDetailPage {
-  product?: Product;
+product!: Product;
+
   quantity = 1;
 
   // social UI state
@@ -27,6 +28,8 @@ export class ViewDetailPage {
   replyText: any = {};
   activeProduct: string | null = null;
   current_user: any = null;
+  showCommentsModal = false;
+activeCommentsProductId: string | null = null;
 
   constructor(
     private productService: Product_Service,
@@ -50,6 +53,7 @@ export class ViewDetailPage {
   this.productService.list_single_product(product_id).subscribe({
     next: (res: any) => {
       this.product = res.data;
+       this.loadComments(this.product._id);
     },
     error: (err: any) => console.error(err),
   });
@@ -166,4 +170,14 @@ export class ViewDetailPage {
       },
     });
   }
+
+  openCommentsModal(productId: string) {
+  this.activeCommentsProductId = productId;
+  this.showCommentsModal = true;
+}
+
+closeCommentsModal() {
+  this.showCommentsModal = false;
+  this.activeCommentsProductId = null;
+}
 }

@@ -1,387 +1,372 @@
-<section class="max-w-5xl mt-32 mx-auto px-4 py-10">
+<section>
   @if (product) {
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-      <!-- PRODUCT IMAGE -->
-      <div class="w-full">
-        <img
-          [src]="product.product_image[0]"
-          [alt]="product.product_title"
-          class="w-full rounded-xl object-cover"
-        />
-      </div>
-
-      <!-- PRODUCT INFO -->
-      <div class="flex flex-col">
-
-        <!-- TITLE -->
-        <h1 class="text-3xl font-semibold mb-4">
-          {{ product.product_title }}
-        </h1>
-
-        <!-- DESCRIPTION -->
-        <p class="text-gray-600 mb-6 leading-relaxed">
-          {{ product.product_description }}
-        </p>
-
-        <!-- PRICE -->
-        <h2 class="text-2xl font-bold mb-6">
-          ${{ product.product_price }}
-        </h2>
-
-        <!-- SOCIAL ACTIONS -->
-        <div class="flex items-center gap-6 mb-6">
-
-          <!-- LIKE BUTTON -->
-          <button
-            (click)="toggleLikeProduct(product)"
-            class="flex items-center gap-2 text-indigo-700 hover:text-indigo-500 font-semibold"
-          >
-            <span>
-              @if (product.liked_by_user) { ♥ } @else { ♡ }
-            </span>
-            <span>{{ product.like_count }}</span>
-          </button>
-
-          <!-- COMMENT BUTTON -->
-          <button
-            (click)="toggleComments(product._id)"
-            class="flex items-center gap-2 text-gray-700 hover:text-gray-500"
-          >
-            💬 <span>{{ product.comment_count }}</span>
-          </button>
-
-        </div>
-
-        <!-- QUANTITY + ADD TO CART -->
-        <div class="flex items-center gap-4 mb-8">
-          <input
-            type="number"
-            [value]="quantity"
-            (input)="setQuantity($event)"
-            min="1"
-            class="w-20 border border-gray-300 rounded-lg py-2 px-3 text-center"
-          />
-
-          <button
-            (click)="add_cart(product._id, quantity)"
-            class="px-6 py-3 bg-indigo-700 text-white text-sm font-semibold rounded-lg hover:bg-indigo-600 transition"
-          >
-            Add To Cart
-          </button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- COMMENTS SECTION -->
-    @if (activeProduct === product._id) {
-      <div class="mt-12 border-t pt-8">
-
-        <!-- NEW COMMENT BOX -->
-        <textarea
-          [(ngModel)]="newComment[product._id]"
-          placeholder="Write a comment..."
-          class="w-full border rounded-lg p-3 mb-4"
-        ></textarea>
-
-        <button
-          (click)="postComment(product._id)"
-          class="px-4 py-2 bg-indigo-700 text-white rounded-lg hover:bg-indigo-600"
-        >
-          Post Comment
-        </button>
-
-        <!-- LIST COMMENTS -->
-        <div class="mt-8 space-y-4">
-
-          @for (c of comments[product._id]; track c._id) {
-            <div class="border p-4 rounded-lg bg-gray-50">
-
-              <p class="font-semibold">{{ c.user.username }}</p>
-              <p class="text-gray-700 mb-3">{{ c.text }}</p>
-
-
-
-              <!-- REPLY -->
-              <button
-                (click)="toggleReply(product._id, c._id)"
-                class="ml-4 text-sm text-gray-700 hover:text-gray-500"
-              >
-                Reply
-              </button>
-
-              <!-- DELETE -->
-              <button
-                (click)="deleteComment(c, product, true)"
-                class="ml-4 text-sm text-red-600 hover:text-red-500"
-              >
-                Delete
-              </button>
-
-              <!-- REPLY BOX -->
-              @if (replyBox[product._id]?.[c._id]) {
-                <div class="mt-3 ml-6">
-                  <textarea
-                    [(ngModel)]="replyText[c._id]"
-                    placeholder="Write reply..."
-                    class="w-full border rounded-lg p-2"
-                  ></textarea>
-
-                  <button
-                    (click)="postReply(product._id, c._id)"
-                    class="mt-2 px-3 py-1 bg-indigo-700 text-white rounded-md"
-                  >
-                    Reply
-                  </button>
-                </div>
-              }
-
-              <!-- CHILD REPLIES -->
-              @for (r of c.replies; track r._id) {
-                <div class="ml-6 mt-4 border-l pl-4">
-
-                  <p class="font-semibold">{{ r.user.username }}</p>
-                  <p class="text-gray-700 mb-2">{{ r.text }}</p>
-
-    
-
-                  <button
-                    (click)="deleteComment(r, product, false)"
-                    class="ml-4 text-sm text-red-600 hover:text-red-500"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-              }
-
-            </div>
-          }
-
-        </div>
-      </div>
-    }
-
-  }
-
-  @else {
-    <div class="text-center py-20">
-      <p class="text-lg text-gray-500">Loading product...</p>
-    </div>
-  }
-</section>
-
-<section> 
-  <div class="p-4 bg-gray-100">
+    <div class="p-4 bg-gray-100">
       <div class="mt-24 max-w-[1800px] mx-auto px-4">
-        <div class="grid items-start grid-cols-1 lg:grid-cols-2 gap-8 max-lg:gap-12 max-sm:gap-8">
+        <div
+          class="grid items-start grid-cols-1 lg:grid-cols-2 gap-8 max-lg:gap-12 max-sm:gap-8"
+        >
           <div class="w-full lg:sticky top-24 self-start">
             <div class="flex flex-col gap-4">
               <div class="bg-white shadow-sm p-2">
-                <img src="https://readymadeui.com/images/sunscreen-img-1.webp" alt="Product"
-                  class="w-full  aspect-[11/8] object-cover object-top" />
+                <img
+                  [src]="product.product_image[0]"
+                  [alt]="product.product_title"
+                  class="w-full aspect-[11/8] object-cover object-top"
+                />
               </div>
-              <div class="bg-white shadow-sm p-2 w-full max-w-full overflow-auto">
-                <div class="flex justify-between flex-row gap-4 shrink-0">
-                  <img src="https://readymadeui.com/images/sunscreen-img-1.webp" alt="Product1"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-black" />
-                  <img src="https://readymadeui.com/images/sunscreen-img-2.webp" alt="Product2"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-transparent" />
-                  <img src="https://readymadeui.com/images/sunscreen-img-3.webp" alt="Product3"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-transparent" />
-                  <img src="https://readymadeui.com/images/sunscreen-img-4.webp" alt="Product4"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-transparent" />
-                  <img src="https://readymadeui.com/images/sunscreen-img-5.webp" alt="Product5"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-transparent" />
-                  <img src="https://readymadeui.com/images/sunscreen-img-6.webp" alt="Product6"
-                    class="w-16 h-16 aspect-square object-cover object-top cursor-pointer shadow-md border-b-2 border-transparent" />
+              <div class="bg-white rounded-xl shadow-sm px-6 py-5 w-full">
+                <div class="grid grid-cols-5 gap-4">
+                  @for (img of product.product_image; track img) {
+                    <button type="button" class="group w-full">
+                      <img
+                        [src]="img"
+                        class="w-full aspect-square object-cover rounded-lg border-2 border-transparent shadow-sm transition-all duration-200 group-hover:border-indigo-500 group-hover:scale-[1.03]"
+                      />
+                    </button>
+                  }
                 </div>
               </div>
             </div>
           </div>
 
           <div class="w-full">
-                        <p class="text-lg font-medium leading-8 text-indigo-600 mb-4">Clothing&nbsp; /&nbsp; Menswear
-                        </p>
+            <p class="text-lg font-medium leading-8 text-indigo-600 mb-4">
+              {{ product.product_category | titlecase }}
+            </p>
             <div>
-              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">SunProtect Sunscreen SPF</h3>
+              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">
+                {{ product.product_title }}
+              </h3>
               <div class="flex items-center gap-3 mt-2">
                 <div class="flex items-center gap-1">
                   <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    class="w-3.5 h-3.5 fill-indigo-600"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
                   </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    class="w-3.5 h-3.5 fill-indigo-600"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
                   </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    class="w-3.5 h-3.5 fill-indigo-600"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
                   </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    class="w-3.5 h-3.5 fill-indigo-600"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
                   </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    class="w-3.5 h-3.5 fill-[#CED5D8]"
+                    viewBox="0 0 14 13"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                    />
                   </svg>
                 </div>
                 <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
+                <p class="text-sm"><i class="fa-solid fa-lightbulb"></i> 10/10</p>
                 <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
+                <p class="text-sm text-slate-500">
+                  <i class="fa-solid fa-comment"></i> {{ product.comment_count }}
+                </p>
+                <span class="text-slate-500">|</span>
+                <button
+                  (click)="toggleLikeProduct(product)"
+                  class="flex items-center gap-2 text-indigo-700 font-semibold"
+                >
+                  <span>
+                    @if (product.liked_by_user) {
+                      <i class="fa-solid fa-heart"></i>
+                    } @else {
+                      ♡
+                    }
+                  </span>
+                  <span>{{ product.like_count }}</span>
+                </button>
               </div>
-              <div class="mt-4">
-                <p class="text-slate-500 mt-1 text-sm">Contains Vitamin E and Green Tea Extract to protect, nourish, and
-                  hydrate the skin while providing antioxidant benefits to combat free radicals and promote a healthy
-                  complexion.</p>
-              </div>
-
               <div class="flex items-center flex-wrap gap-2 mt-6">
-                <p class="text-slate-500 text-base">$16</p>
-                <h4 class="text-indigo-800 text-2xl sm:text-3xl font-semibold">$12</h4>
-                <div class="flex py-1 px-2 bg-indigo-600 font-semibold !ml-4">
+                <h4 class="text-indigo-800 text-2xl sm:text-3xl font-semibold">
+                  {{
+                    product.product_price
+                      | currency: "AUD" : "symbol" : "1.2-2" : "en-AU"
+                  }}
+                </h4>
+
+                <!-- <div class="flex py-1 px-2 bg-indigo-600 font-semibold !ml-4">
                   <span class="text-white text-sm">save 10%</span>
-                </div>
+                </div> -->
               </div>
 
               <div>
-                <h4 class="text-base mt-4 text-slate-500 font-semibold">Net Wt: 100G</h4>
+                <!-- <h4 class="text-base mt-4 text-slate-500 font-semibold">
+                  Net Wt: 100G
+                </h4> -->
               </div>
             </div>
 
             <hr class="my-6 border-gray-300" />
 
-            <div>
-              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">Sizes</h3>
+            <!-- <div>
+              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">
+                Sizes
+              </h3>
               <div class="mb-4 flex flex-wrap gap-4 mt-4">
-                <button type="button"
-                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0">SM</button>
-                <button type="button"
-                  class="w-10 h-9 border border-slate-600 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0">MD</button>
-                <button type="button"
-                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0">LG</button>
-                <button type="button"
-                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0">XL</button>
+                <button
+                  type="button"
+                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0"
+                >
+                  SM
+                </button>
+                <button
+                  type="button"
+                  class="w-10 h-9 border border-slate-600 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0"
+                >
+                  MD
+                </button>
+                <button
+                  type="button"
+                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0"
+                >
+                  LG
+                </button>
+                <button
+                  type="button"
+                  class="w-10 h-9 border border-slate-300 hover:border-slate-600 text-sm cursor-pointer flex items-center justify-center shrink-0"
+                >
+                  XL
+                </button>
               </div>
-
-            </div>
+            </div> -->
             <div>
-              <div class="flex gap-4 items-center border border-gray-300 bg-white px-4 py-2.5 w-max">
-                <button type="button" class="border-0 outline-0 cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5" viewBox="0 0 121.805 121.804">
+              <div
+                class="flex gap-4 items-center border border-gray-300 bg-white px-4 py-2.5 w-max"
+              >
+                <!-- DECREASE -->
+                <button
+                  type="button"
+                  class="border-0 outline-0 cursor-pointer"
+                  (click)="quantity = quantity > 1 ? quantity - 1 : 1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-2.5 h-2.5"
+                    viewBox="0 0 121.805 121.804"
+                  >
                     <path
                       d="M7.308 68.211h107.188a7.309 7.309 0 0 0 7.309-7.31 7.308 7.308 0 0 0-7.309-7.309H7.308a7.31 7.31 0 0 0 0 14.619z"
-                      data-original="#000000" />
+                    />
                   </svg>
                 </button>
-                <span clsemiass="text-slate-900 text-sm font-semibold px-6 block">1</span>
-                <button type="button" class="border-0 outline-0 cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-2.5 h-2.5" viewBox="0 0 512 512">
+
+                <!-- QUANTITY -->
+                <span class="text-slate-900 text-sm font-semibold px-6 block">
+                  {{ quantity }}
+                </span>
+
+                <!-- INCREASE -->
+                <button
+                  type="button"
+                  class="border-0 outline-0 cursor-pointer"
+                  (click)="quantity = quantity + 1"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-2.5 h-2.5"
+                    viewBox="0 0 512 512"
+                  >
                     <path
                       d="M256 509.892c-19.058 0-34.5-15.442-34.5-34.5V36.608c0-19.058 15.442-34.5 34.5-34.5s34.5 15.442 34.5 34.5v438.784c0 19.058-15.442 34.5-34.5 34.5z"
-                      data-original="#000000" />
+                    />
                     <path
                       d="M475.392 290.5H36.608c-19.058 0-34.5-15.442-34.5-34.5s15.442-34.5 34.5-34.5h438.784c19.058 0 34.5 15.442 34.5 34.5s-15.442 34.5-34.5 34.5z"
-                      data-original="#000000" />
+                    />
                   </svg>
                 </button>
               </div>
 
+              <!-- ADD TO CART -->
               <div class="mt-4 flex flex-wrap gap-4">
-                <button type="button"
-                  class="px-4 py-3 w-[45%] cursor-pointer border border-indigo-600 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium">Add
-                  to cart</button>
+                <button
+                  type="button"
+                  (click)="add_cart(product._id, quantity)"
+                  class="px-4 py-3 w-[45%] cursor-pointer border border-indigo-600 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium"
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
 
             <hr class="my-6 border-slate-300" />
 
             <div>
-              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">Product Information</h3>
-              </div>
-                        <p class="text-gray-500 text-base font-normal mb-5">
-                            Introducing our vibrant Basic Yellow Tropical Printed Shirt - a celebration of style and
-                            sunshine! Embrace the essence of summer wherever you go with this eye-catching piece that
-                            effortlessly blends comfort and tropical flair. <a href="#"
-                                class="text-indigo-600">More....</a>
-                        </p>
-                        <ul class="grid gap-y-4 mb-8">
-                            <li class="flex items-center gap-3">
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                                    <path
-                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                                </svg>
-                                <span class="font-normal text-base text-gray-900 ">Branded shirt</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                                    <path
-                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                                </svg>
-                                <span class="font-normal text-base text-gray-900 ">3 color shirt</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                                    <path
-                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                                </svg>
-                                <span class="font-normal text-base text-gray-900 ">Pure Cotton Shirt with 60% as
-                                    40%</span>
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="26" height="26" rx="13" fill="#4F46E5" />
-                                    <path
-                                        d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
-                                        stroke="white" stroke-width="1.6" stroke-linecap="round" />
-                                </svg>
-                                <span class="font-normal text-base text-gray-900 ">all size is available</span>
-                            </li>
-                        </ul>
-                <div class="hover:bg-slate-100 transition-all">
-                  <button type="button"
-                    class="w-full text-sm font-semibold cursor-pointer text-left px-4 py-2.5 text-slate-900 flex items-center">
-                    <span class="mr-4">Vendor details</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-current ml-auto shrink-0 -rotate-90"
-                      viewBox="0 0 24 24">
-                      <path fill-rule="evenodd"
-                        d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
-                        clip-rule="evenodd" data-original="#000000"></path>
-                    </svg>
-                  </button>
-                  <div class="pb-4 px-4 hidden">
-                    <p class="text-sm text-slate-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">
+                Product Information
+              </h3>
+            </div>
+            <p class="text-gray-500 text-base font-normal mb-5">
+              {{ product.product_description }}
+            </p>
+            <ul class="grid gap-y-4 mb-8">
+              <li class="flex items-center gap-3">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                  <path
+                    d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span class="font-normal text-base text-gray-900"
+                  >Nigger</span
+                >
+              </li>
+              <li class="flex items-center gap-3">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                  <path
+                    d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span class="font-normal text-base text-gray-900"
+                  >Nigger</span
+                >
+              </li>
+              <li class="flex items-center gap-3">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                  <path
+                    d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span class="font-normal text-base text-gray-900"
+                  >Nigger</span
+                >
+              </li>
+              <li class="flex items-center gap-3">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect width="26" height="26" rx="13" fill="#4F46E5" />
+                  <path
+                    d="M7.66669 12.629L10.4289 15.3913C10.8734 15.8357 11.0956 16.0579 11.3718 16.0579C11.6479 16.0579 11.8701 15.8357 12.3146 15.3913L18.334 9.37183"
+                    stroke="white"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span class="font-normal text-base text-gray-900"
+                  >Nigger</span
+                >
+              </li>
+            </ul>
+            <div class="hover:bg-slate-100 transition-all">
+              <a
+                routerLink="/profile-page"
+                type="button"
+                class="w-full text-sm font-semibold cursor-pointer text-left px-4 py-2.5 text-slate-900 flex items-center"
+              >
+                <span class="mr-4">Vendor details</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-3 h-3 fill-current ml-auto shrink-0 -rotate-90"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
+                    clip-rule="evenodd"
+                    data-original="#000000"
+                  ></path>
+                </svg>
+              </a>
+              <div class="pb-4 px-4 hidden">
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </p>
 
                 <div class="hover:bg-slate-100 transition-all">
-                  <button type="button"
-                    class="w-full text-sm font-semibold cursor-pointer text-left px-4 py-2.5 text-slate-900 flex items-center">
+                  <button
+                    type="button"
+                    class="w-full text-sm font-semibold cursor-pointer text-left px-4 py-2.5 text-slate-900 flex items-center"
+                  >
                     <span class="mr-4">Return and exchange policy</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-current ml-auto shrink-0 -rotate-90"
-                      viewBox="0 0 24 24">
-                      <path fill-rule="evenodd"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-3 h-3 fill-current ml-auto shrink-0 -rotate-90"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill-rule="evenodd"
                         d="M11.99997 18.1669a2.38 2.38 0 0 1-1.68266-.69733l-9.52-9.52a2.38 2.38 0 1 1 3.36532-3.36532l7.83734 7.83734 7.83734-7.83734a2.38 2.38 0 1 1 3.36532 3.36532l-9.52 9.52a2.38 2.38 0 0 1-1.68266.69734z"
-                        clip-rule="evenodd" data-original="#000000"></path>
+                        clip-rule="evenodd"
+                        data-original="#000000"
+                      ></path>
                     </svg>
                   </button>
                   <div class="pb-4 px-4 hidden">
-                    <p class="text-sm text-slate-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing
-                      elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      Sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -390,290 +375,474 @@
             <hr class="my-6 border-slate-300" />
 
             <div>
-              <h3 class="text-lg sm:text-xl font-semibold text-slate-900">Customer Comments</h3>
-              <div class="flex items-center gap-1.5 mt-6">
-                <svg class="w-5 h-5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <svg class="w-5 h-5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <svg class="w-5 h-5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <svg class="w-5 h-5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-                <svg class="w-5 h-5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                </svg>
-              </div>
+              <!-- COMMENT INPUT AREA -->
+              <div
+                class="mt-6 bg-white border border-gray-200 rounded-xl p-5 shadow-sm"
+              >
+                <!-- HEADER -->
+                <div class="flex items-center justify-between mb-3">
+                  <p class="text-sm font-semibold text-slate-900">
+                    Write a review
+                  </p>
+                  <span class="text-xs text-slate-400">
+                    Be respectful and honest
+                  </span>
+                </div>
 
-              <div class="flex items-center flex-wrap gap-4 mt-4">
-                <h4 class="text-2xl sm:text-3xl text-slate-900 font-semibold">4.0 / 5</h4>
-                <p class="text-sm text-slate-500">Based on 253 ratings</p>
+                <!-- TEXTAREA -->
+                <textarea
+                  [(ngModel)]="newComment[product._id]"
+                  placeholder="What did you like or dislike about this product?"
+                  class="w-full min-h-[120px] border border-gray-300 rounded-lg p-4 text-sm resize-none focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition"
+                ></textarea>
+
+                <!-- ACTIONS -->
+                <div class="flex items-center justify-between mt-4">
+                  <p class="text-xs text-slate-400">
+                    Your comment will be public
+                  </p>
+
+                  <button
+                    (click)="postComment(product._id)"
+                    class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition active:scale-95"
+                  >
+                    Post Comment
+                  </button>
+                </div>
               </div>
             </div>
 
-            <div class="mt-6">
-              <div class="flex items-start">
-                <img src="https://readymadeui.com/team-2.webp" class="w-12 h-12 rounded-full border-2 border-white" />
-                <div class="ml-3">
-                  <h4 class="text-slate-900 text-sm font-semibold">John Doe</h4>
-                  <div class="flex space-x-1 mt-1">
-                    <svg class="w-[14px] h-[14px] fill-indigo-600" viewBox="0 0 14 13" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                    </svg>
-                    <svg class="w-[14px] h-[14px] fill-indigo-600" viewBox="0 0 14 13" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                    </svg>
-                    <svg class="w-[14px] h-[14px] fill-indigo-600" viewBox="0 0 14 13" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                    </svg>
-                    <svg class="w-[14px] h-[14px] fill-indigo-600" viewBox="0 0 14 13" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                    </svg>
-                    <svg class="w-[14px] h-[14px] fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                    </svg>
-                    <p class="text-xs text-slate-500 !ml-2">2 months ago</p>
+            <div class="mt-6 space-y-6">
+              @for (c of comments[product._id]?.slice(0, 5); track c._id) {
+                <div class="flex items-start">
+                  <img
+                    src="https://readymadeui.com/team-2.webp"
+                    class="w-12 h-12 rounded-full border-2 border-white"
+                  />
+
+                  <div class="ml-3 flex-1">
+                    <h4 class="text-slate-900 text-sm font-semibold">
+                      {{ c.user.username }}
+                    </h4>
+
+                    <p class="text-xs text-slate-500 mt-1">
+                      {{ c.createdAt | date: "mediumDate" }}
+                    </p>
+
+                    <p class="text-sm text-slate-500 mt-3 leading-relaxed">
+                      {{ c.text }}
+                    </p>
                   </div>
-                  <p class="text-sm text-slate-500 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-              </div>
-              <a href="javascript:void(0)" class="block text-indigo-600 hover:underline text-sm mt-6 font-semibold">Read all
-                Comments</a>
+              }
+
+              <!-- READ MORE -->
+              @if (comments[product._id]?.length > 5) {
+                <button
+                  (click)="openCommentsModal(product._id)"
+                  class="text-indigo-600 hover:underline text-sm font-semibold"
+                >
+                  Read more...
+                </button>
+              }
             </div>
           </div>
+        </div>
+
+        <hr class="my-6 border-slate-300" />
+        <section>
+          <h2 class="text-3xl font-semibold text-gray-900 mb-8">
+            Suggested Products
+          </h2>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- PRODUCT CARD -->
+            <div
+              class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200"
+            >
+              <a href="#">
+                <div
+                  class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3"
+                >
+                  <img
+                    src="https://readymadeui.com/images/sunscreen-img-1.webp"
+                    alt="SunProtect Sunscreen SPF"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
+                  />
+                </div>
+
+                <h3
+                  class="font-semibold text-gray-900 text-base leading-tight line-clamp-2"
+                >
+                  SunProtect Sunscreen SPF 50+ PA+++
+                </h3>
+
+                <p class="text-blue-600 font-bold text-lg mt-1">$12</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <div class="flex items-center gap-1">
+                    <p class="text-base text-slate-500">4</p>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-[#CED5D8]"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-yellow-500">💡 10/10</p>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-slate-500">50 comments</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- PRODUCT CARD -->
+            <div
+              class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200"
+            >
+              <a href="#">
+                <div
+                  class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3"
+                >
+                  <img
+                    src="https://readymadeui.com/images/sunscreen-img-2.webp"
+                    alt="Hydrating Face Cream"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
+                  />
+                </div>
+
+                <h3
+                  class="font-semibold text-gray-900 text-base leading-tight line-clamp-2"
+                >
+                  Hydrating Face Cream with Vitamin E
+                </h3>
+
+                <p class="text-blue-600 font-bold text-lg mt-1">$18</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <div class="flex items-center gap-1">
+                    <p class="text-base text-slate-500">4</p>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-[#CED5D8]"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-yellow-500">💡 10/10</p>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-slate-500">50 comments</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- PRODUCT CARD -->
+            <div
+              class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200"
+            >
+              <a href="#">
+                <div
+                  class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3"
+                >
+                  <img
+                    src="https://readymadeui.com/images/sunscreen-img-3.webp"
+                    alt="Daily Moisturizer"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
+                  />
+                </div>
+
+                <h3
+                  class="font-semibold text-gray-900 text-base leading-tight line-clamp-2"
+                >
+                  Daily Moisturizer for Sensitive Skin
+                </h3>
+
+                <p class="text-blue-600 font-bold text-lg mt-1">$15</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <div class="flex items-center gap-1">
+                    <p class="text-base text-slate-500">4</p>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-[#CED5D8]"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-yellow-500">💡 10/10</p>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-slate-500">50 comments</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- PRODUCT CARD -->
+            <div
+              class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200"
+            >
+              <a href="#">
+                <div
+                  class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3"
+                >
+                  <img
+                    src="https://readymadeui.com/images/sunscreen-img-4.webp"
+                    alt="Aloe Vera Gel"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
+                  />
+                </div>
+
+                <h3
+                  class="font-semibold text-gray-900 text-base leading-tight line-clamp-2"
+                >
+                  Aloe Vera Cooling Gel for Skin Repair
+                </h3>
+
+                <p class="text-blue-600 font-bold text-lg mt-1">$10</p>
+                <div class="flex items-center gap-3 mt-2">
+                  <div class="flex items-center gap-1">
+                    <p class="text-base text-slate-500">4</p>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-indigo-600"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                    <svg
+                      class="w-3.5 h-3.5 fill-[#CED5D8]"
+                      viewBox="0 0 14 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-yellow-500">💡 10/10</p>
+                  <span class="text-slate-500">|</span>
+                  <p class="text-sm text-slate-500">50 comments</p>
+                </div>
+              </a>
+            </div>
           </div>
-
-          <hr class="my-6 border-slate-300" />
-<section>
-  <h2 class="text-3xl font-semibold text-gray-900 mb-8">
-    Suggested Products
-  </h2>
-
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
-    <!-- PRODUCT CARD -->
-    <div class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200">
-      <a href="#">
-        <div class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3">
-          <img
-            src="https://readymadeui.com/images/sunscreen-img-1.webp"
-            alt="SunProtect Sunscreen SPF"
-            class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
-          />
-        </div>
-
-        <h3 class="font-semibold text-gray-900 text-base leading-tight line-clamp-2">
-          SunProtect Sunscreen SPF 50+ PA+++
-        </h3>
-
-        <p class="text-blue-600 font-bold text-lg mt-1">
-          $12
-        </p>
-<div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-      </a>
-    </div>
-
-    <!-- PRODUCT CARD -->
-    <div class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200">
-      <a href="#">
-        <div class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3">
-          <img
-            src="https://readymadeui.com/images/sunscreen-img-2.webp"
-            alt="Hydrating Face Cream"
-            class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
-          />
-        </div>
-
-        <h3 class="font-semibold text-gray-900 text-base leading-tight line-clamp-2">
-          Hydrating Face Cream with Vitamin E
-        </h3>
-
-        <p class="text-blue-600 font-bold text-lg mt-1">
-          $18
-        </p>
-        <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-      </a>
-    </div>
-
-    <!-- PRODUCT CARD -->
-    <div class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200">
-      <a href="#">
-        <div class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3">
-          <img
-            src="https://readymadeui.com/images/sunscreen-img-3.webp"
-            alt="Daily Moisturizer"
-            class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
-          />
-        </div>
-
-        <h3 class="font-semibold text-gray-900 text-base leading-tight line-clamp-2">
-          Daily Moisturizer for Sensitive Skin
-        </h3>
-
-        <p class="text-blue-600 font-bold text-lg mt-1">
-          $15
-        </p>
-        <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-      </a>
-    </div>
-
-    <!-- PRODUCT CARD -->
-    <div class="rounded-xl bg-white p-3 hover:-translate-y-1 transition-all duration-200">
-      <a href="#">
-        <div class="relative w-full pb-[130%] overflow-hidden rounded-lg mb-3">
-          <img
-            src="https://readymadeui.com/images/sunscreen-img-4.webp"
-            alt="Aloe Vera Gel"
-            class="absolute inset-0 w-full h-full object-cover transition duration-300 hover:scale-105"
-          />
-        </div>
-
-        <h3 class="font-semibold text-gray-900 text-base leading-tight line-clamp-2">
-          Aloe Vera Cooling Gel for Skin Repair
-        </h3>
-
-        <p class="text-blue-600 font-bold text-lg mt-1">
-          $10
-        </p>
-        <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-indigo-600" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-      </a>
-    </div>
-
-  </div>
-</section>
-
+        </section>
       </div>
-    </div> 
-  </section>
+    </div>
+  }
+</section>
+@if (showCommentsModal) {
+  <div
+    class="fixed inset-0 z-[9999] bg-black/50 flex items-center justify-center px-4"
+  >
+    <div
+      class="bg-white w-full max-w-2xl max-h-[80vh] rounded-xl shadow-xl overflow-hidden"
+    >
+      <!-- HEADER -->
+      <div class="flex items-center justify-between px-6 py-4 border-b">
+        <h3 class="text-lg font-semibold text-slate-900">
+          All Customer Comments
+        </h3>
+
+        <button
+          (click)="closeCommentsModal()"
+          class="text-slate-500 hover:text-slate-800 text-xl leading-none"
+        >
+          ×
+        </button>
+      </div>
+
+      <!-- BODY -->
+      <div class="p-6 overflow-y-auto space-y-6">
+        @for (c of comments[activeCommentsProductId!]; track c._id) {
+          <div class="flex items-start">
+            <img
+              src="https://readymadeui.com/team-2.webp"
+              class="w-10 h-10 rounded-full"
+            />
+
+            <div class="ml-3 flex-1">
+              <h4 class="text-sm font-semibold text-slate-900">
+                {{ c.user.username }}
+              </h4>
+
+              <p class="text-xs text-slate-500 mt-1">
+                {{ c.createdAt | date: "mediumDate" }}
+              </p>
+
+              <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                {{ c.text }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}

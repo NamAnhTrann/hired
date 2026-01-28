@@ -1,6 +1,6 @@
 <div class="min-h-screen flex flex-col bg-white dark:bg-neutral-950 transition-colors duration-300">
   <!-- Header -->
-  @if (!hideHeaderFooter()) {
+  @if (!hideHeader()) {
     <app-header></app-header>
   }
 
@@ -10,7 +10,7 @@
   </main>
 
   <!-- Footer -->
-  @if (!hideHeaderFooter()) {
+  @if (!hideFooter()) {
     <app-footer></app-footer>
   }
 </div>
