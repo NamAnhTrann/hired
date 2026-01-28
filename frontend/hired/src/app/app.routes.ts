@@ -17,6 +17,7 @@ import { SellerPage } from './seller-page/seller-page';
 import { SellerCreatePage } from './seller-create-page/seller-create-page';
 import { TermAndConditionPage } from './term-and-condition-page/term-and-condition-page';
 import { SellerStorePage } from './seller-store-page/seller-store-page';
+import { ProfilePage } from './profile-page/profile-page';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
@@ -38,6 +39,6 @@ export const routes: Routes = [
   { path: 'seller-create-page', component: SellerCreatePage },
   { path: 'term-and-condition-page', component: TermAndConditionPage },
   { path: 'seller-store-page', component: SellerStorePage },
-
+  { path: 'profile-page', component: ProfilePage },
   
 ];
