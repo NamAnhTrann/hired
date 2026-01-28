@@ -29,6 +29,8 @@ app.use(
 app.use(express.json());
 
 app.use(passport.initialize());
+app.use("/uploads", express.static("uploads"));
+
 
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";

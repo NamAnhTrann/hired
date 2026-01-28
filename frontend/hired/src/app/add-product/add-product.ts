@@ -40,9 +40,9 @@ export class AddProduct {
       Validators.min(1),
     ]),
 
-    product_image: new FormControl<string[]>([], {
+    product_image: new FormControl<File[]>([], {
       nonNullable: true,
-      validators: [Validators.minLength(1)],
+      validators: [Validators.required],
     }),
 
     product_category: new FormControl<
@@ -56,26 +56,61 @@ export class AddProduct {
       return;
     }
 
-    const payload = {
-      product_title: this.form.value.product_title,
-      product_description: this.form.value.product_description,
-      product_price: this.form.value.product_price,
-      product_quantity: this.form.value.product_quantity,
-      product_image: this.form.value.product_image,
-      product_category: this.form.value.product_category,
-    };
+    this.loading = true;
 
-    this.productService.add_product(payload).subscribe({
+    const formData = new FormData();
+
+    formData.append('product_title', this.form.get('product_title')!.value!);
+
+    formData.append(
+      'product_description',
+      this.form.get('product_description')!.value!,
+    );
+
+    formData.append(
+      'product_price',
+      String(this.form.get('product_price')!.value),
+    );
+
+    formData.append(
+      'product_quantity',
+      String(this.form.get('product_quantity')!.value),
+    );
+
+    formData.append(
+      'product_category',
+      this.form.get('product_category')!.value!,
+    );
+
+    const images = this.form.get('product_image')!.value;
+
+    for (const file of images) {
+      formData.append('product_image', file);
+    }
+
+    this.productService.add_product(formData).subscribe({
       next: () => {
         this.loading = false;
         alert('Post Uploaded');
-        this.form.reset;
-        
+        this.form.reset();
       },
-      error: (err: any) => {
+      error: () => {
         this.loading = false;
         alert('Error');
       },
     });
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) return;
+
+    const files = Array.from(input.files);
+    this.form.patchValue({
+      product_image: files,
+    });
+
+    this.form.get('product_image')?.updateValueAndValidity();
   }
 }
