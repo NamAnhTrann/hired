@@ -88,7 +88,7 @@ export class ViewDetailPage {
 
           if (images.length > 0) {
             this.selectedImage = images[0];
-            this.subImages = images.slice(1, 6); // max 5 sub images
+            this.subImages = images.slice(1, 6); 
           } else {
             this.selectedImage = null;
             this.subImages = [];
@@ -159,7 +159,8 @@ export class ViewDetailPage {
 
   toggleReply(product_id: string, comment_id: string): void {
     if (!this.replyBox[product_id]) this.replyBox[product_id] = {};
-    this.replyBox[product_id][comment_id] = !this.replyBox[product_id][comment_id];
+    this.replyBox[product_id][comment_id] =
+      !this.replyBox[product_id][comment_id];
   }
 
   postReply(product_id: string, parent_id: string): void {
@@ -212,7 +213,9 @@ export class ViewDetailPage {
       .subscribe({
         next: () => {
           if (isTopLevel) {
-            const replyCount = Array.isArray(comment.replies) ? comment.replies.length : 0;
+            const replyCount = Array.isArray(comment.replies)
+              ? comment.replies.length
+              : 0;
             product.comment_count -= 1 + replyCount;
             if (product.comment_count < 0) product.comment_count = 0;
           }

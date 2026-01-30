@@ -831,11 +831,11 @@
                                 class="fa-regular fa-comment text-gray-500"
                               ></i>
 
-                              @if (item.comment_count === 0) {
+                              @if (seller_stats?.total_comments === 0) {
                               <span class="font-medium text-sm">0</span>
                               } @else {
                               <span class="font-medium text-sm">
-                                {{ item.comment_count }}
+                                {{ seller_stats?.total_comments }}
                               </span>
                               }
                             </div>
@@ -903,11 +903,11 @@
                             <div class="flex items-center gap-x-2 mb-4">
                               <i class="fa-regular fa-heart text-gray-500"></i>
 
-                              @if (item.like_count === 0) {
+                              @if (seller_stats?.total_likes === 0) {
                               <span class="font-medium text-sm">0</span>
                               } @else {
                               <span class="font-medium text-sm">
-                                {{ item.like_count }}
+                                {{ seller_stats?.total_likes }}
                               </span>
                               }
                             </div>

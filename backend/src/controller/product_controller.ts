@@ -32,11 +32,27 @@ export const add_product = async function (
 
     const files = req.files as Express.Multer.File[] | undefined;
 
+    //fix later
     const imagePaths: string[] = files
       ? files.map(
           (file) => `http://localhost:2020/uploads/products/${file.filename}`,
         )
       : [];
+
+    const product_features =
+      typeof req.body.product_features === "string"
+        ? JSON.parse(req.body.product_features)
+        : [];
+
+    const shipping_info =
+      typeof req.body.shipping_info === "string"
+        ? JSON.parse(req.body.shipping_info)
+        : [];
+
+    const product_policies =
+      typeof req.body.product_policies === "string"
+        ? JSON.parse(req.body.product_policies)
+        : [];
 
     const newProduct = new Product({
       product_title: req.body.product_title,
@@ -45,10 +61,15 @@ export const add_product = async function (
       product_quantity: req.body.product_quantity,
       product_image: imagePaths,
       product_category: req.body.product_category,
-      product_view_count: 0,
 
+      product_features,
+      shipping_info,
+      product_policies,
+
+      product_view_count: 0,
       product_user: user._id,
     });
+
     await newProduct.save();
     return res
       .status(200)

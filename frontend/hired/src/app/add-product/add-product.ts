@@ -8,10 +8,9 @@ import {
 } from '@angular/forms';
 import { Product_Service } from '../services/product';
 import { RouterLink } from '@angular/router';
-
 @Component({
   selector: 'app-add-product',
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './add-product.html',
   styleUrl: './add-product.css',
 })
@@ -48,6 +47,10 @@ export class AddProduct {
     product_category: new FormControl<
       'clothing' | 'digital' | 'electronic' | 'food' | 'other'
     >('other', [Validators.required]),
+
+    product_features: new FormControl<string[]>([]),
+    shipping_info: new FormControl<string[]>([]),
+  product_policies: new FormControl<string[]>([]),
   });
 
   add_product() {
@@ -80,6 +83,20 @@ export class AddProduct {
     formData.append(
       'product_category',
       this.form.get('product_category')!.value!,
+    );
+    formData.append(
+      'product_features',
+      JSON.stringify(this.form.get('product_features')!.value ?? []),
+    );
+
+    formData.append(
+      'shipping_info',
+      JSON.stringify(this.form.get('shipping_info')!.value ?? []),
+    );
+
+    formData.append(
+      'product_policies',
+      JSON.stringify(this.form.get('product_policies')!.value ?? []),
     );
 
     const images = this.form.controls.product_image.value;
@@ -116,47 +133,73 @@ export class AddProduct {
     });
   }
 
-onFileChange(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (!input.files || input.files.length === 0) return;
+  onFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
 
-  const newFiles = Array.from(input.files);
+    const newFiles = Array.from(input.files);
 
-  // existing previews
-  const existing = this.imgPreviews;
+    // existing previews
+    const existing = this.imgPreviews;
 
-  // convert new files to previews
-  const readers = newFiles.map(
-    file =>
-      new Promise<string>(resolve => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.readAsDataURL(file);
-      }),
-  );
+    // convert new files to previews
+    const readers = newFiles.map(
+      (file) =>
+        new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(file);
+        }),
+    );
 
-  Promise.all(readers).then(newPreviews => {
-    if (existing.length === 0) {
-      // first image becomes MAIN
-      this.imgPreviews = [...newPreviews].slice(0, 6);
-    } else {
-      // keep main image at index 0
-      const main = existing[0];
-      const subs = existing.slice(1);
+    Promise.all(readers).then((newPreviews) => {
+      if (existing.length === 0) {
+        // first image becomes MAIN
+        this.imgPreviews = [...newPreviews].slice(0, 6);
+      } else {
+        // keep main image at index 0
+        const main = existing[0];
+        const subs = existing.slice(1);
 
-      this.imgPreviews = [main, ...subs, ...newPreviews].slice(0, 6);
-    }
-  });
+        this.imgPreviews = [main, ...subs, ...newPreviews].slice(0, 6);
+      }
+    });
 
-  // also update form control
-  const existingFiles = this.form.controls.product_image.value ?? [];
-  const combinedFiles = [...existingFiles, ...newFiles].slice(0, 6);
+    // also update form control
+    const existingFiles = this.form.controls.product_image.value ?? [];
+    const combinedFiles = [...existingFiles, ...newFiles].slice(0, 6);
 
-  this.form.controls.product_image.setValue(combinedFiles);
-  this.form.controls.product_image.markAsTouched();
+    this.form.controls.product_image.setValue(combinedFiles);
+    this.form.controls.product_image.markAsTouched();
 
-  input.value = '';
+    input.value = '';
+  }
+
+  addItem(controlName: 'product_features' | 'shipping_info' | 'product_policies') {
+  const control = this.form.controls[controlName];
+  const current = control.value ?? [];
+  control.setValue([...current, '']);
 }
 
+updateItem(
+  controlName: 'product_features' | 'shipping_info' | 'product_policies',
+  index: number,
+  value: string
+) {
+  const control = this.form.controls[controlName];
+  const current = [...(control.value ?? [])];
+  current[index] = value;
+  control.setValue(current);
+}
+
+removeItem(
+  controlName: 'product_features' | 'shipping_info' | 'product_policies',
+  index: number
+) {
+  const control = this.form.controls[controlName];
+  const current = [...(control.value ?? [])];
+  current.splice(index, 1);
+  control.setValue(current);
+}
 
 }

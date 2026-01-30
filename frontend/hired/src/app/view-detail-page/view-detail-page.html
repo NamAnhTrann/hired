@@ -204,7 +204,8 @@
             </div>
 
             <hr class="my-6 border-slate-300" />
-            <div class="max-w-4xl space-y-16">
+           <div class="max-w-4xl space-y-6">
+
               <!-- PRODUCT INFORMATION -->
               <section class="space-y-6">
                 <h3 class="text-xl font-semibold text-slate-900">
@@ -218,27 +219,17 @@
                 <ul
                   class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-base text-slate-800"
                 >
-                  <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>High-quality materials with durable stitching</span>
-                  </li>
-
-                  <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>Comfortable fit designed for everyday wear</span>
-                  </li>
-
-                  <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>Easy to maintain and machine washable</span>
-                  </li>
-
-                  <li class="flex items-start gap-3">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <span>Suitable for casual and semi-formal use</span>
-                  </li>
+                  @for (feature of product.product_features; track $index) {
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-circle-check"></i>
+                      <span>{{ feature }}</span>
+                    </li>
+                  }
                 </ul>
               </section>
+
+              <!-- DIVIDER -->
+              <div class="border-t border-slate-200"></div>
 
               <!-- SHIPPING INFORMATION -->
               <section class="space-y-6">
@@ -249,44 +240,32 @@
                 <div
                   class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-10 text-sm"
                 >
-                  <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-truck-fast"></i>
-                    <div>
-                      <p class="text-slate-500">Ships from</p>
-                      <p class="font-medium text-slate-900">Australia</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-clock"></i>
-                    <div>
-                      <p class="text-slate-500">Estimated delivery</p>
+                  @for (info of product.shipping_info; track $index) {
+                    <div class="flex items-start gap-3">
+                      <i class="fa-solid fa-truck-fast"></i>
                       <p class="font-medium text-slate-900">
-                        2–5 business days
+                        {{ info }}
                       </p>
                     </div>
-                  </div>
-
-                  <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-plane-departure"></i>
-                    <div>
-                      <p class="text-slate-500">Tracking</p>
-                      <p class="font-medium text-slate-900">
-                        Provided after dispatch
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-3">
-                    <i class="fa-solid fa-arrow-rotate-left"></i>
-                    <div>
-                      <p class="text-slate-500">Returns</p>
-                      <p class="font-medium text-slate-900">
-                        Free within 14 days
-                      </p>
-                    </div>
-                  </div>
+                  }
                 </div>
+              </section>
+
+              <!-- DIVIDER -->
+              <div class="border-t border-slate-200"></div>
+
+              <!-- POLICIES -->
+              <section class="space-y-6">
+                <h3 class="text-xl font-semibold text-slate-900">Policies</h3>
+
+                <ul class="space-y-3 text-sm text-slate-800">
+                  @for (policy of product.product_policies; track $index) {
+                    <li class="flex items-start gap-3">
+                      <i class="fa-solid fa-shield-halved"></i>
+                      <span>{{ policy }}</span>
+                    </li>
+                  }
+                </ul>
               </section>
             </div>
 
@@ -391,8 +370,7 @@
               }
 
               <!-- READ MORE -->
-             @if (product && (comments[product._id]?.length ?? 0) > 5) {
-
+              @if (product && (comments[product._id]?.length ?? 0) > 5) {
                 <button
                   (click)="openCommentsModal(product._id)"
                   class="text-indigo-600 hover:underline text-sm font-semibold"
