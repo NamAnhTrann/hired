@@ -1,195 +1,289 @@
-<section
-  class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-neutral-900 dark:to-neutral-950"
->
-  <section class="max-w-6xl mx-auto px-6 py-10">
-    <!-- BREADCRUMB -->
-    <nav class="mb-8 text-sm text-gray-500 dark:text-neutral-400">
-      <ol class="flex items-center gap-2">
-        <li>
-          <a
-            routerLink="/dashboard-page"
-            class="hover:text-gray-900 dark:hover:text-neutral-200 transition"
-          >
-            Dashboard
-          </a>
-        </li>
-        <li class="opacity-60">/</li>
-        <li class="text-gray-900 dark:text-neutral-200 font-medium">
-          Add Product
-        </li>
-      </ol>
-    </nav>
-
-    <!-- HEADER -->
-    <section class="mb-12 flex items-end justify-between">
-      <div>
-        <h1
-          class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-neutral-100"
-        >
-          Post a new product
-        </h1>
-        <p class="mt-2 text-sm text-gray-500 dark:text-neutral-400 max-w-md">
-          Create a product listing that will be visible to customers
-          immediately.
-        </p>
+<section>
+  <div class="p-4">
+    <div class="mt-24 max-w-[1800px] mx-auto px-4">
+      <div
+        class="mb-6 rounded-lg border border-dashed border-slate-300 bg-slate-50 px-6 py-4 text-sm text-slate-600"
+      >
+        <span class="font-medium text-slate-700">Preview mode.</span>
+        This page shows how your product will look to customers. Click on the
+        highlighted areas to add your product details.
       </div>
 
-      <a
-        routerLink="/dashboard-page"
-        class="text-sm font-medium text-gray-500 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-neutral-200 transition"
+      <div
+        class="grid items-start grid-cols-1 lg:grid-cols-2 gap-8 max-lg:gap-12 max-sm:gap-8"
       >
-        ← Back
-      </a>
-    </section>
+        <!-- LEFT: IMAGES -->
+        <div class="w-full lg:sticky top-24 self-start">
+          <div class="flex flex-col gap-4">
+            <!-- MAIN IMAGE -->
+            <div class="p-2">
+              <input
+                #imageInput
+                type="file"
+                multiple
+                accept="image/*"
+                class="hidden"
+                (change)="onFileChange($event)"
+              />
 
-    <!-- FORM CARD -->
-    <section
-      class="max-w-2xl bg-white/80 dark:bg-neutral-900/80 backdrop-blur rounded-3xl border border-gray-200/60 dark:border-neutral-800 shadow-sm p-10"
-    >
-      <form [formGroup]="form" (ngSubmit)="add_product()" class="space-y-8">
-        <!-- TITLE -->
-        <section>
-          <label
-            class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
-          >
-            Product title
-          </label>
+              @if (imgPreviews.length > 0) {
+                <div
+                  (click)="imageInput.click()"
+                  class="aspect-square rounded-lg overflow-hidden border border-slate-300 cursor-pointer"
+                >
+                  <img
+                    [src]="imgPreviews[0]"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              } @else {
+                <div
+                  (click)="imageInput.click()"
+                  class="w-24 sm:w-full aspect-square rounded-lg border border-dashed border-slate-300 bg-slate-100 flex items-center justify-center text-xs text-slate-400 cursor-pointer hover:bg-slate-200 transition"
+                >
+                  Click to add image
+                </div>
+              }
+            </div>
+
+            <!-- SUB IMAGES -->
+            <div class="rounded-xl px-4 py-4 w-full">
+              <div
+                class="flex gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-5 sm:gap-4 sm:overflow-visible"
+              >
+                @for (img of imgPreviews.slice(1); track img) {
+                  <div
+                    class="w-24 sm:w-full aspect-square rounded-lg overflow-hidden border border-slate-300"
+                  >
+                    <img [src]="img" class="w-full h-full object-cover" />
+                  </div>
+                }
+
+                @if (imgPreviews.length < 6) {
+                  <div
+                    (click)="imageInput.click()"
+                    class="w-24 sm:w-full aspect-square rounded-lg border border-dashed border-slate-300 bg-slate-100 flex items-center justify-center text-xs text-slate-400 cursor-pointer hover:bg-slate-200 transition"
+                  >
+                    +
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: PRODUCT INFO -->
+        <form class="w-full" [formGroup]="form" (ngSubmit)="add_product()">
+          <div>
+            <div class="mb-4 max-w-sm">
+              <div class="relative inline-block w-full">
+                <select
+                  formControlName="product_category"
+                  class="w-full rounded-md bg-slate-200 pl-4 pr-10 py-2 text-sm text-slate-600 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition cursor-pointer"
+                >
+                  <option value="" disabled>Product category</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="digital">Digital</option>
+                  <option value="electronic">Electronic</option>
+                  <option value="food">Food</option>
+                  <option value="other">Other</option>
+                </select>
+
+                <!-- Custom arrow -->
+                <span
+                  class="pointer-events-none absolute inset-y-0 right-3 flex items-center text-slate-500 text-xs"
+                >
+                  ▼
+                </span>
+              </div>
+
+              <!-- Hint -->
+              <p class="mt-1 text-xs text-slate-400">
+                Select a category. This controls how your product is listed.
+              </p>
+
+              @if (
+                form.controls.product_category.touched &&
+                form.controls.product_category.invalid
+              ) {
+                <p class="text-red-500 text-xs mt-1">Must choose a category</p>
+              }
+            </div>
+          </div>
+
           <input
             type="text"
             formControlName="product_title"
-            placeholder="Minimal hoodie"
-            class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
+            placeholder="Add title here (click to add)"
+            class="h-8 sm:h-9 w-3/4 rounded-md bg-slate-200 px-3 text-sm sm:text-base text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
 
-          @if (form.controls.product_title.touched &&
-          form.controls.product_title.invalid) {
-          <p class="text-red-500 text-xs mt-1">
-            Title must be 3–120 characters
-          </p>
-          }
-        </section>
-
-        <!-- DESCRIPTION -->
-        <section>
-          <label
-            class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
-          >
-            Description
-          </label>
-          <textarea
-            rows="4"
-            formControlName="product_description"
-            placeholder="Describe the product in detail"
-            class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
-          ></textarea>
-          @if (form.controls.product_description.touched &&
-          form.controls.product_description.invalid) {
-          <p class="text-red-500 text-xs mt-1">
-            Description must be 10-3000 characters
-          </p>
-          }
-        </section>
-
-        <!-- PRICE & QUANTITY -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <section>
-            <label
-              class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
+          <!-- RATING -->
+          <div class="flex items-center gap-4 mt-4">
+            <div
+              class="h-4 w-24 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
             >
-              Price
-            </label>
+              Rating
+            </div>
+
+            <span class="text-slate-400">|</span>
+
+            <div
+              class="h-4 w-20 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
+            >
+              Reviews
+            </div>
+
+            <span class="text-slate-400">|</span>
+
+            <div
+              class="h-4 w-16 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
+            >
+              Likes
+            </div>
+          </div>
+
+          <!-- PRICE -->
+          <div class="mt-6">
             <input
               type="number"
-              min="0"
-              step="0.01"
               formControlName="product_price"
-              class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
+              placeholder="Add price"
+              min="1"
+              step="1"
+              class="h-8 sm:h-9 w-3/4 rounded-md bg-slate-200 px-3 text-sm sm:text-base text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
-            @if (form.controls.product_price.touched &&
-            form.controls.product_price.invalid) {
-            <p class="text-red-500 text-xs mt-1">Price must be more than 0</p>
-            }
-          </section>
+          </div>
+          <p class="mt-1 text-xs text-slate-400">Enter your product price</p>
 
-          <section>
-            <label
-              class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
-            >
-              Quantity
-            </label>
+          <hr class="my-6 border-gray-300" />
+
+          <!-- QUANTITY -->
+          <div class="mt-6">
             <input
               type="number"
-              min="0"
               formControlName="product_quantity"
-              class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
+              placeholder="Quantity available"
+              min="1"
+              step="1"
+              class="h-8 sm:h-9 w-3/4 rounded-md bg-slate-200 px-3 text-sm sm:text-base text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
-            @if (form.controls.product_quantity.touched &&
-            form.controls.product_quantity.invalid) {
-            <p class="text-red-500 text-xs mt-1">
-              Quantity must be more than 0
+
+            <p class="mt-1 text-xs text-slate-400">
+              Enter how many units you have in stock.
             </p>
+
+            @if (
+              form.controls.product_quantity.touched &&
+              form.controls.product_quantity.invalid
+            ) {
+              <p class="mt-1 text-xs text-red-500">
+                Quantity must be at least 1.
+              </p>
             }
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="mt-4 flex flex-wrap gap-4">
+            <button
+              class="px-5 py-3 w-full sm:w-[48%] bg-slate-200 text-slate-500 text-sm font-medium rounded-lg cursor-not-allowed"
+              disabled
+            >
+              Add to cart
+            </button>
+
+            <button
+              class="px-5 py-3 w-full sm:w-[48%] border border-slate-200 bg-slate-100 text-slate-400 text-sm font-medium rounded-lg cursor-not-allowed"
+              disabled
+            >
+              Back to Shopping
+            </button>
+          </div>
+
+          <hr class="my-6 border-slate-300" />
+
+          <!-- PRODUCT INFO -->
+          <section class="space-y-6 max-w-4xl">
+            <h3 class="text-xl font-semibold text-slate-400">
+              Product Information
+            </h3>
+
+            <textarea
+              formControlName="product_description"
+              placeholder="Add product description here"
+              rows="5"
+              class="w-full rounded-md bg-slate-200 p-4 text-sm sm:text-base text-slate-700 leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            ></textarea>
+
+            <p class="mt-3 text-xs text-slate-400">
+              Product description preview
+            </p>
+
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              <li
+                contenteditable="true"
+                class="h-4 w-3/4 rounded bg-slate-200 flex items-center px-2 py-4 text-xs text-slate-500 cursor-text focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                Add feature
+              </li>
+
+              <li
+                contenteditable="true"
+                class="h-4 w-3/4 rounded bg-slate-200 flex items-center px-2 py-4 text-xs text-slate-500 cursor-text focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                Add feature
+              </li>
+
+              <li
+                contenteditable="true"
+                class="h-4 w-3/4 rounded bg-slate-200 flex items-center px-2 py-4 text-xs text-slate-500 cursor-text focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                Add feature
+              </li>
+
+              <li
+                contenteditable="true"
+                class="h-4 w-3/4 rounded bg-slate-200 flex items-center px-2 py-4 text-xs text-slate-500 cursor-text focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              >
+                Add feature
+              </li>
+            </ul>
           </section>
-        </section>
 
-        <!-- CATEGORY -->
-        <section>
-          <label
-            class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
+          <hr class="my-6 border-slate-300" />
+
+          <!-- COMMENTS -->
+          <div class="space-y-4">
+            <div class="flex gap-3">
+              <div class="w-12 h-12 rounded-full bg-slate-200"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-3 w-24 rounded bg-slate-200"></div>
+                <div class="h-3 w-full rounded bg-slate-200"></div>
+                <div class="h-3 w-5/6 rounded bg-slate-200"></div>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-400">
+              Customer reviews will appear here
+            </p>
+          </div>
+          <div
+            class="mt-10 flex justify-end gap-4 border-t border-slate-300 pt-6"
           >
-            Category
-          </label>
-          <select
-            formControlName="product_category"
-            class="mt-2 w-full rounded-xl border border-gray-300/70 dark:border-neutral-700 bg-white dark:bg-neutral-950 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/70 dark:focus:ring-white/20 transition"
-          >
-            <option value="clothing">Clothing</option>
-            <option value="digital">Digital</option>
-            <option value="electronic">Electronic</option>
-            <option value="food">Food</option>
-            <option value="other">Other</option>
-          </select>
-
-          @if (form.controls.product_category.touched &&
-          form.controls.product_category.invalid) {
-          <p class="text-red-500 text-xs mt-1">Must choose a cateogry</p>
-          }
-        </section>
-
-        <!-- IMAGE -->
-        <section>
-          <label
-            class="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-neutral-400"
-          >
-            Image URL   
-          </label>
-     <input
-  type="file"
-  multiple
-  accept="image/*"
-  (change)="onFileChange($event)"
-/>
-
-        </section>
-
-        <!-- ACTIONS -->
-        <section class="pt-4 flex items-center gap-4">
-          <button
-            type="submit"
-            [disabled]="loading"
-            class="inline-flex items-center justify-center rounded-xl bg-black text-white px-6 py-3 text-sm font-semibold hover:bg-gray-900 transition disabled:opacity-50"
-          >
-            @if (loading) { Publishing… } @else { Publish Product }
-          </button>
-
-          <a
-            routerLink="/dashboard-page"
-            class="text-sm text-gray-500 hover:text-gray-900 dark:text-neutral-400 dark:hover:text-neutral-200 transition"
-          >
-            Cancel
-          </a>
-        </section>
-      </form>
-    </section>
-  </section>
+            <button
+              type="submit"
+              [disabled]="loading || form.invalid"
+              class="px-6 py-3 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition disabled:opacity-50"
+            >
+              @if (loading) {
+                Saving…
+              } @else {
+                Publish Product
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

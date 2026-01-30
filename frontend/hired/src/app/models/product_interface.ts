@@ -6,7 +6,7 @@ export interface Product {
   product_description?: string;
   product_price: number;
   product_quantity: number;
-  product_image: [string, string?];
+  product_image: string[];
   product_category: 'clothing' | 'digital' | 'electronic' | 'food' | 'other';
    product_user: string;
   product_view_count: number;

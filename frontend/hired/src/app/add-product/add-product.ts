@@ -11,12 +11,13 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
-  imports: [FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './add-product.html',
   styleUrl: './add-product.css',
 })
 export class AddProduct {
   loading = false;
+  imgPreviews: string[] = [];
 
   constructor(private productService: Product_Service) {}
 
@@ -41,7 +42,6 @@ export class AddProduct {
     ]),
 
     product_image: new FormControl<File[]>([], {
-      nonNullable: true,
       validators: [Validators.required],
     }),
 
@@ -82,7 +82,13 @@ export class AddProduct {
       this.form.get('product_category')!.value!,
     );
 
-    const images = this.form.get('product_image')!.value;
+    const images = this.form.controls.product_image.value;
+
+    if (!images || images.length === 0) {
+      this.loading = false;
+      alert('Please add at least one image');
+      return;
+    }
 
     for (const file of images) {
       formData.append('product_image', file);
@@ -92,8 +98,17 @@ export class AddProduct {
       next: () => {
         this.loading = false;
         alert('Post Uploaded');
-        this.form.reset();
+
+        this.form.reset({
+          product_price: 0,
+          product_quantity: 0,
+          product_category: 'other',
+          product_image: [],
+        });
+
+        this.imgPreviews = [];
       },
+
       error: () => {
         this.loading = false;
         alert('Error');
@@ -101,16 +116,47 @@ export class AddProduct {
     });
   }
 
-  onFileChange(event: Event) {
-    const input = event.target as HTMLInputElement;
+onFileChange(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (!input.files || input.files.length === 0) return;
 
-    if (!input.files || input.files.length === 0) return;
+  const newFiles = Array.from(input.files);
 
-    const files = Array.from(input.files);
-    this.form.patchValue({
-      product_image: files,
-    });
+  // existing previews
+  const existing = this.imgPreviews;
 
-    this.form.get('product_image')?.updateValueAndValidity();
-  }
+  // convert new files to previews
+  const readers = newFiles.map(
+    file =>
+      new Promise<string>(resolve => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.readAsDataURL(file);
+      }),
+  );
+
+  Promise.all(readers).then(newPreviews => {
+    if (existing.length === 0) {
+      // first image becomes MAIN
+      this.imgPreviews = [...newPreviews].slice(0, 6);
+    } else {
+      // keep main image at index 0
+      const main = existing[0];
+      const subs = existing.slice(1);
+
+      this.imgPreviews = [main, ...subs, ...newPreviews].slice(0, 6);
+    }
+  });
+
+  // also update form control
+  const existingFiles = this.form.controls.product_image.value ?? [];
+  const combinedFiles = [...existingFiles, ...newFiles].slice(0, 6);
+
+  this.form.controls.product_image.setValue(combinedFiles);
+  this.form.controls.product_image.markAsTouched();
+
+  input.value = '';
+}
+
+
 }
