@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="mt-10 bg-gray-100 text-gray-900 min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-1">
+        <!-- PROFILE -->
+        <a routerLink="/setting-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-user"></i></span><span>Profile</span>
+        </a>
+
+        <!-- SECURITY -->
+        <a class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-200 font-medium">
+          <span><i class="fa-solid fa-lock"></i></span><span>Security</span>
+        </a>
+
+        <!-- NOTIFICATIONS -->
+        <a routerLink="/notification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-bell"></i></span><span>Notifications</span>
+        </a>
+
+        <!-- BILLING -->
+        <a routerLink="/billing-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-brands fa-cash-app"></i></span><span>Billing</span>
+        </a>
+
+        <!-- VERIFICATION -->
+        <a routerLink="/verification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-circle-check "></i></span><span>Verification</span>
+        </a>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <section class="md:col-span-3 space-y-12">
+
+        <!-- PROFILE SETTINGS (EDITABLE) -->
+        <form class="bg-white rounded-xl shadow-sm p-8 space-y-10" id="security">
+          <div>
+            <h2 class="text-xl font-semibold">Security</h2>
+            <p class="text-sm text-gray-500 mt-1">Manage how you sign in and keep your account secure.</p>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- PASSWORD -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Password</h3>
+            <p class="text-xs text-gray-500 mt-1">Use a strong password that you don’t reuse elsewhere.</p>
+
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input type="password" placeholder=" Current password" class="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              <input type="password" placeholder=" New password" class="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              <input type="password" placeholder=" Confirm new password" class="md:col-span-2 rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- TWO FACTOR -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Two-factor authentication</h3>
+            <p class="text-xs text-gray-500 mt-1">Add an extra layer of security to your account.</p>
+
+            <div class="mt-4 flex items-center justify-between rounded-lg border p-4">
+              <div>
+                <p class="text-sm font-medium">Authenticator app</p>
+                <p class="text-xs text-gray-500">Use an app like Google Authenticator or Authy.</p>
+              </div>
+              <button type="button" class="px-4 py-2 rounded-lg border text-sm hover:bg-gray-50">Enable</button>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- SESSIONS -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Active sessions</h3>
+            <p class="text-xs text-gray-500 mt-1">Devices currently signed into your account.</p>
+
+            <div class="mt-4 space-y-3">
+              <div class="flex items-center justify-between rounded-lg border p-4">
+                <div>
+                  <p class="text-sm font-medium">Chrome · Windows</p>
+                  <p class="text-xs text-gray-500">Hanoi, Vietnam · Active now</p>
+                </div>
+                <button type="button" class="text-sm text-red-600 hover:underline">Log out</button>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border p-4">
+                <div>
+                  <p class="text-sm font-medium">Safari · iPhone</p>
+                  <p class="text-xs text-gray-500">Last active 2 days ago</p>
+                </div>
+                <button type="button" class="text-sm text-red-600 hover:underline">Log out</button>
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- ACTIONS -->
+          <div class="flex justify-end gap-4 pt-4">
+            <button type="button" class="px-5 py-2 rounded-lg border text-gray-600">Cancel</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Save changes</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+

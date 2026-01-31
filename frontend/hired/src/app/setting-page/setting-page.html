@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="mt-10 bg-gray-100 text-gray-900 min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-1">
+        <!-- PROFILE -->
+        <a class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-200 font-medium">
+          <span><i class="fa-solid fa-user"></i></span><span>Profile</span>
+        </a>
+
+        <!-- SECURITY -->
+        <a routerLink="/security-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-lock"></i></span><span>Security</span>
+        </a>
+
+        <!-- NOTIFICATIONS -->
+        <a routerLink="/notification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-bell"></i></span><span>Notifications</span>
+        </a>
+
+        <!-- BILLING -->
+        <a routerLink="/billing-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-brands fa-cash-app"></i></span><span>Billing</span>
+        </a>
+
+        <!-- VERIFICATION -->
+        <a routerLink="/verification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-circle-check "></i></span><span>Verification</span>
+        </a>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <section class="md:col-span-3 space-y-12">
+
+        <!-- PROFILE SETTINGS (EDITABLE) -->
+        <form class="bg-white rounded-xl shadow-sm p-8 space-y-10">
+          <div>
+            <h2 class="text-xl font-semibold">Profile links & presence</h2>
+            <p class="text-sm text-gray-500 mt-1">Add links that help buyers understand who you are and what you do. These will appear on your public profile.</p>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- PROFILE IMAGE -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Profile picture</h3>
+            <p class="text-xs text-gray-500 mt-1">This image appears next to your name and on your public profile. Use a clear, friendly photo.</p>
+
+            <div class="mt-4 flex items-center gap-6">
+              <div class="h-20 w-20 rounded-full bg-gray-200 flex items-center justify-center text-gray-400">
+                <span class="text-sm">Preview</span>
+              </div>
+              <div>
+                <button type="button" class="px-4 py-2 rounded-lg border text-sm hover:bg-gray-50">Upload new photo</button>
+                <p class="text-xs text-gray-400 mt-2">Recommended: square image, at least 400×400px</p>
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- BANNER IMAGE -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Profile banner</h3>
+            <p class="text-xs text-gray-500 mt-1">This banner appears at the top of your public profile. Use it to showcase your brand or style.</p>
+
+            <div class="mt-4 rounded-lg border border-dashed border-gray-300 p-6 text-center">
+              <p class="text-sm text-gray-600">Drag and drop an image here, or</p>
+              <button type="button" class="mt-3 px-4 py-2 rounded-lg border text-sm hover:bg-gray-50">Upload banner image</button>
+              <p class="text-xs text-gray-400 mt-3">Recommended size: 1600×400px</p>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- INTRO / HEADLINE -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Headline</label>
+            <p class="text-xs text-gray-500 mt-1">A short line that describes you as a seller. This appears under your name.</p>
+            <input
+              type="text"
+              placeholder=" e.g. Digital product creator helping startups launch faster"
+              class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- ABOUT -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700">About you</label>
+            <p class="text-xs text-gray-500 mt-1">Tell buyers what you do, who you help, and what makes your work valuable.</p>
+            <textarea
+              rows="4"
+              placeholder=" Write a short introduction about your experience, skills, or the type of products you sell…"
+              class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+            ></textarea>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- SOCIAL LINKS -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Social & external links</h3>
+            <p class="text-xs text-gray-500 mt-1">Add links you want buyers to visit. Only fill in what’s relevant.</p>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="text-sm text-gray-600">Website / Portfolio</label>
+                <input type="url" placeholder=" https://yourwebsite.com" class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="text-sm text-gray-600">LinkedIn</label>
+                <input type="url" placeholder=" https://linkedin.com/in/yourname" class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="text-sm text-gray-600">YouTube</label>
+                <input type="url" placeholder=" Link to your channel or videos" class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="text-sm text-gray-600">Instagram</label>
+                <input type="url" placeholder=" Share your visual work or updates" class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="text-sm text-gray-600">X (Twitter)</label>
+                <input type="url" placeholder=" Thoughts, updates, or announcements" class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+              <div>
+                <label class="text-sm text-gray-600">Other link</label>
+                <input type="url" placeholder=" Dribbble, Behance, GitHub, Notion, etc." class="mt-2 w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- SELLER CONTACT (OPTIONAL) -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Contact visibility</h3>
+            <p class="text-xs text-gray-500 mt-1">This information may be shown to buyers for trust and support purposes.</p>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <input type="email" placeholder=" Public support email (optional)" class="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+              <input type="tel" placeholder=" Public contact number (optional)" class="rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" />
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- ACTIONS -->
+          <div class="flex justify-end gap-4 pt-4">
+            <button type="button" class="px-5 py-2 rounded-lg border text-gray-600">Cancel</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Save changes</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+
+
