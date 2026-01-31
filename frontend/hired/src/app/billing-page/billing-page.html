@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="mt-10 bg-gray-100 text-gray-900 min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-1">
+        <!-- PROFILE -->
+        <a routerLink="/setting-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-user"></i></span><span>Profile</span>
+        </a>
+
+        <!-- SECURITY -->
+        <a routerLink="/security-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-lock"></i></span><span>Security</span>
+        </a>
+
+        <!-- NOTIFICATIONS -->
+        <a routerLink="/notification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-bell"></i></span><span>Notifications</span>
+        </a>
+
+        <!-- BILLING -->
+        <a class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-200 font-medium">
+          <span><i class="fa-brands fa-cash-app"></i></span><span>Billing</span>
+        </a>
+
+        <!-- VERIFICATION -->
+        <a routerLink="/verification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+          <span><i class="fa-solid fa-circle-check "></i></span><span>Verification</span>
+        </a>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <section class="md:col-span-3 space-y-12">
+
+        <!-- PROFILE SETTINGS (EDITABLE) -->
+        <form class="bg-white rounded-xl shadow-sm p-8 space-y-10" id="billing">
+          <div>
+            <h2 class="text-xl font-semibold">Billing</h2>
+            <p class="text-sm text-gray-500 mt-1">Manage your plan, payment methods, and billing history.</p>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- CURRENT PLAN -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Current plan</h3>
+            <p class="text-xs text-gray-500 mt-1">Your subscription and usage details.</p>
+
+            <div class="mt-4 flex items-center justify-between rounded-lg border p-4">
+              <div>
+                <p class="text-sm font-medium">Pro Seller</p>
+                <p class="text-xs text-gray-500">$29 / month · Renews on Mar 12, 2026</p>
+              </div>
+              <button type="button" class="px-4 py-2 rounded-lg border text-sm hover:bg-gray-50">Change plan</button>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- PAYMENT METHOD -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Payment method</h3>
+            <p class="text-xs text-gray-500 mt-1">The card used for recurring payments.</p>
+
+            <div class="mt-4 flex items-center justify-between rounded-lg border p-4">
+              <div>
+                <p class="text-sm font-medium">Visa ending in 4242</p>
+                <p class="text-xs text-gray-500">Expires 08 / 27</p>
+              </div>
+              <button type="button" class="px-4 py-2 rounded-lg border text-sm hover:bg-gray-50">Update card</button>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- BILLING HISTORY -->
+          <div>
+            <h3 class="text-sm font-semibold text-gray-800">Billing history</h3>
+            <p class="text-xs text-gray-500 mt-1">Download past invoices and receipts.</p>
+
+            <div class="mt-4 divide-y rounded-lg border">
+              <div class="flex items-center justify-between p-4">
+                <div>
+                  <p class="text-sm font-medium">Mar 12, 2026</p>
+                  <p class="text-xs text-gray-500">Pro Seller · $29</p>
+                </div>
+                <button type="button" class="text-sm text-indigo-600 hover:underline">Download</button>
+              </div>
+              <div class="flex items-center justify-between p-4">
+                <div>
+                  <p class="text-sm font-medium">Feb 12, 2026</p>
+                  <p class="text-xs text-gray-500">Pro Seller · $29</p>
+                </div>
+                <button type="button" class="text-sm text-indigo-600 hover:underline">Download</button>
+              </div>
+            </div>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <!-- ACTIONS -->
+          <div class="flex justify-end gap-4 pt-4">
+            <button type="button" class="px-5 py-2 rounded-lg border text-gray-600">Cancel</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Save changes</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+
