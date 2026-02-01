@@ -43,21 +43,20 @@ let product_schema = new mongoose.Schema({
     default: 0,
   },
 
-product_features: {
-  type: [String],
-  default: [],
-},
+  product_features: {
+    type: [String],
+    default: [],
+  },
 
-shipping_info: {
-  type: [String],
-  default: [],
-},
+  shipping_info: {
+    type: [String],
+    default: [],
+  },
 
-product_policies: {
-  type: [String],
-  default: [],
-},
-
+  product_policies: {
+    type: [String],
+    default: [],
+  },
 });
 
 export default mongoose.model("Product", product_schema);

@@ -2,7 +2,7 @@
   <div class="p-4">
     <div class="mt-24 max-w-[1800px] mx-auto px-4">
       <div
-        class="mb-6 rounded-lg border border-dashed border-slate-300 bg-slate-50 px-6 py-4 text-sm text-slate-600 flex items-center justify-between gap-4"
+        class="mb-6 ml-2 rounded-lg border border-dashed border-slate-300 bg-slate-50 px-6 py-4 text-sm text-slate-600 flex items-center justify-between gap-4"
       >
         <p>
           This page shows how your product will look to customers. Click on the
@@ -84,7 +84,7 @@
         <form class="w-full" [formGroup]="form" (ngSubmit)="add_product()">
           <div>
             <div class="mb-4 max-w-sm">
-              <div class="relative inline-block w-full">
+              <div class="relative inline-block w-full mt-2">
                 <select
                   formControlName="product_category"
                   class="w-full rounded-md bg-slate-200 pl-4 pr-10 py-2 text-sm text-slate-600 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-400 transition cursor-pointer"
@@ -127,29 +127,34 @@
           />
 
           <!-- RATING -->
-          <div class="flex items-center gap-4 mt-4">
-            <div
-              class="h-4 w-24 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
-            >
-              Rating
-            </div>
+     <div class="flex items-center gap-4 mt-4">
+  <div
+    class="h-4 w-24 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-600 font-medium"
+  >
+    ⭐ 4.8 / 5
+  </div>
 
-            <span class="text-slate-400">|</span>
+  <span class="text-slate-400">|</span>
 
-            <div
-              class="h-4 w-20 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
-            >
-              Reviews
-            </div>
+  <div
+    class="h-4 w-20 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-600 font-medium"
+  >
+    128 reviews
+  </div>
 
-            <span class="text-slate-400">|</span>
+  <span class="text-slate-400">|</span>
 
-            <div
-              class="h-4 w-16 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-500"
-            >
-              Likes
-            </div>
-          </div>
+  <div
+    class="h-4 w-16 py-3 rounded bg-slate-200 flex items-center justify-center text-xs text-slate-600 font-medium"
+  >
+    2.4k likes
+  </div>
+</div>
+
+<p class="mt-1 text-[11px] text-slate-400 ">
+  Preview only. Ratings and engagement shown are sample data.
+</p>
+
 
           <!-- PRICE -->
           <div class="mt-6">
@@ -319,44 +324,49 @@
               Product Policies
             </h4>
 
- <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-  @for (
-    policy of form.controls.product_policies.value ?? [];
-    track $index;
-    let i = $index
-  ) {
-    <li
-      class="w-3/4 rounded bg-slate-200 flex items-center px-2 py-2 text-xs text-slate-700"
-    >
-      <input
-        type="text"
-        class="flex-1 bg-transparent focus:outline-none"
-        [value]="policy"
-        (input)="updateItem('product_policies', i, $any($event.target).value)"
-        placeholder="Policy detail"
-      />
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              @for (
+                policy of form.controls.product_policies.value ?? [];
+                track $index;
+                let i = $index
+              ) {
+                <li
+                  class="w-3/4 rounded bg-slate-200 flex items-center px-2 py-2 text-xs text-slate-700"
+                >
+                  <input
+                    type="text"
+                    class="flex-1 bg-transparent focus:outline-none"
+                    [value]="policy"
+                    (input)="
+                      updateItem(
+                        'product_policies',
+                        i,
+                        $any($event.target).value
+                      )
+                    "
+                    placeholder="Policy detail"
+                  />
 
-      <button
-        type="button"
-        class="ml-2 text-red-400 hover:text-red-600"
-        (click)="removeItem('product_policies', i)"
-      >
-        ✕
-      </button>
-    </li>
-  }
+                  <button
+                    type="button"
+                    class="ml-2 text-red-400 hover:text-red-600"
+                    (click)="removeItem('product_policies', i)"
+                  >
+                    ✕
+                  </button>
+                </li>
+              }
 
-  <li>
-    <button
-      type="button"
-      class="w-3/4 rounded border border-dashed border-slate-400 text-xs text-slate-500 py-2 hover:bg-slate-100"
-      (click)="addItem('product_policies')"
-    >
-      + Add policy
-    </button>
-  </li>
-</ul>
-
+              <li>
+                <button
+                  type="button"
+                  class="w-3/4 rounded border border-dashed border-slate-400 text-xs text-slate-500 py-2 hover:bg-slate-100"
+                  (click)="addItem('product_policies')"
+                >
+                  + Add policy
+                </button>
+              </li>
+            </ul>
           </section>
 
           <hr class="my-6 border-slate-300" />

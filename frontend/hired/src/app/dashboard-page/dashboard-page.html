@@ -1,76 +1,544 @@
 @if (!current_user) {
-<div class="h-screen flex flex-col items-center justify-center gap-4">
-  <p class="text-gray-500 text-sm text-center">
-    Please log in to access your dashboard.
-  </p>
+  <div class="h-screen flex flex-col items-center justify-center gap-4">
+    <p class="text-gray-500 text-sm text-center">
+      Please log in to access your dashboard.
+    </p>
 
-  <a
-    routerLink="/login-page"
-    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
+    <a
+      routerLink="/login-page"
+      class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
+    >
+      Login
+    </a>
+  </div>
+} @else if (seller?.seller_status === "active") {
+  <body
+    class="hs-overlay-body-open overflow-hidden bg-gray-100 dark:bg-neutral-900"
   >
-    Login
-  </a>
-</div>
-} @else if (seller?.seller_status === 'active') {
-
-<body
-  class="hs-overlay-body-open overflow-hidden bg-gray-100 dark:bg-neutral-900"
->
-  <!-- ========== HEADER ========== -->
-  <header
-    class="fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-zinc-100 text-sm py-2.5 border-b border-gray-200 dark:bg-neutral-900 dark:border-neutral-800"
-  >
-    <nav class="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
-      <div class="w-full flex items-center gap-x-1.5">
-        <ul class="flex items-center gap-1.5">
-          <li
-            class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
-          >
-            <a
-              class="shrink-0 inline-flex justify-center items-center bg-indigo-700 size-8 rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80"
-              routerLink="index.html"
-              aria-label="Preline"
+    <!-- ========== HEADER ========== -->
+    <header
+      class="fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-zinc-100 text-sm py-2.5 border-b border-gray-200 dark:bg-neutral-900 dark:border-neutral-800"
+    >
+      <nav class="px-4 sm:px-5.5 flex basis-full items-center w-full mx-auto">
+        <div class="w-full flex items-center gap-x-1.5">
+          <ul class="flex items-center gap-1.5">
+            <li
+              class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
             >
-              <svg
-                class="shrink-0 size-5"
-                width="36"
-                height="36"
-                viewBox="0 0 36 36"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <a
+                class="shrink-0 inline-flex justify-center items-center bg-indigo-700 size-8 rounded-md text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80"
+                routerLink="index.html"
+                aria-label="Preline"
               >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M18.0835 3.23358C9.88316 3.23358 3.23548 9.8771 3.23548 18.0723V35.5832H0.583496V18.0723C0.583496 8.41337 8.41851 0.583252 18.0835 0.583252C27.7485 0.583252 35.5835 8.41337 35.5835 18.0723C35.5835 27.7312 27.7485 35.5614 18.0835 35.5614H16.7357V32.911H18.0835C26.2838 32.911 32.9315 26.2675 32.9315 18.0723C32.9315 9.8771 26.2838 3.23358 18.0835 3.23358Z"
-                  class="fill-white"
-                  fill="currentColor"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M18.0833 8.62162C12.8852 8.62162 8.62666 12.9245 8.62666 18.2879V35.5833H5.97468V18.2879C5.97468 11.5105 11.3713 5.97129 18.0833 5.97129C24.7954 5.97129 30.192 11.5105 30.192 18.2879C30.192 25.0653 24.7954 30.6045 18.0833 30.6045H16.7355V27.9542H18.0833C23.2815 27.9542 27.54 23.6513 27.54 18.2879C27.54 12.9245 23.2815 8.62162 18.0833 8.62162Z"
-                  class="fill-white"
-                  fill="currentColor"
-                />
-                <path
-                  d="M24.8225 18.1012C24.8225 21.8208 21.8053 24.8361 18.0833 24.8361C14.3614 24.8361 11.3442 21.8208 11.3442 18.1012C11.3442 14.3815 14.3614 11.3662 18.0833 11.3662C21.8053 11.3662 24.8225 14.3815 24.8225 18.1012Z"
-                  class="fill-white"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-            <!-- Sidebar Toggle -->
-            <button
-              type="button"
-              class="p-1.5 size-7.5 inline-flex items-center gap-x-1 text-xs rounded-md border border-transparent text-gray-500 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:text-gray-800 dark:text-neutral-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="hs-pro-sidebar"
-              data-hs-overlay="#hs-pro-sidebar"
+                <svg
+                  class="shrink-0 size-5"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M18.0835 3.23358C9.88316 3.23358 3.23548 9.8771 3.23548 18.0723V35.5832H0.583496V18.0723C0.583496 8.41337 8.41851 0.583252 18.0835 0.583252C27.7485 0.583252 35.5835 8.41337 35.5835 18.0723C35.5835 27.7312 27.7485 35.5614 18.0835 35.5614H16.7357V32.911H18.0835C26.2838 32.911 32.9315 26.2675 32.9315 18.0723C32.9315 9.8771 26.2838 3.23358 18.0835 3.23358Z"
+                    class="fill-white"
+                    fill="currentColor"
+                  />
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M18.0833 8.62162C12.8852 8.62162 8.62666 12.9245 8.62666 18.2879V35.5833H5.97468V18.2879C5.97468 11.5105 11.3713 5.97129 18.0833 5.97129C24.7954 5.97129 30.192 11.5105 30.192 18.2879C30.192 25.0653 24.7954 30.6045 18.0833 30.6045H16.7355V27.9542H18.0833C23.2815 27.9542 27.54 23.6513 27.54 18.2879C27.54 12.9245 23.2815 8.62162 18.0833 8.62162Z"
+                    class="fill-white"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M24.8225 18.1012C24.8225 21.8208 21.8053 24.8361 18.0833 24.8361C14.3614 24.8361 11.3442 21.8208 11.3442 18.1012C11.3442 14.3815 14.3614 11.3662 18.0833 11.3662C21.8053 11.3662 24.8225 14.3815 24.8225 18.1012Z"
+                    class="fill-white"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+              <!-- Sidebar Toggle -->
+              <button
+                type="button"
+                class="p-1.5 size-7.5 inline-flex items-center gap-x-1 text-xs rounded-md border border-transparent text-gray-500 hover:text-gray-800 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:text-gray-800 dark:text-neutral-500 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="hs-pro-sidebar"
+                data-hs-overlay="#hs-pro-sidebar"
+              >
+                <svg
+                  class="shrink-0 size-3.5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="M15 3v18" />
+                  <path d="m10 15-3-3 3-3" />
+                </svg>
+                <span class="sr-only">Sidebar Toggle</span>
+              </button>
+              <!-- End Sidebar Toggle -->
+            </li>
+
+            <li
+              class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
             >
+              <!-- Project Dropdown -->
+              <div class="inline-flex justify-center w-full">
+                <div
+                  class="hs-dropdown relative [--strategy:absolute] [--placement:bottom-left] inline-flex"
+                >
+                  <!-- Project Button -->
+                  <button
+                    id="hs-pro-anpjdi"
+                    type="button"
+                    class="py-1 px-2 min-h-8 flex items-center gap-x-1 font-medium text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Dropdown"
+                  >
+                    <img
+                      class="shrink-0 size-6 rounded-full object-cover me-1"
+                      src="https://preline.co/assets/img/logo/hs.png"
+                      alt="Logo"
+                    />
+                    SoldOut
+                  </button>
+                  <!-- End Project Button -->
+                </div>
+              </div>
+              <!-- End Project Dropdown -->
+            </li>
+
+            <li
+              class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
+            ></li>
+          </ul>
+
+          <ul class="flex flex-row items-center gap-x-3 ms-auto">
+            <li
+              class="hidden lg:inline-flex items-center gap-1.5 relative text-gray-500 pe-3 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
+            >
+              <a
+                class="flex items-center justify-between gap-x-2 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
+                routerLink="#"
+              >
+                <i class="fa-solid fa-wallet"></i>
+
+                <span>Available To Withdraw</span>
+
+                <span
+                  class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
+                >
+                  $340.00
+                </span>
+              </a>
+
+              <a
+                class="flex items-center justify-between gap-x-2 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
+                routerLink="#"
+              >
+                <i class="fa-solid fa-hourglass-half"></i>
+                <span>Pending Fund</span>
+
+                <span
+                  class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
+                >
+                  $2340.00
+                </span>
+              </a>
+
+              <a
+                class="flex items-center gap-x-1.5 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
+                routerLink="#"
+              >
+                <i class="fa-solid fa-money-bills"></i> Payment
+              </a>
+            </li>
+
+            <li
+              class="inline-flex items-center gap-1.5 relative text-gray-500 pe-3 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
+            >
+              <div class="h-8">
+                <!-- Account Dropdown -->
+                <div
+                  class="hs-dropdown inline-flex [--strategy:absolute] [--auto-close:inside] [--placement:bottom-right] relative text-start"
+                >
+                  <button
+                    id="hs-dnad"
+                    type="button"
+                    class="p-0.5 inline-flex shrink-0 items-center gap-x-3 text-start rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-200 dark:text-neutral-500"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    aria-label="Dropdown"
+                  >
+                    <img
+                      class="shrink-0 size-7 rounded-full"
+                      [src]="
+                        current_user.user_profile ||
+                        'https://www.gravatar.com/avatar/?d=mp&s=256'
+                      "
+                      [alt]="current_user.user_username || 'User avatar'"
+                    />
+                  </button>
+
+                  <!-- Account Dropdown -->
+                  <div
+                    class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-60 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-white border border-gray-200 rounded-xl shadow-xl dark:bg-neutral-900 dark:border-neutral-700"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="hs-dnad"
+                  >
+                    <div class="py-2 px-3.5">
+                      <span
+                        class="font-medium text-gray-800 dark:text-neutral-300"
+                      >
+                        {{ current_user.user_first_name || "You" }}
+                        {{ current_user.user_last_name || "" }}
+                      </span>
+                      <p class="text-sm text-gray-500 dark:text-neutral-500">
+                        {{ current_user.user_email || "You" }}
+                      </p>
+                      <div class="mt-1.5">
+                        <a
+                          class="flex justify-center items-center gap-x-1.5 py-2 px-2.5 font-medium text-[13px] bg-black text-white rounded-lg focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-black"
+                          routerLink="#"
+                        >
+                          Upgrade to Pro
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      class="px-4 py-2 border-t border-gray-200 dark:border-neutral-800"
+                    >
+                      <!-- Switch/Toggle -->
+                      <div
+                        class="flex flex-wrap justify-between items-center gap-2"
+                      >
+                        <span
+                          class="flex-1 cursor-pointer text-sm text-gray-600 dark:text-neutral-400"
+                          >Theme</span
+                        >
+                        <div
+                          class="p-0.5 inline-flex cursor-pointer bg-gray-100 rounded-full dark:bg-neutral-800"
+                        >
+                          <button
+                            type="button"
+                            class="size-7 flex justify-center items-center bg-white shadow-sm text-gray-800 rounded-full dark:text-neutral-200 hs-auto-mode-active:bg-transparent hs-auto-mode-active:shadow-none hs-dark-mode-active:bg-transparent hs-dark-mode-active:shadow-none"
+                            data-hs-theme-click-value="default"
+                          >
+                            <svg
+                              class="shrink-0 size-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <circle cx="12" cy="12" r="4" />
+                              <path d="M12 3v1" />
+                              <path d="M12 20v1" />
+                              <path d="M3 12h1" />
+                              <path d="M20 12h1" />
+                              <path d="m18.364 5.636-.707.707" />
+                              <path d="m6.343 17.657-.707.707" />
+                              <path d="m5.636 5.636.707.707" />
+                              <path d="m17.657 17.657.707.707" />
+                            </svg>
+                            <span class="sr-only">Default (Light)</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="size-7 flex justify-center items-center text-gray-800 rounded-full dark:text-neutral-200 hs-dark-mode-active:bg-white hs-dark-mode-active:shadow-sm hs-dark-mode-active:text-neutral-800"
+                            data-hs-theme-click-value="dark"
+                          >
+                            <svg
+                              class="shrink-0 size-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+                            </svg>
+                            <span class="sr-only">Dark</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="size-7 flex justify-center items-center text-gray-800 rounded-full dark:text-neutral-200 hs-auto-light-mode-active:bg-white hs-auto-dark-mode-active:bg-red-800 hs-auto-mode-active:shadow-sm"
+                            data-hs-theme-click-value="auto"
+                          >
+                            <svg
+                              class="shrink-0 size-4"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <rect width="20" height="14" x="2" y="3" rx="2" />
+                              <line x1="8" x2="16" y1="21" y2="21" />
+                              <line x1="12" x2="12" y1="17" y2="21" />
+                            </svg>
+                            <span class="sr-only">Auto (System)</span>
+                          </button>
+                        </div>
+                      </div>
+                      <!-- End Switch/Toggle -->
+                    </div>
+                    <div
+                      class="p-1 border-t border-gray-200 dark:border-neutral-800"
+                    >
+                      <a
+                        class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        routerLink="#"
+                      >
+                        <svg
+                          class="shrink-0 mt-0.5 size-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        Profile
+                      </a>
+                      <a
+                        class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        routerLink="#"
+                      >
+                        <svg
+                          class="shrink-0 size-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path
+                            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+                          />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        Settings
+                      </a>
+                      <button
+                        (click)="logout()"
+                        class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
+                        routerLink="#"
+                      >
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Log out
+                      </button>
+                    </div>
+                  </div>
+                  <!-- End Account Dropdown -->
+                </div>
+                <!-- End Account Dropdown -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- ========== END HEADER ========== -->
+
+    <!-- ========== MAIN CONTENT ========== -->
+
+    <main
+      class="lg:hs-overlay-layout-open:ps-60 transition-all duration-300 lg:fixed lg:inset-0 pt-13 px-3 pb-3"
+    >
+      <!-- Sidebar -->
+      <div
+        id="hs-pro-sidebar"
+        class="mt-12 hs-overlay [--body-scroll:true] lg:[--overlay-backdrop:false] [--is-layout-affect:true] [--opened:lg] [--auto-close:lg] hs-overlay-open:translate-x-0 lg:hs-overlay-layout-open:translate-x-0 -translate-x-full transition-all duration-300 transform w-60 hidden fixed inset-y-0 z-60 start-0 bg-gray-100 lg:block lg:-translate-x-full lg:end-auto lg:bottom-0 dark:bg-neutral-900"
+        role="dialog"
+        tabindex="-1"
+        aria-label="Sidebar"
+      >
+        <div class="lg:pt-13 relative flex flex-col h-full max-h-full">
+          <!-- Body -->
+          <nav
+            class="p-3 size-full flex flex-col overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+          >
+            <div class="lg:hidden mb-2 flex items-center justify-between">
+              <!-- Sidebar Toggle -->
+              <button
+                type="button"
+                class="p-1.5 size-7.5 inline-flex items-center gap-x-1 text-xs rounded-md text-gray-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden dark:text-neutral-500"
+                aria-haspopup="dialog"
+                aria-expanded="false"
+                aria-controls="hs-pro-sidebar"
+                data-hs-overlay="#hs-pro-sidebar"
+              >
+                <span class="sr-only">Sidebar Toggle</span>
+              </button>
+              <!-- End Sidebar Toggle -->
+            </div>
+
+            <div class="pt-3 flex flex-col dark:border-neutral-700">
+              <span
+                class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
+              >
+                Home
+              </span>
+
+              <!-- List -->
+              <ul class="flex flex-col gap-y-1">
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="#"
+                  >
+                    <i class="fa-solid fa-chart-line"></i>Dashboard
+                  </a>
+                </li>
+              </ul>
+              <!-- End List -->
+            </div>
+
+            <div
+              class="pt-3 mt-3 flex flex-col border-t border-gray-200 first:border-t-0 first:pt-0 first:mt-0 dark:border-neutral-700"
+            >
+              <span
+                class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
+              >
+                Pages
+              </span>
+
+              <!-- List -->
+              <ul class="flex flex-col gap-y-1">
+                <li>
+                  <a
+                    routerLink="/add-product-page"
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                  >
+                    <i class="fa-solid fa-circle-plus"></i> Create Post
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="#"
+                  >
+                    <i class="fa-solid fa-comment"></i> Chats
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="/marketplace-page"
+                  >
+                    <i class="fa-solid fa-store"></i> Marketplace
+                  </a>
+                </li>
+              </ul>
+              <!-- End List -->
+            </div>
+
+            <div
+              class="pt-3 mt-3 flex flex-col border-t border-gray-200 first:border-t-0 first:pt-0 first:mt-0 dark:border-neutral-700"
+            >
+              <span
+                class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
+              >
+                Actions
+              </span>
+
+              <!-- List -->
+              <ul class="flex flex-col gap-y-1">
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="#"
+                  >
+                    <i class="fa-solid fa-gear"></i> Settings
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="/profile-page"
+                  >
+                    <i class="fa-solid fa-address-card"></i> Profile
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
+                    routerLink="/seller-store-page"
+                  >
+                    <i class="fa-solid fa-shop"></i> Store Front
+                  </a>
+                </li>
+              </ul>
+              <!-- End List -->
+            </div>
+          </nav>
+          <!-- End Body -->
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <!-- Content -->
+      <div
+        class="h-[calc(100dvh-62px)] lg:h-full overflow-hidden flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700"
+      >
+        <!-- Header -->
+        <div
+          class="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
+        >
+          <div>
+            <h1 class="font-medium text-lg text-gray-800 dark:text-neutral-200">
+              Dashboard
+            </h1>
+          </div>
+
+          <!-- Button Group -->
+          <div class="flex items-center gap-x-5">
+            <span class="text-sm text-gray-500 dark:text-neutral-500">
+              Sign up for Pro
+            </span>
+            <a
+              class="py-1.5 px-2 flex items-center justify-center gap-x-1 bg-indigo-500/10 border border-indigo-200 text-indigo-700 text-xs rounded-full py-1 hover:bg-indigo-500/20 focus:outline-hidden focus:bg-indigo-500/20 dark:text-indigo-400 dark:border-indigo-500/20"
+              routerLink="#"
+            >
+              Get 7 days free
               <svg
-                class="shrink-0 size-3.5"
+                class="shrink-0 size-4"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -81,1056 +549,593 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <rect width="18" height="18" x="3" y="3" rx="2" />
-                <path d="M15 3v18" />
-                <path d="m10 15-3-3 3-3" />
+                <path d="m9 18 6-6-6-6"></path>
               </svg>
-              <span class="sr-only">Sidebar Toggle</span>
-            </button>
-            <!-- End Sidebar Toggle -->
-          </li>
+            </a>
+          </div>
+          <!-- End Button Group -->
+        </div>
+        <!-- End Header -->
 
-          <li
-            class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
-          >
-            <!-- Project Dropdown -->
-            <div class="inline-flex justify-center w-full">
+        <!-- Body -->
+        <div
+          class="flex-1 flex flex-col overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+        >
+          <div class="flex-1 flex flex-col lg:flex-row">
+            <div
+              class="flex-1 min-w-0 flex flex-col border-e border-gray-200 dark:border-neutral-700"
+            >
+              <!-- Negative Value Chart in Card -->
               <div
-                class="hs-dropdown relative [--strategy:absolute] [--placement:bottom-left] inline-flex"
+                class="p-4 flex flex-col bg-white border-b border-gray-200 dark:border-neutral-700 dark:bg-neutral-800"
               >
-                <!-- Project Button -->
-                <button
-                  id="hs-pro-anpjdi"
-                  type="button"
-                  class="py-1 px-2 min-h-8 flex items-center gap-x-1 font-medium text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                  aria-haspopup="menu"
-                  aria-expanded="false"
-                  aria-label="Dropdown"
-                >
-                  <img
-                    class="shrink-0 size-6 rounded-full object-cover me-1"
-                    src="https://preline.co/assets/img/logo/hs.png"
-                    alt="Logo"
-                  />
-                  SoldOut
-                </button>
-                <!-- End Project Button -->
-              </div>
-            </div>
-            <!-- End Project Dropdown -->
-          </li>
-
-          <li
-            class="inline-flex items-center relative text-gray-200 pe-1.5 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
-          ></li>
-        </ul>
-
-        <ul class="flex flex-row items-center gap-x-3 ms-auto">
-          <li
-            class="hidden lg:inline-flex items-center gap-1.5 relative text-gray-500 pe-3 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
-          >
-            <a
-              class="flex items-center justify-between gap-x-2 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
-              routerLink="#"
-            >
-              <i class="fa-solid fa-wallet"></i>
-
-              <span>Available To Withdraw</span>
-
-              <span
-                class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400"
-              >
-                $340.00
-              </span>
-            </a>
-
-            <a
-              class="flex items-center justify-between gap-x-2 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
-              routerLink="#"
-            >
-              <i class="fa-solid fa-hourglass-half"></i>
-              <span>Pending Fund</span>
-
-              <span
-                class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400"
-              >
-                $2340.00
-              </span>
-            </a>
-
-            <a
-              class="flex items-center gap-x-1.5 py-1.5 px-2 text-sm text-gray-800 rounded-lg hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800 dark:text-neutral-200"
-              routerLink="#"
-            >
-              <i class="fa-solid fa-money-bills"></i> Payment
-            </a>
-          </li>
-
-          <li
-            class="inline-flex items-center gap-1.5 relative text-gray-500 pe-3 last:pe-0 last:after:hidden after:absolute after:top-1/2 after:end-0 after:inline-block after:w-px after:h-3.5 after:bg-gray-300 after:rounded-full after:-translate-y-1/2 after:rotate-12 dark:text-neutral-200 dark:after:bg-neutral-700"
-          >
-            <div class="h-8">
-              <!-- Account Dropdown -->
-              <div
-                class="hs-dropdown inline-flex [--strategy:absolute] [--auto-close:inside] [--placement:bottom-right] relative text-start"
-              >
-                <button
-                  id="hs-dnad"
-                  type="button"
-                  class="p-0.5 inline-flex shrink-0 items-center gap-x-3 text-start rounded-full hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-200 dark:text-neutral-500"
-                  aria-haspopup="menu"
-                  aria-expanded="false"
-                  aria-label="Dropdown"
-                >
-                  <img
-                    class="shrink-0 size-7 rounded-full"
-                    [src]="
-                      current_user.user_profile ||
-                      'https://www.gravatar.com/avatar/?d=mp&s=256'
-                    "
-                    [alt]="current_user.user_username || 'User avatar'"
-                  />
-                </button>
-
-                <!-- Account Dropdown -->
-                <div
-                  class="hs-dropdown-menu hs-dropdown-open:opacity-100 w-60 transition-[opacity,margin] duration opacity-0 hidden z-20 bg-white border border-gray-200 rounded-xl shadow-xl dark:bg-neutral-900 dark:border-neutral-700"
-                  role="menu"
-                  aria-orientation="vertical"
-                  aria-labelledby="hs-dnad"
-                >
-                  <div class="py-2 px-3.5">
-                    <span
-                      class="font-medium text-gray-800 dark:text-neutral-300"
-                    >
-                      {{ current_user.user_first_name || "You" }}
-                      {{ current_user.user_last_name || "" }}
-                    </span>
-                    <p class="text-sm text-gray-500 dark:text-neutral-500">
-                      {{ current_user.user_email || "You" }}
-                    </p>
-                    <div class="mt-1.5">
-                      <a
-                        class="flex justify-center items-center gap-x-1.5 py-2 px-2.5 font-medium text-[13px] bg-black text-white rounded-lg focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none dark:bg-white dark:text-black"
-                        routerLink="#"
-                      >
-                        Upgrade to Pro
-                      </a>
-                    </div>
-                  </div>
-                  <div
-                    class="px-4 py-2 border-t border-gray-200 dark:border-neutral-800"
-                  >
-                    <!-- Switch/Toggle -->
-                    <div
-                      class="flex flex-wrap justify-between items-center gap-2"
-                    >
+                <!-- Grid -->
+                <div class="mt-2 grid grid-cols-2 gap-2">
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
                       <span
-                        class="flex-1 cursor-pointer text-sm text-gray-600 dark:text-neutral-400"
-                        >Theme</span
+                        class="block font-medium text-xl text-gray-800 dark:text-neutral-200"
                       >
-                      <div
-                        class="p-0.5 inline-flex cursor-pointer bg-gray-100 rounded-full dark:bg-neutral-800"
+                        22,900
+                      </span>
+                      <span
+                        class="flex justify-center items-center gap-x-1 text-sm text-green-600 dark:text-green-500"
                       >
-                        <button
-                          type="button"
-                          class="size-7 flex justify-center items-center bg-white shadow-sm text-gray-800 rounded-full dark:text-neutral-200 hs-auto-mode-active:bg-transparent hs-auto-mode-active:shadow-none hs-dark-mode-active:bg-transparent hs-dark-mode-active:shadow-none"
-                          data-hs-theme-click-value="default"
+                        <svg
+                          class="shrink-0 size-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
                         >
-                          <svg
-                            class="shrink-0 size-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M12 3v1" />
-                            <path d="M12 20v1" />
-                            <path d="M3 12h1" />
-                            <path d="M20 12h1" />
-                            <path d="m18.364 5.636-.707.707" />
-                            <path d="m6.343 17.657-.707.707" />
-                            <path d="m5.636 5.636.707.707" />
-                            <path d="m17.657 17.657.707.707" />
-                          </svg>
-                          <span class="sr-only">Default (Light)</span>
-                        </button>
-                        <button
-                          type="button"
-                          class="size-7 flex justify-center items-center text-gray-800 rounded-full dark:text-neutral-200 hs-dark-mode-active:bg-white hs-dark-mode-active:shadow-sm hs-dark-mode-active:text-neutral-800"
-                          data-hs-theme-click-value="dark"
+                          <path d="m5 12 7-7 7 7"></path>
+                          <path d="M12 19V5"></path>
+                        </svg>
+                        0.2%
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="shrink-0 w-3 h-1.5 inline-block bg-indigo-700 rounded-xs dark:bg-indigo-500"
+                      ></span>
+                      <div class="grow">
+                        <span
+                          class="block text-sm text-gray-500 dark:text-neutral-500"
                         >
-                          <svg
-                            class="shrink-0 size-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-                          </svg>
-                          <span class="sr-only">Dark</span>
-                        </button>
-                        <button
-                          type="button"
-                          class="size-7 flex justify-center items-center text-gray-800 rounded-full dark:text-neutral-200 hs-auto-light-mode-active:bg-white hs-auto-dark-mode-active:bg-red-800 hs-auto-mode-active:shadow-sm"
-                          data-hs-theme-click-value="auto"
-                        >
-                          <svg
-                            class="shrink-0 size-4"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <rect width="20" height="14" x="2" y="3" rx="2" />
-                            <line x1="8" x2="16" y1="21" y2="21" />
-                            <line x1="12" x2="12" y1="17" y2="21" />
-                          </svg>
-                          <span class="sr-only">Auto (System)</span>
-                        </button>
+                          Free
+                        </span>
                       </div>
                     </div>
-                    <!-- End Switch/Toggle -->
                   </div>
-                  <div
-                    class="p-1 border-t border-gray-200 dark:border-neutral-800"
-                  >
-                    <a
-                      class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                      routerLink="#"
-                    >
-                      <svg
-                        class="shrink-0 mt-0.5 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                  <!-- End Col -->
+
+                  <div class="flex flex-col items-end">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="flex justify-center items-center gap-x-1 text-sm text-green-600 dark:text-green-500"
                       >
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
-                      Profile
-                    </a>
-                    <a
-                      class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                      routerLink="#"
-                    >
-                      <svg
-                        class="shrink-0 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        <svg
+                          class="shrink-0 size-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path d="m5 12 7-7 7 7"></path>
+                          <path d="M12 19V5"></path>
+                        </svg>
+                        14.5%
+                      </span>
+                      <span
+                        class="block font-medium text-xl text-gray-800 dark:text-neutral-200"
                       >
-                        <path
-                          d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                        />
-                        <circle cx="12" cy="12" r="3" />
-                      </svg>
-                      Settings
-                    </a>
+                        24,300
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="shrink-0 w-3 h-1.5 inline-block bg-[linear-gradient(135deg,var(--color-violet-400)_25%,transparent_25%,transparent_50%,var(--color-violet-400)_50%,var(--color-violet-400)_75%,transparent_75%,transparent)] bg-[length:4px_4px] rounded-xs"
+                      ></span>
+                      <div class="grow">
+                        <span
+                          class="block text-sm text-gray-500 dark:text-neutral-500"
+                        >
+                          Paid
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Col -->
+                </div>
+                <!-- End Grid -->
+
+                <!-- Apex Line Chart -->
+                <div id="hs-pro-anvpch" class="min-h-[323px]"></div>
+              </div>
+              <!-- End Negative Value Chart in Card -->
+
+              <!-- Featured News Blog -->
+              <div class="p-4 flex flex-col bg-white dark:bg-neutral-800">
+                <!-- Header -->
+                <div
+                  class="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700"
+                >
+                  <!-- TITLE -->
+                  <h2 class="font-medium text-gray-800 dark:text-neutral-200">
+                    Top posts
+                  </h2>
+
+                  <!-- ACTIONS -->
+                  <div class="flex items-center gap-2">
+                    <!-- RANK BY (hardcoded for now) -->
+                    <div
+                      class="flex items-center gap-1 text-[13px] text-gray-600"
+                    >
+                      <i class="fa-solid fa-chart-simple"></i>
+                      <span>Rank By:</span>
+                    </div>
+
+                    <select
+                      class="text-[13px] px-2 py-1 rounded-md border border-gray-200 text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200"
+                    >
+                      <option selected>Views</option>
+                      <option>Likes</option>
+                      <option>Comments</option>
+                      <option>Price</option>
+                      <option>Stock</option>
+                    </select>
+                    <div class="relative">
+                      <i
+                        class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"
+                      ></i>
+                      <input
+                        type="text"
+                        placeholder="Search for posts..."
+                        class="pl-7 pr-2 py-1.5 w-36 md:w-64 text-[13px] rounded-md border border-gray-200 text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200"
+                      />
+                    </div>
+
+                    <!-- REFRESH -->
                     <button
-                      (click)="logout()"
-                      class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                      routerLink="#"
+                      type="button"
+                      (click)="refresh()"
+                      class="py-1.5 px-2.5 flex items-center justify-center gap-x-1.5 border border-gray-200 text-gray-800 text-[13px] rounded-lg hover:bg-indigo-50 hover:border-indigo-100 hover:text-indigo-700 dark:text-neutral-200 dark:border-neutral-700 dark:hover:bg-indigo-500/20 dark:hover:border-indigo-500/20"
                     >
-                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                      Log out
+                      <i class="fa-solid fa-rotate-right text-[13px]"></i>
+                      Refresh
                     </button>
                   </div>
                 </div>
-                <!-- End Account Dropdown -->
-              </div>
-              <!-- End Account Dropdown -->
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- ========== END HEADER ========== -->
 
-  <!-- ========== MAIN CONTENT ========== -->
+                <!-- End Header -->
 
-  <main
-    class="lg:hs-overlay-layout-open:ps-60 transition-all duration-300 lg:fixed lg:inset-0 pt-13 px-3 pb-3"
-  >
-    <!-- Sidebar -->
-    <div
-      id="hs-pro-sidebar"
-      class="mt-12 hs-overlay [--body-scroll:true] lg:[--overlay-backdrop:false] [--is-layout-affect:true] [--opened:lg] [--auto-close:lg] hs-overlay-open:translate-x-0 lg:hs-overlay-layout-open:translate-x-0 -translate-x-full transition-all duration-300 transform w-60 hidden fixed inset-y-0 z-60 start-0 bg-gray-100 lg:block lg:-translate-x-full lg:end-auto lg:bottom-0 dark:bg-neutral-900"
-      role="dialog"
-      tabindex="-1"
-      aria-label="Sidebar"
-    >
-      <div class="lg:pt-13 relative flex flex-col h-full max-h-full">
-        <!-- Body -->
-        <nav
-          class="p-3 size-full flex flex-col overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-200 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-        >
-          <div class="lg:hidden mb-2 flex items-center justify-between">
-            <!-- Sidebar Toggle -->
-            <button
-              type="button"
-              class="p-1.5 size-7.5 inline-flex items-center gap-x-1 text-xs rounded-md text-gray-500 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden dark:text-neutral-500"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="hs-pro-sidebar"
-              data-hs-overlay="#hs-pro-sidebar"
-            >
-              <span class="sr-only">Sidebar Toggle</span>
-            </button>
-            <!-- End Sidebar Toggle -->
-          </div>
-
-          <div class="pt-3 flex flex-col dark:border-neutral-700">
-            <span
-              class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
-            >
-              Home
-            </span>
-
-            <!-- List -->
-            <ul class="flex flex-col gap-y-1">
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="#"
-                >
-                  <i class="fa-solid fa-chart-line"></i>Dashboard
-                </a>
-              </li>
-            </ul>
-            <!-- End List -->
-          </div>
-
-          <div
-            class="pt-3 mt-3 flex flex-col border-t border-gray-200 first:border-t-0 first:pt-0 first:mt-0 dark:border-neutral-700"
-          >
-            <span
-              class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
-            >
-              Pages
-            </span>
-
-            <!-- List -->
-            <ul class="flex flex-col gap-y-1">
-              <li>
-                <a
-                  routerLink="/add-product-page"
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                >
-                  <i class="fa-solid fa-circle-plus"></i> Create Post
-                </a>
-              </li>
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="#"
-                >
-                  <i class="fa-solid fa-comment"></i> Chats
-                </a>
-              </li>
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="/marketplace-page"
-                >
-                  <i class="fa-solid fa-store"></i> Marketplace
-                </a>
-              </li>
-            </ul>
-            <!-- End List -->
-          </div>
-
-          <div
-            class="pt-3 mt-3 flex flex-col border-t border-gray-200 first:border-t-0 first:pt-0 first:mt-0 dark:border-neutral-700"
-          >
-            <span
-              class="block ps-2.5 mb-2 font-medium text-xs uppercase text-gray-800 dark:text-neutral-500"
-            >
-              Actions
-            </span>
-
-            <!-- List -->
-            <ul class="flex flex-col gap-y-1">
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="#"
-                >
-                  <i class="fa-solid fa-gear"></i> Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="/profile-page"
-                >
-                  <i class="fa-solid fa-address-card"></i> Profile
-                </a>
-              </li>
-              <li>
-                <a
-                  class="w-full flex items-center gap-x-2 py-2 px-2.5 text-sm text-gray-500 rounded-lg hover:bg-gray-200 hover:text-gray-800 focus:outline-hidden focus:bg-gray-200 focus:text-gray-800 dark:hover:bg-neutral-800 dark:hover:text-neutral-200 dark:focus:bg-neutral-800 dark:focus:text-neutral-500 dark:text-neutral-500"
-                  routerLink="/seller-store-page"
-                >
-                  <i class="fa-solid fa-shop"></i> Store Front
-                </a>
-              </li>
-            </ul>
-            <!-- End List -->
-          </div>
-        </nav>
-        <!-- End Body -->
-      </div>
-    </div>
-    <!-- End Sidebar -->
-
-    <!-- Content -->
-    <div
-      class="h-[calc(100dvh-62px)] lg:h-full overflow-hidden flex flex-col bg-white border border-gray-200 shadow-xs rounded-lg dark:bg-neutral-800 dark:border-neutral-700"
-    >
-      <!-- Header -->
-      <div
-        class="py-3 px-4 flex flex-wrap justify-between items-center gap-2 bg-white border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
-      >
-        <div>
-          <h1 class="font-medium text-lg text-gray-800 dark:text-neutral-200">
-            Dashboard
-          </h1>
-        </div>
-
-        <!-- Button Group -->
-        <div class="flex items-center gap-x-5">
-          <span class="text-sm text-gray-500 dark:text-neutral-500">
-            Sign up for Pro
-          </span>
-          <a
-            class="py-1.5 px-2 flex items-center justify-center gap-x-1 bg-indigo-500/10 border border-indigo-200 text-indigo-700 text-xs rounded-full py-1 hover:bg-indigo-500/20 focus:outline-hidden focus:bg-indigo-500/20 dark:text-indigo-400 dark:border-indigo-500/20"
-            routerLink="#"
-          >
-            Get 7 days free
-            <svg
-              class="shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="m9 18 6-6-6-6"></path>
-            </svg>
-          </a>
-        </div>
-        <!-- End Button Group -->
-      </div>
-      <!-- End Header -->
-
-      <!-- Body -->
-      <div
-        class="flex-1 flex flex-col overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-      >
-        <div class="flex-1 flex flex-col lg:flex-row">
-          <div
-            class="flex-1 min-w-0 flex flex-col border-e border-gray-200 dark:border-neutral-700"
-          >
-            <!-- Negative Value Chart in Card -->
-            <div
-              class="p-4 flex flex-col bg-white border-b border-gray-200 dark:border-neutral-700 dark:bg-neutral-800"
-            >
-              <!-- Grid -->
-              <div class="mt-2 grid grid-cols-2 gap-2">
-                <div class="flex flex-col">
-                  <div class="flex items-center gap-2">
-                    <span
-                      class="block font-medium text-xl text-gray-800 dark:text-neutral-200"
-                    >
-                      22,900
-                    </span>
-                    <span
-                      class="flex justify-center items-center gap-x-1 text-sm text-green-600 dark:text-green-500"
-                    >
-                      <svg
-                        class="shrink-0 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="m5 12 7-7 7 7"></path>
-                        <path d="M12 19V5"></path>
-                      </svg>
-                      0.2%
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    <span
-                      class="shrink-0 w-3 h-1.5 inline-block bg-indigo-700 rounded-xs dark:bg-indigo-500"
-                    ></span>
-                    <div class="grow">
-                      <span
-                        class="block text-sm text-gray-500 dark:text-neutral-500"
-                      >
-                        Free
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="flex flex-col items-end">
-                  <div class="flex items-center gap-2">
-                    <span
-                      class="flex justify-center items-center gap-x-1 text-sm text-green-600 dark:text-green-500"
-                    >
-                      <svg
-                        class="shrink-0 size-4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path d="m5 12 7-7 7 7"></path>
-                        <path d="M12 19V5"></path>
-                      </svg>
-                      14.5%
-                    </span>
-                    <span
-                      class="block font-medium text-xl text-gray-800 dark:text-neutral-200"
-                    >
-                      24,300
-                    </span>
-                  </div>
-                  <div class="flex items-center gap-1.5">
-                    <span
-                      class="shrink-0 w-3 h-1.5 inline-block bg-[linear-gradient(135deg,var(--color-violet-400)_25%,transparent_25%,transparent_50%,var(--color-violet-400)_50%,var(--color-violet-400)_75%,transparent_75%,transparent)] bg-[length:4px_4px] rounded-xs"
-                    ></span>
-                    <div class="grow">
-                      <span
-                        class="block text-sm text-gray-500 dark:text-neutral-500"
-                      >
-                        Paid
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Grid -->
-
-              <!-- Apex Line Chart -->
-              <div id="hs-pro-anvpch" class="min-h-[323px]"></div>
-            </div>
-            <!-- End Negative Value Chart in Card -->
-
-            <!-- Featured News Blog -->
-            <div class="p-4 flex flex-col bg-white dark:bg-neutral-800">
-              <!-- Header -->
-              <div
-                class="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700"
-              >
-                <!-- TITLE -->
-                <h2 class="font-medium text-gray-800 dark:text-neutral-200">
-                  Top posts
-                </h2>
-
-                <!-- ACTIONS -->
-                <div class="flex items-center gap-2">
-                  <!-- RANK BY (hardcoded for now) -->
-                  <div
-                    class="flex items-center gap-1 text-[13px] text-gray-600"
-                  >
-                    <i class="fa-solid fa-chart-simple"></i>
-                    <span>Rank By:</span>
-                  </div>
-
-                  <select
-                    class="text-[13px] px-2 py-1 rounded-md border border-gray-200 text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200"
-                  >
-                    <option selected>Views</option>
-                    <option>Likes</option>
-                    <option>Comments</option>
-                    <option>Price</option>
-                    <option>Stock</option>
-                  </select>
-                  <div class="relative">
-                    <i
-                      class="fa-solid fa-magnifying-glass absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"
-                    ></i>
-                    <input
-                      type="text"
-                      placeholder="Search for posts..."
-                      class="pl-7 pr-2 py-1.5 w-36 md:w-64 text-[13px] rounded-md border border-gray-200 text-gray-700 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-500 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200"
-                    />
-                  </div>
-
-                  <!-- REFRESH -->
-                  <button
-                    type="button"
-                    (click)="refresh()"
-                    class="py-1.5 px-2.5 flex items-center justify-center gap-x-1.5 border border-gray-200 text-gray-800 text-[13px] rounded-lg hover:bg-indigo-50 hover:border-indigo-100 hover:text-indigo-700 dark:text-neutral-200 dark:border-neutral-700 dark:hover:bg-indigo-500/20 dark:hover:border-indigo-500/20"
-                  >
-                    <i class="fa-solid fa-rotate-right text-[13px]"></i>
-                    Refresh
-                  </button>
-                </div>
-              </div>
-
-              <!-- End Header -->
-
-              <!-- TOP PRODUCTS -->
-              <div class="space-y-6">
-                @for (item of top_products; track item._id; let i = $index) {
-
-                <!-- ONE PRODUCT CARD -->
-                <div
-                  class="flex flex-col bg-white pb-4 last:pb-0 last:border-b-0 border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
-                >
-                  <div class="pt-4 flex flex-col md:flex-row gap-5">
-                    <!-- PRODUCT IMAGE -->
+                <!-- TOP PRODUCTS -->
+                <div class="space-y-6">
+                  @for (item of top_products; track item._id; let i = $index) {
+                    <!-- ONE PRODUCT CARD -->
                     <div
-                      class="relative w-full md:max-w-80 h-[380px] sm:h-[420px] md:h-[320px] bg-gray-100 rounded-lg dark:bg-neutral-700 overflow-hidden"
+                      class="flex flex-col bg-white pb-4 last:pb-0 last:border-b-0 border-b border-gray-200 dark:bg-neutral-800 dark:border-neutral-700"
                     >
-                      <img
-                        class="absolute inset-0 w-full h-full object-cover object-center rounded-lg"
-                        [src]="item.product_image?.[0]"
-                        [alt]="item.product_title"
-                      />
-                    </div>
-
-                    <!-- CONTENT -->
-                    <div class="grow">
-                      <div class="h-full flex flex-col">
-                        <p class="text-sm text-gray-500 dark:text-neutral-500">
-                          Product ranking:
-                        </p>
-
-                        <h3
-                          class="font-medium text-gray-800 dark:text-neutral-200 flex items-center gap-2"
-                        >
-                          @if (i === 0) {
-                          <i class="fa-solid fa-crown"></i>
-                          } @else if (i === 1) {
-                          <i class="fa-solid fa-medal"></i>
-                          } @else if (i === 2) {
-                          <i class="fa-solid fa-award"></i>
-                          } #{{ i + 1 }} {{ item.product_title }}
-                        </h3>
-
-                        <!-- GRID -->
+                      <div class="pt-4 flex flex-col md:flex-row gap-5">
+                        <!-- PRODUCT IMAGE -->
                         <div
-                          class="mt-4 grid grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2"
+                          class="relative w-full md:max-w-80 h-[380px] sm:h-[420px] md:h-[320px] bg-gray-100 rounded-lg dark:bg-neutral-700 overflow-hidden"
                         >
-                          <!-- CATEGORY -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500 flex items-center gap-1"
-                            >
-                              Category:
-                            </span>
+                          <img
+                            class="absolute inset-0 w-full h-full object-cover object-center rounded-lg"
+                            [src]="item.product_image?.[0]"
+                            [alt]="item.product_title"
+                          />
+                        </div>
 
-                            <span
-                              class="font-medium text-sm capitalize flex items-center gap-2 text-gray-800 dark:text-neutral-200"
+                        <!-- CONTENT -->
+                        <div class="grow">
+                          <div class="h-full flex flex-col">
+                            <p
+                              class="text-sm text-gray-500 dark:text-neutral-500"
                             >
-                              @if (item.product_category === 'clothing') {
-                              <i class="fa-solid fa-shirt"></i>
-                              Clothing } @else if (item.product_category ===
-                              'digital') {
-                              <i class="fa-solid fa-file-lines"></i>
-                              Digital } @else if (item.product_category ===
-                              'electronic') {
-                              <i class="fa-solid fa-microchip"></i>
-                              Electronic } @else {
-                              <i class="fa-solid fa-box"></i>
-                              Other }
-                            </span>
-                          </div>
+                              Product ranking:
+                            </p>
 
-                          <!-- TREND -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500"
-                            >
-                              Trend:
-                            </span>
-
-                            <div
-                              class="flex items-center gap-2 text-sm font-medium"
+                            <h3
+                              class="font-medium text-gray-800 dark:text-neutral-200 flex items-center gap-2"
                             >
                               @if (i === 0) {
-                              <i
-                                class="fa-solid fa-arrow-up text-green-600"
-                              ></i>
-                              <span class="text-green-600">Trending</span>
-                              } @else if (i < 3) {
-                              <i
-                                class="fa-solid fa-arrow-right text-gray-500"
-                              ></i>
-                              <span class="text-gray-600">Stable</span>
-                              } @else {
-                              <i
-                                class="fa-solid fa-arrow-down text-red-600"
-                              ></i>
-                              <span class="text-red-600">Cooling</span>
+                                <i class="fa-solid fa-crown"></i>
+                              } @else if (i === 1) {
+                                <i class="fa-solid fa-medal"></i>
+                              } @else if (i === 2) {
+                                <i class="fa-solid fa-award"></i>
                               }
+                              #{{ i + 1 }} {{ item.product_title }}
+                            </h3>
+
+                            <!-- GRID -->
+                            <div
+                              class="mt-4 grid grid-cols-2 xl:grid-cols-3 gap-y-4 gap-x-2"
+                            >
+                              <!-- CATEGORY -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500 flex items-center gap-1"
+                                >
+                                  Category:
+                                </span>
+
+                                <span
+                                  class="font-medium text-sm capitalize flex items-center gap-2 text-gray-800 dark:text-neutral-200"
+                                >
+                                  @if (item.product_category === "clothing") {
+                                    <i class="fa-solid fa-shirt"></i>
+                                    Clothing
+                                  } @else if (
+                                    item.product_category === "digital"
+                                  ) {
+                                    <i class="fa-solid fa-file-lines"></i>
+                                    Digital
+                                  } @else if (
+                                    item.product_category === "electronic"
+                                  ) {
+                                    <i class="fa-solid fa-microchip"></i>
+                                    Electronic
+                                  } @else {
+                                    <i class="fa-solid fa-box"></i>
+                                    Other
+                                  }
+                                </span>
+                              </div>
+
+                              <!-- TREND -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500"
+                                >
+                                  Trend:
+                                </span>
+
+                                <div
+                                  class="flex items-center gap-2 text-sm font-medium"
+                                >
+                                  @if (i === 0) {
+                                    <i
+                                      class="fa-solid fa-arrow-up text-green-600"
+                                    ></i>
+                                    <span class="text-green-600">Trending</span>
+                                  } @else if (i < 3) {
+                                    <i
+                                      class="fa-solid fa-arrow-right text-gray-500"
+                                    ></i>
+                                    <span class="text-gray-600">Stable</span>
+                                  } @else {
+                                    <i
+                                      class="fa-solid fa-arrow-down text-red-600"
+                                    ></i>
+                                    <span class="text-red-600">Cooling</span>
+                                  }
+                                </div>
+                              </div>
+
+                              <!-- COMMENTS -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500"
+                                >
+                                  Comments:
+                                </span>
+                                <div class="flex items-center gap-x-2 mb-4">
+                                  <i
+                                    class="fa-regular fa-comment text-gray-500"
+                                  ></i>
+
+                                  <span class="font-medium text-sm">
+                                    {{ item.comment_count }}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <!-- STOCK STATUS -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500 flex items-center gap-1"
+                                >
+                                  Stock:
+                                </span>
+                                <span
+                                  class="font-medium text-sm flex items-center gap-2"
+                                  [ngClass]="{
+                                    'text-green-600': item.product_quantity > 5,
+                                    'text-orange-500':
+                                      item.product_quantity > 0 &&
+                                      item.product_quantity <= 5,
+                                    'text-red-600': item.product_quantity === 0,
+                                  }"
+                                >
+                                  @if (item.product_quantity === 0) {
+                                    <i class="fa-solid fa-circle-xmark"></i>
+                                    Out of stock
+                                  } @else if (item.product_quantity <= 5) {
+                                    <i
+                                      class="fa-solid fa-triangle-exclamation"
+                                    ></i>
+                                    Low stock ({{ item.product_quantity }})
+                                  } @else {
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    In stock
+                                  }
+                                </span>
+                              </div>
+
+                              <!-- VIEWS -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500"
+                                >
+                                  Views:
+                                </span>
+
+                                <div class="flex items-center gap-x-2 mb-4">
+                                  @if (item.product_view_count === 0) {
+                                    <span class="font-medium text-sm">
+                                      <i class="fa-regular fa-eye"></i>
+                                      0
+                                    </span>
+                                  } @else {
+                                    <span class="font-medium text-sm">
+                                      <i class="fa-regular fa-eye"></i>
+                                      {{ item.product_view_count }}
+                                    </span>
+                                  }
+                                </div>
+                              </div>
+
+                              <!-- LIKES -->
+                              <div class="flex flex-col gap-y-1">
+                                <span
+                                  class="text-[13px] text-gray-500 dark:text-neutral-500"
+                                >
+                                  Likes:
+                                </span>
+
+                                <div class="flex items-center gap-x-2 mb-4">
+                                  <i
+                                    class="fa-regular fa-heart text-gray-500"
+                                  ></i>
+                                  <span class="font-medium text-sm">
+                                    {{ item.like_count }}
+                                  </span>
+                                </div>
+                              </div>
                             </div>
-                          </div>
 
-                          <!-- COMMENTS -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500"
+                            <!-- FOOTER -->
+                            <div
+                              class="mt-4 xl:mt-auto pt-4 border-t border-gray-200 dark:border-neutral-700"
                             >
-                              Comments:
-                            </span>
+                              <div
+                                class="flex flex-wrap justify-between items-center gap-1.5"
+                              >
+                                <!-- PRIMARY CTA -->
+                                <buitton
+                                  (click)="viewDetail(item)"
+                                  class="cursor-pointer inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition"
+                                  [routerLink]="['/product', item._id]"
+                                >
+                                  View Post
+                                  <i class="fa-solid fa-arrow-right"></i>
+                                </buitton>
 
-                            <div class="flex items-center gap-x-2 mb-4">
-                              <i
-                                class="fa-regular fa-comment text-gray-500"
-                              ></i>
+                                <div class="flex items-center gap-1">
+                                  <!-- EDIT -->
+                                  <button
+                                    type="button"
+                                    class="inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition"
+                                    [routerLink]="[
+                                      '/product-edit-page',
+                                      item._id,
+                                    ]"
+                                  >
+                                    Edit Post
+                                    <i class="fa-solid fa-pen"></i>
+                                  </button>
 
-                              @if (seller_stats?.total_comments === 0) {
-                              <span class="font-medium text-sm">0</span>
-                              } @else {
-                              <span class="font-medium text-sm">
-                                {{ seller_stats?.total_comments }}
-                              </span>
-                              }
-                            </div>
-                          </div>
-
-                          <!-- STOCK STATUS -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500 flex items-center gap-1"
-                            >
-                              Stock:
-                            </span>
-                            <span
-                              class="font-medium text-sm flex items-center gap-2"
-                              [ngClass]="{
-                                'text-green-600': item.product_quantity > 5,
-                                'text-orange-500':
-                                  item.product_quantity > 0 &&
-                                  item.product_quantity <= 5,
-                                'text-red-600': item.product_quantity === 0
-                              }"
-                            >
-                              @if (item.product_quantity === 0) {
-                              <i class="fa-solid fa-circle-xmark"></i>
-                              Out of stock } @else if (item.product_quantity <=
-                              5) {
-                              <i class="fa-solid fa-triangle-exclamation"></i>
-                              Low stock ({{ item.product_quantity }}) } @else {
-                              <i class="fa-solid fa-circle-check"></i>
-                              In stock }
-                            </span>
-                          </div>
-
-                          <!-- VIEWS -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500"
-                            >
-                              Views:
-                            </span>
-
-                            <div class="flex items-center gap-x-2 mb-4">
-                              @if (item.product_view_count === 0) {
-                              <span class="font-medium text-sm">
-                                <i class="fa-regular fa-eye"></i>
-                                0
-                              </span>
-                              } @else {
-                              <span class="font-medium text-sm">
-                                <i class="fa-regular fa-eye"></i>
-                                {{ item.product_view_count }}
-                              </span>
-                              }
-                            </div>
-                          </div>
-
-                          <!-- LIKES -->
-                          <div class="flex flex-col gap-y-1">
-                            <span
-                              class="text-[13px] text-gray-500 dark:text-neutral-500"
-                            >
-                              Likes:
-                            </span>
-
-                            <div class="flex items-center gap-x-2 mb-4">
-                              <i class="fa-regular fa-heart text-gray-500"></i>
-
-                              @if (seller_stats?.total_likes === 0) {
-                              <span class="font-medium text-sm">0</span>
-                              } @else {
-                              <span class="font-medium text-sm">
-                                {{ seller_stats?.total_likes }}
-                              </span>
-                              }
+                                  <!-- DELETE -->
+                                  <button
+                                    (click)="delete_product(item)"
+                                    type="button"
+                                    class="inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition"
+                                  >
+                                    Remove
+                                    <i class="fa-solid fa-trash"></i>
+                                  </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
+                      </div>
+                    </div>
+                    <!-- END PRODUCT CARD -->
+                  }
+                </div>
+              </div>
+              <!-- End Featured News Blog -->
+            </div>
+            <!-- End Col -->
 
-                        <!-- FOOTER -->
-                        <div
-                          class="mt-4 xl:mt-auto pt-4 border-t border-gray-200 dark:border-neutral-700"
+            <div class="flex-shrink-0">
+              <div class="lg:w-80">
+                <!-- Card Group -->
+                <div class="relative z-1 bg-white dark:bg-neutral-800">
+                  <!-- Heading -->
+                  <div class="p-4 pb-0">
+                    <div
+                      class="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700"
+                    >
+                      <h2
+                        class="font-medium text-sm text-gray-800 dark:text-neutral-200"
+                      >
+                        Author
+                      </h2>
+
+                      <!-- Avatar Media -->
+                      {{ current_user.user_username || "You" }}
+                      <!-- End Avatar Media -->
+                    </div>
+                  </div>
+
+                  <!-- End Heading -->
+
+                  <!-- Body -->
+                  <div class="p-4">
+                    <!-- Profile -->
+                    <div class="flex items-center gap-x-3">
+                      <span
+                        class="relative size-14 shrink-0 bg-gray-100 rounded-full dark:bg-neutral-700"
+                      >
+                        <img
+                          class="absolute inset-0 size-full object-cover rounded-full"
+                          [src]="
+                            current_user.user_profile ||
+                            'https://www.gravatar.com/avatar/?d=mp&s=256'
+                          "
+                          [alt]="current_user.user_username || 'User avatar'"
+                        />
+                      </span>
+                      <div class="grow">
+                        <h3
+                          class="font-medium text-lg text-gray-800 dark:text-neutral-200"
                         >
-                          <div
-                            class="flex flex-wrap justify-between items-center gap-1.5"
+                          {{ current_user.user_username || "You" }}
+                        </h3>
+                      </div>
+                    </div>
+                    <!-- End Profile -->
+
+                    <!-- Grid List -->
+                    <div
+                      class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
+                    >
+                      <!-- Item -->
+                      <div class="flex flex-col gap-y-1">
+                        <span
+                          class="text-[13px] text-gray-500 dark:text-neutral-500"
+                        >
+                          Published posts:
+                        </span>
+
+                        <div class="flex items-center gap-x-1.5">
+                          <i class="fa-solid fa-fire"></i>
+
+                          <span
+                            class="font-medium text-sm text-gray-800 dark:text-neutral-200"
                           >
-                            <!-- PRIMARY CTA -->
-                            <buitton
-                              (click)="viewDetail(item)"
-                              class="cursor-pointer inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition"
-                              [routerLink]="['/product', item._id]"
-                            >
-                              View Post
-                              <i class="fa-solid fa-arrow-right"></i>
-                            </buitton>
-
-                            <div class="flex items-center gap-1">
-                              <!-- EDIT -->
-                              <button
-                                type="button"
-                                class="inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition"
-                                [routerLink]="['/product-edit-page', item._id]"
-                              >
-                                Edit Post
-                                <i class="fa-solid fa-pen"></i>
-                              </button>
-
-                              <!-- DELETE -->
-                              <button
-                                (click)="delete_product(item)"
-                                type="button"
-                                class="inline-flex items-center justify-center gap-x-2 px-4 py-2 rounded-md bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition"
-                              >
-                                Remove
-                                <i class="fa-solid fa-trash"></i>
-                              </button>
-                            </div>
-                          </div>
+                            {{ seller_stats?.published_posts ?? 0 }}
+                          </span>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- END PRODUCT CARD -->
+                      <!-- End Item -->
 
-                }
+                      <!-- Item -->
+                      <div class="flex flex-col gap-y-1">
+                        <span
+                          class="text-[13px] text-gray-500 dark:text-neutral-500"
+                        >
+                          Avg. post views:
+                        </span>
+
+                        <div class="flex items-center gap-x-1.5">
+                          <i class="fa-solid fa-eye"></i>
+
+                          <span
+                            class="font-medium text-sm text-gray-800 dark:text-neutral-200"
+                          >
+                            {{ seller_stats?.avg_view ?? 0 }}
+                          </span>
+                        </div>
+                      </div>
+                      <!-- End Item -->
+
+                      <!-- Item -->
+                      <div class="flex flex-col gap-y-1">
+                        <span
+                          class="text-[13px] text-gray-500 dark:text-neutral-500"
+                        >
+                          Total comments:
+                        </span>
+
+                        <div class="flex items-center gap-x-1.5">
+                          <i class="fa-solid fa-comment"></i>
+
+                          <span
+                            class="font-medium text-sm text-gray-800 dark:text-neutral-200"
+                          >
+                            {{ seller_stats?.total_comments ?? 0 }}
+                          </span>
+                        </div>
+                      </div>
+                      <!-- End Item -->
+
+                      <!-- Item -->
+                      <div class="flex flex-col gap-y-1">
+                        <span
+                          class="text-[13px] text-gray-500 dark:text-neutral-500"
+                        >
+                          Posts Total Likes:
+                        </span>
+
+                        <div class="flex items-center gap-x-1.5">
+                          <i class="fa-solid fa-heart"></i>
+
+                          <span
+                            class="font-medium text-sm text-gray-800 dark:text-neutral-200"
+                          >
+                            {{ seller_stats?.total_likes ?? 0 }}
+                          </span>
+                        </div>
+                      </div>
+                      <!-- End Item -->
+                    </div>
+                    <!-- End Grid List -->
+                  </div>
+                  <!-- End Body -->
+                </div>
+                <!-- End Card Group -->
               </div>
             </div>
-            <!-- End Featured News Blog -->
+
+            <!-- End Col -->
           </div>
-          <!-- End Col -->
-
-          <div class="flex-shrink-0">
-            <div class="lg:w-80">
-              <!-- Card Group -->
-              <div class="relative z-1 bg-white dark:bg-neutral-800">
-                <!-- Heading -->
-                <div class="p-4 pb-0">
-                  <div
-                    class="pb-2 flex flex-wrap justify-between items-center gap-2 border-b border-dashed border-gray-200 dark:border-neutral-700"
-                  >
-                    <h2
-                      class="font-medium text-sm text-gray-800 dark:text-neutral-200"
-                    >
-                      Author
-                    </h2>
-
-                    <!-- Avatar Media -->
-                    {{ current_user.user_username || "You" }}
-                    <!-- End Avatar Media -->
-                  </div>
-                </div>
-
-                <!-- End Heading -->
-
-                <!-- Body -->
-                <div class="p-4">
-                  <!-- Profile -->
-                  <div class="flex items-center gap-x-3">
-                    <span
-                      class="relative size-14 shrink-0 bg-gray-100 rounded-full dark:bg-neutral-700"
-                    >
-                      <img
-                        class="absolute inset-0 size-full object-cover rounded-full"
-                        [src]="
-                          current_user.user_profile ||
-                          'https://www.gravatar.com/avatar/?d=mp&s=256'
-                        "
-                        [alt]="current_user.user_username || 'User avatar'"
-                      />
-                    </span>
-                    <div class="grow">
-                      <h3
-                        class="font-medium text-lg text-gray-800 dark:text-neutral-200"
-                      >
-                        {{ current_user.user_username || "You" }}
-                      </h3>
-                    </div>
-                  </div>
-                  <!-- End Profile -->
-
-                  <!-- Grid List -->
-                  <div
-                    class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2"
-                  >
-                    <!-- Item -->
-                    <div class="flex flex-col gap-y-1">
-                      <span
-                        class="text-[13px] text-gray-500 dark:text-neutral-500"
-                      >
-                        Published posts:
-                      </span>
-
-                      <div class="flex items-center gap-x-1.5">
-                        <i class="fa-solid fa-fire"></i>
-
-                        <span
-                          class="font-medium text-sm text-gray-800 dark:text-neutral-200"
-                        >
-                          {{ seller_stats?.published_posts ?? 0 }}
-                        </span>
-                      </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <!-- Item -->
-                    <div class="flex flex-col gap-y-1">
-                      <span
-                        class="text-[13px] text-gray-500 dark:text-neutral-500"
-                      >
-                        Avg. post views:
-                      </span>
-
-                      <div class="flex items-center gap-x-1.5">
-                        <i class="fa-solid fa-eye"></i>
-
-                        <span
-                          class="font-medium text-sm text-gray-800 dark:text-neutral-200"
-                        >
-                          {{ seller_stats?.avg_view ?? 0 }}
-                        </span>
-                      </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <!-- Item -->
-                    <div class="flex flex-col gap-y-1">
-                      <span
-                        class="text-[13px] text-gray-500 dark:text-neutral-500"
-                      >
-                        Total comments:
-                      </span>
-
-                      <div class="flex items-center gap-x-1.5">
-                        <i class="fa-solid fa-comment"></i>
-
-                        <span
-                          class="font-medium text-sm text-gray-800 dark:text-neutral-200"
-                        >
-                          {{ seller_stats?.total_comments ?? 0 }}
-                        </span>
-                      </div>
-                    </div>
-                    <!-- End Item -->
-
-                    <!-- Item -->
-                    <div class="flex flex-col gap-y-1">
-                      <span
-                        class="text-[13px] text-gray-500 dark:text-neutral-500"
-                      >
-                        Posts Total Likes:
-                      </span>
-
-                      <div class="flex items-center gap-x-1.5">
-                        <i class="fa-solid fa-heart"></i>
-
-                        <span
-                          class="font-medium text-sm text-gray-800 dark:text-neutral-200"
-                        >
-                          {{ seller_stats?.total_likes ?? 0 }}
-                        </span>
-                      </div>
-                    </div>
-                    <!-- End Item -->
-                  </div>
-                  <!-- End Grid List -->
-                </div>
-                <!-- End Body -->
-              </div>
-              <!-- End Card Group -->
-            </div>
-          </div>
-
-          <!-- End Col -->
         </div>
+        <!-- End Body -->
       </div>
-      <!-- End Body -->
-    </div>
-    <!-- End Content -->
-  </main>
-</body>
+      <!-- End Content -->
+    </main>
+  </body>
 } @else {
-<div class="h-screen flex flex-col items-center justify-center gap-4">
-  <p class="text-gray-500 text-sm text-center">
-    Your seller account is not active yet.
-  </p>
+  <div class="h-screen flex flex-col items-center justify-center gap-4">
+    <p class="text-gray-500 text-sm text-center">
+      Your seller account is not active yet.
+    </p>
 
-  <p class="text-gray-400 text-xs text-center max-w-sm">
-    Complete seller onboarding and verification to access your dashboard.
-  </p>
+    <p class="text-gray-400 text-xs text-center max-w-sm">
+      Complete seller onboarding and verification to access your dashboard.
+    </p>
 
-  <a
-    routerLink="/seller-create-page"
-    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
-  >
-    Continue onboarding
-  </a>
-</div>
+    <a
+      routerLink="/seller-create-page"
+      class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full bg-gray-900 text-white hover:bg-gray-800 transition"
+    >
+      Continue onboarding
+    </a>
+  </div>
 }

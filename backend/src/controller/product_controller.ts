@@ -231,18 +231,50 @@ export const list_my_products = async function (
 ) {
   try {
     const user_id = (req as any).user?._id;
-
-    if (!user_id) {
-      return next(unauthorized("Not authenticated"));
-    }
+    if (!user_id) return next(unauthorized("Not authenticated"));
 
     const products = await Product.find({
       product_user: user_id,
     }).lean();
 
+    if (products.length === 0) {
+      return res.status(200).json({
+        success: true,
+        data: [],
+        message: "List My Products",
+      });
+    }
+
+    const productIds = products.map((p) => p._id);
+
+    // LIKE COUNTS
+    const likeCounts = await Like.aggregate([
+      { $match: { product: { $in: productIds } } },
+      { $group: { _id: "$product", total: { $sum: 1 } } },
+    ]);
+
+    const likeMap: Record<string, number> = {};
+    likeCounts.forEach((i) => (likeMap[String(i._id)] = i.total));
+
+    // COMMENT COUNTS
+    const commentCounts = await Comment.aggregate([
+      { $match: { product: { $in: productIds } } },
+      { $group: { _id: "$product", total: { $sum: 1 } } },
+    ]);
+
+    const commentMap: Record<string, number> = {};
+    commentCounts.forEach((i) => (commentMap[String(i._id)] = i.total));
+
+    const finalProducts = products.map((p) => ({
+      ...p,
+      like_count: likeMap[String(p._id)] || 0,
+      comment_count: commentMap[String(p._id)] || 0,
+      product_view_count: p.product_view_count ?? 0,
+    }));
+
     return res.status(200).json({
       success: true,
-      data: products,
+      data: finalProducts,
       message: "List My Products",
     });
   } catch (err: any) {
