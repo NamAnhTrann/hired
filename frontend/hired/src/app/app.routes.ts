@@ -18,6 +18,11 @@ import { SellerCreatePage } from './seller-create-page/seller-create-page';
 import { TermAndConditionPage } from './term-and-condition-page/term-and-condition-page';
 import { SellerStorePage } from './seller-store-page/seller-store-page';
 import { ProfilePage } from './profile-page/profile-page';
+import { SettingPage } from './setting-page/setting-page';
+import { SecurityPage } from './security-page/security-page';
+import { NotificationPage } from './notification-page/notification-page';
+import { BillingPage } from './billing-page/billing-page';
+import { VerificationPage } from './verification-page/verification-page';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
@@ -40,5 +45,10 @@ export const routes: Routes = [
   { path: 'term-and-condition-page', component: TermAndConditionPage },
   { path: 'seller-store-page', component: SellerStorePage },
   { path: 'profile-page', component: ProfilePage },
-  
+  { path: 'setting-page', component: SettingPage },
+  { path: 'security-page', component: SecurityPage },
+  { path: 'notification-page', component: NotificationPage },
+  { path: 'billing-page', component: BillingPage },
+  { path: 'verification-page', component: VerificationPage },
 ];
+
