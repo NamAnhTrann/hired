@@ -517,6 +517,49 @@ export const rate_ic = async function (
   }
 };
 
+export const get_ic_rating = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const user = (req as any).user;
+    const product_id = req.params.id;
+
+    if (!user) {
+      return next(unauthorized("Not authenticated"));
+    }
+
+    const product = await Product.findById(product_id).select(
+      "product_ic_rating_sum product_ic_rating_count product_user_rating_sum product_user_rating_count",
+    );
+
+    if (!product) {
+      return next(not_found("Product not found"));
+    }
+
+    const { avgIC, avgStars } = compute_display_rating(product);
+
+    const rating = await Rating.findOne({
+      product: product_id,
+      user: user._id,
+    });
+
+    const userIC = rating?.ic ?? null;
+
+    return res.status(200).json({
+      success: true,
+      userIC,
+      avgIC: Number(avgIC.toFixed(2)),
+      avgStars: Number(avgStars.toFixed(2)),
+
+      count: product.product_ic_rating_count,
+    });
+  } catch (err: any) {
+    return next(internal(err.message));
+  }
+};
+
 //search
 export const search_product = async function (
   req: Request,
@@ -612,8 +655,6 @@ export const filter_product = async function (req: Request, res: Response) {
     if (stock === "out") {
       filter.product_quantity = 0;
     }
-
-
 
     const products = await Product.find(filter)
       .populate("product_user")

@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import {uploadProductImages} from "../utils/upload";
 
-import { add_product, list_all_product, list_single_product, delete_product, edit_product_details, list_my_products, rate_star, rate_ic, search_product, filter_product } from "../controller/product_controller";
+import { add_product, list_all_product, list_single_product, delete_product, edit_product_details, list_my_products, rate_star, rate_ic, search_product, filter_product, get_ic_rating } from "../controller/product_controller";
 import { optional_auth, require_auth } from "../middleware/require_auth";
 
 router.post("/add/product", uploadProductImages.array("product_image", 6), require_auth, add_product);
@@ -15,6 +15,11 @@ router.put("/edit/product/:id", require_auth, edit_product_details);
 
 router.post("/products/:id/rate-stars" ,require_auth, rate_star);
 router.post("/products/:id/rate-ic",require_auth, rate_ic);
+router.get(
+  "/products/:id/rate-ic",
+  require_auth,
+  get_ic_rating
+);
 router.get("/search/product", optional_auth, search_product );
 router.get('/products/filter', filter_product, optional_auth);
 

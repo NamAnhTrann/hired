@@ -64,4 +64,19 @@ export class Product_Service {
   filter_product(params: any) {
     return this.http.get<any>(`${this.local_url}/products/filter`, { params });
   }
+
+   rateIC(productId: string, ic: number): Observable<any> {
+    return this.http.post(
+      `${this.local_url}/products/${productId}/rate-ic`,
+      { ic },
+      httpOptions
+    );
+  }
+  getIC(productId: string) {
+  return this.http.get<any>(
+    `${this.local_url}/products/${productId}/rate-ic`,
+    { withCredentials: true }
+  );
+}
+
 }

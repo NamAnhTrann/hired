@@ -52,6 +52,10 @@ export class MarketplacePage {
   lowStockCtrl = new FormControl(false);
   outStockCtrl = new FormControl(false);
 
+  avgIC: Record<string, number> = {};
+icCount: Record<string, number> = {};
+
+
   constructor(
     private auth: AuthService,
     private product_service: Product_Service,
@@ -90,7 +94,11 @@ export class MarketplacePage {
       .subscribe({
         next: (res: any) => {
           // Handle both APIs
-          this.products = res.data ?? res.results ?? [];
+         this.products = res.data ?? res.results ?? [];
+
+this.products.forEach(p => {
+  this.loadIC(p._id);
+});
 
           this.loading = false;
         },
@@ -99,6 +107,23 @@ export class MarketplacePage {
         },
       });
   }
+
+  loadIC(productId: string) {
+
+  if (!productId) return;
+
+  this.product_service.getIC(productId).subscribe({
+    next: (res: any) => {
+      this.avgIC[productId] = res.avgIC;
+      this.icCount[productId] = res.count;
+    },
+    error: (err) => {
+      console.error('IC load failed', err);
+    },
+  });
+
+}
+
   applyFilters() {
     const params: any = {};
 
@@ -119,12 +144,15 @@ export class MarketplacePage {
 
     if (this.outStockCtrl.value) params.stock = 'out';
 
-
     this.loading = true;
 
     this.product_service.filter_product(params).subscribe({
       next: (res: any) => {
-        this.products = res.data;
+this.products = res.data;
+
+this.products.forEach(p => {
+  this.loadIC(p._id);
+});
         this.loading = false;
       },
       error: () => {
@@ -161,10 +189,16 @@ export class MarketplacePage {
     this.loading = true;
 
     this.product_service.list_products().subscribe({
-      next: (res: any) => {
-        this.products = res.data;
-        this.loading = false;
-      },
+    next: (res: any) => {
+  this.products = res.data;
+
+  this.products.forEach(p => {
+    this.loadIC(p._id);
+  });
+
+  this.loading = false;
+},
+
       error: (err) => {
         console.error('Failed to load products', err);
         this.loading = false;

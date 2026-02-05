@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { Product } from '../models/product_interface';
 import { Product_Service } from '../services/product';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -19,17 +19,16 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ViewDetailPage {
   private readonly destroyRef = inject(DestroyRef);
-
+  @Input() productId!: string;
   product: Product | null = null;
-
+  loading = false;
   quantity = 1;
-
+  message = '';
   // social UI state
   comments: Record<string, any[]> = {};
   newComment: Record<string, string> = {};
   replyBox: Record<string, Record<string, boolean>> = {};
   replyText: Record<string, string> = {};
-
   activeProduct: string | null = null;
   current_user: any = null;
 
@@ -38,6 +37,10 @@ export class ViewDetailPage {
 
   selectedImage: string | null = null; // main image
   subImages: string[] = []; // exactly 5 max
+  selectedIC: Record<string, number> = {};
+  avgIC: Record<string, number> = {};
+  icCount: Record<string, number> = {};
+  hoverIC: Record<string, number> = {};
 
   constructor(
     private productService: Product_Service,
@@ -54,6 +57,7 @@ export class ViewDetailPage {
       .subscribe((u) => (this.current_user = u));
 
     this.list_product();
+    
   }
 
   // MAIN <-> SUB swap (keeps 1 main + 5 sub images)
@@ -88,13 +92,14 @@ export class ViewDetailPage {
 
           if (images.length > 0) {
             this.selectedImage = images[0];
-            this.subImages = images.slice(1, 6); 
+            this.subImages = images.slice(1, 6);
           } else {
             this.selectedImage = null;
             this.subImages = [];
           }
 
           this.loadComments(product._id);
+          this.loadIC(product._id);
         },
         error: (err: any) => console.error(err),
       });
@@ -233,5 +238,40 @@ export class ViewDetailPage {
   closeCommentsModal(): void {
     this.showCommentsModal = false;
     this.activeCommentsProductId = null;
+  }
+
+  loadIC(productId: string) {
+    this.productService.getIC(productId).subscribe({
+      next: (res) => {
+        this.selectedIC[productId] = res.userIC ?? 0;
+        this.avgIC[productId] = res.avgIC;
+        this.icCount[productId] = res.count;
+      },
+
+      error: (err) => {
+        console.error('IC load failed', err);
+      },
+    });
+  }
+
+  submit_ic(productId: string) {
+    if (!productId) return;
+
+    const ic = this.selectedIC[productId];
+
+    if (ic == null || ic < 0 || ic > 5) return;
+
+    this.loading = true;
+
+    this.productService.rateIC(productId, ic).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        this.message = res.message || 'rating saved';
+      },
+      error: (err: any) => {
+        this.loading = false;
+        this.message = err?.error?.message || 'failed to submit rate';
+      },
+    });
   }
 }
