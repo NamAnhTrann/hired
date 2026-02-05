@@ -92,53 +92,42 @@
                       {{ item.seller?.store_name || "Unknown seller" }}
                     </p>
 
-       <h3 class="text-base font-semibold text-gray-900 dark:text-white leading-snug">
+                    <h3
+                      class="text-base font-semibold text-gray-900 dark:text-white leading-snug"
+                    >
+                      <!-- Title -->
+                      <span class="block">
+                        {{ item.product_title }}
+                      </span>
 
-  <!-- Title -->
-  <span class="block">
-    {{ item.product_title }}
-  </span>
+                      <!-- Ratings Row -->
+                      <div
+                        class="mt-1 flex items-center gap-4 text-sm font-medium"
+                      >
+                        <!-- Star Rating -->
+                        <span class="flex items-center gap-1 text-amber-500">
+                          <i class="fa-solid fa-star"></i>
 
-  <!-- Ratings Row -->
-  <div class="mt-1 flex items-center gap-4 text-sm font-medium">
+                          <span>
+                            {{ item.rating || "4.9" }}
+                          </span>
+                        </span>
 
-    <!-- Star Rating -->
-    <span class="flex items-center gap-1 text-amber-500">
+                        <!-- IC Rating -->
+                        <span class="flex items-center gap-1 text-yellow-500">
+                          <i class="fa-solid fa-lightbulb"></i>
 
-      <i class="fa-solid fa-star"></i>
+                          <span> {{ avgIC[item._id] }}/10 </span>
+                        </span>
 
-      <span>
-        {{ item.rating || '4.9' }}
-      </span>
+                        <!-- Votes -->
+                        <span class="flex items-center gap-1 text-slate-400">
+                          <i class="fa-regular fa-user"></i>
 
-    </span>
-
-    <!-- IC Rating -->
-    <span class="flex items-center gap-1 text-yellow-500">
-
-      <i class="fa-solid fa-lightbulb"></i>
-
-      <span>
-        {{ avgIC[item._id]  }}/5
-      </span>
-
-    </span>
-
-    <!-- Votes -->
-    <span class="flex items-center gap-1 text-slate-400">
-
-      <i class="fa-regular fa-user"></i>
-
-      <span>
-        {{ icCount[item._id]  }} votes
-      </span>
-
-    </span>
-
-  </div>
-
-</h3>
-
+                          <span> {{ icCount[item._id] }} votes </span>
+                        </span>
+                      </div>
+                    </h3>
 
                     <p class="mt-1 text-sm text-gray-500">
                       {{ item.product_description }}

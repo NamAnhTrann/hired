@@ -259,7 +259,7 @@ export class ViewDetailPage {
 
     const ic = this.selectedIC[productId];
 
-    if (ic == null || ic < 0 || ic > 5) return;
+    if (ic == null || ic < 0 || ic > 10) return;
 
     this.loading = true;
 

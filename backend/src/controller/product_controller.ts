@@ -461,7 +461,7 @@ export const rate_ic = async function (
       return next(unauthorized("Not authenticated"));
     }
 
-    if (typeof ic !== "number" || ic < 0 || ic > 5) {
+    if (typeof ic !== "number" || ic < 0 || ic > 10) {
       return next(bad_request("IC must be between 0 and 5"));
     }
 
