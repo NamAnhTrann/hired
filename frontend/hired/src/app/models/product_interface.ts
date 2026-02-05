@@ -3,6 +3,7 @@ import { User } from './user_interface';
 export interface Product {
   _id: string;
 
+  // Core info
   product_title: string;
   product_description?: string;
 
@@ -12,15 +13,35 @@ export interface Product {
   product_image: string[];
 
   product_category: 'clothing' | 'digital' | 'electronic' | 'food' | 'other';
+
   product_features: string[];
   shipping_info: string[];
   product_policies: string[];
 
-  product_user: string;
+  // Relations
+  product_user: string | User;
 
+  // Analytics
   product_view_count: number;
 
   like_count: number;
   comment_count: number;
   liked_by_user: boolean;
+
+  // Ratings (raw)
+  product_user_rating_sum: number;
+  product_user_rating_count: number;
+
+  product_ic_rating_sum: number;
+  product_ic_rating_count: number;
+
+  avgStars?: number;
+  avgIC?: number;
+
+  // Ranking
+  ranking_score?: number;
+
+  // Meta
+  createdAt?: string;
+  updatedAt?: string;
 }

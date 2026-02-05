@@ -2,17 +2,23 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Product_Service } from '../services/product';
 import { Comment } from '../services/comment';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth';
 import { Like_Service } from '../services/like';
 import { Optimistic } from '../helper/optimistic';
 import { Cart_Service } from '../services/cart';
 import { Cart } from '../models/cart_interface';
+import {
+  combineLatest,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-marketplace-page',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './marketplace-page.html',
   styleUrl: './marketplace-page.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -31,18 +37,56 @@ export class MarketplacePage {
   activeProduct: string | null = null;
   isDeleting: Record<string, boolean> = {};
 
+  //searches
+  page = 0;
+  loading = false;
+
+  qCtrl = new FormControl('', { nonNullable: true });
+  categoryCtrl = new FormControl('', { nonNullable: true });
+  minPriceCtrl = new FormControl<number | null>(null);
+  maxPriceCtrl = new FormControl<number | null>(null);
+  inStockCtrl = new FormControl(false, { nonNullable: true });
+
   constructor(
     private auth: AuthService,
     private product_service: Product_Service,
     private commentService: Comment,
     private likeService: Like_Service,
     private cartService: Cart_Service,
-    private router: Router
+    private router: Router,
   ) {}
 
   public ngOnInit(): void {
     this.auth.user$.subscribe((u) => (this.current_user = u));
     this.loadProducts();
+    this.initSearch();
+  }
+  private initSearch(): void {
+    this.qCtrl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((q: string | null) => {
+          this.loading = true;
+          this.page = 0;
+
+          const query = q?.trim();
+
+          return this.product_service.search({
+            q: query || undefined,
+            page: this.page,
+          });
+        }),
+      )
+      .subscribe({
+        next: (res: any) => {
+          this.products = res.results;
+          this.loading = false;
+        },
+        error: () => {
+          this.loading = false;
+        },
+      });
   }
 
   toggleComments(product_id: string) {
@@ -171,24 +215,20 @@ export class MarketplacePage {
       () => {
         product.liked_by_user = before;
         product.like_count = beforeCount;
-      }
+      },
     );
   }
 
   buyNow(product_id: string) {
     this.cartService.add_cart(product_id, this.quantity).subscribe({
       next: (res: any) => {
-        alert("Added to Cart")
+        alert('Added to Cart');
         console.log(res);
       },
     });
   }
 
-viewDetail(item: any) {
-  this.router.navigate(['/view-detail-page', item._id]);
-}
-
-
-
-
+  viewDetail(item: any) {
+    this.router.navigate(['/view-detail-page', item._id]);
+  }
 }

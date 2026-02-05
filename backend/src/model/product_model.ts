@@ -57,6 +57,44 @@ let product_schema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+
+  product_user_rating_sum: {
+    type: Number,
+    default: 0,
+  },
+  product_user_rating_count: {
+    type: Number,
+    default: 0,
+  },
+
+  product_ic_rating_sum: {
+    type: Number,
+    default: 0,
+  },
+  product_ic_rating_count: {
+    type: Number,
+    default: 0,
+  },
 });
+
+product_schema.index(
+  {
+    product_title: "text",
+    product_description: "text",
+    product_features: "text",
+    product_category: "text",
+  },
+  {
+    default_language:'none',
+    weights: {
+      product_title: 10,
+      product_features: 6,
+      product_description: 3,
+      product_category: 2,
+    },
+    name: "ProductTextIndex",
+  }
+);
+
 
 export default mongoose.model("Product", product_schema);

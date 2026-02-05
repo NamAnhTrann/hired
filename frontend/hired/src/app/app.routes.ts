@@ -51,4 +51,3 @@ export const routes: Routes = [
   { path: 'billing-page', component: BillingPage },
   { path: 'verification-page', component: VerificationPage },
 ];
-

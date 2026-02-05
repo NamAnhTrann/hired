@@ -2,6 +2,7 @@ import Product from "../model/product_model";
 import Like from "../model/like_model";
 import Comment from "../model/comment_model";
 import Seller from "../model/seller_model";
+import Rating from "../model/rating_model";
 
 import {
   get_product_like_count,
@@ -15,6 +16,8 @@ import {
   not_found,
   unauthorized,
 } from "../middleware/error_handler";
+import rating_model from "../model/rating_model";
+import { compute_display_rating, compute_ranking_score } from "../utils/helper";
 
 export const add_product = async function (
   req: Request,
@@ -152,15 +155,30 @@ export const list_all_product = async function (
 
     const sellerMap = new Map(sellers.map((s) => [String(s.user_id), s]));
 
-    // 6. FINAL RESPONSE
-    const finalProducts = products.map((p) => ({
-      ...p,
-      seller: sellerMap.get(String(p.product_user?._id)) || null,
-      like_count: likeMap[String(p._id)] || 0,
-      comment_count: commentMap[String(p._id)] || 0,
-      liked_by_user: userLikedSet.has(String(p._id)),
-      product_view_count: p.product_view_count ?? 0,
-    }));
+    //FINAL RESPONSE
+    const finalProducts = products
+      .map((p) => {
+        const { avgStars, avgIC } = compute_display_rating(p);
+        const ranking_score = compute_ranking_score(p);
+
+        return {
+          ...p,
+          seller: sellerMap.get(String(p.product_user?._id)) || null,
+          like_count: likeMap[String(p._id)] || 0,
+          comment_count: commentMap[String(p._id)] || 0,
+          liked_by_user: userLikedSet.has(String(p._id)),
+          product_view_count: p.product_view_count ?? 0,
+
+          // display values
+          avgStars: Math.round(avgStars),
+          avgIC: Math.round(avgIC),
+
+          // internal only
+          ranking_score,
+        };
+      })
+      .sort((a, b) => b.ranking_score - a.ranking_score)
+      .map(({ ranking_score, ...rest }) => rest);
 
     return res.status(200).json({
       success: true,
@@ -198,6 +216,7 @@ export const list_single_product = async function (
     if (!product) {
       return next(not_found("Product not found"));
     }
+    const { avgIC, avgStars } = compute_display_rating(product);
 
     const like_count = await get_product_like_count(product_id);
     const comment_count = await Comment.countDocuments({ product: product_id });
@@ -215,6 +234,8 @@ export const list_single_product = async function (
         like_count,
         comment_count,
         liked_by_user,
+        avgStars: Math.round(avgStars),
+        avgIC: Math.round(avgIC),
       },
       message: "List Single Product",
     });
@@ -332,6 +353,10 @@ export const edit_product_details = async function (
       return next(not_found("product not found"));
     }
 
+    if (!user_id) {
+      return next(unauthorized("Unauthorised"));
+    }
+
     const update_product = await Product.findOneAndUpdate(
       {
         _id: product_id,
@@ -352,6 +377,192 @@ export const edit_product_details = async function (
     });
   } catch (err: any) {
     if (err.name === "ValidationError") return next(bad_request(err.message));
+    return next(internal(err.message));
+  }
+};
+
+//rating
+export const rate_star = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const user = (req as any).user;
+    const product_id = req.params.id;
+    const { stars } = req.body;
+
+    if (!user) {
+      return next(unauthorized("Not authorised"));
+    }
+
+    if (stars < 0 || stars > 10) {
+      return next(bad_request("Star must be between 0 and 10"));
+    }
+
+    const product = await Product.findById(product_id);
+    if (!product) {
+      return next(not_found("Product not found"));
+    }
+
+    const rating = await Rating.findOne({
+      product: product_id,
+      user: user._id,
+    });
+
+    if (rating && rating.stars !== undefined) {
+      const diff = stars - rating.stars!;
+      rating.stars = stars;
+      await rating.save();
+
+      await Product.findByIdAndUpdate(product_id, {
+        $inc: { product_user_rating_sum: diff },
+      });
+    } else {
+      if (rating) {
+        rating.stars = stars;
+        await rating.save();
+      } else {
+        await Rating.create({
+          product: product_id,
+          user: user._id,
+          stars,
+        });
+      }
+
+      await Product.findByIdAndUpdate(product_id, {
+        $inc: {
+          product_user_rating_sum: stars,
+          product_user_rating_count: 1,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Stars rating submitted",
+    });
+  } catch (err: any) {
+    return next(internal(err.message));
+  }
+};
+
+export const rate_ic = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const user = (req as any).user;
+    const product_id = req.params.id;
+    const { ic } = req.body;
+
+    if (!user) {
+      return next(unauthorized("Not authenticated"));
+    }
+
+    if (typeof ic !== "number" || ic < 0 || ic > 5) {
+      return next(bad_request("IC must be between 0 and 5"));
+    }
+
+    const product = await Product.findById(product_id);
+    if (!product) {
+      return next(not_found("Product not found"));
+    }
+
+    const rating = await Rating.findOne({
+      product: product_id,
+      user: user._id,
+    });
+
+    // UPDATE EXISTING
+    if (rating && rating.ic !== undefined) {
+      const diff = ic - rating.ic!;
+
+      rating.ic = ic;
+      await rating.save();
+
+      await Product.findByIdAndUpdate(product_id, {
+        $inc: { product_ic_rating_sum: diff },
+      });
+    }
+
+    // CREATE OR ADD IC FIELD
+    else {
+      if (rating) {
+        rating.ic = ic;
+        await rating.save();
+      } else {
+        await Rating.create({
+          product: product_id,
+          user: user._id,
+          ic,
+        });
+      }
+
+      await Product.findByIdAndUpdate(product_id, {
+        $inc: {
+          product_ic_rating_sum: ic,
+          product_ic_rating_count: 1,
+        },
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "IC rating submitted",
+    });
+  } catch (err: any) {
+    return next(internal(err.message));
+  }
+};
+
+//search
+export const search_product = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const q = String(req.query.q || "").trim();
+    const page = Number(req.query.page || 0);
+
+    const limit = 20;
+
+    const filter: any = {};
+
+    if (q.length > 0 && q.length < 3) {
+      filter.product_title = {
+        $regex: "^" + q,
+        $options: "i",
+      };
+    } 
+    else if (q.length >= 3) {
+      filter.$text = { $search: q };
+    }
+
+    let query = Product.find(filter);
+
+    if (q.length >= 3) {
+      query = query
+        .select({ score: { $meta: "textScore" } })
+        .sort({ score: { $meta: "textScore" } });
+    } else {
+      query = query.sort({ product_view_count: -1 });
+    }
+
+    const products = await query
+      .skip(page * limit)
+      .limit(limit)
+      .lean();
+
+    return res.json({
+      page,
+      count: products.length,
+      results: products,
+    });
+
+  } catch (err: any) {
     return next(internal(err.message));
   }
 };

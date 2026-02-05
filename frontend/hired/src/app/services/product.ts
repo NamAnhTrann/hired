@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { SearchResponse } from '../models/search_res';
 const httpOptions = {
   withCredentials: true,
 };
@@ -44,5 +46,18 @@ export class Product_Service {
       product_data,
       httpOptions,
     );
+  }
+
+  search(params:any):Observable<SearchResponse> {
+    let httpParams = new HttpParams();
+    Object.entries(params).forEach(([key,value])=>{
+      if(value !== undefined && value !== null && value !== "") {
+        httpParams = httpParams.set(key, String(value));
+      }
+    });
+
+    return this.http.get<SearchResponse>(`${this.local_url}/search/product`, {
+      params:httpParams,
+    });
   }
 }
