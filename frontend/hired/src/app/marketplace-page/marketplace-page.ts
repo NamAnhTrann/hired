@@ -45,7 +45,12 @@ export class MarketplacePage {
   categoryCtrl = new FormControl('', { nonNullable: true });
   minPriceCtrl = new FormControl<number | null>(null);
   maxPriceCtrl = new FormControl<number | null>(null);
-  inStockCtrl = new FormControl(false, { nonNullable: true });
+  icCtrl = new FormControl<number>(0);
+  viewsCtrl = new FormControl('');
+  likesCtrl = new FormControl('');
+  inStockCtrl = new FormControl(false);
+  lowStockCtrl = new FormControl(false);
+  outStockCtrl = new FormControl(false);
 
   constructor(
     private auth: AuthService,
@@ -93,6 +98,53 @@ export class MarketplacePage {
           this.loading = false;
         },
       });
+  }
+  applyFilters() {
+    const params: any = {};
+
+    if (this.minPriceCtrl.value !== null)
+      params.minPrice = this.minPriceCtrl.value;
+
+    if (this.maxPriceCtrl.value !== null)
+      params.maxPrice = this.maxPriceCtrl.value;
+    if (this.icCtrl.value !== null && this.icCtrl.value > 0) {
+      params.minIC = this.icCtrl.value;
+    }
+
+    if (this.viewsCtrl.value) params.minViews = this.viewsCtrl.value;
+
+    if (this.likesCtrl.value) params.minLikes = this.likesCtrl.value;
+
+    if (this.inStockCtrl.value) params.stock = 'in';
+
+    if (this.outStockCtrl.value) params.stock = 'out';
+
+
+    this.loading = true;
+
+    this.product_service.filter_product(params).subscribe({
+      next: (res: any) => {
+        this.products = res.data;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      },
+    });
+  }
+
+  resetFilters() {
+    this.minPriceCtrl.reset();
+    this.maxPriceCtrl.reset();
+    this.icCtrl.setValue(0);
+    this.viewsCtrl.reset();
+    this.likesCtrl.reset();
+
+    this.inStockCtrl.setValue(false);
+    this.lowStockCtrl.setValue(false);
+    this.outStockCtrl.setValue(false);
+
+    this.loadProducts();
   }
 
   toggleComments(product_id: string) {

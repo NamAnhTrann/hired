@@ -48,16 +48,20 @@ export class Product_Service {
     );
   }
 
-  search(params:any):Observable<SearchResponse> {
+  search(params: any): Observable<SearchResponse> {
     let httpParams = new HttpParams();
-    Object.entries(params).forEach(([key,value])=>{
-      if(value !== undefined && value !== null && value !== "") {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== '') {
         httpParams = httpParams.set(key, String(value));
       }
     });
 
     return this.http.get<SearchResponse>(`${this.local_url}/search/product`, {
-      params:httpParams,
+      params: httpParams,
     });
+  }
+
+  filter_product(params: any) {
+    return this.http.get<any>(`${this.local_url}/products/filter`, { params });
   }
 }

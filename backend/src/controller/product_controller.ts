@@ -536,8 +536,7 @@ export const search_product = async function (
         $regex: "^" + q,
         $options: "i",
       };
-    } 
-    else if (q.length >= 3) {
+    } else if (q.length >= 3) {
       filter.$text = { $search: q };
     }
 
@@ -561,8 +560,75 @@ export const search_product = async function (
       count: products.length,
       results: products,
     });
-
   } catch (err: any) {
     return next(internal(err.message));
+  }
+};
+
+//filters
+export const filter_product = async function (req: Request, res: Response) {
+  try {
+    const { minPrice, maxPrice, minIC, maxIC, minLikes, minViews, stock } =
+      req.query;
+
+    const filter: any = {};
+
+    if (minPrice || maxPrice) {
+      filter.product_price = {};
+    }
+
+    if (minPrice) {
+      filter.product_price.$gte = Number(minPrice);
+    }
+
+    if (maxPrice) {
+      filter.product_price.$lte = Number(maxPrice);
+    }
+
+    if (minIC || maxIC) {
+      filter.score = {};
+    }
+
+    if (minIC) {
+      filter.score.$gte = Number(minIC);
+    }
+
+    if (maxIC) {
+      filter.score.$lte = Number(maxIC);
+    }
+
+    if (minLikes) {
+      filter.like_count = { $gte: Number(minLikes) };
+    }
+
+    if (minViews) {
+      filter.product_view_count = { $gte: Number(minViews) };
+    }
+
+    if (stock === "in") {
+      filter.product_quantity = { $gt: 0 };
+    }
+
+    if (stock === "out") {
+      filter.product_quantity = 0;
+    }
+
+
+
+    const products = await Product.find(filter)
+      .populate("product_user")
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      data: products,
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      success: false,
+      message: "Filter failed",
+    });
   }
 };
