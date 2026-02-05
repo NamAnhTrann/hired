@@ -54,24 +54,28 @@
       <div class="lg:hidden">
         <button
           type="button"
-          id="hs-pro-hcail-collapse"
-          data-hs-collapse="#hs-pro-hcail"
-          aria-controls="hs-pro-hcail"
-          class="hs-collapse-toggle w-11 h-11 flex justify-center items-center text-xl rounded-xl border border-gray-200 text-black dark:text-white dark:border-neutral-700"
+          (click)="toggleMenu()"
+          aria-label="Toggle navigation"
+          class="w-11 h-11 flex items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-neutral-700 active:scale-95 transition shadow-sm"
         >
-          <i class="fa-solid fa-bars hs-collapse-open:hidden"></i>
-          <i class="fa-solid fa-xmark hidden hs-collapse-open:block"></i>
+          @if (!isMenuOpen) {
+            <i class="fa-solid fa-bars text-lg"></i>
+          } @else {
+            <i class="fa-solid fa-xmark text-lg"></i>
+          }
         </button>
       </div>
     </div>
 
     <!-- Nav Links -->
+    <!-- Mobile / Tablet Menu -->
     <div
-      id="hs-pro-hcail"
-      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6"
+      id="mobile-menu"
+      class="overflow-hidden transition-all duration-300 basis-full grow lg:block lg:w-auto lg:basis-auto lg:order-2 lg:col-span-6 absolute lg:static top-full left-0 w-full bg-white lg:bg-transparent dark:bg-neutral-900 dark:lg:bg-transparent border-t lg:border-0 border-gray-200 dark:border-neutral-700 shadow-xl lg:shadow-none z-40"
+      [class.hidden]="!isMenuOpen"
     >
       <div
-        class="mobile-nav flex flex-col gap-y-4 mt-5 lg:flex-row lg:justify-center lg:items-center lg:gap-x-7 lg:mt-0"
+        class="mobile-nav px-4 pb-6 pt-4 flex flex-col gap-y-3 lg:px-0 lg:pb-0 lg:pt-0 lg:flex-row lg:justify-center lg:items-center lg:gap-x-7 lg:mt-0 "
       >
         <!-- Listings -->
         <a

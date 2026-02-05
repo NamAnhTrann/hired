@@ -9,29 +9,34 @@ import { AuthService } from '../services/auth';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header implements OnInit {
+export class Header {
   isShrunk = false;
   private lastScrollTop = 0;
   cartCount = 0;
+  isMenuOpen = false;
+  openMenu: string | null = null;
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+  ) {}
 
-  constructor(public auth:AuthService, private router:Router) {}
-  
-  ngOnInit() {
-  
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
-
-  public logout(){
-      if (!confirm('Are you sure you want to logout?')) return;
+  toggleSubMenu(name: string) {
+  this.openMenu = this.openMenu === name ? null : name;
+}
+  public logout() {
+    if (!confirm('Are you sure you want to logout?')) return;
 
     this.auth.logout().subscribe({
-      next:()=>{
-        
-        this.router.navigate(["/login-page"])
+      next: () => {
+        this.router.navigate(['/login-page']);
       },
       error: () => {
         alert('Logout failed');
-      }
-    })
+      },
+    });
   }
 
   @HostListener('window:scroll', [])

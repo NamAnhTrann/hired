@@ -66,21 +66,27 @@ export class MarketplacePage {
       .pipe(
         debounceTime(300),
         distinctUntilChanged(),
-        switchMap((q: string | null) => {
+        switchMap((q) => {
+          // If empty → reload full list instead
+          if (!q || !q.trim()) {
+            this.loading = true;
+            return this.product_service.list_products();
+          }
+
           this.loading = true;
           this.page = 0;
 
-          const query = q?.trim();
-
           return this.product_service.search({
-            q: query || undefined,
+            q: q.trim(),
             page: this.page,
           });
         }),
       )
       .subscribe({
         next: (res: any) => {
-          this.products = res.results;
+          // Handle both APIs
+          this.products = res.data ?? res.results ?? [];
+
           this.loading = false;
         },
         error: () => {
@@ -100,12 +106,16 @@ export class MarketplacePage {
   }
 
   private loadProducts() {
+    this.loading = true;
+
     this.product_service.list_products().subscribe({
       next: (res: any) => {
         this.products = res.data;
+        this.loading = false;
       },
       error: (err) => {
         console.error('Failed to load products', err);
+        this.loading = false;
       },
     });
   }
