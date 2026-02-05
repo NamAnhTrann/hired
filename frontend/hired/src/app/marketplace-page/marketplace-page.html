@@ -109,7 +109,7 @@
                           <i class="fa-solid fa-star"></i>
 
                           <span>
-                            {{ item.rating || "4.9" }}
+                            {{ item.rating || "0" }}
                           </span>
                         </span>
 
@@ -292,17 +292,23 @@
             Price Range
           </h3>
 
-          <input
-            type="range"
-            min="0"
-            max="1000"
-            [formControl]="maxPriceCtrl"
-            class="w-full accent-indigo-600"
-          />
+          <div class="space-y-2">
+            <!-- Slider -->
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              [formControl]="maxPriceCtrl"
+              class="w-full accent-indigo-600"
+            />
 
-          <div class="flex justify-between text-sm text-gray-500">
-            <span>$0</span>
-            <span>$1000+</span>
+            <!-- Min / Max Labels -->
+            <div
+              class="flex items-center justify-between text-xs text-slate-500"
+            >
+              <span>$0</span>
+              <span>$1000+</span>
+            </div>
           </div>
 
           <div>
@@ -400,23 +406,6 @@
             <label class="flex items-center gap-2">
               <input type="checkbox" [formControl]="outStockCtrl" />
               Out of Stock
-            </label>
-          </div>
-
-          <!-- EXTRA -->
-          <div class="space-y-3 text-sm">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">
-              Other
-            </h3>
-
-            <label class="flex items-center gap-2">
-              <input type="checkbox" class="rounded border-gray-300" />
-              Only Discounts
-            </label>
-
-            <label class="flex items-center gap-2">
-              <input type="checkbox" class="rounded border-gray-300" />
-              Only Events
             </label>
           </div>
           <!-- ACTION -->

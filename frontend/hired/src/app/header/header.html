@@ -13,9 +13,17 @@
     <div class="lg:col-span-3 flex items-center">
       <a
         routerLink="/"
-        class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-hidden focus:opacity-80"
+        class="flex items-center gap-2 rounded-xl text-xl font-semibold focus:outline-hidden focus:opacity-80"
       >
-        Doohickey
+        <!-- Logo -->
+        <img
+          src="/assets/Doohickey_1.png"
+          alt="Doohickey Logo"
+          class="h-8 w-8 object-contain"
+        />
+
+        <!-- Brand -->
+        <span>Doohickey</span>
       </a>
     </div>
 
@@ -75,7 +83,7 @@
       [class.hidden]="!isMenuOpen"
     >
       <div
-        class="mobile-nav px-4 pb-6 pt-4 flex flex-col gap-y-3 lg:px-0 lg:pb-0 lg:pt-0 lg:flex-row lg:justify-center lg:items-center lg:gap-x-7 lg:mt-0 "
+        class="mobile-nav px-4 pb-6 pt-4 flex flex-col gap-y-3 lg:px-0 lg:pb-0 lg:pt-0 lg:flex-row lg:justify-center lg:items-center lg:gap-x-7 lg:mt-0"
       >
         <!-- Listings -->
         <a
