@@ -6,34 +6,34 @@
   <title>Settings</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="mt-10 bg-gray-100 text-gray-900 min-h-screen">
+<body class="bg-[#f9f6ee] mt-10 bg-gray-100 text-gray-900 min-h-screen">
   <div class="max-w-7xl mx-auto px-6 py-12">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
 
       <!-- SIDEBAR -->
       <aside class="space-y-1">
         <!-- PROFILE -->
-        <a routerLink="/setting-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+        <a routerLink="/setting-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#e3a72f]">
           <span><i class="fa-solid fa-user"></i></span><span>Profile</span>
         </a>
 
         <!-- SECURITY -->
-        <a routerLink="/security-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+        <a routerLink="/security-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#e3a72f]">
           <span><i class="fa-solid fa-lock"></i></span><span>Security</span>
         </a>
 
         <!-- NOTIFICATIONS -->
-        <a class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-200 font-medium">
+        <a class="w-full flex items-center gap-3 px-4 py-3 rounded-lg bg-[#e3a72f] font-medium">
           <span><i class="fa-solid fa-bell"></i></span><span>Notifications</span>
         </a>
 
         <!-- BILLING -->
-        <a routerLink="/billing-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+        <a routerLink="/billing-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#e3a72f]">
           <span><i class="fa-brands fa-cash-app"></i></span><span>Billing</span>
         </a>
 
         <!-- VERIFICATION -->
-        <a routerLink="/verification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-200">
+        <a routerLink="/verification-page" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-[#e3a72f]">
           <span><i class="fa-solid fa-circle-check "></i></span><span>Verification</span>
         </a>
       </aside>
@@ -42,7 +42,7 @@
       <section class="md:col-span-3 space-y-12">
 
         <!-- PROFILE SETTINGS (EDITABLE) -->
-        <form class="bg-white rounded-xl shadow-sm p-8 space-y-10" id="notifications">
+        <form class="bg-[#fffdf6] rounded-xl shadow-sm p-8 space-y-10" id="notifications">
           <div>
             <h2 class="text-xl font-semibold">Notifications</h2>
             <p class="text-sm text-gray-500 mt-1">Choose how and when you want to hear from us.</p>
@@ -61,7 +61,7 @@
                   <p class="text-sm font-medium">Product updates</p>
                   <p class="text-xs text-gray-500">New features, improvements, and announcements.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" checked />
               </label>
 
               <label class="flex items-start justify-between gap-4">
@@ -69,7 +69,7 @@
                   <p class="text-sm font-medium">Tips & best practices</p>
                   <p class="text-xs text-gray-500">Learn how to get the most out of your account.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" />
               </label>
 
               <label class="flex items-start justify-between gap-4">
@@ -77,7 +77,7 @@
                   <p class="text-sm font-medium">Billing & receipts</p>
                   <p class="text-xs text-gray-500">Invoices, payment confirmations, and billing issues.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" checked />
               </label>
             </div>
           </div>
@@ -95,7 +95,7 @@
                   <p class="text-sm font-medium">New orders & activity</p>
                   <p class="text-xs text-gray-500">Alerts when buyers interact with your products.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" checked />
               </label>
 
               <label class="flex items-start justify-between gap-4">
@@ -103,7 +103,7 @@
                   <p class="text-sm font-medium">Messages</p>
                   <p class="text-xs text-gray-500">When someone sends you a message or inquiry.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" checked />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" checked />
               </label>
             </div>
           </div>
@@ -121,7 +121,7 @@
                   <p class="text-sm font-medium">Featured opportunities</p>
                   <p class="text-xs text-gray-500">Be notified about promotions or being featured.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" />
               </label>
 
               <label class="flex items-start justify-between gap-4">
@@ -129,7 +129,7 @@
                   <p class="text-sm font-medium">Surveys & feedback</p>
                   <p class="text-xs text-gray-500">Occasional requests to help improve the platform.</p>
                 </div>
-                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                <input type="checkbox" class="mt-1 h-4 w-4 rounded border-gray-300 accent-[#e3a72f]" />
               </label>
             </div>
           </div>
@@ -139,7 +139,7 @@
           <!-- ACTIONS -->
           <div class="flex justify-end gap-4 pt-4">
             <button type="button" class="px-5 py-2 rounded-lg border text-gray-600">Cancel</button>
-            <button type="submit" class="px-5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">Save preferences</button>
+            <button type="submit" class="px-5 py-2 rounded-lg bg-[#e3a72f] text-white hover:bg-[#996600]">Save preferences</button>
           </div>
         </form>
       </section>
