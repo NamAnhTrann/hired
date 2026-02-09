@@ -1,5 +1,6 @@
+<section class="bg-[#f9f6ee]">
 <!-- Contact Us -->
-<div class="mt-20 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div class="bg-[#f9f6ee] mt-20 max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <div class="max-w-2xl lg:max-w-5xl mx-auto">
     <div class="text-center">
       <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
@@ -33,7 +34,7 @@
                     form.controls['contact_first_name'].invalid &&
                     form.controls['contact_first_name'].touched
                   "
-                  class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-[#FFE135]"
+                  class="bg-[#fffdf6] py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:ring-[#FFE135]"
                   placeholder="First Name"
                 />
 
@@ -52,7 +53,7 @@
                     form.controls['contact_last_name'].invalid &&
                     form.controls['contact_last_name'].touched
                   "
-                  class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                  class="bg-[#fffdf6] py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                   placeholder="Last Name"
                 />
 
@@ -72,7 +73,7 @@
                   form.controls['contact_email'].invalid &&
                   form.controls['contact_email'].touched
                 "
-                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                class="bg-[#fffdf6] py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Email"
               />
 
@@ -93,7 +94,7 @@
                   form.controls['contact_phone_number'].invalid &&
                   form.controls['contact_phone_number'].touched
                 "
-                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                class="bg-[#fffdf6] py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Phone Number"
               />
 
@@ -111,7 +112,7 @@
                   form.controls['contact_type'].invalid &&
                   form.controls['contact_type'].touched
                 "
-                class="appearance-none py-2.5 sm:py-3 px-4 pr-10 block w-full border rounded-lg sm:text-sm text-gray-700 dark:text-neutral-300 bg-white dark:bg-neutral-900 border-gray-300 focus:border-[#4F46E5] dark:focus:border-[#FFE135]"
+                class="appearance-none py-2.5 sm:py-3 px-4 pr-10 block w-full border rounded-lg sm:text-sm text-gray-700 dark:text-neutral-300 bg-[#fffdf6] dark:bg-neutral-900 border-gray-300 focus:border-[#4F46E5] dark:focus:border-[#FFE135]"
               >
                 <option value="" disabled selected>Select Enquiry Type</option>
                 <option value="general">General Enquiry</option>
@@ -136,7 +137,7 @@
                   form.controls['contact_message'].invalid &&
                   form.controls['contact_message'].touched
                 "
-                class="py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
+                class="bg-[#fffdf6] py-2.5 sm:py-3 px-4 block w-full border rounded-lg sm:text-sm border-gray-300 focus:border-[#4F46E5] focus:ring-[#4F46E5] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
                 placeholder="Details"
               ></textarea>
 
@@ -157,7 +158,7 @@
               <input
                 type="file"
                 (change)="onFileSelected($event)"
-                class="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#4F46E5] file:text-white hover:file:bg-[#4338CA] dark:file:bg-[#FFE135] dark:file:text-black"
+                class="mt-1 block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#e3a72f] file:text-white hover:file:bg-[#996600] dark:file:bg-[#FFE135] dark:file:text-black"
               />
             </div>
           </div>
@@ -167,7 +168,7 @@
             <button
               type="submit"
               [disabled]="loading"
-              class="w-full py-3 px-4 inline-flex justify-center items-center text-sm font-medium rounded-lg bg-[#4F46E5] text-white hover:scale-[1.05] transition-all duration-300 hover:bg-[#4338CA] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700]"
+              class="w-full py-3 px-4 inline-flex justify-center items-center text-sm font-medium rounded-lg bg-[#e3a72f] text-white hover:scale-[1.05] transition-all duration-300 hover:bg-[#996600] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#FFD700]"
             >
               @if (loading) {
               <span>Sending...</span>
@@ -319,4 +320,5 @@
     </div>
   </div>
 </div>
+</section>
 <!-- End Contact Us -->
