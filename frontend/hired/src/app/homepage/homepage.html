@@ -1,4 +1,4 @@
-<section class="bg-[#F9F6EE]">
+<section class="mt-10 bg-[#F9F6EE]">
 
 <section 
   class="relative h-[80vh] w-[95%] mx-auto overflow-hidden rounded-2xl bg-[#F9F6EE]"
@@ -22,16 +22,13 @@
         class="md:ml-48 mt-8 text-center md:text-left max-w-xl z-10"
         data-aos="fade-right"
       >
-        <p class="uppercase tracking-widest text-gray-700 text-sm mb-2">
-          OutSold.
-        </p>
-
+        
         <h1
           class="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-900 leading-tight"
         >
           Made With One Purpose
           <br />
-          <span class="text-[#e3a72f]">To OutSold Everyone!</span>
+          <span class="text-[#e3a72f]">To Doohickey Everyone!</span>
         </h1>
 
         <p class="mt-4 text-gray-800 text-lg leading-relaxed">
@@ -40,7 +37,7 @@
         </p>
 
         <a
-          routerLink="/marketplace-page"
+          routerLink="/about-us-page"
           class="mt-6 inline-block bg-black text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all hover:bg-gray-800"
         >
           Read More
@@ -65,9 +62,7 @@
       class="relative h-full bg-[#F9F6EE] flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-16"
     >
       <div class="md:ml-48 mt-8 text-center md:text-left max-w-xl z-10">
-        <p class="uppercase tracking-widest text-gray-700 text-sm mb-2">
-          OutSold.
-        </p>
+        
 
         <h1
           class="font-extrabold text-4xl sm:text-5xl lg:text-6xl text-gray-900 leading-tight"
@@ -102,87 +97,6 @@
   </swiper-container>
 </section>
 
-<section class=" bg-[#F9F6EE] px-4 py-24">
-  <div class="max-w-[1450px] mx-auto">
-    <h2 class="text-2xl md:text-3xl font-semibold mb-2">
-      Most Popular Products
-    </h2>
-
-    <p class="text-gray-600 mb-10">
-      Transforming your wardrobe with the latest trends
-    </p>
-
-    <!-- GRID -->
-    <div
-      class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8"
-      data-aos="fade-right"
-    >
-      <!-- LEFT PROMO CARD (spans 2 cols on desktop) -->
-      <div
-        class="bg-[#e3a72f] rounded-2xl p-8 flex flex-col justify-between sm:col-span-3 lg:col-span-2 min-h-[280px]"
-      >
-        <div>
-          <h3 class="text-3xl font-bold text-white leading-tight">
-            Enjoy <span class="text-white">20%</span> Off Your First Purchase<br />
-            At Crayon Curve !!
-          </h3>
-        </div>
-      </div>
-
-      <!-- PRODUCT CARDS -->
-      @for (item of trending_model.slice(0,5); track item._id) {
-
-      <a
-        href="#"
-        class="group block rounded-2xl transition-transform duration-200 hover:scale-[1.03]"
-      >
-        <div
-          class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-[#F9F6EE] shadow-md"
-        >
-          <img
-            [src]="item.product.product_image[0]"
-            [alt]="item.product.product_title"
-            class="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-
-        <div class="pt-3">
-          <h3 class="text-[15px] text-gray-800 font-medium">
-            {{ item.product.product_title }}
-          </h3>
-
-          <p class="mt-1 text-gray-900 font-semibold">
-            ${{ item.product.product_price }}
-          </p>
-        </div>
-      </a>
-
-      }
-
-      <!-- RIGHT PROMO CARD (matches screenshot) -->
-      <div
-        class="rounded-2xl overflow-hidden bg-[#e3a72f] shadow-md w-full flex flex-col sm:col-span-1"
-      >
-        <!-- Top block: exact same height as product image -->
-        <div
-          class="aspect-[4/5] w-full flex flex-col items-center justify-center p-6 space-y-4"
-        >
-          <i class="fa-solid fa-gift text-white text-4xl"></i>
-
-          <h3 class="text-xl font-bold text-white leading-tight text-center">
-            Special Collections<br />
-            Curated Just For You
-          </h3>
-
-          <p class="text-white text-sm opacity-90 text-center max-w-[200px]">
-            Explore handpicked outfits and unique seasonal drops.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="w-full min-h-screen bg-[#F9F6EE]">
   <div
     class="max-w-[1450px] mx-auto"
@@ -190,7 +104,7 @@
   >
 
     <!-- SCROLL CONTEXT (required for sticky to work) -->
-    <div class="flex flex-col lg:flex-row gap-8 min-h-[220vh] py-24">
+    <div class="mt-10 flex flex-col lg:flex-row gap-8 min-h-[220vh] py-24">
 
       <!-- LEFT: Sticky Hidden Gems Panel -->
       <div class="lg:w-1/2">
@@ -202,8 +116,7 @@
             </h2>
 
             <p class="mt-6 text-grey-100 text-lg leading-relaxed">
-              Unexpected products, ideas, and services discovered across the
-              marketplace — not ranked, not categorized, just found.
+              Doohickey is a marketplace reserved for the most innovative products, decided by and for the community
             </p>
 
             <p class="mt-6 text-grey-200 text-base">
@@ -402,6 +315,86 @@
   </div>
 </section>
 
+<section class="bg-[#F9F6EE] px-4 py-24">
+  <div class="max-w-[1450px] mx-auto">
+    <h2 class="text-2xl md:text-3xl font-semibold mb-2">
+      Innovations score
+    </h2>
+
+    <p class="text-gray-600 mb-10">
+      Innovation Score (IC) is our site unique metric to measure how innovative is the product.
+    </p>
+
+    <!-- GRID -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8"
+      data-aos="fade-right"
+    >
+      <!-- LEFT PROMO CARD (spans 2 cols on desktop) -->
+      <div
+        class="bg-[#e3a72f] rounded-2xl p-8 flex flex-col justify-between sm:col-span-3 lg:col-span-2 min-h-[280px]"
+      >
+        <div>
+          <h3 class="text-3xl font-bold text-white leading-tight">
+            Enjoy <span class="text-white">20%</span> Off Your First Purchase<br />
+            At Crayon Curve !!
+          </h3>
+        </div>
+      </div>
+
+      <!-- PRODUCT CARDS -->
+      @for (item of trending_model.slice(0,5); track item._id) {
+
+      <a
+        href="#"
+        class="group block rounded-2xl transition-transform duration-200 hover:scale-[1.03]"
+      >
+        <div
+          class="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-[#F9F6EE] shadow-md"
+        >
+          <img
+            [src]="item.product.product_image[0]"
+            [alt]="item.product.product_title"
+            class="absolute inset-0 w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="pt-3">
+          <h3 class="text-[15px] text-gray-800 font-medium">
+            {{ item.product.product_title }}
+          </h3>
+
+          <p class="mt-1 text-gray-900 font-semibold">
+            ${{ item.product.product_price }}
+          </p>
+        </div>
+      </a>
+
+      }
+
+      <!-- RIGHT PROMO CARD (matches screenshot) -->
+      <div
+        class="rounded-2xl overflow-hidden bg-[#e3a72f] shadow-md w-full flex flex-col sm:col-span-1"
+      >
+        <!-- Top block: exact same height as product image -->
+        <div
+          class="aspect-[4/5] w-full flex flex-col items-center justify-center p-6 space-y-4"
+        >
+          <i class="fa-solid fa-gift text-white text-4xl"></i>
+
+          <h3 class="text-xl font-bold text-white leading-tight text-center">
+            Special Collections<br />
+            Curated Just For You
+          </h3>
+
+          <p class="text-white text-sm opacity-90 text-center max-w-[200px]">
+            Explore handpicked outfits and unique seasonal drops.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="bg-[#fffdf6] py-28 sm:py-36">
@@ -412,7 +405,7 @@
       <p
         class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl"
       >
-        The Perfect Platform To Advertise, Connect And More
+        The Perfect Platform to Discover, Connect and More
       </p>
       <div class="mt-6 flex justify-center">
         <div class="mt-6 flex justify-center">
@@ -452,7 +445,7 @@
               <p
                 class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center"
               >
-                Outsold does not discriminate any products and/or hobies, unless
+                Doohickey does not discriminate any products and/or hobies, unless
                 it is illegal of course. With limitless range and versatile
                 service you can provide, we sell and people buy.
               </p>
@@ -491,7 +484,7 @@
               <p
                 class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center"
               >
-                Outsold have created not only a platform to sell and buy items,
+                Doohickey have created not only a platform to sell and buy items,
                 we also provide a state-of-the-art online performence tracker
                 that helps users track performance, improve visibility, and sell
                 smarter, all in real time.
@@ -525,7 +518,7 @@
               <p
                 class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center"
               >
-                At Outsold, we understand the growing difficulties of being
+                At Doohickey, we understand the growing difficulties of being
                 overshadowed by big corporations, which is why we provide safe
                 place to operate, grow, and be seen — while continuously putting
                 them in the spotlight so they can truly shine.
@@ -561,12 +554,12 @@
               <p
                 class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center"
               >
-                Outsold goes beyond being just a digital marketplace by
+                Doohickey goes beyond being just a digital marketplace by
                 recreating the experience and energy of a real-life market.
                 Through the ability to talk, share, and engage with sellers—or
                 even competitors—users can spark healthy competition, discover
                 new partnerships, and build genuine connections within the
-                Outsold community.
+                Doohickey community.
               </p>
             </div>
             <div class="relative min-h-120 w-full grow">
@@ -690,7 +683,7 @@
               aria-expanded="false"
               aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two"
             >
-              How do I buy or sell on Outsold?
+              How do I buy or sell on Doohickey?
               <svg
                 class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -782,7 +775,7 @@
               aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-three"
             >
               <p class="text-gray-600 dark:text-neutral-400">
-                Yes. Outsold encourages interaction. You can message sellers
+                Yes. Doohickey encourages interaction. You can message sellers
                 directly, ask questions, and connect before making a purchase —
                 just like a real-life market.
               </p>
@@ -836,7 +829,7 @@
             >
               <p class="text-gray-600 dark:text-neutral-400">
                 Buyers add items to their cart and complete checkout securely
-                through Outsold. Payments are processed safely, and sellers
+                through Doohickey. Payments are processed safely, and sellers
                 receive payouts once transactions are completed.
               </p>
             </div>
@@ -888,7 +881,7 @@
               aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-five"
             >
               <p class="text-gray-600 dark:text-neutral-400">
-                Outsold is open to everything and anything — from physical
+                Doohickey is open to everything and anything — from physical
                 products and digital goods to creative services and unique
                 ideas. If you can imagine it, you can sell it. The only
                 limitation is that all listings must comply with our guidelines
@@ -906,7 +899,7 @@
               aria-expanded="false"
               aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-six"
             >
-              Is Outsold safe to use?
+              Is Doohickey safe to use?
               <svg
                 class="hs-accordion-active:hidden block shrink-0 size-5 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -943,7 +936,7 @@
               aria-labelledby="hs-basic-with-title-and-arrow-stretched-heading-six"
             >
               <p class="text-gray-600 dark:text-neutral-400">
-                Yes. Outsold includes secure payments, user accounts, chat
+                Yes. Doohickey includes secure payments, user accounts, chat
                 moderation, and community interaction tools to help create a
                 trusted and transparent marketplace experience.
               </p>
