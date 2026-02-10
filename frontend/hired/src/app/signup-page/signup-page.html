@@ -1,11 +1,11 @@
-<section class="mt-8 mb-8 relative overflow-hidden">
+<section class="bg-[#f9f6ee] mt-8 mb-8 relative overflow-hidden">
   <!-- Floating gradient shapes background -->
   <div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
     <div
-      class="absolute top-20 left-1/3 w-72 h-72 bg-[#4F46E5]/25 dark:bg-[#FFE135]/20 rounded-full blur-3xl animate-pulse"
+      class="absolute top-20 left-1/3 w-72 h-72 bg-[#E3A72F]/25 dark:bg-[#FFE135]/20 rounded-full blur-3xl animate-pulse"
     ></div>
     <div
-      class="absolute bottom-10 right-10 w-72 h-72 bg-[#FFE135]/30 dark:bg-[#4F46E5]/20 rounded-full blur-3xl animate-pulse delay-300"
+      class="absolute bottom-10 right-10 w-72 h-72 bg-[#FFE135]/30 dark:bg-[#E3A72F]/20 rounded-full blur-3xl animate-pulse delay-300"
     ></div>
   </div>
 
@@ -34,7 +34,7 @@
           Already have an account?
           <a
             routerLink="/login-page"
-            class="font-medium hover:underline ml-1 text-[#4F46E5] dark:text-[#FFE135]"
+            class="font-medium hover:underline ml-1 text-[#E3A72F] dark:text-[#FFE135]"
             >Login here</a
           >
         </p>
@@ -44,7 +44,7 @@
       <form
         [formGroup]="form"
         (ngSubmit)="signup()"
-        class="max-w-md lg:ml-auto w-full relative z-10 bg-white dark:bg-neutral-900 border border-slate-200 dark:border-neutral-700 rounded-xl p-6 shadow-lg"
+        class="max-w-md lg:ml-auto w-full relative z-10 bg-[#fffdf6] dark:bg-neutral-900 border border-slate-200 dark:border-neutral-700 rounded-xl p-6 shadow-lg"
       >
         <h2 class="text-3xl font-semibold mb-8 text-slate-900 dark:text-white">
           Sign up
@@ -73,7 +73,7 @@
               <input
                 formControlName="user_first_name"
                 type="text"
-                class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
+                class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
                 placeholder="First name"
               />
 
@@ -89,7 +89,7 @@
               <input
                 formControlName="user_last_name"
                 type="text"
-                class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
+                class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
                 placeholder="Last name"
               />
 
@@ -106,7 +106,7 @@
             <input
               type="text"
               formControlName="user_username"
-              class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 text-sm rounded-md border border-gray-200 dark:border-neutral-700 focus:border-[#4F46E5] dark:focus:border-[#FFE135] outline-none"
+              class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 text-sm rounded-md border border-gray-200 dark:border-neutral-700 focus:border-[#E3A72F] dark:focus:border-[#FFE135] outline-none"
               placeholder="Choose a username"
             />
 
@@ -130,7 +130,7 @@
             <input
               formControlName="user_email"
               type="email"
-              class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
+              class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
               placeholder="Enter email"
             />
 
@@ -151,7 +151,7 @@
             <input
               formControlName="user_password"
               type="password"
-              class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
+              class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
               placeholder="Create password"
             />
 
@@ -175,7 +175,7 @@
             <input
               formControlName="user_phone_number"
               type="text"
-              class="bg-slate-100 dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
+              class="bg-[#fffdf6] dark:bg-neutral-800 w-full px-4 py-3 rounded-md border border-gray-200 dark:border-neutral-700"
               placeholder="Enter phone number"
             />
           </div>
@@ -186,7 +186,7 @@
           <button
             type="submit"
             [disabled]="loading || form.invalid"
-            class="w-full py-2.5 px-4 text-[15px] font-medium rounded-md text-white bg-[#4F46E5] hover:bg-[#3b36c9] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#ffea67] shadow-xl transition-all"
+            class="w-full py-2.5 px-4 text-[15px] font-medium rounded-md text-white bg-[#E3A72F] hover:bg-[#996600] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#ffea67] shadow-xl transition-all"
           >
             @if (loading) {
             <span>Creating account...</span>

@@ -1,5 +1,5 @@
 <div
-  class="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-neutral-950 transition-colors duration-300"
+  class="min-h-screen flex flex-col items-center justify-center bg-[#f9f6ee] dark:bg-neutral-950 transition-colors duration-300"
 >
   <div class="py-6 px-4 w-full">
     <div
@@ -7,7 +7,7 @@
     >
       <!-- LOGIN FORM -->
       <div
-        class="border border-slate-300 dark:border-neutral-700 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] dark:shadow-[0_2px_22px_-4px_rgba(255,225,53,0.15)] max-lg:mx-auto bg-white dark:bg-neutral-900 transition-colors duration-300"
+        class="bg-[#fffdf6] border border-slate-300 dark:border-neutral-700 rounded-lg p-6 max-w-md shadow-[0_2px_22px_-4px_rgba(93,96,127,0.2)] dark:shadow-[0_2px_22px_-4px_rgba(255,225,53,0.15)] max-lg:mx-auto bg-[#f9f6ee] dark:bg-neutral-900 transition-colors duration-300"
       >
         <form [formGroup]="form" (ngSubmit)="login()" class="space-y-6">
           <div class="text-center lg:text-left">
@@ -34,7 +34,7 @@
                 required
                 formControlName="user_email"
                 name="user_email"
-                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
+                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#E3A72F] dark:focus:border-[#FFE135] transition-all"
                 placeholder="Enter your email"
               />
             </div>
@@ -52,7 +52,7 @@
                 required
                formControlName="user_password"
                 name="user_password"
-                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#4F46E5] dark:focus:border-[#FFE135] transition-all"
+                class="w-full text-sm text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-neutral-700 pl-4 pr-10 py-3 rounded-lg outline-none focus:border-[#E3A72F] dark:focus:border-[#FFE135] transition-all"
                 placeholder="Enter your password"
               />
             </div>
@@ -71,7 +71,7 @@
               <input
                 id="remember-me"
                 type="checkbox"
-                class="h-4 w-4 text-[#4F46E5] dark:text-[#FFE135] focus:ring-[#4F46E5] dark:focus:ring-[#FFE135] border-slate-300 dark:border-neutral-600 rounded"
+                class="accent-[#e3a72f] h-4 w-4 text-[#E3A72F] dark:text-[#FFE135] focus:ring-[#E3A72F] dark:focus:ring-[#FFE135] border-slate-300 dark:border-neutral-600 rounded"
               />
               <label
                 for="remember-me"
@@ -82,7 +82,7 @@
             </div>
             <a
               routerLink="/forgotPassword-page"
-              class="font-medium text-[#4F46E5] hover:underline dark:text-[#FFE135]"
+              class="font-medium text-[#e3a72f] hover:underline dark:text-[#FFE135]"
             >
               Forgot password?
             </a>
@@ -92,7 +92,7 @@
           <div class="!mt-12">
             <button
               type="submit"
-              class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-[#4F46E5] hover:bg-[#3b36c9] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#ffea67] focus:outline-none transition-all"
+              class="w-full shadow-xl py-2.5 px-4 text-[15px] font-medium tracking-wide rounded-lg text-white bg-[#e3a72f] hover:bg-[#996600] dark:bg-[#FFE135] dark:text-black dark:hover:bg-[#ffea67] focus:outline-none transition-all"
             >
               Login
             </button>
@@ -102,7 +102,7 @@
               Don't have an account?
               <a
                 routerLink="/signup-page"
-                class="font-medium ml-1 whitespace-nowrap text-[#4F46E5] hover:underline dark:text-[#FFE135]"
+                class="font-medium ml-1 whitespace-nowrap text-[#e3a72f] hover:underline dark:text-[#FFE135]"
               >
                 Register here
               </a>
@@ -121,14 +121,14 @@
               Empowering Creators Everywhere
             </h2>
             <p class="text-slate-600 dark:text-neutral-400 text-[15px]">
-              Join thousands of creators using Scrappy to grow their audience,
+              Join thousands of creators using Doohickey to grow their audience,
               boost sales, and collaborate with purpose.
             </p>
           </div>
 
           <div class="grid grid-cols-3 gap-6 mt-10">
             <div>
-              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+              <p class="text-3xl font-bold text-[#E3A72F] dark:text-[#FFE135]">
                 12K+
               </p>
               <p class="text-sm text-slate-600 dark:text-neutral-400">
@@ -136,7 +136,7 @@
               </p>
             </div>
             <div>
-              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+              <p class="text-3xl font-bold text-[#E3A72F] dark:text-[#FFE135]">
                 98%
               </p>
               <p class="text-sm text-slate-600 dark:text-neutral-400">
@@ -144,7 +144,7 @@
               </p>
             </div>
             <div>
-              <p class="text-3xl font-bold text-[#4F46E5] dark:text-[#FFE135]">
+              <p class="text-3xl font-bold text-[#E3A72F] dark:text-[#FFE135]">
                 2x
               </p>
               <p class="text-sm text-slate-600 dark:text-neutral-400">
@@ -154,14 +154,14 @@
           </div>
 
           <div
-            class="mt-10 p-6 rounded-lg bg-slate-50 dark:bg-neutral-800 shadow-md"
+            class="mt-10 p-6 rounded-lg bg-[#fffdf6] dark:bg-neutral-800 shadow-md"
           >
             <p class="italic text-slate-700 dark:text-neutral-300">
-              “Scrappy gives me the power to build and sell freely — no limits,
+              “Doohickey gives me the power to build and sell freely — no limits,
               just opportunities.”
             </p>
             <p class="mt-3 font-semibold text-slate-900 dark:text-white">
-              — A Scrappy Creator
+              — A Doohickey Creator
             </p>
           </div>
         </div>
