@@ -53,8 +53,6 @@ export class MarketplacePage {
   outStockCtrl = new FormControl(false);
 
   avgIC: Record<string, number> = {};
-icCount: Record<string, number> = {};
-
 
   constructor(
     private auth: AuthService,
@@ -94,11 +92,10 @@ icCount: Record<string, number> = {};
       .subscribe({
         next: (res: any) => {
           // Handle both APIs
-         this.products = res.data ?? res.results ?? [];
+          this.products = res.data ?? res.results ?? [];
 
-this.products.forEach(p => {
-  this.loadIC(p._id);
-});
+          this.products.forEach((p) => {
+          });
 
           this.loading = false;
         },
@@ -108,21 +105,7 @@ this.products.forEach(p => {
       });
   }
 
-  loadIC(productId: string) {
-
-  if (!productId) return;
-
-  this.product_service.getIC(productId).subscribe({
-    next: (res: any) => {
-      this.avgIC[productId] = res.avgIC;
-      this.icCount[productId] = res.count;
-    },
-    error: (err) => {
-      console.error('IC load failed', err);
-    },
-  });
-
-}
+  
 
   applyFilters() {
     const params: any = {};
@@ -148,11 +131,10 @@ this.products.forEach(p => {
 
     this.product_service.filter_product(params).subscribe({
       next: (res: any) => {
-this.products = res.data;
+        this.products = res.data;
 
-this.products.forEach(p => {
-  this.loadIC(p._id);
-});
+        this.products.forEach((p) => {
+        });
         this.loading = false;
       },
       error: () => {
@@ -189,15 +171,14 @@ this.products.forEach(p => {
     this.loading = true;
 
     this.product_service.list_products().subscribe({
-    next: (res: any) => {
-  this.products = res.data;
+      next: (res: any) => {
+        this.products = res.data;
 
-  this.products.forEach(p => {
-    this.loadIC(p._id);
-  });
+        this.products.forEach((p) => {
+        });
 
-  this.loading = false;
-},
+        this.loading = false;
+      },
 
       error: (err) => {
         console.error('Failed to load products', err);

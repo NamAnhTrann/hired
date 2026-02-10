@@ -59,6 +59,15 @@ const seller_schema = new mongoose.Schema(
       type: [String],
       default: [],
     },
+
+    store_rating: {
+
+    },
+
+    store_total_sale: {
+      type:Number, 
+      default:0
+    }
   },
   { timestamps: true }
 );

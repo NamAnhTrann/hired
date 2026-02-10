@@ -47,4 +47,22 @@ public get_seller() {
       payouts_enabled: boolean;
     }>(`${this.local_url}/status`, { withCredentials: true });
   }
+
+public getSellerFromProduct(productId: string) {
+  return this.http.get<{
+    success: boolean;
+    seller: Seller;
+  }>(
+    `${this.local_url}/get/seller/from_product/${productId}`
+  );
+}
+
+public listBySeller(userId: string) {
+  return this.http.get<any>(
+    `${this.local_url}/by-seller/${userId}`
+  );
+}
+
+
+
 }

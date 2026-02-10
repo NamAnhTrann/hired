@@ -1,4 +1,6 @@
-<section class="py-10 px-4 mt-16 :px-6 lg:px-8 bg-[#f9f6ee] dark:bg-neutral-950">
+<section
+  class="py-10 px-4 mt-16 :px-6 lg:px-8 bg-[#f9f6ee] dark:bg-neutral-950"
+>
   <div class="mx-auto max-w-[1800px] px-4">
     <!-- HEADER -->
     <header>
@@ -117,14 +119,7 @@
                         <span class="flex items-center gap-1 text-yellow-500">
                           <i class="fa-solid fa-lightbulb"></i>
 
-                          <span> {{ avgIC[item._id] }}/10 </span>
-                        </span>
-
-                        <!-- Votes -->
-                        <span class="flex items-center gap-1 text-slate-400">
-                          <i class="fa-regular fa-user"></i>
-
-                          <span> {{ icCount[item._id] }} votes </span>
+                          <span> {{ item.avgIC ?? 0 }}/10 </span>
                         </span>
                       </div>
                     </h3>
@@ -399,12 +394,20 @@
             </h3>
 
             <label class="flex items-center gap-2">
-              <input type="checkbox" [formControl]="inStockCtrl" class="accent-[#e3a72f]"/>
+              <input
+                type="checkbox"
+                [formControl]="inStockCtrl"
+                class="accent-[#e3a72f]"
+              />
               In Stock
             </label>
 
             <label class="flex items-center gap-2">
-              <input type="checkbox" [formControl]="outStockCtrl" class="accent-[#e3a72f]" />
+              <input
+                type="checkbox"
+                [formControl]="outStockCtrl"
+                class="accent-[#e3a72f]"
+              />
               Out of Stock
             </label>
           </div>

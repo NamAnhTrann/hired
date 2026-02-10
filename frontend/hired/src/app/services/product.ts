@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchResponse } from '../models/search_res';
+import { Product } from '../models/product_interface';
 const httpOptions = {
   withCredentials: true,
 };
@@ -25,9 +26,11 @@ export class Product_Service {
     return this.http.get(`${this.local_url}/list/all/product`);
   }
 
-  list_my_products() {
-    return this.http.get(`${this.local_url}/products/my-products`);
-  }
+list_my_products(): Observable<Product[]> {
+  return this.http.get<Product[]>(
+    `${this.local_url}/products/my-products`
+  );
+}
 
   list_single_product(product_id: string) {
     return this.http.get(`${this.local_url}/list/single/product/${product_id}`);

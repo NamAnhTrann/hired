@@ -10,11 +10,13 @@ import {
   not_found,
   unauthorized,
 } from "../middleware/error_handler";
+import { compute_display_rating } from "../utils/helper";
+import mongoose from "mongoose";
 
 export const create_seller_profile = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user._id;
@@ -77,7 +79,7 @@ export const create_seller_profile = async function (
 export const get_seller_profile = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user._id;
@@ -105,7 +107,7 @@ export const get_seller_profile = async function (
 export const get_status = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user._id;
@@ -114,7 +116,7 @@ export const get_status = async function (
     }
 
     const seller = await Seller.findOne({ user_id }).select(
-      "_id seller_status stripe_onboarded store_name"
+      "_id seller_status stripe_onboarded store_name",
     );
     return res.status(200).json({
       success: true,
@@ -134,7 +136,7 @@ export const get_status = async function (
 export const get_stats = async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const user_id = (req as any).user._id;
@@ -186,6 +188,112 @@ export const get_stats = async function (
       return next(bad_request(err.message));
     }
     //return intertal 500
+    return next(internal(err.message));
+  }
+};
+
+//get seller from product
+export const get_seller_from_product = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const product_id = req.params.product_id;
+    const product = await Product.findById(product_id);
+    if (!product) {
+      return next(not_found("Product not found"));
+    }
+
+    const seller = await Seller.findOne({
+      user_id: product.product_user,
+    });
+    if (!seller) {
+      return next(not_found("Seller not found"));
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, seller, message: "Seller found" });
+  } catch (err: any) {
+    return next(internal(err.message));
+  }
+};
+
+export const list_products_by_seller = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const sellerUserId = req.params.userId;
+
+    if (!sellerUserId) {
+      return next(bad_request("Seller user id required"));
+    }
+
+    const products = await Product.aggregate([
+      {
+        $match: {
+          product_user: new mongoose.Types.ObjectId(sellerUserId),
+        },
+      },
+
+      // Likes
+      {
+        $lookup: {
+          from: "likes",
+          localField: "_id",
+          foreignField: "product",
+          as: "likes",
+        },
+      },
+
+      // Comments
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "product",
+          as: "comments",
+        },
+      },
+
+      // Counts
+      {
+        $addFields: {
+          like_count: { $size: "$likes" },
+          comment_count: { $size: "$comments" },
+        },
+      },
+
+      // Remove arrays
+      {
+        $project: {
+          likes: 0,
+          comments: 0,
+        },
+      },
+    ]);
+
+    const finalProducts = products.map((p) => {
+      const { avgIC, avgStars } = compute_display_rating(p);
+
+      return {
+        ...p,
+        avgIC: Number(avgIC.toFixed(2)),
+        avgStars: Number(avgStars.toFixed(2)),
+      };
+    });
+
+    return res.status(200).json({
+      success: true,
+      data: finalProducts,
+      meta: {
+        total: finalProducts.length,
+      },
+    });
+  } catch (err: any) {
     return next(internal(err.message));
   }
 };

@@ -14,7 +14,7 @@ export interface Product {
 
   product_category: 'clothing' | 'digital' | 'electronic' | 'food' | 'other';
 
-  product_features: string[];
+  product_features: string[]; 
   shipping_info: string[];
   product_policies: string[];
 

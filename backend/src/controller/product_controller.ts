@@ -286,12 +286,24 @@ export const list_my_products = async function (
     const commentMap: Record<string, number> = {};
     commentCounts.forEach((i) => (commentMap[String(i._id)] = i.total));
 
-    const finalProducts = products.map((p) => ({
-      ...p,
-      like_count: likeMap[String(p._id)] || 0,
-      comment_count: commentMap[String(p._id)] || 0,
-      product_view_count: p.product_view_count ?? 0,
-    }));
+    const finalProducts = products.map((p) => {
+      const { avgIC, avgStars } = compute_display_rating(p);
+
+      return {
+        ...p,
+
+        // social
+        like_count: likeMap[String(p._id)] || 0,
+        comment_count: commentMap[String(p._id)] || 0,
+
+        // analytics
+        product_view_count: p.product_view_count ?? 0,
+
+        // ratings
+        avgIC: Number(avgIC.toFixed(2)),
+        avgStars: Number(avgStars.toFixed(2)),
+      };
+    });
 
     return res.status(200).json({
       success: true,
@@ -673,3 +685,4 @@ export const filter_product = async function (req: Request, res: Response) {
     });
   }
 };
+  

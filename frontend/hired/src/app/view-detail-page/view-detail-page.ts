@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject, Input } from '@angular/core';
 import { Product } from '../models/product_interface';
 import { Product_Service } from '../services/product';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Cart_Service } from '../services/cart';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,8 @@ import { Like_Service } from '../services/like';
 import { AuthService } from '../services/auth';
 import { Optimistic } from '../helper/optimistic';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Seller_Service } from '../services/seller';
+import { Seller } from '../models/seller_interface';
 
 @Component({
   selector: 'app-view-detail-page',
@@ -41,6 +43,7 @@ export class ViewDetailPage {
   avgIC: Record<string, number> = {};
   icCount: Record<string, number> = {};
   hoverIC: Record<string, number> = {};
+  seller: Seller | null = null;
 
   constructor(
     private productService: Product_Service,
@@ -49,6 +52,8 @@ export class ViewDetailPage {
     private commentService: Comment,
     private likeService: Like_Service,
     private auth: AuthService,
+    private sellerService: Seller_Service,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +62,6 @@ export class ViewDetailPage {
       .subscribe((u) => (this.current_user = u));
 
     this.list_product();
-    
   }
 
   // MAIN <-> SUB swap (keeps 1 main + 5 sub images)
@@ -85,7 +89,6 @@ export class ViewDetailPage {
           const product: Product = res.data;
 
           this.product = product;
-
           const images: string[] = Array.isArray(product.product_image)
             ? product.product_image
             : [];
@@ -103,6 +106,10 @@ export class ViewDetailPage {
         },
         error: (err: any) => console.error(err),
       });
+  }
+
+  goToSellerStore(): void {
+    this.router.navigate(['/seller-store-page', this.product!._id]);
   }
 
   // ADD TO CART

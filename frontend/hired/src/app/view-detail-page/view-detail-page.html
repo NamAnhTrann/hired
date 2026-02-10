@@ -273,7 +273,8 @@
             >
               <button
                 type="button"
-                routerLink="/profile-page"
+                (click)="goToSellerStore()"
+                [disabled]="!product"
                 class="group w-full px-6 py-5 text-left transition hover:bg-[#fff3db]"
               >
                 <!-- Top row -->
@@ -334,7 +335,7 @@
 
                       <!-- Bulbs -->
                       <div class="flex items-center gap-1">
-                        @for (i of [1,2,3,4,5,6,7,8,9,10]; track i) {
+                        @for (i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track i) {
                           <i
                             class="fa-solid fa-lightbulb cursor-pointer text-lg transition transform hover:scale-110"
                             [ngClass]="
@@ -352,17 +353,17 @@
                             "
                           >
                           </i>
-                        } 
+                        }
                       </div>
                     </div>
 
                     <!-- RIGHT: AVG + COUNT -->
                     <div class="flex items-center gap-2 text-xs text-slate-500">
-                      <span> Avg {{ avgIC[product._id]  }}/5 </span>
+                      <span> Avg {{ avgIC[product._id] }}/5 </span>
 
                       <span class="text-slate-300">•</span>
 
-                      <span> {{ icCount[product._id]  }} votes </span>
+                      <span> {{ icCount[product._id] }} votes </span>
                     </div>
                   </div>
                 </div>

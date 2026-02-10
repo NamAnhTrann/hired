@@ -43,11 +43,12 @@ export const routes: Routes = [
   { path: 'seller-page', component: SellerPage },
   { path: 'seller-create-page', component: SellerCreatePage },
   { path: 'term-and-condition-page', component: TermAndConditionPage },
-  { path: 'seller-store-page', component: SellerStorePage },
-  { path: 'profile-page', component: ProfilePage },
+  { path: 'seller-store-page/:productId', component: SellerStorePage },
+{ path: 'seller-profile-page/:productId', component: ProfilePage },
   { path: 'setting-page', component: SettingPage },
   { path: 'security-page', component: SecurityPage },
   { path: 'notification-page', component: NotificationPage },
   { path: 'billing-page', component: BillingPage },
   { path: 'verification-page', component: VerificationPage },
+
 ];

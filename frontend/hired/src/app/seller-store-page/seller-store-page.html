@@ -1,166 +1,146 @@
-<section class="bg-[#f9f6ee] dark:bg-neutral-950 min-h-screen px-4 sm:px-6 lg:px-10 py-10">
-
+<section
+  class="mt-4 bg-[#f9f6ee] dark:bg-neutral-950 min-h-screen px-4 sm:px-6 lg:px-10 py-10"
+>
   <div class="mt-10 max-w-[1800px] mx-auto">
-<!-- ================= SELLER BANNER (FULL BLEED) ================= -->
-<section class="relative w-full h-[420px] overflow-hidden">
+    <!-- ================= SELLER BANNER (FULL BLEED) ================= -->
+    <section class="relative w-full h-[420px] overflow-hidden rounded">
+      <!-- Background Image (FULL WIDTH) -->
+      <img
+        src="https://picsum.photos/2000/900"
+        class="absolute inset-0 w-full h-full object-cover"
+        alt="Store banner"
+      />
 
-  <!-- Background Image (FULL WIDTH) -->
-  <img
-    src="https://picsum.photos/2000/900"
-    class="absolute inset-0 w-full h-full object-cover"
-    alt="Store banner"
-  />
+      <!-- Dark Overlay -->
+      <div class="absolute inset-0 bg-black/50"></div>
 
-  <!-- Dark Overlay -->
-  <div class="absolute inset-0 bg-black/50"></div>
+      <!-- CONTENT CONTAINER (CONSTRAINED) -->
+      <div class="relative h-full">
+        <div class="max-w-[1800px] mx-auto px-6 h-full flex items-center">
+          <!-- LEFT CONTENT (UNCHANGED POSITION) -->
+          <div class="max-w-xl text-white">
+            <div class="flex items-center gap-4 mb-5">
+              <div
+                class="w-16 h-16 rounded-full bg-[#f9f6ee]/90 text-gray-900 font-bold text-xl flex items-center justify-center"
+              ></div>
 
-  <!-- CONTENT CONTAINER (CONSTRAINED) -->
-  <div class="relative h-full">
-    <div class="max-w-[1800px] mx-auto px-6 h-full flex items-center">
+              <div>
+                <h1 class="text-3xl font-semibold">
+                  {{ seller!.store_name }}
+                </h1>
+                <p class="text-sm text-white/80">
+                  {{ seller!.store_description }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-6 mt-6 text-sm text-white/90">
+              <span>⭐ 4.9 rating</span>
+              <span>3.9k sales</span>
+              <span>{{ experience }} years experience</span>
+            </div>
 
-      <!-- LEFT CONTENT (UNCHANGED POSITION) -->
-      <div class="max-w-xl text-white">
-
-        <div class="flex items-center gap-4 mb-5">
-          <div class="w-16 h-16 rounded-full bg-[#f9f6ee]/90 text-gray-900 font-bold text-xl flex items-center justify-center">
-            CW
+            <div class="flex gap-4 mt-8">
+              <button
+                class="px-6 py-3 rounded-full bg-[#e3a72f] hover:bg-[#996600] transition text-sm font-medium"
+              >
+                Follow Store
+              </button>
+              <button
+                (click)="to_seller_media()"
+                class="px-6 py-3 rounded-full border border-white/40 hover:bg-[#f9f6ee]/10 transition text-sm font-medium"
+              >
+                Contact Seller
+              </button>
+            </div>
           </div>
-
-          <div>
-            <h1 class="text-3xl font-semibold">
-              Claudette Worters
-              <i class="fa-solid fa-circle-check" style="color: #e3a72f;"></i>
-            </h1>
-            <p class="text-sm text-white/80">
-              Handmade Jewellery · United Kingdom
-            </p>
-          </div>
         </div>
-
-        <p class="text-lg leading-relaxed text-white/90">
-          Thoughtfully handcrafted jewellery made to celebrate meaningful moments.
-        </p>
-
-        <div class="flex items-center gap-6 mt-6 text-sm text-white/90">
-          <span>⭐ 4.9 rating</span>
-          <span>3.9k sales</span>
-          <span>8 years experience</span>
-        </div>
-
-        <div class="flex gap-4 mt-8">
-          <button class="px-6 py-3 rounded-full bg-[#e3a72f] hover:bg-[#996600] transition text-sm font-medium">
-            Follow Store
-          </button>
-          <button class="px-6 py-3 rounded-full border border-white/40 hover:bg-[#f9f6ee]/10 transition text-sm font-medium">
-            Contact Seller
-          </button>
-        </div>
-
       </div>
-    </div>
-  </div>
-
-</section>
+    </section>
 
     <!-- ================= MAIN LAYOUT ================= -->
     <div class="mt-10 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-10">
-
       <!-- ========== SIDEBAR ========= -->
       <aside
-  class="rounded-3xl bg-[#fffdf6] dark:bg-neutral-900 p-6 space-y-8
-         border border-gray-200 dark:border-neutral-800"
->
-
-  <!-- Sidebar Title -->
-  <div>
-    <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-5">
-      Store Categories
-    </h3>
-
-    <ul class="space-y-2 text-sm">
-
-      <!-- ACTIVE ITEM -->
-      <li
-        class="relative px-4 py-2 rounded-xl
-               bg-[#e3a72f] text-white font-medium
-               cursor-pointer shadow-sm"
+        class="rounded-3xl bg-[#fffdf6] dark:bg-neutral-900 p-6 space-y-8 border border-gray-200 dark:border-neutral-800"
       >
-        All Products
+        <!-- Sidebar Title -->
+        <div>
+          <h3
+            class="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-5"
+          >
+            Store Categories
+          </h3>
 
-        <!-- Left Accent -->
-        <span
-          class="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1
-                 bg-[#f9f6ee] rounded-r-full"
-        ></span>
-      </li>
+          <ul class="space-y-2 text-sm">
+            <!-- ACTIVE ITEM -->
+            <li
+              class="relative px-4 py-2 rounded-xl bg-[#e3a72f] text-white font-medium cursor-pointer shadow-sm"
+            >
+              All Products
 
-      <!-- INACTIVE ITEMS -->
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Diamond Jewellery
-      </li>
+              <!-- Left Accent -->
+              <span
+                class="absolute left-0 top-1/2 -translate-y-1/2 h-6 w-1 bg-[#f9f6ee] rounded-r-full"
+              ></span>
+            </li>
 
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Birthstone Necklaces
-      </li>
+            <!-- INACTIVE ITEMS -->
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Diamond Jewellery
+            </li>
 
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Birthstone Bracelets
-      </li>
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Birthstone Necklaces
+            </li>
 
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Constellation Necklaces
-      </li>
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Birthstone Bracelets
+            </li>
 
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Pearl Jewellery
-      </li>
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Constellation Necklaces
+            </li>
 
-      <li
-        class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300
-               hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
-      >
-        Personalised Items
-      </li>
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Pearl Jewellery
+            </li>
 
-    </ul>
-  </div>
+            <li
+              class="px-4 py-2 rounded-xl text-gray-700 dark:text-gray-300 hover:bg-[#f9f6ee] dark:hover:bg-neutral-800 cursor-pointer transition"
+            >
+              Personalised Items
+            </li>
+          </ul>
+        </div>
 
-  <!-- Divider -->
-  <div class="h-px bg-gray-200 dark:bg-neutral-800"></div>
+        <!-- Divider -->
+        <div class="h-px bg-gray-200 dark:bg-neutral-800"></div>
 
-  <!-- CTA -->
-  <button
-    class="w-full py-3 rounded-xl bg-[#e3a72f] text-white text-sm font-medium
-           hover:bg-[#996600] transition shadow-md"
-  >
-    Request Custom Order
-  </button>
-
-</aside>
+        <!-- CTA -->
+        <button
+          class="w-full py-3 rounded-xl bg-[#e3a72f] text-white text-sm font-medium hover:bg-[#996600] transition shadow-md"
+        >
+          Request Custom Order
+        </button>
+      </aside>
 
       <!-- ========== PRODUCTS ========= -->
       <main>
-
         <!-- Featured -->
         <div class="mb-10">
           <div class="flex items-center justify-between mb-5">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">
-              Featured Pieces
+              All Products
             </h2>
 
             <select class="text-sm border rounded-lg px-3 py-2">
@@ -169,258 +149,245 @@
               <option>Price: Low → High</option>
             </select>
           </div>
+          <!-- All Items -->
+          <div>
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+              <!-- Product Card -->
+              @for (p of products; track p._id) {
+                <div
+                  class="group cursor-pointer"
+                  [routerLink]="['/product', p._id]"
+                >
+                  <div
+                    class="relative aspect-square rounded-2xl overflow-hidden bg-gray-100 group"
+                  >
+                    <!-- Image -->
+                    <img
+                      [src]="p.product_image[0] || 'https://picsum.photos/600'"
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+                      (click)="viewDetail(p)"
+                    />
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Card -->
-            <div class="group cursor-pointer">
-              <div class="aspect-square rounded-2xl overflow-hidden bg-gray-100">
-                <img src="https://picsum.photos/600" class="w-full h-full object-cover group-hover:scale-105 transition">
-              </div>
-              <div class="mt-3">
-                <h3 class="text-sm font-medium line-clamp-2">
-                  Diamond Initial Necklace
-                </h3>
-                <p class="text-sm font-semibold mt-1">3,694,030đ</p>
-                        <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-              </div>
-            </div>
+                    <!-- Hover Overlay -->
+                    <div
+                      class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      (click)="viewDetail(p)"
+                    >
+                      <span
+                        class="text-white text-sm font-semibold tracking-wide uppercase"
+                      >
+                        View more detail
+                      </span>
+                    </div>
+                  </div>
 
-            <!-- duplicate cards -->
-            <div class="group cursor-pointer">
-              <div class="aspect-square rounded-2xl overflow-hidden bg-gray-100">
-                <img src="https://picsum.photos/601" class="w-full h-full object-cover group-hover:scale-105 transition">
-              </div>
-              <div class="mt-3">
-                <h3 class="text-sm font-medium line-clamp-2">
-                  Garnet Birthstone Necklace
-                </h3>
-                <p class="text-sm font-semibold mt-1">1,828,358đ</p>
-                        <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
+                  <div class="mt-2 space-y-1">
+                    <!-- Product Name -->
+                    <h3
+                      class="text-sm font-semibold text-gray-900 truncate"
+                      title="{{ p.product_title }}"
+                    >
+                      {{ p.product_title }}
+                    </h3>
+
+                    <!-- Price + Stock -->
+                    <div class="flex items-center justify-between text-sm">
+                      <span class="font-semibold text-[#e3a72f]">
+                        ${{ p.product_price }}
+                      </span>
+
+                      <span class="text-xs text-slate-500">
+                        {{
+                          p.product_quantity > 0
+                            ? p.product_quantity + " in stock"
+                            : "Out of stock"
+                        }}
+                      </span>
+                    </div>
+                    <!-- Row 1: Stars + Comments -->
+                    <div class="flex items-center justify-between">
+                      <!-- Left: Stars -->
+                      <div class="flex items-center gap-1">
+                        <p class="text-sm font-medium text-slate-600">
+                          {{ p.avgStars ?? 0 }}
+                        </p>
+
+                        @for (i of [1, 2, 3, 4, 5]; track i) {
+                          <svg
+                            class="w-3.5 h-3.5"
+                            [ngClass]="
+                              i <= (p.avgStars ?? 0)
+                                ? 'fill-[#e3a72f]'
+                                : 'fill-[#CED5D8]'
+                            "
+                            viewBox="0 0 14 13"
+                          >
+                            <path
+                              d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                            />
+                          </svg>
+                        }
+                      </div>
+
+                      <!-- Right: Comments -->
+                      <span class="text-xs text-slate-500 whitespace-nowrap">
+                        {{ p.comment_count }} comments
+                      </span>
+                    </div>
+
+                    <!-- Row 2: IC (Aligned Under Stars) -->
+                    <div
+                      class="flex items-center text-xs text-yellow-500 font-medium"
+                    >
+                      <i class="fa-solid fa-lightbulb"></i>
+                      {{ p.avgIC ?? 0 }}/10
+                    </div>
+                  </div>
                 </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-              </div>
+              }
+
+              <!-- repeat -->
             </div>
           </div>
         </div>
-
-        <!-- All Items -->
-        <div>
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-5">
-            All Items
-          </h2>
-
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Product Card -->
-            <div class="group cursor-pointer">
-              <div class="aspect-square rounded-2xl overflow-hidden bg-gray-100">
-                <img src="https://picsum.photos/602" class="w-full h-full object-cover group-hover:scale-105 transition">
-              </div>
-              <div class="mt-3 space-y-1">
-                <h3 class="text-sm font-medium line-clamp-2">
-                  Sapphire Birthstone Bracelet
-                </h3>
-                <p class="text-sm font-semibold">1,828,358đ</p>        
-                <div class="flex items-center gap-3 mt-2">
-                <div class="flex items-center gap-1">
-                  <p class="text-base text-slate-500">4</p>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-3.5 h-3.5 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-yellow-500">💡 10/10</p>
-                <span class="text-slate-500">|</span>
-                <p class="text-sm text-slate-500">50 comments</p>
-              </div>
-              </div>
-            </div>
-
-            <!-- repeat -->
-          </div>
-        </div>
-
       </main>
     </div>
-<!-- ================= STORE REVIEWS ================= -->
-<section class="mt-20 pt-16 border-t border-gray-200 dark:border-neutral-800">
-
-  <div class="max-w-[1200px] mx-auto">
-
-    <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
-
-      <div>
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-          Customer Reviews
-        </h2>
-        <p class="mt-2 text-sm text-gray-500">
-          Trusted by thousands of happy customers worldwide
-        </p>
-      </div>
-
-      <!-- Overall Rating -->
-      <div class="flex items-center gap-4 bg-[#fffdf6] dark:bg-neutral-900 rounded-2xl px-6 py-4">
-        <div class="text-4xl font-bold text-gray-900 dark:text-white">
-          4.9
-        </div>
-
-        <div>
-          <div class="flex items-center gap-1">
-            <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-          </div>
-          <p class="text-sm text-gray-500 mt-1">
-            Based on 827 reviews
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Reviews Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Review Card -->
-      <div class="rounded-2xl border bg-[#fffdf6] border-gray-200 dark:border-neutral-800 p-6">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-1">
-            <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-            <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
-              <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"/>
-            </svg>
-          </div>
-          <span class="text-xs text-gray-400">2 days ago</span>
-        </div>
-
-        <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-4">
-          Absolutely beautiful craftsmanship. The necklace arrived faster than expected and looks even better in person.
-        </p>
-        
-        <div class="mt-4 flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 text-sm font-semibold">
-            A
-          </div>
+    <!-- ================= STORE REVIEWS ================= -->
+    <section
+      class="mt-20 pt-16 border-t border-gray-200 dark:border-neutral-800"
+    >
+      <div class="max-w-[1200px] mx-auto">
+        <!-- Header -->
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10"
+        >
           <div>
-            <p class="text-sm font-medium">Anna L.</p>
-            <p class="text-xs text-gray-500">Verified buyer</p>
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+              Customer Reviews
+            </h2>
+            <p class="mt-2 text-sm text-gray-500">
+              Trusted by thousands of happy customers worldwide
+            </p>
+          </div>
+
+          <!-- Overall Rating -->
+          <div
+            class="flex items-center gap-4 bg-[#fffdf6] dark:bg-neutral-900 rounded-2xl px-6 py-4"
+          >
+            <div class="text-4xl font-bold text-gray-900 dark:text-white">
+              4.9
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1">
+                <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-4 h-4 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+              </div>
+              <p class="text-sm text-gray-500 mt-1">Based on 827 reviews</p>
+            </div>
           </div>
         </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Review Card -->
+          <div
+            class="rounded-2xl border bg-[#fffdf6] border-gray-200 dark:border-neutral-800 p-6"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+                <svg class="w-3.5 h-3.5 fill-[#e3a72f]" viewBox="0 0 14 13">
+                  <path
+                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z"
+                  />
+                </svg>
+              </div>
+              <span class="text-xs text-gray-400">2 days ago</span>
+            </div>
+
+            <p class="text-sm text-gray-700 dark:text-gray-300 line-clamp-4">
+              Absolutely beautiful craftsmanship. The necklace arrived faster
+              than expected and looks even better in person.
+            </p>
+
+            <div class="mt-4 flex items-center gap-3">
+              <div
+                class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 text-sm font-semibold"
+              >
+                A
+              </div>
+              <div>
+                <p class="text-sm font-medium">Anna L.</p>
+                <p class="text-xs text-gray-500">Verified buyer</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duplicate cards -->
+        </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-10">
+          <button
+            class="px-6 py-2 bg-[#fffdf6] rounded-full border border-gray-300 text-sm hover:bg-[#fff3db] dark:hover:bg-neutral-800"
+          >
+            View All Reviews
+          </button>
+        </div>
       </div>
-
-      <!-- Duplicate cards -->
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center mt-10">
-      <button class="px-6 py-2 bg-[#fffdf6] rounded-full border border-gray-300 text-sm hover:bg-[#fff3db] dark:hover:bg-neutral-800">
-        View All Reviews
-      </button>
-    </div>
-
-  </div>
-</section>
-
+    </section>
   </div>
 </section>
 <!-- ================= SELLER FAQ ================= -->
-<section class="bg-[#f9f6ee]  pt-10 border-t border-gray-200 dark:border-neutral-800">
-
+<section
+  class="bg-[#f9f6ee] pt-10 border-t border-gray-200 dark:border-neutral-800"
+>
   <div class="max-w-[1000px] mx-auto px-4">
-
     <!-- Header -->
     <div class="mb-10 text-center">
       <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -433,52 +400,54 @@
 
     <!-- FAQ List -->
     <div class="space-y-4 bg-[#f9f6ee]">
-
       <!-- FAQ Item -->
       <details
-        class="group rounded-2xl border border-gray-200 dark:border-neutral-800
-               bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
+        class="group rounded-2xl border border-gray-200 dark:border-neutral-800 bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
       >
-        <summary class="flex cursor-pointer list-none items-center justify-between">
-          <h3 class=" text-sm font-medium text-gray-900 dark:text-white">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between"
+        >
+          <h3 class="text-sm font-medium text-gray-900 dark:text-white">
             How long does it take to make and ship an order?
           </h3>
 
           <span
-            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full
-                   bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500
-                   group-open:rotate-45 transition"
+            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500 group-open:rotate-45 transition"
           >
             +
           </span>
         </summary>
 
-        <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p
+          class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+        >
           Most items are handmade to order and ship within 3–5 business days.
-          Delivery times vary depending on location, but tracking is always provided.
+          Delivery times vary depending on location, but tracking is always
+          provided.
         </p>
       </details>
 
       <!-- FAQ Item -->
       <details
-        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800
-               bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
+        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800 bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
       >
-        <summary class="flex cursor-pointer list-none items-center justify-between">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between"
+        >
           <h3 class="text-sm font-medium text-gray-900 dark:text-white">
             Can I request a custom or personalised piece?
           </h3>
 
           <span
-            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full
-                   bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500
-                   group-open:rotate-45 transition"
+            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500 group-open:rotate-45 transition"
           >
             +
           </span>
         </summary>
 
-        <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+        <p
+          class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+        >
           Yes! Custom orders are welcome. Use the “Request Custom Order” button
           in the sidebar or contact the seller directly to discuss your idea.
         </p>
@@ -486,57 +455,56 @@
 
       <!-- FAQ Item -->
       <details
-        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800
-               bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
+        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800 bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
       >
-        <summary class="flex cursor-pointer list-none items-center justify-between">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between"
+        >
           <h3 class="text-sm font-medium text-gray-900 dark:text-white">
             What materials are used in the jewellery?
           </h3>
 
           <span
-            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full
-                   bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500
-                   group-open:rotate-45 transition"
+            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500 group-open:rotate-45 transition"
           >
             +
           </span>
         </summary>
 
-        <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-          All pieces are crafted using high-quality materials such as sterling silver,
-          gold vermeil, and ethically sourced gemstones.
+        <p
+          class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+        >
+          All pieces are crafted using high-quality materials such as sterling
+          silver, gold vermeil, and ethically sourced gemstones.
         </p>
       </details>
 
       <!-- FAQ Item -->
       <details
-        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800
-               bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
+        class="bg-[#fffdf6] group rounded-2xl border border-gray-200 dark:border-neutral-800 bg-[#fffdf6] dark:bg-neutral-900 p-6 transition"
       >
-        <summary class="flex cursor-pointer list-none items-center justify-between">
+        <summary
+          class="flex cursor-pointer list-none items-center justify-between"
+        >
           <h3 class="text-sm font-medium text-gray-900 dark:text-white">
             Do you accept returns or exchanges?
           </h3>
 
           <span
-            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full
-                   bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500
-                   group-open:rotate-45 transition"
+            class="ml-4 flex h-8 w-8 items-center justify-center rounded-full bg-[#f9f6ee] dark:bg-neutral-800 text-gray-500 group-open:rotate-45 transition"
           >
             +
           </span>
         </summary>
 
-        <p class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-          Returns are accepted within 14 days for non-custom items.
-          Custom and personalised orders are non-refundable unless faulty.
+        <p
+          class="mt-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
+        >
+          Returns are accepted within 14 days for non-custom items. Custom and
+          personalised orders are non-refundable unless faulty.
         </p>
       </details>
-
     </div>
-
   </div>
-  <br>
+  <br />
 </section>
-
