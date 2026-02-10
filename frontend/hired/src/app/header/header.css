@@ -1,52 +1,85 @@
-/* header.css */
+/* ================= HEADER NAV LINKS ================= */
 
 .nav-link {
   position: relative;
-  transition: color 0.2s ease;
-  display: inline-block; /* fix underline alignment */
+  display: inline-block;
+  padding-bottom: 4px; /* space for underline */
+  font-weight: 500;
+
+  transition: color 0.25s ease;
 }
 
 
+/* Underline animation */
 .nav-link::after {
   content: "";
   position: absolute;
-  bottom: 0px;
+
   left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  transform-origin: center;
+  bottom: 0;
+
   width: 100%;
   height: 2px;
-background: rgb(112, 80, 226);
+
+  background: #e3a72f;
+
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+
   transition: transform 0.3s ease;
 }
 
+
+/* Hover underline */
 .nav-link:hover::after {
   transform: translateX(-50%) scaleX(1);
 }
 
+
+/* Active route */
 .active-link {
-  color: #000;
+  color: #e3a72f;
+  font-weight: 600;
 }
 
 .active-link::after {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* Disable underline + hover for mobile dropdown */
+
+
+/* ================= MOBILE FIX ================= */
+
 @media (max-width: 1023px) {
+
+  /* Disable underline on mobile menu */
   .mobile-nav .nav-link::after {
     display: none !important;
   }
 
   .mobile-nav .nav-link:hover {
     color: inherit !important;
-    opacity: 1 !important;
   }
 
   .mobile-nav .nav-link {
+    padding-bottom: 0;
     transition: none !important;
   }
 }
+
+
+
+/* ================= DROPDOWN LINKS ================= */
+
+.dropdown-item {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #f9f6ee;
+  color: #e3a72f;
+}
+
 
 
 
