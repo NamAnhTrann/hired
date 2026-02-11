@@ -15,6 +15,7 @@ export class Header {
   cartCount = 0;
   isMenuOpen = false;
   openMenu: string | null = null;
+  isProfileOpen = false;
   constructor(
     public auth: AuthService,
     private router: Router,
@@ -22,10 +23,22 @@ export class Header {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+    if (this.isMenuOpen) {
+    this.isProfileOpen = false;
   }
+  }
+
+  toggleProfile() {
+    this.isProfileOpen = !this.isProfileOpen;
+  }
+
+  closeProfile() {
+    this.isProfileOpen = false;
+  }
+
   toggleSubMenu(name: string) {
-  this.openMenu = this.openMenu === name ? null : name;
-}
+    this.openMenu = this.openMenu === name ? null : name;
+  }
   public logout() {
     if (!confirm('Are you sure you want to logout?')) return;
 
@@ -39,16 +52,10 @@ export class Header {
     });
   }
 
-  @HostListener('window:scroll', [])
-  onScroll() {
-    const current = window.scrollY;
 
-    if (current > this.lastScrollTop && current > 20) {
-      this.isShrunk = true;
-    } else {
-      this.isShrunk = false;
-    }
+@HostListener('window:scroll', [])
+onScroll() {
+  this.isShrunk = window.scrollY > 20;
+}
 
-    this.lastScrollTop = current <= 0 ? 0 : current;
-  }
 }

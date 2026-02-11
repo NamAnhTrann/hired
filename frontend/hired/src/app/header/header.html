@@ -1,320 +1,245 @@
-<!-- ========== PROMO BAR ========== -->
-<div
-  class="fixed top-0 left-0 w-full z-[60] bg-[#e3a72f] text-white text-sm text-center h-10 flex items-center justify-center"
->
-  <span>
-    Summer Sale: Save up to 40% on select items. Limited-time offer!
-  </span>
-</div>
-<!-- ========== END PROMO BAR ========== -->
-
-<!-- ========== HEADER ========== -->
-<header
-  class="fixed top-10 left-0 w-full z-50 bg-[#fffdf6] border-b border-gray-200 h-20 flex items-center"
->
-  <nav
-  class="max-w-7xl mx-auto w-full grid grid-cols-12 items-center h-20 px-8"
->
-  <!-- LEFT -->
-  <div class="col-span-4 hidden lg:flex items-center gap-5 justify-start">
-
-    <a
-  routerLink="/"
-  routerLinkActive="active-link"
-  [routerLinkActiveOptions]="{ exact: true }"
-  class="nav-link text-lg font-medium"
->
-      Home
-    </a>
-
-    <a
-      routerLink="/marketplace-page"
-      routerLinkActive="active-link"
-      class="nav-link text-lg font-medium"
-    >
-      Marketplace
-    </a>
-
-    @if (auth.isLoggedIn()) {
-      <a
-        routerLink="/dashboard-page"
-        routerLinkActive="active-link"
-        class="nav-link text-lg font-medium"
-      >
-        Dashboard
-      </a>
-    }
-
-    <a
-      routerLink="/seller-store-page"
-      routerLinkActive="active-link"
-      class="nav-link text-lg font-medium"
-    >
-      Seller
-    </a>
-
-  </div>
-
-
-  <!-- CENTER LOGO -->
-  <div class="col-span-4 flex justify-center items-center gap-2">
-
-    <a
-      routerLink="/"
-      class="flex items-center gap-2 font-semibold text-lg"
-    >
-      <img
-  src="/assets/Doohickey_logo.png"
-  class="h-9 w-9 object-contain"
-/>
-
-      <span class="text-xl font-semibold">Doohickey</span>
-  </a>
-
-  </div>
-
-  <!-- RIGHT -->
-<div class="col-span-4 hidden lg:flex items-center gap-5 justify-end">
-    <!-- Notifications -->
-<a
-  routerLink="/notifications-page"
-  class="flex items-center gap-1 text-sm hover:text-[#e3a72f] relative"
->
-  <div class="relative">
-    <i class="fa-regular fa-bell text-xl"></i>
-
-    <!-- Badge -->
-    <span
-      class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
-    >
-      5
-    </span>
-  </div>
-
-  <span class="hidden font-medium md:block">
-    Notifications
-  </span>
-</a>
-
-
-    <!-- Wishlist -->
-<a
-  routerLink="/wishlist-page"
-  class="flex items-center gap-1 text-sm hover:text-[#e3a72f] relative"
->
-  <div class="relative">
-    <i class="fa-regular fa-heart text-xl"></i>
-
-    <!-- Badge -->
-    <span
-      class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
-    >
-      2
-    </span>
-  </div>
-
-  <span class="hidden font-medium md:block">
-    Wishlist
-  </span>
-</a>
-    <!-- Cart -->
-<a
-  routerLink="/cart-page"
-  class="flex items-center gap-1 text-sm hover:text-[#e3a72f] relative"
->
-  <div class="relative">
-    <i class="fa-solid fa-cart-shopping text-xl"></i>
-
-    <!-- Badge -->
-    <span
-      class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
-    >
-      4
-    </span>
-  </div>
-
-  <span class="hidden font-medium md:block">
-    Cart
-  </span>
-</a>
-    <!-- AUTH -->
-    @if (auth.user$ | async; as user) {
-
-     <!-- AUTH -->
-@if (auth.user$ | async; as user) {
-
-<!-- Profile Dropdown -->
-<div class="relative">
-
-  <!-- Avatar Button -->
-    <button
-  (click)="isProfileOpen = !isProfileOpen"
-  class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200"
->
-
-  >
-    <i class="fa-solid fa-user text-base"></i>
-  </button>
-
-  <!-- Dropdown Menu -->
-    <div
-  class="absolute right-0 mt-2 w-52 bg-[#fffdf6] border rounded-lg shadow-md
-         opacity-0 invisible group-hover:opacity-100 group-hover:visible transition
-         z-[9999]"
->
-
-    <!-- User Info -->
-    <div class="px-4 py-3 border-b border-gray-200">
-      <p class="text-sm font-semibold">My Account</p>
-      <p class="text-xs text-gray-500 truncate">
-        {{ user?.email || 'user@email.com' }}
-      </p>
-    </div>
-
-    <!-- Menu Links -->
-    <a
-  routerLink="/settings-page"
-  class="block px-4 py-2 text-sm hover:bg-[#fff3db] transition"
->
-  ⚙️ Settings
-</a>
-
-    <a
-      routerLink="/orders-page"
-      class="block px-4 py-2 text-sm hover:bg-[#fff3db] transition"
-    >
-      📦 Orders
-    </a>
-    
-    <a
-      routerLink="/profile-page"
-      class="block px-4 py-2 text-sm hover:bg-[#fff3db] transition"
-    >
-      👤 Profile
-    </a>
-
-    <!-- Logout -->
-    <button
-      (click)="logout()"
-      class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition rounded-b-xl"
-    >
-      🚪 Logout
-    </button>
-
-  </div>
-
-
-    <!-- Dropdown -->
-    <div
-      class="absolute right-0 mt-2 w-52 bg-[#fffdf6] border rounded-lg shadow-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition"
-    >
-
-      <a routerLink="/dashboard-page" class="dropdown-item">
-        My Account
-      </a>
-
-      <a routerLink="/orders-page" class="dropdown-item">
-        Orders
-      </a>
-
-      <a routerLink="/wishlist-page" class="dropdown-item">
-        Wishlist
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <!-- Logout Button (VISIBLE like before) -->
-  <button
-    (click)="logout()"
-    class="px-4 py-2 rounded-md bg-red-600 text-white text-sm hover:bg-red-500 transition flex items-center gap-1"
-  >
-    Logout
-    <i class="fa-solid fa-right-from-bracket text-xs"></i>
-  </button>
-
-
-} @else {
-
-  <!-- Sign In -->
-  <a
-    routerLink="/login-page"
-    class="px-4 py-2 rounded-md border border-[#e3a72f] text-[#e3a72f] text-sm hover:bg-[#fff3db]"
-  >
-    Sign In
-  </a>
-
-  <!-- Sign Up -->
-  <a
-    routerLink="/signup-page"
-    class="px-4 py-2 rounded-md bg-[#e3a72f] text-white text-sm hover:bg-[#996600]"
-  >
-    Sign Up
-  </a>
-
-}
-
-    } @else {
-
-      <!-- Sign In -->
-      <a
-        routerLink="/login-page"
-        class="px-4 py-2 rounded-md border border-[#e3a72f] text-[#e3a72f] text-sm hover:bg-[#fff3db]"
-      >
-        Sign In
-      </a>
-
-      <!-- Sign Up -->
-      <a
-        routerLink="/signup-page"
-        class="px-4 py-2 rounded-md bg-[#e3a72f] text-white text-sm hover:bg-[#996600]"
-      >
-        Sign Up
-      </a>
-
-    }
-
-
-    <!-- Mobile Button -->
-    <button
-      (click)="toggleMenu()"
-      class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full bg-gray-100"
-    >
-      <i
-        class="fa-solid"
-        [ngClass]="isMenuOpen ? 'fa-xmark' : 'fa-bars'"
-      ></i>
-    </button>
-
-  </div>
-
-</nav>
-
-
-  <!-- ========== MOBILE MENU ========== -->
+<div class="fixed top-0 left-0 w-full z-[60]">
+  <!-- PROMO -->
   <div
-    class="lg:hidden bg-[#fffdf6] border-t"
-    [class.hidden]="!isMenuOpen"
+    class="bg-[#e3a72f] text-white text-sm text-center flex items-center justify-center py-2 md:py-3"
   >
-
-    <div class="flex flex-col p-4 gap-3">
-
-      <a routerLink="/" class="mobile-link">Home</a>
-      <a routerLink="/marketplace-page" class="mobile-link">Marketplace</a>
-      <a routerLink="/seller-store-page" class="mobile-link">Seller</a>
-
-      @if (auth.isLoggedIn()) {
-        <a routerLink="/dashboard-page" class="mobile-link">Dashboard</a>
-      }
-
-      <a routerLink="/cart-page" class="mobile-link">Cart</a>
-      <a routerLink="/wishlist-page" class="mobile-link">Wishlist</a>
-
-    </div>
-
+    <span>
+      It's Doohickey Opening Day!! 
+      Limited Offer of 40% discount to all first purchase! 
+    </span>
   </div>
 
-</header>
-<!-- ========== END HEADER ========== -->
+  <!-- ========== HEADER ========== -->
+  <header
+    [ngClass]="{
+      'h-16 shadow-md': isShrunk,
+      'h-20 shadow-none': !isShrunk,
+    }"
+    class="sticky top-0 w-full backdrop-blur-xl bg-white/70 border-b border-white/30 flex items-center transition-all duration-300"
+  >
+    <nav
+      class="max-w-7xl mx-auto w-full flex items-center justify-between h-full px-8 transition-all duration-300"
+    >
+      <!-- LEFT -->
+      <div class="flex items-center">
+        <!-- Logo -->
+        <a
+          routerLink="/"
+          class="mr-4 flex items-center gap-2 font-semibold text-lg shrink-0"
+        >
+          <img
+            src="/assets/Doohickey_logo.png"
+            [class.h-7]="isShrunk"
+            [class.h-9]="!isShrunk"
+            class="w-9 object-contain transition-all duration-300"
+          />
+          <span
+            [ngClass]="{
+              'text-lg': isShrunk,
+              'text-xl': !isShrunk,
+            }"
+            class="font-semibold transition-all duration-300"
+          >
+            Doohickey
+          </span>
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden lg:flex items-center gap-5 ml-10">
+          <a
+            routerLink="/"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link text-base"
+          >
+            Home
+          </a>
+
+          <a
+            routerLink="/marketplace-page"
+            routerLinkActive="active-link"
+            class="nav-link text-base"
+          >
+            Marketplace
+          </a>
+
+          @if (auth.isLoggedIn()) {}
+
+          <a
+            routerLink="/about-us-page"
+            routerLinkActive="active-link"
+            class="nav-link text-base"
+          >
+            About Doohickey
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="flex items-center gap-5">
+        <!-- Mobile Hamburger -->
+        <button
+          (click)="toggleMenu()"
+          class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full bg-gray-100"
+        >
+          <i
+            class="fa-solid"
+            [ngClass]="isMenuOpen ? 'fa-xmark' : 'fa-bars'"
+          ></i>
+        </button>
+
+        <!-- Desktop Icons -->
+        <div class="hidden lg:flex items-center gap-5">
+          <!-- Notifications -->
+          <a
+            routerLink="/notifications-page"
+            class="flex items-center gap-1 text-sm relative transition-colors duration-200 ease-in-out hover:text-[#e3a72f]"
+          >
+            <div class="relative">
+              <i class="fa-regular fa-bell text-xl"></i>
+
+              <span
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
+              >
+                5
+              </span>
+            </div>
+
+            <span class="hidden md:block font-medium"> Notifications </span>
+          </a>
+
+          <!-- Cart -->
+          <a
+            routerLink="/cart-page"
+            class="flex items-center gap-1 text-sm transition-colors duration-200 ease-in-out hover:text-[#e3a72f] relative"
+          >
+            <div class="relative">
+              <i class="fa-solid fa-cart-shopping text-xl"></i>
+
+              <span
+                class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
+              >
+                4
+              </span>
+            </div>
+
+            <span class="hidden md:block font-medium"> Cart </span>
+          </a>
+
+          <!-- AUTH -->
+          @if (auth.user$ | async; as user) {
+            <div class="relative">
+              <button
+                (click)="toggleProfile()"
+                class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200"
+              >
+                <i class="fa-solid fa-user"></i>
+              </button>
+
+              @if (isProfileOpen) {
+                <div
+                  class="absolute right-0 mt-2 w-52 bg-[#fffdf6] border rounded-lg shadow-md"
+                >
+                  <div class="px-4 py-3 border-b">
+                    <p class="text-sm font-semibold">My Account</p>
+                    <p class="text-xs text-gray-500 truncate">
+                      {{ user.email }}
+                    </p>
+                  </div>
+
+                  <a
+                    routerLink="/profile-page"
+                    (click)="closeProfile()"
+                    class="block px-4 py-2 text-sm hover:bg-[#fff3db]"
+                  >
+                    👤 Profile
+                  </a>
+
+                  <a
+                    routerLink="/dashboard-page"
+                    (click)="closeProfile()"
+                    class="block px-4 py-2 text-sm hover:bg-[#fff3db]"
+                  >
+                    👤 Dashboard
+                  </a>
+
+                  <a
+                    routerLink="/orders-page"
+                    (click)="closeProfile()"
+                    class="block px-4 py-2 text-sm hover:bg-[#fff3db]"
+                  >
+                    📦 Orders
+                  </a>
+
+                  <a
+                    routerLink="/setting-page"
+                    (click)="closeProfile()"
+                    class="block px-4 py-2 text-sm hover:bg-[#fff3db]"
+                  >
+                    ⚙️ Settings
+                  </a>
+
+                  <button
+                    (click)="logout(); closeProfile()"
+                    class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                  >
+                    🚪 Logout
+                  </button>
+                </div>
+              }
+            </div>
+          } @else {
+            <a
+              routerLink="/login-page"
+              class="px-4 py-2 rounded-md border border-[#e3a72f] text-[#e3a72f] text-sm hover:bg-[#fff3db]"
+            >
+              Sign In
+            </a>
+          }
+        </div>
+      </div>
+    </nav>
+
+    <!-- ========== MOBILE MENU ========== -->
+    <div
+      class="lg:hidden absolute top-full left-0 w-full bg-[#fffdf6] border-t shadow-md"
+      [class.hidden]="!isMenuOpen"
+    >
+      <div class="max-w-7xl mx-auto flex flex-col p-4 gap-3 px-8">
+        <a routerLink="/" class="mobile-link" (click)="toggleMenu()">Home</a>
+        <a
+          routerLink="/marketplace-page"
+          class="mobile-link"
+          (click)="toggleMenu()"
+          >Marketplace</a
+        >
+        <a
+          routerLink="/seller-store-page"
+          class="mobile-link"
+          (click)="toggleMenu()"
+          >Seller</a
+        >
+
+        @if (auth.isLoggedIn()) {
+          <a
+            routerLink="/dashboard-page"
+            class="mobile-link"
+            (click)="toggleMenu()"
+            >Dashboard</a
+          >
+        }
+
+        <a routerLink="/cart-page" class="mobile-link" (click)="toggleMenu()"
+          >Cart</a
+        >
+        <a
+          routerLink="/wishlist-page"
+          class="mobile-link"
+          (click)="toggleMenu()"
+          >Wishlist</a
+        >
+      </div>
+    </div>
+  </header>
+  <!-- ========== END HEADER ========== -->
+</div>
