@@ -15,7 +15,7 @@
       'h-16 shadow-md': isShrunk,
       'h-20 shadow-none': !isShrunk,
     }"
-    class="sticky top-0 w-full backdrop-blur-xl bg-white/70 border-b border-white/30 flex items-center transition-all duration-300"
+    class="sticky top-0 w-full backdrop-blur-xl bg-[#fffdf6]/70 border-b border-white/30 flex items-center transition-all duration-300"
   >
     <nav
       class="max-w-7xl mx-auto w-full flex items-center justify-between h-full px-8 transition-all duration-300"
@@ -64,16 +64,39 @@
           </a>
 
           @if (auth.isLoggedIn()) {}
-
-          <a
-            routerLink="/about-us-page"
-            routerLinkActive="active-link"
-            class="nav-link text-base"
-          >
-            About Doohickey
-          </a>
         </div>
       </div>
+<!-- SEARCH BAR -->
+<div class="hidden md:flex flex-1 justify-center px-6">
+  <div class="w-full max-w-md">
+
+    <div
+      class="relative h-11 bg-white border border-[#e3a72f]/30 rounded-full shadow-sm overflow-hidden flex items-center"
+    >
+
+      <!-- Icon -->
+      <span class="pl-4 text-gray-400 flex items-center">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+
+      <!-- Input -->
+      <input
+        type="text"
+        placeholder="Search products, brands..."
+        class="flex-1 h-full px-3 text-sm bg-transparent outline-none placeholder-gray-400"
+      />
+
+      <!-- Button -->
+      <button
+        class="h-9 mr-1 px-5 rounded-full bg-[#e3a72f] text-white text-sm font-medium hover:bg-[#996600] transition flex items-center justify-center"
+      >
+        Search
+      </button>
+
+    </div>
+
+  </div>
+</div>
 
       <!-- RIGHT -->
       <div class="flex items-center gap-5">
@@ -91,41 +114,48 @@
         <!-- Desktop Icons -->
         <div class="hidden lg:flex items-center gap-5">
           <!-- Notifications -->
-          <a
-            routerLink="/notifications-page"
-            class="flex items-center gap-1 text-sm relative transition-colors duration-200 ease-in-out hover:text-[#e3a72f]"
-          >
-            <div class="relative">
-              <i class="fa-regular fa-bell text-xl"></i>
+<a
+  routerLink="/notifications-page"
+  routerLinkActive="active-link"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="nav-link"
+>
+  <div class="flex items-center gap-1 text-base font-medium">
+    <div class="relative">
+      <i class="fa-regular fa-bell text-xl"></i>
 
-              <span
-                class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
-              >
-                5
-              </span>
-            </div>
+      <span
+        class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
+      >
+        5
+      </span>
+    </div>
 
-            <span class="hidden md:block font-medium"> Notifications </span>
-          </a>
+    <span class="hidden md:block">Notifications</span>
+  </div>
+</a>
 
           <!-- Cart -->
-          <a
-            routerLink="/cart-page"
-            class="flex items-center gap-1 text-sm transition-colors duration-200 ease-in-out hover:text-[#e3a72f] relative"
-          >
-            <div class="relative">
-              <i class="fa-solid fa-cart-shopping text-xl"></i>
+<a
+  routerLink="/cart-page"
+  routerLinkActive="active-link"
+  [routerLinkActiveOptions]="{ exact: true }"
+  class="nav-link"
+>
+  <div class="flex items-center gap-1 text-base font-medium">
+    <div class="relative">
+      <i class="fa-solid fa-cart-shopping text-xl"></i>
 
-              <span
-                class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
-              >
-                4
-              </span>
-            </div>
+      <span
+        class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1"
+      >
+        4
+      </span>
+    </div>
 
-            <span class="hidden md:block font-medium"> Cart </span>
-          </a>
-
+    <span class="hidden md:block">Cart</span>
+  </div>
+</a>
           <!-- AUTH -->
           @if (auth.user$ | async; as user) {
             <div class="relative">
@@ -191,7 +221,7 @@
           } @else {
             <a
               routerLink="/login-page"
-              class="px-4 py-2 rounded-md border border-[#e3a72f] text-[#e3a72f] text-sm hover:bg-[#fff3db]"
+              class="px-5 py-2 rounded-full bg-[#e3a72f] text-white text-sm font-semibold hover:scale-105 hover:bg-[#996600] transition-all shadow-md"
             >
               Sign In
             </a>
