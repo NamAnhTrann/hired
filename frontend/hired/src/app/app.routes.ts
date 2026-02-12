@@ -44,6 +44,7 @@ export const routes: Routes = [
   { path: 'seller-create-page', component: SellerCreatePage },
   { path: 'term-and-condition-page', component: TermAndConditionPage },
   { path: 'seller-store-page/:productId', component: SellerStorePage },
+  { path: 'seller-store-page', component: SellerStorePage },
 { path: 'seller-profile-page/:productId', component: ProfilePage },
 { path: 'profile-page', component: ProfilePage },
   { path: 'setting-page', component: SettingPage },
