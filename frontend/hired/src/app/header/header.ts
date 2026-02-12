@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../services/auth';
+import { Cart_Service } from '../services/cart';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { AuthService } from '../services/auth';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+  export class Header implements OnInit {
   isShrunk = false;
   private lastScrollTop = 0;
   cartCount = 0;
@@ -19,7 +20,14 @@ export class Header {
   constructor(
     public auth: AuthService,
     private router: Router,
+    private cart: Cart_Service,
   ) {}
+  ngOnInit(): void {
+  this.cart.list_cart().subscribe();
+  this.cart.cartCount$.subscribe((count) => {
+    this.cartCount = count;
+  });
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
