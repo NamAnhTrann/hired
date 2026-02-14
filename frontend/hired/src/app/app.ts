@@ -52,14 +52,8 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth.load_user().subscribe({
-      next: (res: any) => {
-        console.log('User is logged in:', res.user);
-      },
-      error: () => {
-        console.log('No user logged in');
-      }
-    });
+    this.auth.load_user().subscribe(
+    );
   }
 
   hideHeader(): boolean {

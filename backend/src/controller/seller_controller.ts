@@ -33,7 +33,8 @@ export const create_seller_profile = async function (
       });
     }
 
-    const { store_name, store_description, store_address, store_logo } = req.body;
+    const { store_name, store_description, store_address, store_logo } =
+      req.body;
 
     if (!store_name) {
       return next(bad_request("Store name is required"));
@@ -43,8 +44,8 @@ export const create_seller_profile = async function (
       return next(bad_request("Store description is required"));
     }
 
-    if(!store_logo) {
-      return next(bad_request("Store logo is a must"))
+    if (!store_logo) {
+      return next(bad_request("Store logo is a must"));
     }
 
     const require_address = ["street", "city", "state", "postcode", "country"];
@@ -80,8 +81,6 @@ export const create_seller_profile = async function (
     return next(internal(err.message));
   }
 };
-
-
 
 export const get_seller_profile = async function (
   req: Request,
@@ -305,10 +304,62 @@ export const list_products_by_seller = async (
   }
 };
 
-export const seller_store_page_edit = async function(req:Request, res:Response, next:NextFunction){
+export const seller_store_page_edit = async function (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   try {
-    
-  } catch (err:any)
-{
-  
-}}
+    //get user_id
+    const user_id = (req as any).user?._id;
+
+    //validate user
+    if (!user_id) {
+      return next(unauthorized("unauthorised"));
+    }
+
+    //data request as body (address can be dealt with later)
+    const {
+      store_name,
+      store_description,
+      store_logo,
+      store_banner,
+    } = req.body;
+
+    //assigned data to variable
+    const update_data: any = {};
+
+    //validates
+    if (store_name) {
+      update_data.store_name = store_name;
+    }
+
+
+    if (store_description) {
+      update_data.store_name = store_name;
+    }
+    if (store_logo) {
+      update_data.store_name = store_logo;
+    }
+    if (store_banner) {
+      update_data.store_name = store_banner;
+    }
+
+    const seller = await Seller.findOneAndUpdate(
+      { user_id },
+      { $set: update_data },
+      { new: true },
+    );
+    if (!seller) {
+      return next(not_found("Seller store not found"));
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, message: "store updated", data: seller });
+  } catch (err: any) {
+    if (err.name === "ValidationError") {
+      return next(bad_request(err.message));
+    }
+  }
+};

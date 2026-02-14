@@ -61,23 +61,25 @@ const seller_schema = new mongoose.Schema(
     },
 
     store_rating: {
-      type:Number
+      type: Number,
+      default: 0,
     },
 
     store_logo: {
-      type:String,
-      required:true
+      type: String,
+      required: true,
     },
 
-    store_banner : {
-      type:String,
-      default: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&h=600&q=80"
+    store_banner: {
+      type: String,
+      default:
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&h=600&q=80",
     },
     store_total_sale: {
-      type:Number, 
-      default:0
-    }
+      type: Number,
+      default: 0,
+    },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 export default mongoose.model("Seller", seller_schema);

@@ -23,6 +23,8 @@ export interface Seller {
   seller_status: 'pending' | 'active' | 'suspended';
 
   store_banner: string,
+  store_rating: string,
+  store_total_sale:Number
 
   seller_badges: Array<
     | 'trusted_seller'

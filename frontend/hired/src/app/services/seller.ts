@@ -63,6 +63,15 @@ public listBySeller(userId: string) {
   );
 }
 
+public update_store_profile(data: Partial<Seller>) {
+  return this.http.patch(
+    `${this.local_url}/seller/store/profile`,
+    data,
+    httpOptions
+  );
+}
+
+
 
 
 }

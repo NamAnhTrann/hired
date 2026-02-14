@@ -23,6 +23,7 @@ import { SecurityPage } from './security-page/security-page';
 import { NotificationPage } from './notification-page/notification-page';
 import { BillingPage } from './billing-page/billing-page';
 import { VerificationPage } from './verification-page/verification-page';
+import { EditStorePage } from './edit-store-page/edit-store-page';
 
 export const routes: Routes = [
   { path: '', component: Homepage },
@@ -52,5 +53,6 @@ export const routes: Routes = [
   { path: 'notification-page', component: NotificationPage },
   { path: 'billing-page', component: BillingPage },
   { path: 'verification-page', component: VerificationPage },
+  { path: 'edit-store-page', component: EditStorePage },
 
 ];
