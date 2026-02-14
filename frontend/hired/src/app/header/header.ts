@@ -10,30 +10,50 @@ import { Cart_Service } from '../services/cart';
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-  export class Header implements OnInit {
+export class Header implements OnInit {
   isShrunk = false;
   private lastScrollTop = 0;
   cartCount = 0;
   isMenuOpen = false;
   openMenu: string | null = null;
   isProfileOpen = false;
+  isDarkMode = false;
+
   constructor(
     public auth: AuthService,
     private router: Router,
     private cart: Cart_Service,
   ) {}
   ngOnInit(): void {
-  this.cart.list_cart().subscribe();
-  this.cart.cartCount$.subscribe((count) => {
-    this.cartCount = count;
-  });
+    this.cart.list_cart().subscribe();
+    this.cart.cartCount$.subscribe((count) => {
+      this.cartCount = count;
+    });
+
+    const html = document.documentElement;
+    const saved = localStorage.getItem('theme');
+
+    if (saved === 'dark') {
+      html.classList.add('dark');
+      this.isDarkMode = true;
+    } else {
+      html.classList.remove('dark');
+      this.isDarkMode = false;
+    }
+  }
+
+  toggleTheme() {
+    const html = document.documentElement;
+    html.classList.toggle('dark');
+    this.isDarkMode = html.classList.contains('dark');
+    localStorage.setItem('theme', this.isDarkMode ? 'dark' : 'light');
   }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
-    this.isProfileOpen = false;
-  }
+      this.isProfileOpen = false;
+    }
   }
 
   toggleProfile() {
@@ -60,10 +80,8 @@ import { Cart_Service } from '../services/cart';
     });
   }
 
-
-@HostListener('window:scroll', [])
-onScroll() {
-  this.isShrunk = window.scrollY > 20;
-}
-
+  @HostListener('window:scroll', [])
+  onScroll() {
+    this.isShrunk = window.scrollY > 20;
+  }
 }
