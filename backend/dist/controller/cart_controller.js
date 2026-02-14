@@ -44,7 +44,7 @@ const add_cart = async function (req, res, next) {
                 cart_quantity: quantity,
             });
         }
-        // Recalculate subtotal
+        // Recalculate subtotal (can optimise later)
         let total = 0;
         for (const item of cart.item) {
             const products = await product_model_1.default.findById(item.product_id);

@@ -50,34 +50,39 @@ const like_comment = async function like_comment(req, res, next) {
         const { comment_id } = req.body;
         if (!comment_id)
             return next((0, error_handler_1.bad_request)("Missing comment_id"));
-        const comment = await comment_model_1.default.findById(comment_id);
+        const comment = await comment_model_1.default.findById(comment_id).populate("user", "user_username user_email");
         if (!comment)
             return next((0, error_handler_1.not_found)("Comment not found"));
         const user_id = req.user._id;
-        if (!user_id) {
+        if (!user_id)
             return next((0, error_handler_1.unauthorized)("Not authorised"));
-        }
         // prevent duplicate like
         const existing = await like_model_1.default.findOne({ user: user_id, comment: comment_id });
-        if (existing) {
+        if (existing)
             return next((0, error_handler_1.bad_request)("You already liked this comment"));
-        }
-        const like = await like_model_1.default.create({
+        // create like
+        await like_model_1.default.create({
             user: user_id,
             comment: comment_id,
         });
+        // updated like count
+        const likeCount = await like_model_1.default.countDocuments({ comment: comment_id });
         return res.status(200).json({
             success: true,
             message: "Comment liked",
-            data: like,
+            data: {
+                comment: {
+                    ...comment.toObject(),
+                    like_count: likeCount,
+                    liked_by_user: true,
+                },
+            },
         });
     }
     catch (err) {
-        //this will handle errors from Schemas
         if (err.name === "ValidationError") {
             return next((0, error_handler_1.bad_request)(err.message));
         }
-        //call the error handler
         return next((0, error_handler_1.internal)(err.message));
     }
 };
@@ -90,9 +95,8 @@ const unlike = async function (req, res, next) {
             return next((0, error_handler_1.bad_request)("Missing target id or type"));
         }
         const user_id = req.user._id;
-        if (!user_id) {
+        if (!user_id)
             return next((0, error_handler_1.unauthorized)("Not authorised"));
-        }
         const filter = { user: user_id };
         if (type === "product") {
             filter.product = target_id;
@@ -107,17 +111,34 @@ const unlike = async function (req, res, next) {
         if (deleted.deletedCount === 0) {
             return next((0, error_handler_1.not_found)("Like does not exist"));
         }
+        // if unlike is for a COMMENT, return updated state
+        if (type === "comment") {
+            const updatedComment = await comment_model_1.default.findById(target_id)
+                .populate("user", "user_username user_email")
+                .lean();
+            const likeCount = await like_model_1.default.countDocuments({ comment: target_id });
+            return res.status(200).json({
+                success: true,
+                message: "unliked",
+                data: {
+                    comment: {
+                        ...updatedComment,
+                        like_count: likeCount,
+                        liked_by_user: false,
+                    },
+                },
+            });
+        }
+        // for product only
         return res.status(200).json({
             success: true,
             message: "unliked",
         });
     }
     catch (err) {
-        //this will handle errors from Schemas
         if (err.name === "ValidationError") {
             return next((0, error_handler_1.bad_request)(err.message));
         }
-        //call the error handler
         return next((0, error_handler_1.internal)(err.message));
     }
 };

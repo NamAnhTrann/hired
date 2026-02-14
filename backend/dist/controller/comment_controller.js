@@ -31,6 +31,7 @@ const add_comment = async function (req, res, next) {
         });
         //save and return
         await new_comment.save();
+        await new_comment.populate("user", "user_username");
         return res
             .status(200)
             .json({ message: "Commend is added", success: true, data: new_comment });
@@ -48,15 +49,15 @@ exports.add_comment = add_comment;
 //reply to comments
 async function reply_comment(req, res, next) {
     try {
-        const { product_id, parent_comment, comment_text } = req.body;
+        const { product_id, parent_comment, text } = req.body;
         // Validate input
-        if (!product_id || !parent_comment || !comment_text) {
+        if (!product_id || !parent_comment || !text) {
             return next((0, error_handler_1.bad_request)("Missing fields for reply"));
         }
         const newReply = await comment_model_1.default.create({
             product: product_id,
             parent_comment: parent_comment,
-            text: comment_text,
+            text: text,
             user: req.user._id,
         });
         return res.status(200).json({
@@ -86,11 +87,8 @@ const list_comment = async function (req, res, next) {
             .populate("user", "user_username user_email")
             .sort({ createdAt: -1 })
             .lean();
-        // Current logged-in user (for liked_by_user calculation)
-        const current_user_id = req.user
-            ? String(req.user._id)
-            : "";
-        const nested_comments = await (0, comment_tree_1.comment_tree)(comments, current_user_id);
+        // Build nested comment structure (NO likes)
+        const nested_comments = await (0, comment_tree_1.comment_tree)(comments);
         return res.status(200).json({
             success: true,
             data: nested_comments,
@@ -117,9 +115,12 @@ const delete_comment = async function (req, res, next) {
         }
         const comment = await comment_model_1.default.findById(comment_id);
         if (!comment) {
-            return next((0, error_handler_1.not_found)("Comment not found"));
+            return res.status(200).json({
+                success: true,
+                message: "Already deleted"
+            });
         }
-        if (comment.user.toString() !== user._id.toString()) {
+        if (comment.user.toString() !== (user._id || user.id).toString()) {
             return next((0, error_handler_1.unauthorized)("Cannot delete someone else comment"));
         }
         await (0, comment_tree_1.delete_comment_tree)(comment_id);
@@ -134,7 +135,7 @@ const delete_comment = async function (req, res, next) {
             return next((0, error_handler_1.bad_request)(err.message));
         }
         //call the error handler
-        return next((0, error_handler_1.internal)("Failed to add contact"));
+        return next((0, error_handler_1.internal)("Failed to add comment"));
     }
 };
 exports.delete_comment = delete_comment;

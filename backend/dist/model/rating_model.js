@@ -3,22 +3,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// model/like_model.ts
 const mongoose_1 = __importDefault(require("mongoose"));
-const like_schema = new mongoose_1.default.Schema({
-    user: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
+const rating_schema = new mongoose_1.default.Schema({
     product: {
         type: mongoose_1.default.Schema.Types.ObjectId,
         ref: "Product",
+        required: true,
     },
-    comment: {
+    user: {
         type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: "Comment",
-    }
+        ref: "User",
+        required: true,
+    },
+    stars: {
+        type: Number,
+        min: 0,
+        max: 5,
+    },
+    ic: {
+        type: Number,
+        min: 0,
+        max: 10,
+    },
 }, { timestamps: true });
-like_schema.index({ user: 1, product: 1 }, { unique: true, sparse: true });
-exports.default = mongoose_1.default.model("Like", like_schema);
+//make sure rating per product
+rating_schema.index({ product: 1, user: 1 }, { unique: true });
+exports.default = mongoose_1.default.model("Rating", rating_schema);
