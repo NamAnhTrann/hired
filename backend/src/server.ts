@@ -67,11 +67,11 @@ async function connect_db() {
   }
 }
 
-app.listen(process.env.PORT_NO, function (err) {
+app.listen(process.env.port_no, function (err) {
   if (err) {
     console.error("cannot connect to port");
   } else {
-    console.log(`connected to port ${process.env.PORT_NO}`);
+    console.log(`connected to port ${process.env.port_no}`);
   }
 });
 
