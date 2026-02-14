@@ -35,6 +35,9 @@ const order_router_1 = __importDefault(require("./router/order_router"));
 const trending_router_1 = __importDefault(require("./router/trending_router"));
 const seller_route_1 = __importDefault(require("./router/seller_route"));
 const stripe_router_1 = __importDefault(require("./router/stripe_router"));
+app.get("/", (req, res) => {
+    res.send("Backend is running");
+});
 app.use("/api", contact_router_1.default);
 app.use("/api", product_router_1.default);
 app.use("/api", auth_router_1.default);
