@@ -75,4 +75,9 @@ app.listen(process.env.PORT, function (err) {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
+
+
 connect_db();
