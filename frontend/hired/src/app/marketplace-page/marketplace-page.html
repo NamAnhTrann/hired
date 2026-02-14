@@ -42,7 +42,7 @@
       Products Listed
     </h2>
     <div class="mt-6 sm:mt-8 flex flex-col lg:flex-row gap-6 xl:gap-8">
-      <div class="w-full lg:w-[68%]">
+      <div class="w-full lg:w-[68%] order-2 lg:order-1">
         <div class="space-y-6">
           @if (loading) {
             @for (i of [1, 2, 3, 4, 5, 6]; track i) {
@@ -278,7 +278,7 @@
           }
         </div>
       </div>
-      <div class="w-full lg:w-[32%] space-y-6 lg:mt-0">
+      <div class="w-full lg:w-[32%] space-y-6 lg:mt-0 order-1 lg:order-2">
         <div
           class="rounded-lg border border-gray-200 bg-[#fffdf6] p-4 shadow-sm dark:bg-gray-800 space-y-6"
         >

@@ -61,9 +61,17 @@ const seller_schema = new mongoose.Schema(
     },
 
     store_rating: {
-
+      type:Number
     },
 
+    store_profile: {
+      type:String,
+      required:true
+    },
+
+    store_banner : {
+      type:String
+    },
     store_total_sale: {
       type:Number, 
       default:0

@@ -33,7 +33,7 @@ export const create_seller_profile = async function (
       });
     }
 
-    const { store_name, store_description, store_address } = req.body;
+    const { store_name, store_description, store_address, store_logo } = req.body;
 
     if (!store_name) {
       return next(bad_request("Store name is required"));
@@ -41,6 +41,10 @@ export const create_seller_profile = async function (
 
     if (!store_description) {
       return next(bad_request("Store description is required"));
+    }
+
+    if(!store_logo) {
+      return next(bad_request("Store logo is a must"))
     }
 
     const require_address = ["street", "city", "state", "postcode", "country"];
@@ -56,6 +60,7 @@ export const create_seller_profile = async function (
       store_name,
       store_description: store_description || "",
       store_address,
+      store_logo,
       seller_status: "pending",
     });
 
@@ -75,6 +80,8 @@ export const create_seller_profile = async function (
     return next(internal(err.message));
   }
 };
+
+
 
 export const get_seller_profile = async function (
   req: Request,
@@ -297,3 +304,11 @@ export const list_products_by_seller = async (
     return next(internal(err.message));
   }
 };
+
+export const seller_store_page_edit = async function(req:Request, res:Response, next:NextFunction){
+  try {
+    
+  } catch (err:any)
+{
+  
+}}

@@ -46,14 +46,7 @@
 
         <!-- Desktop Links -->
         <div class="hidden lg:flex items-center gap-5 ml-10">
-          <a
-            routerLink="/"
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="nav-link text-base"
-          >
-            Home
-          </a>
+
 
           <a
             routerLink="/marketplace-page"
@@ -65,7 +58,7 @@
 
           @if (auth.user$ | async; as user) {
             <a
-              routerLink="/marketplace-page"
+              routerLink="/message-page"
               routerLinkActive="active-link"
               class="nav-link text-base"
             >
