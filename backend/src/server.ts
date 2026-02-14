@@ -7,6 +7,8 @@ import { errorHandler } from "./middleware/error_handler";
 import cookieParser from "cookie-parser";
 import passport from "passport";
 import "./auth/passport";
+import { Request, Response, NextFunction } from "express";
+
 
 const app = express();
 
@@ -75,7 +77,7 @@ app.listen(process.env.PORT, function (err) {
   }
 });
 
-app.get("/", (req, res) => {
+app.get("/", (req:Request, res:Response) => {
   res.send("Backend is running");
 });
 
