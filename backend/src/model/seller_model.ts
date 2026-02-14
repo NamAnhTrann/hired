@@ -64,13 +64,14 @@ const seller_schema = new mongoose.Schema(
       type:Number
     },
 
-    store_profile: {
+    store_logo: {
       type:String,
       required:true
     },
 
     store_banner : {
-      type:String
+      type:String,
+      default: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1920&h=600&q=80"
     },
     store_total_sale: {
       type:Number, 
