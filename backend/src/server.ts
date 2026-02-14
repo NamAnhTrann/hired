@@ -44,6 +44,11 @@ import order_router from "./router/order_router";
 import trending_router from "./router/trending_router";
 import seller_router from "./router/seller_route";
 import stripe_router from "./router/stripe_router";
+
+app.get("/", (req:Request, res:Response) => {
+  res.send("Backend is running");
+});
+
 app.use("/api", contact_router);
 app.use("/api", product_router);
 app.use("/api", auth_router);
@@ -77,9 +82,6 @@ app.listen(process.env.PORT, function (err) {
   }
 });
 
-app.get("/", (req:Request, res:Response) => {
-  res.send("Backend is running");
-});
 
 
 connect_db();
