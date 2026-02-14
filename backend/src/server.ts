@@ -9,16 +9,19 @@ import passport from "passport";
 import "./auth/passport";
 import { Request, Response, NextFunction } from "express";
 
-
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:4200",
+    origin: [
+      "http://localhost:4200",
+      "http://54.252.159.167:4200",
+      "http://54.252.159.167",
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 app.use(cookieParser());
@@ -26,13 +29,12 @@ import webhook_router from "./router/webhook";
 app.use(
   "/api/stripe",
   bodyParser.raw({ type: "application/json" }),
-  webhook_router
+  webhook_router,
 );
 app.use(express.json());
 
 app.use(passport.initialize());
 app.use("/uploads", express.static("uploads"));
-
 
 import contact_router from "./router/contact_router";
 import product_router from "./router/product_router";
@@ -45,7 +47,7 @@ import trending_router from "./router/trending_router";
 import seller_router from "./router/seller_route";
 import stripe_router from "./router/stripe_router";
 
-app.get("/", (req:Request, res:Response) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Backend is running");
 });
 
@@ -81,7 +83,5 @@ app.listen(process.env.PORT, function (err) {
     console.log(`connected to port ${process.env.PORT}`);
   }
 });
-
-
 
 connect_db();

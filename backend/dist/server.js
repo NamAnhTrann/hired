@@ -14,7 +14,11 @@ const passport_1 = __importDefault(require("passport"));
 require("./auth/passport");
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "http://localhost:4200",
+    origin: [
+        "http://localhost:4200",
+        "http://54.252.159.167:4200",
+        "http://54.252.159.167",
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
