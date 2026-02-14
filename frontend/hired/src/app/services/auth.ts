@@ -6,7 +6,7 @@ import { BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService  {
-  private local_url = 'http://54.252.159.167:2020/api';
+  private local_url = 'http://localhost:2020/api';
 
   private _user = new BehaviorSubject<any>(null);
   user$ = this._user.asObservable();

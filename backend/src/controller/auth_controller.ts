@@ -12,7 +12,7 @@ import { bad_request, conflict, internal } from "../middleware/error_handler";
 export const register = async function (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   try {
     //extract the data from req.body
@@ -71,7 +71,7 @@ export const register = async function (
 export const login = async function (
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   // Use passport local strategy for authentication
   passport.authenticate(
@@ -107,9 +107,8 @@ export const login = async function (
         // Store JWT in an httpOnly cookie
         res.cookie("token", token, {
           httpOnly: true,
-          secure: false, // HTTP only
-          sameSite: "lax", // REQUIRED for cross-origin HTTP
-          path: "/", // REQUIRED
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
           maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -128,17 +127,13 @@ export const login = async function (
       } catch (err: any) {
         return next(internal("Failed to generate login token"));
       }
-    },
+    }
   )(req, res, next);
 };
 
 //logout so clear cookies
 export const logout = async function (req: Request, res: Response) {
-  res.clearCookie("token", {
-  path: "/",
-  sameSite: "lax",
-  secure: false,
-});
+  res.clearCookie("token");
 
   return res.status(200).json({
     success: true,

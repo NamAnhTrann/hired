@@ -18,7 +18,7 @@ app.use((0, cors_1.default)({
         "http://localhost:4200",
         "http://54.252.159.167:4200",
         "http://54.252.159.167",
-    ],
+    ], yy,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],

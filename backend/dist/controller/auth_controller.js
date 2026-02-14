@@ -81,9 +81,8 @@ const login = async function (req, res, next) {
             // Store JWT in an httpOnly cookie
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false, // HTTP only
-                sameSite: "lax", // REQUIRED for cross-origin HTTP
-                path: "/", // REQUIRED
+                sameSite: "lax",
+                secure: process.env.NODE_ENV === "production",
                 maxAge: 7 * 24 * 60 * 60 * 1000,
             });
             return res.status(200).json({
@@ -107,11 +106,7 @@ const login = async function (req, res, next) {
 exports.login = login;
 //logout so clear cookies
 const logout = async function (req, res) {
-    res.clearCookie("token", {
-        path: "/",
-        sameSite: "lax",
-        secure: false,
-    });
+    res.clearCookie("token");
     return res.status(200).json({
         success: true,
         message: "Logged out successfully",

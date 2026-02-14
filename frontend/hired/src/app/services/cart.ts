@@ -10,7 +10,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class Cart_Service {
-  private local_url = 'http://54.252.159.167:2020/api';
+  private local_url = 'http://localhost:2020/api';
 
   // Cart count stream
   private cartCountSubject = new BehaviorSubject<number>(0);
